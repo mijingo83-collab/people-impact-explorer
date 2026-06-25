@@ -1,0 +1,1795 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>인사 시사점 분석 도구</title>
+    <style>
+      :root {
+        --bg: #f3f5f8;
+        --paper: #ffffff;
+        --paper-soft: #f8fafc;
+        --paper-warm: #fffdf8;
+        --ink: #111827;
+        --ink-2: #273344;
+        --muted: #687789;
+        --faint: #8a98a8;
+        --line: #dfe5ee;
+        --navy: #101820;
+        --blue: #2f55d4;
+        --teal: #0f8f87;
+        --green: #148044;
+        --amber: #b36b14;
+        --red: #bf3d3a;
+        --shadow: 0 14px 30px rgba(28, 42, 58, 0.06);
+        --shadow-soft: 0 8px 18px rgba(28, 42, 58, 0.05);
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Pretendard",
+          "Apple SD Gothic Neo",
+          "Malgun Gothic",
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        letter-spacing: 0;
+      }
+
+      button,
+      textarea,
+      a {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        width: min(1460px, 100%);
+        margin: 0 auto;
+        padding: 28px 28px 38px;
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: start;
+        margin-bottom: 20px;
+      }
+
+      .brand-block {
+        display: grid;
+        gap: 8px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        color: var(--navy);
+        font-size: clamp(32px, 3.6vw, 46px);
+        font-weight: 840;
+        line-height: 1.08;
+      }
+
+      h2 {
+        color: var(--navy);
+        font-size: 24px;
+        font-weight: 820;
+        line-height: 1.25;
+      }
+
+      h3 {
+        color: var(--ink);
+        font-size: 19px;
+        font-weight: 790;
+        line-height: 1.32;
+      }
+
+      .subcopy {
+        max-width: 890px;
+        color: #516173;
+        font-size: 17px;
+        font-weight: 560;
+        line-height: 1.55;
+      }
+
+      .status-board {
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        gap: 6px;
+        align-items: center;
+        padding: 6px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .status-pill {
+        display: grid;
+        gap: 3px;
+        min-width: 112px;
+        min-height: auto;
+        padding: 8px 10px;
+        border: 1px solid #e3e8ef;
+        border-radius: 7px;
+        background: var(--paper);
+      }
+
+      .status-pill span {
+        color: var(--faint);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .status-pill strong {
+        color: var(--ink-2);
+        font-size: 14px;
+        font-weight: 820;
+        white-space: nowrap;
+      }
+
+      .status-link {
+        align-content: center;
+        min-width: 104px;
+        background: var(--navy);
+      }
+
+      .status-link span,
+      .status-link strong {
+        color: #ffffff;
+      }
+
+      .control-band {
+        display: none;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .scenario-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .scenario-tab,
+      .advance-button,
+      .select-area {
+        min-height: 40px;
+        border: 0;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 820;
+      }
+
+      .scenario-tab {
+        padding: 0 14px;
+        background: transparent;
+        color: #5d6d80;
+      }
+
+      .scenario-tab[aria-selected="true"] {
+        background: var(--navy);
+        color: #ffffff;
+        box-shadow: 0 10px 24px rgba(16, 24, 32, 0.2);
+      }
+
+      .advance-button {
+        padding: 0 18px;
+        background: var(--blue);
+        color: #ffffff;
+        box-shadow: 0 14px 28px rgba(47, 85, 212, 0.22);
+      }
+
+      .panel,
+      .metric-tile,
+      .ranking-row,
+      .evidence-card,
+      .case-card,
+      .action-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      .panel {
+        padding: 20px;
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 13px;
+      }
+
+      .panel-title {
+        display: grid;
+        gap: 6px;
+      }
+
+      .panel-title p {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 640;
+        line-height: 1.5;
+      }
+
+      .confidence-badge,
+      .source-chip,
+      .type-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 26px;
+        width: max-content;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 820;
+        white-space: nowrap;
+      }
+
+      .confidence-high {
+        background: #e7f6ed;
+        color: var(--green);
+      }
+
+      .confidence-medium {
+        background: #edf2ff;
+        color: var(--blue);
+      }
+
+      .confidence-watch {
+        background: #fff3dc;
+        color: var(--amber);
+      }
+
+      .input-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.72fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .news-input {
+        display: block;
+        width: 100%;
+        min-height: 224px;
+        padding: 17px 18px;
+        resize: none;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        outline: none;
+        background: var(--paper-soft);
+        color: #243140;
+        font-size: 17px;
+        font-weight: 560;
+        line-height: 1.78;
+      }
+
+      .news-input:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 4px rgba(47, 85, 212, 0.12);
+      }
+
+      .article-card {
+        display: grid;
+        gap: 16px;
+      }
+
+      .article-title-link {
+        color: var(--navy);
+        text-decoration: none;
+      }
+
+      .article-title-link:hover {
+        color: var(--blue);
+      }
+
+      .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .article-meta span,
+      .article-meta a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        padding: 6px 11px;
+        border: 1px solid #d9e2ee;
+        border-radius: 6px;
+        background: #f8fafc;
+        color: #46566a;
+        font-size: 13px;
+        font-weight: 760;
+      }
+
+      .article-meta a {
+        color: var(--blue);
+        background: #f4f7ff;
+      }
+
+      .article-summary {
+        padding: 16px;
+        border: 1px solid #dce5ef;
+        border-radius: var(--radius);
+        background: var(--paper-soft);
+        color: #253244;
+        font-size: 16px;
+        font-weight: 620;
+        line-height: 1.65;
+      }
+
+      .report-flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 0;
+      }
+
+      .flow-card {
+        position: relative;
+        min-height: auto;
+        padding: 12px 13px;
+        border: 1px solid #dce5ef;
+        border-radius: var(--radius);
+        background: #ffffff;
+        box-shadow: none;
+      }
+
+      .flow-card:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        top: 50%;
+        right: -14px;
+        z-index: 1;
+        transform: translateY(-50%);
+        color: #7a8797;
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .flow-card span {
+        display: block;
+        color: var(--faint);
+        font-size: 12px;
+        font-weight: 860;
+      }
+
+      .flow-card strong {
+        display: block;
+        margin-top: 7px;
+        color: var(--ink-2);
+        font-size: 15px;
+        font-weight: 760;
+        line-height: 1.45;
+      }
+
+      .source-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .source-chip {
+        border: 1px solid #cbd7e5;
+        background: #fff;
+        color: #46576a;
+      }
+
+      .judgement-panel {
+        display: grid;
+        align-content: start;
+        gap: 12px;
+      }
+
+      .judgement-box {
+        display: grid;
+        gap: 7px;
+        padding: 13px 14px;
+        border: 1px solid #dde5ef;
+        border-radius: var(--radius);
+        background: var(--paper-warm);
+      }
+
+      .judgement-box span {
+        color: var(--faint);
+        font-size: 13px;
+        font-weight: 820;
+      }
+
+      .judgement-box strong {
+        color: #263242;
+        font-size: 16px;
+        font-weight: 820;
+        line-height: 1.42;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric-tile {
+        min-height: auto;
+        padding: 12px 13px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .metric-tile span {
+        color: var(--faint);
+        font-size: 13px;
+        font-weight: 820;
+      }
+
+      .metric-tile strong {
+        display: block;
+        margin-top: 7px;
+        color: var(--navy);
+        font-size: 21px;
+        font-weight: 860;
+        line-height: 1;
+      }
+
+      .metric-tile p {
+        margin-top: 6px;
+        color: #5a6a7c;
+        font-size: 14px;
+        font-weight: 640;
+        line-height: 1.48;
+      }
+
+      .risk-overview {
+        margin-top: 18px;
+      }
+
+      .risk-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .risk-card {
+        display: grid;
+        gap: 8px;
+        min-height: auto;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #ffffff;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .risk-card span {
+        color: var(--faint);
+        font-size: 13px;
+        font-weight: 840;
+      }
+
+      .risk-card h3 {
+        color: var(--navy);
+        font-size: 22px;
+      }
+
+      .risk-card p {
+        color: #4c5d70;
+        font-size: 16px;
+        font-weight: 650;
+        line-height: 1.45;
+      }
+
+      .impact-level {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 30px;
+        padding: 6px 11px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 860;
+        white-space: nowrap;
+      }
+
+      .level-critical {
+        border: 1px solid #f2b8b5;
+        background: #fff1f0;
+        color: #b42318;
+      }
+
+      .level-high {
+        border: 1px solid #f7c78f;
+        background: #fff7ed;
+        color: #b54708;
+      }
+
+      .level-medium {
+        border: 1px solid #f8df7b;
+        background: #fffbe6;
+        color: #7a5a00;
+      }
+
+      .level-low {
+        border: 1px solid #d4dbe5;
+        background: #f5f7fa;
+        color: #5c6978;
+      }
+
+      .support-score .impact-level {
+        color: #111827;
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: minmax(500px, 0.88fr) minmax(460px, 0.78fr);
+        gap: 18px;
+        margin-top: 18px;
+        align-items: start;
+      }
+
+      .ranking-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .ranking-row {
+        display: grid;
+        grid-template-columns: 36px minmax(0, 1fr) auto;
+        gap: 13px;
+        align-items: center;
+        width: 100%;
+        min-height: auto;
+        padding: 13px 14px;
+        color: inherit;
+        text-align: left;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .ranking-row.active {
+        border-color: rgba(47, 85, 212, 0.72);
+        background: #f4f7ff;
+        box-shadow: 0 12px 28px rgba(47, 85, 212, 0.11);
+      }
+
+      .ranking-row.supporting {
+        background: #fbfcfe;
+        border-color: #e8edf4;
+      }
+
+      .ranking-row.supporting .rank-title strong {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .ranking-row.supporting .rank-main p {
+        color: var(--faint);
+        font-size: 0.88rem;
+      }
+
+      .ranking-row.supporting .rank-no {
+        background: #98a6b7;
+      }
+
+      .rank-no {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 7px;
+        background: var(--navy);
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 860;
+      }
+
+      .ranking-row.active .rank-no {
+        background: var(--blue);
+      }
+
+      .rank-main {
+        display: grid;
+        gap: 7px;
+        min-width: 0;
+      }
+
+      .rank-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .rank-title strong {
+        color: var(--ink);
+        font-size: 19px;
+        font-weight: 820;
+        line-height: 1.3;
+      }
+
+      .rank-main p {
+        color: #526274;
+        font-size: 16px;
+        font-weight: 590;
+        line-height: 1.45;
+      }
+
+      .rank-score {
+        display: grid;
+        justify-items: end;
+        gap: 5px;
+      }
+
+      .rank-score strong {
+        color: var(--navy);
+        font-size: 26px;
+        font-weight: 860;
+        line-height: 1;
+      }
+
+      .detail-panel {
+        display: grid;
+        gap: 14px;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .detail-panel .eyebrow,
+      .detail-panel .panel-title p {
+        color: var(--muted);
+      }
+
+      .detail-panel h2,
+      .detail-panel h3 {
+        color: var(--navy);
+      }
+
+      .detail-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .support-score {
+        display: grid;
+        justify-items: end;
+        gap: 5px;
+      }
+
+      .support-score strong {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 860;
+        line-height: 1;
+      }
+
+      .support-score span {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .detail-section {
+        display: grid;
+        gap: 7px;
+      }
+
+      .detail-section > span {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 820;
+        text-transform: uppercase;
+      }
+
+      .detail-section ul,
+      .action-card ol {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .detail-section li {
+        color: #273344;
+        font-size: 16px;
+        font-weight: 610;
+        line-height: 1.52;
+      }
+
+      .insight-box {
+        padding: 12px 14px;
+        border-left: 3px solid var(--teal);
+        border-radius: 6px;
+        background: #f4fbfa;
+        color: #20313f;
+        font-size: 15px;
+        font-weight: 650;
+        line-height: 1.52;
+      }
+
+      .risk-box {
+        padding: 12px 14px;
+        border-left: 3px solid #f97316;
+        border-radius: 6px;
+        background: #fff7ed;
+        color: #2b3340;
+        font-size: 15px;
+        font-weight: 680;
+        line-height: 1.52;
+      }
+
+      .pathway {
+        display: grid;
+        gap: 8px;
+      }
+
+      .path-step {
+        display: grid;
+        grid-template-columns: 94px minmax(0, 1fr);
+        gap: 10px;
+        align-items: start;
+        padding: 10px 12px;
+        border: 1px solid #dfe6ef;
+        border-radius: 6px;
+        background: #f8fafc;
+      }
+
+      .path-step span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 840;
+      }
+
+      .path-step strong {
+        color: #1f2a37;
+        font-size: 15px;
+        font-weight: 650;
+        line-height: 1.45;
+      }
+
+      .evidence-action-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(420px, 0.58fr);
+        gap: 18px;
+        margin-top: 18px;
+        align-items: start;
+      }
+
+      .evidence-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .evidence-card {
+        display: grid;
+        gap: 10px;
+        min-height: auto;
+        padding: 16px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .type-badge {
+        background: #eef2ff;
+        color: var(--blue);
+      }
+
+      .evidence-card h3 {
+        color: var(--ink);
+        font-size: 17px;
+      }
+
+      .evidence-key {
+        color: var(--navy);
+        font-size: 14px;
+        font-weight: 780;
+        line-height: 1.48;
+      }
+
+      .evidence-summary {
+        color: #46566a;
+        font-size: 14px;
+        font-weight: 610;
+        line-height: 1.55;
+      }
+
+      .evidence-link-note {
+        padding: 10px 11px;
+        border-radius: 6px;
+        background: #f5f8fb;
+        color: #415064;
+        font-size: 13px;
+        font-weight: 720;
+        line-height: 1.45;
+      }
+
+      .source-meta {
+        display: grid;
+        gap: 4px;
+        color: #5a6a7c;
+        font-size: 13px;
+        font-weight: 680;
+        line-height: 1.4;
+      }
+
+      .evidence-card a,
+      .case-card a {
+        align-self: end;
+        color: var(--blue);
+        font-size: 13px;
+        font-weight: 860;
+      }
+
+      .link-missing {
+        align-self: end;
+        color: var(--faint);
+        font-size: 12px;
+        font-weight: 780;
+      }
+
+      .action-stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .action-card {
+        display: grid;
+        gap: 13px;
+        padding: 18px;
+        background: var(--paper-warm);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .action-card h3 {
+        color: var(--navy);
+        font-size: 22px;
+      }
+
+      .action-card li {
+        color: #263242;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.55;
+        margin-bottom: 8px;
+      }
+
+      .case-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .case-card {
+        display: grid;
+        gap: 9px;
+        min-height: auto;
+        padding: 14px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .case-card-strong {
+        border-color: rgba(15, 143, 135, 0.38);
+        background: #f7fbfb;
+      }
+
+      .case-card span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 860;
+      }
+
+      .case-card h3 {
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1.35;
+      }
+
+      .case-card p {
+        color: #596a7c;
+        font-size: 14px;
+        font-weight: 620;
+        line-height: 1.5;
+      }
+
+      .case-meta {
+        display: grid;
+        gap: 7px;
+        margin: 0;
+      }
+
+      .case-meta div {
+        display: grid;
+        gap: 3px;
+      }
+
+      .case-meta dt {
+        color: var(--faint);
+        font-size: 11px;
+        font-weight: 850;
+      }
+
+      .case-meta dd {
+        margin: 0;
+        color: #405064;
+        font-size: 13px;
+        font-weight: 650;
+        line-height: 1.42;
+      }
+
+      .evidence-card a:hover,
+      .case-card a:hover,
+      .case-card:focus-visible a {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 650;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 1280px) {
+        .input-grid,
+        .analysis-grid,
+        .evidence-action-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .report-flow {
+          grid-template-columns: 1fr;
+        }
+
+        .case-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .flow-card:not(:last-child)::after {
+          content: "↓";
+          top: auto;
+          right: 50%;
+          bottom: -18px;
+          transform: translateX(50%);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .shell {
+          padding: 16px;
+        }
+
+        .topbar,
+        .control-band {
+          grid-template-columns: 1fr;
+        }
+
+        .status-board,
+        .scenario-tabs,
+        .metric-grid,
+        .risk-grid,
+        .evidence-grid,
+        .case-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .advance-button {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .shell {
+          padding: 12px;
+        }
+
+        .panel {
+          padding: 16px;
+        }
+
+        .news-input {
+          min-height: 300px;
+          font-size: 15px;
+          line-height: 1.7;
+        }
+
+        .ranking-row {
+          grid-template-columns: 34px minmax(0, 1fr);
+          align-items: start;
+        }
+
+        .rank-score {
+          grid-column: 2;
+          justify-items: start;
+        }
+
+        .detail-head {
+          flex-direction: column;
+        }
+
+        .support-score {
+          justify-items: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">초안 보고서</p>
+          <h1>인사 시사점 분석 도구</h1>
+          <p class="subcopy">
+            국내외 주요 이슈가 인사 업무에 미치는 영향과 권고 액션을 제공합니다.
+          </p>
+        </div>
+        <div class="status-board" aria-label="보고서 상태">
+          <div class="status-pill">
+            <span>자료 유형</span>
+            <strong>리서치 기반</strong>
+          </div>
+          <div class="status-pill">
+            <span>분석 관점</span>
+            <strong>인사 업무</strong>
+          </div>
+          <div class="status-pill">
+            <span>대상 이슈</span>
+            <strong>국내 반도체 인재 확보</strong>
+          </div>
+          <a class="status-pill status-link" href="../archive.html">
+            <span>이력 보기</span>
+            <strong>달력 열기</strong>
+          </a>
+        </div>
+      </header>
+
+      <nav class="scenario-tabs" id="scenarioTabs" role="tablist" aria-label="데일리 선정 뉴스 3건"></nav>
+
+      <section class="input-grid" aria-label="분석 대상 기사와 인사 판단 요약">
+        <article class="panel article-card">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">분석 대상 기사</p>
+              <h2><a class="article-title-link" id="articleTitleLink" href="#" target="_blank" rel="noopener noreferrer"><span id="headline"></span></a></h2>
+              <div class="article-meta">
+                <span id="articleSource"></span>
+                <span id="articleDate"></span>
+                <a id="articleOriginalLink" href="#" target="_blank" rel="noopener noreferrer">기사 원문 보기</a>
+              </div>
+            </div>
+          </div>
+          <p class="article-summary" id="newsInput"></p>
+          <p id="scenarioContext"></p>
+          <div class="report-flow" id="reportFlow" aria-label="영향 전개 경로 요약"></div>
+        </article>
+
+        <aside class="panel judgement-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">인사 판단 요약</p>
+              <h2>가장 먼저 봐야 할 질문</h2>
+              <p>점수보다 실행 판단을 먼저 보여줍니다.</p>
+            </div>
+            <span class="confidence-badge" id="overallConfidence"></span>
+          </div>
+          <div class="judgement-box">
+            <span>핵심 질문</span>
+            <strong id="decisionQuestion"></strong>
+          </div>
+          <div class="judgement-box">
+            <span>인사 업무 신호</span>
+            <strong id="peopleSignal"></strong>
+          </div>
+          <div class="judgement-box">
+            <span>기준 기사만 본 직접 영향</span>
+            <strong id="directFinding"></strong>
+          </div>
+          <div class="judgement-box">
+            <span>추가 자료 포함 종합 판단</span>
+            <strong id="researchJudgement"></strong>
+          </div>
+          <div class="metric-grid" id="metricGrid"></div>
+        </aside>
+      </section>
+
+      <section class="panel risk-overview" aria-label="상위 리스크 3개">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">상위 리스크 3개</p>
+            <h2>먼저 검토할 인사 리스크</h2>
+            <p>관련 자료를 종합했을 때 인사 조직이 우선 확인해야 할 리스크입니다.</p>
+          </div>
+        </div>
+        <div class="risk-grid" id="riskGrid"></div>
+      </section>
+
+      <section class="analysis-grid" aria-label="영향 영역 순위와 상세 분석">
+        <article class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">영향 영역 순위</p>
+              <h2>인사 기능별 영향도</h2>
+              <p>기사 직접 언급 순서가 아니라, 인사 조직이 먼저 검토해야 할 리스크가 큰 순서로 정렬했습니다.</p>
+            </div>
+          </div>
+          <div class="ranking-list" id="rankingList"></div>
+        </article>
+
+        <aside class="panel detail-panel" aria-live="polite">
+          <div class="detail-head">
+            <div class="panel-title">
+              <p class="eyebrow">상세 분석</p>
+              <h2 id="detailTitle"></h2>
+              <p id="detailOwner"></p>
+            </div>
+            <div class="support-score">
+              <span>영향 수준</span>
+              <strong id="detailImpactLevel"></strong>
+              <span id="detailConfidence"></span>
+            </div>
+          </div>
+          <div class="detail-section">
+            <span>관련 업무 범위</span>
+            <ul id="detailScope"></ul>
+          </div>
+          <div class="detail-section">
+            <span>직접 영향</span>
+            <div class="insight-box" id="detailDirectImpact"></div>
+          </div>
+          <div class="detail-section">
+            <span>영향 전개 경로</span>
+            <div class="pathway" id="detailPathway"></div>
+          </div>
+          <div class="detail-section">
+            <span>검토 필요 리스크</span>
+            <div class="risk-box" id="detailFinalRisk"></div>
+          </div>
+          <div class="detail-section">
+            <span>왜 영향이 있는가</span>
+            <ul id="detailWhy"></ul>
+          </div>
+          <div class="detail-section">
+            <span>핵심 시사점</span>
+            <div class="insight-box" id="detailInsight"></div>
+          </div>
+          <div class="detail-section">
+            <span>확인해야 할 내부 지표</span>
+            <ul id="detailIndicators"></ul>
+          </div>
+        </aside>
+      </section>
+
+      <section class="evidence-action-grid" aria-label="근거 자료와 권고 액션">
+        <article class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">근거 자료</p>
+              <h2>관련 자료 탐색 결과</h2>
+              <p>원문 기사, 공식 발표, 시장 기사, 보상 기사, 연구 보고서를 함께 보며 파급 영향을 판단합니다.</p>
+            </div>
+          </div>
+          <div class="evidence-grid" id="evidenceGrid"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">권고 액션</p>
+              <h2>인사 조직이 바로 검토할 일</h2>
+              <p>선택한 영역 기준으로 실행 과제를 제안합니다.</p>
+            </div>
+          </div>
+          <div class="action-stack" id="actionStack"></div>
+        </article>
+      </section>
+
+      <section class="panel" aria-label="유사·참고 사례">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">유사·참고 사례</p>
+            <h2>비교 근거와 실행 인사이트</h2>
+            <p>현재 이슈의 People 리스크와 권고 액션을 보강하는 참고 사례입니다.</p>
+          </div>
+        </div>
+        <div class="case-grid" id="caseGrid"></div>
+      </section>
+
+      <p class="footer-note">
+        보고서 초안: 2026-06-24 기준으로 생성되는 인사 시사점 리포트입니다.
+      </p>
+    </main>
+
+    <script>
+      const axes = ["인력 재배치", "운영비 영향", "규제 리스크", "실행 시급성"];
+
+      const peopleScope = {
+        "조직/임원": ["조직개편", "임원 지원 및 관리", "임원 인사", "차세대 리더 양성 및 관리"],
+        "인력운영": ["인력 운영 계획 수립 및 실적 관리", "인력 충원 및 효율화", "휴직/복직/퇴직 관리"],
+        "제도": ["승격", "평가", "연봉 산정", "시상/징계"],
+        "채용": ["외부 인력 발굴 및 채용", "우수 인력 선확보", "산학교류 및 참여연구원 관리"],
+        "교육": ["직급/직무별 특화 교육", "차세대 리더 육성", "AI/직무/리더십/어학 교육"],
+        "노사": ["대내외 동향 관리", "특이 인력 파악"],
+        "조직문화": ["캠퍼스 행사 운영", "일하는 문화 조성"],
+        "총무": ["의전", "레이아웃 관리", "사무환경/비품", "식당", "인허가", "차량 관리"],
+        "보안": ["보안 시스템 개선 및 관리", "보안 점검"],
+      };
+
+      function area(name, owner, score, confidence, summary, why, insight, stars, actions) {
+        return { name, owner, score, confidence, summary, why, insight, stars, actions, scope: peopleScope[name] };
+      }
+
+      const peopleAreaNames = Object.keys(peopleScope);
+
+      const peopleOwners = {
+        "조직/임원": "조직/임원 담당",
+        "인력운영": "인력운영 담당",
+        "제도": "제도 담당",
+        "채용": "채용 담당",
+        "교육": "교육 담당",
+        "노사": "노사 담당",
+        "조직문화": "조직문화 담당",
+        "총무": "총무 담당",
+        "보안": "보안 담당",
+      };
+
+      const supportingScoresByScenario = {
+        "kr-semiconductor-talent-20260624": { "조직/임원": 74, "제도": 70, "노사": 66, "조직문화": 64, "총무": 61, "보안": 60 },
+        "kr-compensation-policy-20260624": { "채용": 72, "교육": 66, "조직문화": 64, "조직/임원": 63, "보안": 58, "총무": 55 },
+        "global-ai-talent-20260624": { "조직/임원": 80, "교육": 76, "인력운영": 74, "노사": 70, "조직문화": 68, "총무": 58 },
+      };
+
+      const supportingIndicators = {
+        "조직/임원": ["임원 보고 필요 안건", "핵심 조직 영향도", "리더 후보군 영향"],
+        "인력운영": ["충원 계획 변동", "전배·퇴직 신호", "핵심 직무 공백"],
+        "제도": ["평가·승격 기준 영향", "보상 문의", "예외 승인 필요성"],
+        "채용": ["채용 소요기간", "제안 수락률", "후보자 유입 경로"],
+        "교육": ["교육 수요", "이수율", "전환 가능 인력"],
+        "노사": ["구성원 문의", "현장 VOC", "특이 인력 신호"],
+        "조직문화": ["몰입도 변화", "성장기회 체감", "협업 문화 이슈"],
+        "총무": ["좌석·비품 수요", "공간 지원 필요", "입사 운영 부하"],
+        "보안": ["접근권한 변경", "보안 교육 이수", "민감정보 취급 범위"],
+      };
+
+      const supportingActions = {
+        "조직/임원": ["임원 보고 필요 여부를 판단한다.", "핵심 조직과 리더 후보군 영향을 점검한다.", "조직 구조 변경 가능성을 모니터링한다."],
+        "인력운영": ["충원 계획과 실제 배치 가능 인원을 비교한다.", "전배·퇴직 신호를 점검한다.", "핵심 직무 공백 가능성을 확인한다."],
+        "제도": ["평가·승격·보상 기준과 충돌하는 지점을 확인한다.", "예외 승인 기준 필요성을 검토한다.", "구성원 설명 가능성을 점검한다."],
+        "채용": ["경쟁사 채용 신호와 후보자 유입 변화를 확인한다.", "제안 수락률과 거절 사유를 점검한다.", "선확보 파이프라인 영향을 모니터링한다."],
+        "교육": ["직무별 교육 수요 변화를 확인한다.", "전환 교육 필요 인원을 산정한다.", "현업 멘토링 수용력을 점검한다."],
+        "노사": ["현장 문의와 VOC를 모니터링한다.", "구성원 커뮤니케이션 필요성을 판단한다.", "특이 인력 신호를 조기 파악한다."],
+        "조직문화": ["성장기회와 공정성 체감 변화를 확인한다.", "조직문화 메시지 보완 필요성을 검토한다.", "협업 방식 변화 신호를 관찰한다."],
+        "총무": ["공간·비품·좌석 수요 변화를 확인한다.", "입사·이동 운영 부하를 점검한다.", "근무환경 지원 필요성을 산정한다."],
+        "보안": ["접근권한 변경 필요성을 확인한다.", "민감정보 취급 범위를 점검한다.", "보안 교육과 점검 항목 보완 여부를 검토한다."],
+      };
+
+      function supportingStars(score) {
+        if (score >= 68) return { "인력 재배치": 2, "운영비 영향": 2, "규제 리스크": 2, "실행 시급성": 3 };
+        return { "인력 재배치": 1, "운영비 영향": 1, "규제 리스크": 1, "실행 시급성": 2 };
+      }
+
+      function makeSupportingArea(scenario, name) {
+        const score = supportingScoresByScenario[scenario.id]?.[name] ?? 62;
+        return Object.assign(
+          area(
+            name,
+            peopleOwners[name],
+            score,
+            "Watch",
+            `${scenario.label} 이슈와의 직접 연관은 상대적으로 낮지만 ${peopleScope[name].join(", ")} 관점의 확인은 필요하다.`,
+            [
+              "상위 영향 영역은 아니지만 후속 실행 과정에서 업무 범위가 연결될 수 있다.",
+              "초기 판단 단계에서는 낮은 강도로 모니터링하고, 내부 지표 변화가 확인되면 우선순위를 올린다.",
+            ],
+            `${name} 영역은 이번 이슈의 보조 영향 영역으로 두고, 관련 내부 지표를 관찰하는 수준에서 관리한다.`,
+            supportingStars(score),
+            supportingActions[name],
+          ),
+          {
+            supporting: true,
+            directImpact: `${name} 영역의 직접 영향은 제한적이나 후속 점검 대상이다.`,
+            finalRisk: "현재는 낮은 우선순위이나, 내부 지표 변화가 있으면 검토 범위를 확대해야 한다.",
+            indicators: supportingIndicators[name],
+          },
+        );
+      }
+
+      function completePeopleAreas(scenario) {
+        const existing = new Set(scenario.areas.map((item) => item.name));
+        peopleAreaNames.forEach((name) => {
+          if (!existing.has(name)) scenario.areas.push(makeSupportingArea(scenario, name));
+        });
+      }
+
+      // Daily report content generated for 2026-06-24. Replace this block on each run.
+      const scenarios = [
+        {
+          id: "kr-semiconductor-talent-20260624",
+          label: "국내 반도체 인재 확보",
+          headline: "삼성전자 DS부문 반도체·AI 경력 채용 공고 점검",
+          article: {
+            title: "삼성전자 DS부문 반도체·AI 경력 채용 공고 점검",
+            source: "Samsung Careers / 공개 채용 공고",
+            date: "2026-06-24",
+            url: "https://www.samsungcareers.com/",
+          },
+          context: "국내 반도체·AI 산업의 핵심 직무 채용 신호를 공개 채용 공고와 산업 보도 관점에서 확인한 이슈다. 국내 경쟁사의 인재 확보 움직임은 채용, 보상, 교육, 핵심인재 유지 기준을 함께 점검하게 만든다.",
+          input: "삼성전자 DS부문 등 국내 반도체 기업의 공개 채용 공고와 AI·반도체 직무 수요는 설계, 공정, 데이터, SW, 보안 직군의 인재 경쟁이 계속되고 있음을 보여준다. 국내 People 조직은 외부 채용 경쟁만이 아니라 내부 핵심인력 유지, 산학교류, 직무 교육 수용력까지 함께 확인해야 한다.",
+          sourceMix: ["국내 산업/경쟁사", "공개 채용 공고", "반도체·AI 인재"],
+          confidence: "Medium",
+          decisionQuestion: "국내 반도체·AI 핵심 직무 인재 경쟁에서 우리 채용·유지·육성 체계는 어느 지점이 가장 취약한가?",
+          peopleSignal: "핵심 직무의 외부 채용 신호는 후보자 시장뿐 아니라 내부 저연차·전문인력의 성장기회 비교와 보상 기대에도 영향을 준다.",
+          directFinding: "기준 자료만 보면 국내 반도체·AI 핵심 직무에서 경력·전문 인재 확보 경쟁이 이어지고 있다는 점이 직접 영향이다.",
+          researchJudgement: "국내 산업 경쟁 구도까지 보면 채용 대응보다 먼저 핵심 직무별 이탈 위험, 제안 수락률, 산학교류 전환율, 직무 교육 수용력을 함께 점검해야 한다.",
+          metrics: [["가장 영향이 큰 영역", "채용", "핵심 직무 후보자 유입과 제안 수락률이 직접 압박을 받는다."], ["가장 시급한 영역", "인력운영", "기존 핵심인력의 유지와 배치 공백 리스크를 먼저 확인해야 한다."]],
+          reportFlow: [["기준 자료", "국내 반도체·AI 핵심 직무 공개 채용 신호"], ["직접 영향", "채용 경쟁과 후보자 비교 기준 상승"], ["2차 영향", "내부 핵심인력의 보상·성장기회 재평가 가능성"], ["검토 필요 리스크", "채용 지연, 핵심인력 이탈, 교육 수용력 부족"], ["권고 액션", "직무별 채용·유지·육성 지표를 함께 점검"]],
+          topRisks: [["1", "핵심 직무 채용 경쟁 리스크", "반도체·AI 직무 후보자 유입과 제안 수락률이 낮아질 수 있다."], ["2", "핵심인력 유지 리스크", "경쟁사 채용 신호가 내부 전문인력의 외부 기회 인식으로 이어질 수 있다."], ["3", "교육 수용력 리스크", "신규·전환 인력의 직무 교육과 현업 멘토링 수용력이 부족할 수 있다."]],
+          areas: [
+            Object.assign(area("채용", "채용 담당", 95, "Medium", "국내 반도체·AI 핵심 직무 채용 경쟁이 후보자 발굴과 제안 수락률을 직접 압박한다.", ["공개 채용 공고는 시장에서 어떤 역량을 우선 확보하려는지 보여주는 빠른 신호다.", "동일 직무 후보자를 두고 대기업 간 처우, 연구환경, 성장기회 비교가 강화될 수 있다."], "채용은 공고 수보다 직무별 후보자 풀, 제안 거절 사유, 산학교류 전환율을 함께 봐야 한다.", { "인력 재배치": 3, "운영비 영향": 4, "규제 리스크": 2, "실행 시급성": 5 }, ["핵심 직무별 경쟁사 채용 공고와 요구 역량을 주간 비교한다.", "제안 거절 사유를 보상, 성장기회, 연구환경, 근무지 요인으로 분류한다.", "산학교류·참여연구원 파이프라인의 실제 지원 전환율을 점검한다."]), { directImpact: "핵심 직무 채용 경쟁 심화", finalRisk: "후보자 확보 지연과 제안 수락률 하락 가능성", indicators: ["핵심 직무 채용 소요기간", "제안 수락률과 거절 사유", "산학교류 후보자 전환율"] }),
+            Object.assign(area("인력운영", "인력운영 담당", 88, "Medium", "외부 채용 경쟁은 기존 핵심인력 유지와 배치 공백 리스크를 키운다.", ["경쟁사의 채용 신호는 내부 구성원의 외부 기회 인식에 영향을 줄 수 있다.", "핵심 직무 인력 공백은 프로젝트 일정과 충원 계획을 동시에 흔든다."], "인력운영은 채용 계획만이 아니라 유지·이동·퇴직 위험을 같은 대시보드에서 봐야 한다.", { "인력 재배치": 5, "운영비 영향": 3, "규제 리스크": 1, "실행 시급성": 4 }, ["핵심 직무별 대체 난이도와 공백 시 사업 영향을 산정한다.", "저연차·전문인력의 전배, 퇴직, 면담 신호를 월간 추적한다.", "충원 계획과 현업 배치 가능 인원을 함께 재점검한다."]), { directImpact: "핵심 직무 유지와 배치 계획 점검 필요", finalRisk: "핵심인력 이탈 또는 충원 지연에 따른 프로젝트 공백", indicators: ["핵심 직무 퇴직률", "전배·면담 신청 추이", "프로젝트별 인력 공백 규모"] }),
+            Object.assign(area("교육", "교육 담당", 82, "Medium", "AI·반도체 직무 수요 증가는 내부 전환 교육과 직무별 특화 교육 필요를 높인다.", ["외부 채용만으로 희소 직무를 모두 채우기 어렵다.", "내부 인력을 전환하려면 직무별 기초 역량 진단과 현업 프로젝트 배치가 필요하다."], "교육은 핵심 직무를 사후 보충하는 기능이 아니라 채용 경쟁을 완화하는 선제 수단이 되어야 한다.", { "인력 재배치": 4, "운영비 영향": 3, "규제 리스크": 1, "실행 시급성": 4 }, ["AI·반도체 핵심 직무별 역량 매트릭스를 업데이트한다.", "전환 가능 인력의 기초 역량 진단을 실시한다.", "현업 멘토링 수용 가능 인원을 교육 계획에 반영한다."]), { directImpact: "내부 재교육과 전환 배치 수요 증가", finalRisk: "교육 수용력 부족에 따른 충원 의존도 상승", indicators: ["전환 교육 신청·이수율", "직무별 역량 진단 결과", "현업 멘토 배정 가능 인원"] }),
+          ],
+          evidence: [
+            { type: "공개 채용 공고", title: "Samsung Careers", source: "Samsung Careers", date: "2026-06-24", url: "https://www.samsungcareers.com/", summary: "요약: 국내 대기업 반도체·AI 직무의 공개 채용 신호를 확인할 수 있는 공식 채널이다.", impactLink: "판단 연결: 경쟁사 채용 요건과 후보자 시장 변화를 확인하는 기준 자료다." },
+            { type: "산업 보완 자료", title: "Samsung Semiconductor Careers", source: "Samsung Semiconductor", date: "2026-06-24", url: "https://semiconductor.samsung.com/careers/", summary: "요약: 반도체 직무와 인재 메시지를 확인할 수 있는 공개 채널이다.", impactLink: "판단 연결: 직무 역량, 채용 브랜딩, 교육 설계 비교 기준으로 사용한다." },
+          ],
+          cases: [
+            { title: "Samsung Semiconductor Careers", type: "확인된 유사 사례", org: "Samsung Semiconductor", why: "반도체 직무별 인재 메시지와 채용 브랜딩을 확인할 수 있다.", peopleInsight: "직무 역량, 연구환경, 성장기회 메시지를 후보자 관점으로 점검해야 한다.", peopleFunction: "채용/교육", actionLink: "핵심 직무별 경쟁사 채용 공고와 요구 역량을 주간 비교한다.", url: "https://semiconductor.samsung.com/careers/", priority: true },
+            { title: "CHIPS for America Workforce Development", type: "적용 가능성이 있는 선행 사례", org: "NIST", why: "반도체 인력 개발을 산학·정부 협력으로 다루는 공개 정책 사례다.", peopleInsight: "산학교류, 장학생, 참여연구원 파이프라인을 채용 전환율 지표와 연결해야 한다.", peopleFunction: "채용/교육", actionLink: "산학교류·참여연구원 파이프라인의 실제 지원 전환율을 점검한다.", url: "https://www.nist.gov/chips/workforce-development", priority: true },
+            { title: "Future of Jobs Report 2025", type: "비교 참고 사례", org: "World Economic Forum", why: "기술 변화가 직무 수요와 핵심 역량을 바꾸는 흐름을 보여준다.", peopleInsight: "내부 전환 교육과 핵심 직무 역량 매트릭스를 함께 갱신해야 한다.", peopleFunction: "교육/인력운영", actionLink: "AI·반도체 핵심 직무별 역량 매트릭스를 업데이트한다.", url: "https://www.weforum.org/publications/the-future-of-jobs-report-2025/" },
+            { title: "RPI-GlobalFoundries 인력 파트너십", type: "확인된 유사 사례", org: "Times Union / GlobalFoundries-RPI", why: "대학 연계 인재 파이프라인을 산업 수요와 연결한 사례다.", peopleInsight: "장기 육성형 후보군은 선확보 후 교육·배치 지표로 관리해야 한다.", peopleFunction: "채용/교육", actionLink: "현업 멘토링 수용 가능 인원을 교육 계획에 반영한다.", url: "https://www.timesunion.com/business/article/rpi-globalfoundries-partner-workforce-development-19993695.php" },
+          ],
+        },
+        {
+          id: "kr-compensation-policy-20260624",
+          label: "국내 보상·제도 점검",
+          headline: "한국은행 물가 점검 속 IT 업종 특별급여·성과급 영향 부각",
+          article: {
+            title: "한국은행 물가 점검 속 IT 업종 특별급여·성과급 영향 부각",
+            source: "한국은행 / 공개 보고서·시장 보도",
+            date: "2026-06-24",
+            url: "https://www.bok.or.kr/portal/main/main.do",
+          },
+          context: "국내 정책/보상 이슈로, 반도체·IT 업종 특별급여와 성과급이 임금·물가 흐름의 변수로 언급된 점을 People 관점에서 해석한다. 보상 경쟁력, 성과급 커뮤니케이션, 노사 리스크, 연봉 산정 기준을 함께 점검해야 한다.",
+          input: "한국은행의 물가 점검과 관련 시장 보도에서는 IT 업종 특별급여와 성과급이 임금·소득 흐름에 영향을 줄 수 있는 요인으로 거론됐다. 반도체·AI 산업 호황 신호가 커질수록 구성원의 보상 기대와 내부 형평성 인식도 함께 움직일 수 있다.",
+          sourceMix: ["국내 정책", "보상·성과급", "제도/노사"],
+          confidence: "Medium",
+          decisionQuestion: "반도체·IT 보상 기대가 높아질 때 우리 연봉 산정, 성과급, 승격, 노사 커뮤니케이션 기준은 충분히 설명 가능한가?",
+          peopleSignal: "외부 보상 신호는 구성원의 기대 수준을 바꾸며, 보상 경쟁력과 내부 형평성 기준을 동시에 점검하게 만든다.",
+          directFinding: "기준 자료만 보면 IT 업종 특별급여와 성과급이 국내 임금·물가 흐름의 관찰 변수로 부각됐다는 점이 직접 영향이다.",
+          researchJudgement: "People 관점에서는 거시 물가보다 내부 보상 기대, 성과급 산식의 설명 가능성, 핵심 직군 보상 경쟁력, 노사 커뮤니케이션 리스크를 우선 확인해야 한다.",
+          metrics: [["가장 영향이 큰 영역", "제도", "연봉 산정, 평가, 승격, 성과급 기준의 설명 가능성이 중요해진다."], ["가장 시급한 영역", "노사", "보상 기대와 형평성 인식이 현장 문의와 불만으로 확산될 수 있다."]],
+          reportFlow: [["기준 자료", "IT 업종 특별급여·성과급 영향 신호"], ["직접 영향", "구성원의 보상 기대와 시장 비교 기준 상승"], ["2차 영향", "성과급 산식, 평가·승격 기준, 노사 커뮤니케이션 압박"], ["검토 필요 리스크", "보상 불만, 형평성 논란, 핵심인력 유지 실패"], ["권고 액션", "보상 경쟁력과 설명 기준을 선제 점검"]],
+          topRisks: [["1", "보상 기대 불일치 리스크", "외부 성과급·특별급여 신호와 내부 지급 기준 사이의 기대 차이가 커질 수 있다."], ["2", "내부 형평성 리스크", "핵심 직군 보상 예외가 확대되면 직군 간 형평성 논란이 생길 수 있다."], ["3", "노사 커뮤니케이션 리스크", "성과급 산식과 지급 기준 설명이 부족하면 현장 불만이 빠르게 확산될 수 있다."]],
+          areas: [
+            Object.assign(area("제도", "제도 담당", 94, "Medium", "성과급과 특별급여 신호는 연봉 산정, 평가, 승격, 시상 기준의 설명 가능성을 압박한다.", ["시장 보상 신호가 커지면 기존 기준의 공정성과 경쟁력이 비교 대상이 된다.", "성과급 산식이 명확하지 않으면 평가·승격 불만까지 함께 커질 수 있다."], "제도 영역은 보상 수준보다 산정 기준, 예외 승인 기준, 평가 연계 기준을 설명 가능하게 정리해야 한다.", { "인력 재배치": 2, "운영비 영향": 5, "규제 리스크": 2, "실행 시급성": 5 }, ["핵심 직군 보상 경쟁력을 시장 데이터와 비교한다.", "성과급 산식과 예외 승인 기준을 구성원이 이해할 수 있게 정리한다.", "평가·승격·시상 기준이 보상 메시지와 충돌하지 않는지 점검한다."]), { directImpact: "보상·승격·평가 기준 설명력 점검 필요", finalRisk: "보상 불만과 핵심인재 유지 실패 가능성", indicators: ["직군별 보상 경쟁력", "성과급 관련 문의·이의제기 건수", "핵심인재 보상 예외 승인 건수"] }),
+            Object.assign(area("노사", "노사 담당", 88, "Medium", "보상 기대는 현장 문의, 불만, 대내외 동향 관리 이슈로 확산될 수 있다.", ["특별급여와 성과급 보도는 구성원의 기대 수준을 빠르게 바꾼다.", "지급 기준을 설명하지 못하면 형평성 논란과 특이 인력 관리 이슈가 생길 수 있다."], "노사 영역은 보상 결정 이후가 아니라 기대가 형성되는 시점부터 문의와 정서를 모니터링해야 한다.", { "인력 재배치": 1, "운영비 영향": 4, "규제 리스크": 3, "실행 시급성": 4 }, ["보상 관련 VOC와 익명 게시판 반응을 주간 모니터링한다.", "성과급 산식과 시장 상황 설명 자료를 관리자용으로 준비한다.", "고위험 조직과 특이 인력 면담 신호를 조기 파악한다."]), { directImpact: "보상 기대와 형평성 인식 관리 필요", finalRisk: "보상 불만 확산과 노사 갈등 가능성", indicators: ["보상 관련 VOC", "관리자 질의 건수", "고위험 조직 몰입도 변화"] }),
+            Object.assign(area("인력운영", "인력운영 담당", 82, "Medium", "보상 경쟁력은 핵심인력 유지와 충원 계획의 전제 조건이 된다.", ["핵심 직무 보상 기대가 높아지면 이탈 위험과 충원 난도가 함께 오른다.", "보상 예산과 인력 운영 계획이 분리되면 유지 대응이 늦어진다."], "인력운영은 보상 이슈를 비용 항목이 아니라 핵심인력 유지 지표와 연결해 봐야 한다.", { "인력 재배치": 3, "운영비 영향": 4, "규제 리스크": 1, "실행 시급성": 4 }, ["핵심인력 이탈 위험군과 보상 민감도를 함께 점검한다.", "충원 난도가 높은 직무의 보상 경쟁력을 우선 확인한다.", "퇴직 면담에서 보상·성장기회 요인을 분리 집계한다."]), { directImpact: "핵심인력 유지와 충원 계획 재점검", finalRisk: "보상 경쟁력 부족에 따른 이탈·충원 지연", indicators: ["핵심 직무 퇴직률", "충원 목표 대비 실적", "퇴직 면담 보상 언급 비중"] }),
+          ],
+          evidence: [
+            { type: "공식 자료", title: "한국은행 물가안정 관련 공개 자료", source: "한국은행", date: "2026-06-24", url: "https://www.bok.or.kr/portal/main/main.do", summary: "요약: 물가와 임금·소득 흐름을 확인할 수 있는 공식 확인 채널이다.", impactLink: "판단 연결: 보상 기대와 성과급 신호를 제도·노사 리스크로 연결하는 배경 근거다." },
+            { type: "시장 보도", title: "Samsung and SK hynix employees' bonuses are a risk factor for inflation", source: "Tom's Hardware", date: "2026-06-21", url: "https://www.tomshardware.com/pc-components/cpus/samsung-and-sk-hynix-employees-bonuses-are-a-risk-factor-for-inflation-says-bank-of-korea-report", summary: "요약: 한국은행 자료를 인용해 IT 업종 특별급여와 반도체 기업 성과급 신호를 다룬 보도다.", impactLink: "판단 연결: 외부 보상 신호가 내부 기대와 리텐션 판단에 들어가야 한다는 보조 근거다." },
+          ],
+          cases: [
+            { title: "IT 업종 성과급 물가 영향 보도", type: "확인된 유사 사례", org: "Tom's Hardware / 한국은행 인용 보도", why: "반도체 기업 성과급 신호가 보상 기대와 거시 지표에 함께 연결되는 사례다.", peopleInsight: "성과급 산식과 지급 기준을 사전에 설명할 필요가 있다.", peopleFunction: "제도/노사", actionLink: "성과급 산식과 예외 승인 기준을 구성원이 이해할 수 있게 정리한다.", url: "https://www.tomshardware.com/pc-components/cpus/samsung-and-sk-hynix-employees-bonuses-are-a-risk-factor-for-inflation-says-bank-of-korea-report", priority: true },
+            { title: "성과급 산식 설명자료 운영", type: "비교 참고 사례", org: "국내 대기업 보상 커뮤니케이션 범위", why: "성과급 결정 이후가 아니라 기대 형성 단계의 설명 품질이 노사 리스크를 좌우한다.", peopleInsight: "관리자용 FAQ와 구성원 안내 문구를 미리 준비해야 한다.", peopleFunction: "노사/제도", actionLink: "성과급 산식과 시장 상황 설명 자료를 관리자용으로 준비한다.", url: "", priority: true },
+            { title: "핵심 직군 보상 예외 기준", type: "적용 가능성이 있는 선행 사례", org: "첨단산업 핵심직군 보상 운영 범위", why: "핵심 직군 보상 차등은 리텐션에 도움이 되지만 내부 형평성 논란을 만들 수 있다.", peopleInsight: "예외 승인 기준과 설명 기준을 한 세트로 설계해야 한다.", peopleFunction: "제도/인력운영", actionLink: "핵심 직군 보상 경쟁력을 시장 데이터와 비교한다.", url: "" },
+            { title: "임금협상 쟁점 사전 정리", type: "추가 확인 필요 사례", org: "국내 제조업 노사 커뮤니케이션 범위", why: "임금·성과급 이슈는 현장 문의와 불만 쟁점이 빠르게 확산될 수 있다.", peopleInsight: "예상 문의와 불만 쟁점을 사전에 정리해 노사 커뮤니케이션 품질을 높여야 한다.", peopleFunction: "노사", actionLink: "보상 관련 VOC와 익명 게시판 반응을 주간 모니터링한다.", url: "" },
+          ],
+        },
+        {
+          id: "global-ai-talent-20260624",
+          label: "해외 AI 인재경쟁",
+          headline: "Google loses two AI stars as the talent wars enter their celebrity era",
+          article: {
+            title: "Google loses two AI stars as the talent wars enter their celebrity era",
+            source: "Business Insider",
+            date: "2026-06-23",
+            url: "https://www.businessinsider.com/google-ai-talent-wars-anthropic-jumper-shazeer-karpathy-openai-2026-6",
+          },
+          context: "해외 이슈는 1건만 포함했다. Google DeepMind 핵심 AI 인재의 이동은 국내 AI·반도체·제조업 People 조직에도 핵심인재 유지, 보상 예외, 연구환경, 기술정보 보안 기준을 점검하게 하는 신호다.",
+          input: "Business Insider는 Google의 주요 AI 인재가 OpenAI와 Anthropic으로 이동하며 AI 인재 경쟁이 상징성과 보상 경쟁을 동반한 고위험 경쟁으로 커지고 있다고 보도했다. 국내 조직에는 핵심 AI·기술 인재의 유지 기준과 보상·성장기회·보안 프로세스를 점검해야 한다는 시사점이 있다.",
+          sourceMix: ["해외 AI 인재경쟁", "국내 People 시사점", "보상·보안·채용"],
+          confidence: "High",
+          decisionQuestion: "핵심 AI·기술 인재가 외부 기회를 비교할 때 우리 조직은 어떤 보상, 성장, 연구환경, 보안 기준으로 유지할 것인가?",
+          peopleSignal: "AI 핵심인재 경쟁은 채용만의 문제가 아니라 보상·승격·리더십·조직문화·보안까지 이어지는 People 리스크다.",
+          directFinding: "기준 기사만 보면 Google 주요 AI 인재의 OpenAI·Anthropic 이동이 직접 영향이며, 해외 빅테크의 핵심인재 유출 리스크를 보여준다.",
+          researchJudgement: "국내 People 업무에 연결하면 AI·반도체 핵심 직무의 보상 경쟁력, 연구 자율성, 성장경로, 핵심자료 접근권한 회수 기준을 함께 점검해야 한다.",
+          metrics: [["가장 영향이 큰 영역", "채용", "핵심 AI 인재 확보 경쟁이 외부 채용과 선확보 파이프라인을 직접 압박한다."], ["가장 시급한 영역", "제도", "보상·승격·인정 기준이 시장 수준과 어긋나면 리텐션 리스크가 커진다."]],
+          reportFlow: [["기준 기사", "Google 주요 AI 인재의 OpenAI·Anthropic 이동"], ["시장 신호", "소수 핵심 AI 인재의 이동이 기술 경쟁력과 시장 평가에 영향"], ["국내 파급", "AI·반도체 핵심인재 유지와 보상 예외 기준 점검 필요"], ["검토 필요 리스크", "핵심인재 이탈, 내부 형평성 논란, 기술정보 보안"], ["권고 액션", "핵심인재 유지 지표와 보상·보안 기준을 동시에 점검"]],
+          topRisks: [["1", "핵심인재 이탈 리스크", "소수 AI·기술 리더의 이탈이 조직 역량과 대외 신뢰를 동시에 흔들 수 있다."], ["2", "보상 형평성 리스크", "핵심인재 보상 예외가 필요해지면 내부 형평성 논란이 생길 수 있다."], ["3", "기술정보 보안 리스크", "핵심인재 이동 과정에서 연구 자료와 접근권한 관리가 중요해진다."]],
+          areas: [
+            Object.assign(area("채용", "채용 담당", 96, "High", "AI 핵심인재 경쟁은 외부 인력 발굴, 우수 인력 선확보, 산학교류 파이프라인을 직접 압박한다.", ["핵심 AI 인재는 보상뿐 아니라 연구환경, 기술 과제, 리더십 평판을 비교한다.", "국내 조직도 글로벌 AI 인재 이동의 보상 기준과 연구환경 기준을 참고해야 한다."], "채용은 핵심인재 후보자 맵과 제안 거절 사유를 정밀하게 관리해야 한다.", { "인력 재배치": 3, "운영비 영향": 5, "규제 리스크": 2, "실행 시급성": 5 }, ["AI 핵심 직무별 후보자 맵과 경쟁사 영입 동향을 업데이트한다.", "제안 거절 사유를 보상, 연구환경, 성장기회, 리더십 요인으로 분류한다.", "산학교류·연구협력 파이프라인을 우수 인력 선확보 채널로 재점검한다."]), { directImpact: "AI 핵심인재 확보 경쟁 심화", finalRisk: "핵심 직무 채용 지연과 제안 수락률 하락", indicators: ["AI 핵심직무 채용 소요기간", "제안 수락률", "산학교류 후보자 전환율"] }),
+            Object.assign(area("제도", "제도 담당", 92, "High", "핵심 AI 인재 유지에는 보상, 승격, 인정 기준의 시장 경쟁력과 내부 형평성 관리가 함께 필요하다.", ["핵심인재 보상 예외는 유지에 도움이 되지만 내부 형평성 논란을 만들 수 있다.", "승격·시상 기준이 기술 기여를 인정하지 못하면 외부 이동 유인이 커진다."], "제도 영역은 핵심인재 예외 기준을 임시 판단이 아니라 설명 가능한 원칙으로 정리해야 한다.", { "인력 재배치": 2, "운영비 영향": 5, "규제 리스크": 2, "실행 시급성": 5 }, ["AI 핵심 직군의 보상 경쟁력을 시장 데이터와 비교한다.", "핵심인재 보상 예외 승인 기준과 설명 기준을 정리한다.", "고성과 연구·기술 인재의 승격·시상 기준을 점검한다."]), { directImpact: "핵심인재 보상·승격 기준 재점검", finalRisk: "보상 불만과 내부 형평성 논란", indicators: ["핵심 직군 보상 경쟁력", "보상 예외 승인 건수", "승격 누락 핵심인재 비율"] }),
+            Object.assign(area("보안", "보안 담당", 84, "Medium", "핵심인재 이동은 연구 자료, 코드, 모델, 접근권한 회수 기준을 점검하게 만든다.", ["핵심인력의 이동은 기술정보 접근권한과 퇴직 프로세스의 취약점을 드러낼 수 있다.", "AI 연구 자료와 모델 관련 산출물은 일반 문서보다 접근 통제가 중요하다."], "보안은 퇴직 시점의 권한 회수뿐 아니라 핵심 프로젝트 접근권한을 상시 점검해야 한다.", { "인력 재배치": 1, "운영비 영향": 3, "규제 리스크": 5, "실행 시급성": 4 }, ["핵심 연구인력의 접근권한 목록과 회수 절차를 점검한다.", "AI 모델·데이터·코드 저장소 접근 로그를 확인한다.", "경쟁사 이동 가능성이 높은 직무의 퇴직 보안 체크리스트를 강화한다."]), { directImpact: "핵심인재 이동 시 기술정보 보호 기준 강화", finalRisk: "연구자료 유출과 권한 회수 실패 가능성", indicators: ["핵심 저장소 접근 로그", "퇴직자 권한 회수 소요시간", "보안 교육 이수율"] }),
+          ],
+          evidence: [
+            { type: "기준 기사", title: "Google loses two AI stars as the talent wars enter their celebrity era", source: "Business Insider", date: "2026-06-23", url: "https://www.businessinsider.com/google-ai-talent-wars-anthropic-jumper-shazeer-karpathy-openai-2026-6", summary: "요약: Google 주요 AI 연구 인재의 이동과 AI 인재 전쟁의 고비용 경쟁 양상을 다룬 기사다.", impactLink: "판단 연결: 국내 AI·반도체 핵심인재 유지, 보상 예외, 연구환경, 보안 기준 점검에 연결된다." },
+            { type: "보완 자료", title: "Future of Jobs Report 2025", source: "World Economic Forum", date: "2025-01-07", url: "https://www.weforum.org/publications/the-future-of-jobs-report-2025/", summary: "요약: 기술 변화가 직무 수요와 핵심 역량을 바꾸며 재교육과 인재 확보 전략의 중요성을 강조한다.", impactLink: "판단 연결: AI 인재 확보와 내부 육성 전략을 함께 봐야 한다는 보조 근거다." },
+          ],
+          cases: [
+            { title: "Future of Jobs Report 2025", type: "비교 참고 사례", org: "World Economic Forum", why: "AI와 기술 변화가 직무 수요와 재교육 우선순위를 바꾸는 흐름을 정리한다.", peopleInsight: "핵심 AI 인재 확보와 내부 재교육을 분리하지 말고 함께 설계해야 한다.", peopleFunction: "교육/채용", actionLink: "AI 핵심 직무별 후보자 맵과 경쟁사 영입 동향을 업데이트한다.", url: "https://www.weforum.org/publications/the-future-of-jobs-report-2025/", priority: true },
+            { title: "NIST AI Risk Management Framework", type: "적용 가능성이 있는 선행 사례", org: "NIST", why: "AI 사용 리스크와 조직 통제 원칙을 공식 프레임워크로 제시한다.", peopleInsight: "AI 사용 가이드, 보안 정책, 관리자 책임 기준을 함께 업데이트해야 한다.", peopleFunction: "보안/제도", actionLink: "AI 모델·데이터·코드 저장소 접근 로그를 확인한다.", url: "https://www.nist.gov/itl/ai-risk-management-framework", priority: true },
+            { title: "Microsoft Responsible AI", type: "해외 선행 사례", org: "Microsoft", why: "AI 개발·사용 원칙과 책임 구조를 대외적으로 공개한 기업 사례다.", peopleInsight: "관리자 교육과 AI 사용 승인 기준을 직원 행동 기준으로 연결해야 한다.", peopleFunction: "교육/보안", actionLink: "핵심 연구인력의 접근권한 목록과 회수 절차를 점검한다.", url: "https://www.microsoft.com/en-us/ai/responsible-ai" },
+            { title: "IBM SkillsBuild", type: "AI 재교육 사례", org: "IBM", why: "AI·디지털 역량 전환을 학습 플랫폼 형태로 제공하는 사례다.", peopleInsight: "직무 전환 교육과 관리자 교육을 별도 트랙으로 설계할 필요가 있다.", peopleFunction: "교육/인력운영", actionLink: "제안 거절 사유를 보상, 연구환경, 성장기회, 리더십 요인으로 분류한다.", url: "https://skillsbuild.org/" },
+          ],
+        },
+      ];
+
+      const areaRefinements = {};
+      const evidenceSummaries = {};
+      const evidenceImpactLinks = {};
+      // End generated daily report content.
+      scenarios.forEach((scenario) => {
+        completePeopleAreas(scenario);
+        scenario.areas.forEach((item) => Object.assign(item, areaRefinements[scenario.id]?.[item.name] || {}));
+        scenario.evidence.forEach((item) => {
+          item.summary = evidenceSummaries[item.title] || item.summary || "요약: 이 자료는 해당 이슈가 인사 기능에 미치는 영향을 판단하기 위한 참고 근거로 활용된다.";
+          item.impactLink = item.impactLink || evidenceImpactLinks[item.title];
+        });
+      });
+
+      const confidenceLabel = {
+        High: "신뢰도 높음",
+        Medium: "신뢰도 보통",
+        Watch: "관찰 필요",
+      };
+
+      const confidenceClass = {
+        High: "confidence-high",
+        Medium: "confidence-medium",
+        Watch: "confidence-watch",
+      };
+
+      let scenarioIndex = 0;
+      let selectedAreaName = "";
+
+      const nodes = {
+        tabs: document.getElementById("scenarioTabs"),
+        advanceScenario: document.getElementById("advanceScenario"),
+        headline: document.getElementById("headline"),
+        articleTitleLink: document.getElementById("articleTitleLink"),
+        articleSource: document.getElementById("articleSource"),
+        articleDate: document.getElementById("articleDate"),
+        articleOriginalLink: document.getElementById("articleOriginalLink"),
+        scenarioContext: document.getElementById("scenarioContext"),
+        newsInput: document.getElementById("newsInput"),
+        sourceMix: document.getElementById("sourceMix"),
+        reportFlow: document.getElementById("reportFlow"),
+        overallConfidence: document.getElementById("overallConfidence"),
+        decisionQuestion: document.getElementById("decisionQuestion"),
+        peopleSignal: document.getElementById("peopleSignal"),
+        directFinding: document.getElementById("directFinding"),
+        researchJudgement: document.getElementById("researchJudgement"),
+        metricGrid: document.getElementById("metricGrid"),
+        riskGrid: document.getElementById("riskGrid"),
+        rankingList: document.getElementById("rankingList"),
+        detailTitle: document.getElementById("detailTitle"),
+        detailOwner: document.getElementById("detailOwner"),
+        detailImpactLevel: document.getElementById("detailImpactLevel"),
+        detailConfidence: document.getElementById("detailConfidence"),
+        detailScope: document.getElementById("detailScope"),
+        detailDirectImpact: document.getElementById("detailDirectImpact"),
+        detailPathway: document.getElementById("detailPathway"),
+        detailFinalRisk: document.getElementById("detailFinalRisk"),
+        detailWhy: document.getElementById("detailWhy"),
+        detailInsight: document.getElementById("detailInsight"),
+        detailIndicators: document.getElementById("detailIndicators"),
+        evidenceGrid: document.getElementById("evidenceGrid"),
+        actionStack: document.getElementById("actionStack"),
+        caseGrid: document.getElementById("caseGrid"),
+      };
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function hasUrl(value) {
+        return typeof value === "string" && /^https?:\/\//.test(value);
+      }
+
+      function sourceLink(url, label) {
+        if (!hasUrl(url)) return `<span class="link-missing">링크 확인 필요</span>`;
+        return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+      }
+
+      function selectedScenario() {
+        return scenarios[scenarioIndex];
+      }
+
+      function sortedAreas(scenario) {
+        return [...scenario.areas].sort((a, b) => b.score - a.score);
+      }
+
+      function selectedArea(scenario) {
+        const sorted = sortedAreas(scenario);
+        return sorted.find((area) => area.name === selectedAreaName) || sorted[0];
+      }
+
+      function stars(value) {
+        return "★★★★★".slice(0, value) + "☆☆☆☆☆".slice(0, 5 - value);
+      }
+
+      function impactLevel(area) {
+        if (area.score >= 92) return { text: "매우 높음", className: "level-critical" };
+        if (area.score >= 82) return { text: "높음", className: "level-high" };
+        if (area.score >= 68) return { text: "보통", className: "level-medium" };
+        return { text: "낮음", className: "level-low" };
+      }
+
+      function renderTabs() {
+        if (!nodes.tabs) return;
+        nodes.tabs.innerHTML = scenarios
+          .map(
+            (scenario, index) => `
+              <button
+                class="scenario-tab"
+                type="button"
+                role="tab"
+                aria-selected="${index === scenarioIndex}"
+                data-scenario-index="${index}"
+              >${escapeHtml(scenario.label)}</button>
+            `,
+          )
+          .join("");
+
+        nodes.tabs.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", () => {
+            scenarioIndex = Number(button.dataset.scenarioIndex);
+            selectedAreaName = "";
+            render();
+          });
+        });
+      }
+
+      function renderInput(scenario) {
+        const article = scenario.article || scenario.evidence[0] || {};
+        nodes.headline.textContent = article.title || scenario.headline;
+        nodes.articleTitleLink.href = hasUrl(article.url) ? article.url : "#";
+        nodes.articleSource.textContent = `출처: ${article.source || "확인 필요"}`;
+        nodes.articleDate.textContent = `날짜: ${article.date || "확인 필요"}`;
+        nodes.articleOriginalLink.style.display = hasUrl(article.url) ? "inline-flex" : "none";
+        nodes.articleOriginalLink.href = hasUrl(article.url) ? article.url : "#";
+        nodes.scenarioContext.textContent = scenario.context;
+        nodes.newsInput.textContent = scenario.input;
+        if (nodes.sourceMix) {
+          nodes.sourceMix.innerHTML = "";
+        }
+        nodes.reportFlow.innerHTML = (scenario.reportFlow || [])
+          .map(
+            ([label, text]) => `
+              <div class="flow-card">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(text)}</strong>
+              </div>
+            `,
+          )
+          .join("");
+        nodes.overallConfidence.className = `confidence-badge ${confidenceClass[scenario.confidence]}`;
+        nodes.overallConfidence.textContent = confidenceLabel[scenario.confidence];
+        nodes.decisionQuestion.textContent = scenario.decisionQuestion;
+        nodes.peopleSignal.textContent = scenario.peopleSignal;
+        nodes.directFinding.textContent = scenario.directFinding || scenario.context;
+        nodes.researchJudgement.textContent = scenario.researchJudgement || scenario.peopleSignal;
+        nodes.metricGrid.innerHTML = scenario.metrics
+          .map(
+            ([label, value, note]) => `
+              <div class="metric-tile">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(value)}</strong>
+                <p>${escapeHtml(note)}</p>
+              </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderTopRisks(scenario) {
+        nodes.riskGrid.innerHTML = (scenario.topRisks || [])
+          .map(
+            ([index, title, note]) => `
+              <article class="risk-card">
+                <span>${escapeHtml(index)}. 우선 검토</span>
+                <h3>${escapeHtml(title)}</h3>
+                <p>${escapeHtml(note)}</p>
+              </article>
+            `,
+          )
+          .join("");
+      }
+
+      function renderRanking(scenario, activeArea) {
+        nodes.rankingList.innerHTML = sortedAreas(scenario)
+          .map((area, index) => {
+            const level = impactLevel(area);
+            return `
+              <button class="ranking-row ${area.name === activeArea.name ? "active" : ""} ${area.supporting ? "supporting" : ""}" type="button" data-area="${escapeHtml(area.name)}">
+                <span class="rank-no">${index + 1}</span>
+                <span class="rank-main">
+                  <span class="rank-title">
+                    <strong>${escapeHtml(area.name)}</strong>
+                    <span class="confidence-badge ${confidenceClass[area.confidence]}">${confidenceLabel[area.confidence]}</span>
+                  </span>
+                  <p>${escapeHtml(area.summary)}</p>
+                </span>
+                <span class="rank-score">
+                  <span class="impact-level ${level.className}">영향 수준 ${level.text}</span>
+                </span>
+              </button>
+            `;
+          })
+          .join("");
+
+        nodes.rankingList.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", () => {
+            selectedAreaName = button.dataset.area;
+            render();
+          });
+        });
+      }
+
+      function renderDetail(area) {
+        const level = impactLevel(area);
+        const impactPath = area.impactPath || [
+          { stage: "기사 내용", text: area.summary },
+          { stage: "직접 영향", text: area.directImpact || area.summary },
+          { stage: "최종 리스크", text: area.finalRisk || area.insight },
+          { stage: "우선 검토", text: `${area.name} 관점의 실행 과제 확인` },
+        ];
+        nodes.detailTitle.textContent = area.name;
+        nodes.detailOwner.textContent = `${area.owner} 관점`;
+        nodes.detailImpactLevel.className = `impact-level ${level.className}`;
+        nodes.detailImpactLevel.textContent = level.text;
+        nodes.detailConfidence.textContent = confidenceLabel[area.confidence];
+        nodes.detailScope.innerHTML = area.scope.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+        nodes.detailDirectImpact.textContent = area.directImpact || area.summary;
+        nodes.detailPathway.innerHTML = impactPath
+          .map(
+            (step) => `
+              <div class="path-step">
+                <span>${escapeHtml(step.stage)}</span>
+                <strong>${escapeHtml(step.text)}</strong>
+              </div>
+            `,
+          )
+          .join("");
+        nodes.detailFinalRisk.textContent = area.finalRisk || area.insight;
+        nodes.detailWhy.innerHTML = area.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+        nodes.detailInsight.textContent = area.insight;
+        nodes.detailIndicators.innerHTML = (area.indicators || ["관련 내부 지표 확인 필요"])
+          .map((item) => `<li>${escapeHtml(item)}</li>`)
+          .join("");
+      }
+
+      function renderEvidence(scenario) {
+        nodes.evidenceGrid.innerHTML = scenario.evidence
+          .map(
+            (item) => `
+              <article class="evidence-card">
+                <span class="type-badge">${escapeHtml(item.type)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <p class="evidence-key">핵심 근거: ${escapeHtml(item.keyEvidence || item.summary.replace(/^요약:\s*/, "").split(".")[0])}</p>
+                <p class="evidence-summary">${escapeHtml(item.summary)}</p>
+                <p class="evidence-link-note">${escapeHtml(item.impactLink || "판단 연결: 해당 이슈의 인사 영향 판단 근거")}</p>
+                <div class="source-meta">
+                  <span>출처: ${escapeHtml(item.source)}</span>
+                  <span>날짜: ${escapeHtml(item.date)}</span>
+                </div>
+                ${sourceLink(item.url, "자료 열기")}
+              </article>
+            `,
+          )
+          .join("");
+      }
+
+      function renderActions(area) {
+        nodes.actionStack.innerHTML = `
+          <article class="action-card">
+            <span class="confidence-badge ${confidenceClass[area.confidence]}">${escapeHtml(area.name)}</span>
+            <h3>권고 액션</h3>
+            <ol>
+              ${area.actions.map((action) => `<li>${escapeHtml(action)}</li>`).join("")}
+            </ol>
+          </article>
+        `;
+      }
+
+      function renderCases(scenario) {
+        nodes.caseGrid.innerHTML = scenario.cases
+          .map(
+            (item) => `
+              <article class="case-card ${item.priority ? "case-card-strong" : ""}">
+                <span>${escapeHtml(item.type || item.tag)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <dl class="case-meta">
+                  <div><dt>출처/범위</dt><dd>${escapeHtml(item.org || item.sourceScope || "확인 필요")}</dd></div>
+                  <div><dt>참고 이유</dt><dd>${escapeHtml(item.why || item.note)}</dd></div>
+                  <div><dt>인사 시사점</dt><dd>${escapeHtml(item.peopleInsight || item.note)}</dd></div>
+                  <div><dt>연결 기능</dt><dd>${escapeHtml(item.peopleFunction || item.tag)}</dd></div>
+                  <div><dt>연결 액션</dt><dd>${escapeHtml(item.actionLink || "권고 액션 점검")}</dd></div>
+                </dl>
+                ${sourceLink(item.url, "사례 열기")}
+              </article>
+            `,
+          )
+          .join("");
+      }
+
+      function render() {
+        const scenario = selectedScenario();
+        const area = selectedArea(scenario);
+        renderTabs();
+        renderInput(scenario);
+        renderTopRisks(scenario);
+        renderRanking(scenario, area);
+        renderDetail(area);
+        renderEvidence(scenario);
+        renderActions(area);
+        renderCases(scenario);
+      }
+
+      if (nodes.advanceScenario) {
+        nodes.advanceScenario.addEventListener("click", () => {
+          scenarioIndex = (scenarioIndex + 1) % scenarios.length;
+          selectedAreaName = "";
+          render();
+        });
+      }
+
+      render();
+    </script>
+  </body>
+</html>
