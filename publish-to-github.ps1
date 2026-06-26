@@ -6,7 +6,11 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$git = "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\mingw64\bin\git.exe"
+$gitRoot = "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git"
+$gitBin = Join-Path $gitRoot "mingw64\bin"
+$gitCore = Join-Path $gitRoot "mingw64\libexec\git-core"
+$gitCmd = Join-Path $gitRoot "cmd"
+$git = Join-Path $gitBin "git.exe"
 $defaultRepoUrl = "https://github.com/mijingo83-collab/people-impact-explorer.git"
 
 if ([string]::IsNullOrWhiteSpace($RepoUrl)) {
@@ -20,6 +24,9 @@ if ([string]::IsNullOrWhiteSpace($RepoUrl)) {
 if (-not (Test-Path $git)) {
   throw "Git executable not found: $git"
 }
+
+$env:GIT_EXEC_PATH = $gitCore
+$env:PATH = "$gitBin;$gitCore;$gitCmd;$env:PATH"
 
 $userName = (& $git config user.name 2>$null)
 $userEmail = (& $git config user.email 2>$null)
@@ -62,9 +69,41 @@ if ($hasOrigin) {
   if ($LASTEXITCODE -ne 0) { throw "git remote add failed." }
 }
 
-Write-Host "Staging files..."
-& $git add .
-if ($LASTEXITCODE -ne 0) { throw "git add failed." }
+$pathsToUntrack = @(
+  "work",
+  "outputs/github-pages-upload",
+  "outputs/github-pages-upload-*",
+  "outputs/*.zip"
+)
+
+$pathsToStage = @(
+  ".nojekyll",
+  ".gitignore",
+  "AGENTS.md",
+  "DEPLOY.md",
+  "PUBLIC_BASE_URL.txt",
+  "PUBLIC_BASE_URL.example.txt",
+  "archive.html",
+  "index.html",
+  "publish-to-github.ps1",
+  "scripts/generate-daily-report.mjs",
+  "outputs/latest.html",
+  "outputs/reports.json",
+  "outputs/template.html",
+  "outputs/*.html"
+)
+
+Write-Host "Removing ignored helper artifacts from git tracking..."
+foreach ($pattern in $pathsToUntrack) {
+  & $git rm -r --cached --ignore-unmatch -- $pattern
+  if ($LASTEXITCODE -ne 0) { throw "git rm --cached failed for $pattern" }
+}
+
+Write-Host "Staging public and automation files..."
+foreach ($pattern in $pathsToStage) {
+  & $git add -- $pattern
+  if ($LASTEXITCODE -ne 0) { throw "git add failed for $pattern" }
+}
 
 try {
   & $git diff --cached --quiet

@@ -14,11 +14,22 @@
     "date": "2026-06-25",
     "title": "2026-06-25 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260625.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       "[단독]SK, 광주-전남 반도체 단지에 신재생 투자도 검토",
       "“지난해 순이익 30% 성과급 달라”… 현대차 노조 ‘찬성 86%’ 파업 가결",
       "“앤트로픽 버렸다” 미국 개발자들이 중국 AI로 갈아타는 이유[딥다이브]"
+    ]
+  },
+  {
+    "date": "2026-06-26",
+    "title": "2026-06-26 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260626.html",
+    "latest": true,
+    "issues": [
+      "삼성 ‘호남 팹’ 급물살… K반도체 벨트 키운다",
+      "[단독]노란봉투법 100일… 하청 복지 챙겨도 ‘교섭 폭탄’ 위험",
+      "AI is plowing through the workplace. This new group wants to help people adapt and have jobs"
     ]
   }
 ]

@@ -1,0 +1,4 @@
+work/
+outputs/*.zip
+outputs/github-pages-upload/
+outputs/github-pages-upload-*/
