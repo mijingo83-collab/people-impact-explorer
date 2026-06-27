@@ -13,6 +13,10 @@ $gitCmd = Join-Path $gitRoot "cmd"
 $git = Join-Path $gitBin "git.exe"
 $defaultRepoUrl = "https://github.com/mijingo83-collab/people-impact-explorer.git"
 
+if ($PSScriptRoot) {
+  Set-Location -LiteralPath $PSScriptRoot
+}
+
 if ([string]::IsNullOrWhiteSpace($RepoUrl)) {
   $RepoUrl = Read-Host "GitHub repository URL (.git)"
 }
