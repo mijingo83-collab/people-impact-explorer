@@ -66,22 +66,22 @@
       }
 
       .shell {
-        width: min(1460px, 100%);
+        width: min(1360px, 100%);
         margin: 0 auto;
-        padding: 28px 28px 38px;
+        padding: 32px 28px 44px;
       }
 
       .topbar {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        gap: 18px;
+        gap: 24px;
         align-items: start;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
       }
 
       .brand-block {
         display: grid;
-        gap: 8px;
+        gap: 10px;
       }
 
       .eyebrow {
@@ -122,31 +122,31 @@
       }
 
       .subcopy {
-        max-width: 890px;
+        max-width: 760px;
         color: #516173;
-        font-size: 17px;
+        font-size: 16px;
         font-weight: 560;
-        line-height: 1.55;
+        line-height: 1.72;
       }
 
       .status-board {
         display: grid;
         grid-template-columns: repeat(4, auto);
-        gap: 6px;
+        gap: 8px;
         align-items: center;
-        padding: 6px;
+        padding: 8px;
         border: 1px solid var(--line);
         border-radius: var(--radius);
-        background: rgba(255, 255, 255, 0.76);
+        background: rgba(255, 255, 255, 0.92);
         box-shadow: var(--shadow-soft);
       }
 
       .status-pill {
         display: grid;
-        gap: 3px;
-        min-width: 112px;
+        gap: 4px;
+        min-width: 124px;
         min-height: auto;
-        padding: 8px 10px;
+        padding: 10px 12px;
         border: 1px solid #e3e8ef;
         border-radius: 7px;
         background: var(--paper);
@@ -160,7 +160,7 @@
 
       .status-pill strong {
         color: var(--ink-2);
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 820;
         white-space: nowrap;
       }
@@ -236,7 +236,7 @@
       }
 
       .panel {
-        padding: 20px;
+        padding: 22px;
       }
 
       .panel-header {
@@ -291,9 +291,13 @@
 
       .input-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.72fr);
+        grid-template-columns: 1fr;
         gap: 18px;
         align-items: start;
+      }
+
+      .article-card {
+        gap: 18px;
       }
 
       .news-input {
@@ -357,30 +361,44 @@
       }
 
       .article-summary {
-        padding: 16px;
+        padding: 18px 20px;
         border: 1px solid #dce5ef;
+        border-left: 4px solid #2f55d4;
         border-radius: var(--radius);
-        background: var(--paper-soft);
+        background: #ffffff;
         color: #253244;
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 620;
-        line-height: 1.65;
+        line-height: 1.75;
+      }
+
+      #scenarioContext {
+        margin-top: 14px;
+        padding: 14px 16px;
+        border: 1px solid #e5eaf1;
+        border-radius: var(--radius);
+        background: #fbfcfe;
+        color: #566679;
+        font-size: 15px;
+        font-weight: 580;
+        line-height: 1.72;
       }
 
       .report-flow {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 12px;
-        margin-top: 0;
+        gap: 14px;
+        margin-top: 14px;
       }
 
       .flow-card {
         position: relative;
         min-height: auto;
-        padding: 12px 13px;
+        padding: 14px 15px;
         border: 1px solid #dce5ef;
+        border-top: 3px solid #d7e3ff;
         border-radius: var(--radius);
-        background: #ffffff;
+        background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
         box-shadow: none;
       }
 
@@ -409,7 +427,7 @@
         color: var(--ink-2);
         font-size: 15px;
         font-weight: 760;
-        line-height: 1.45;
+        line-height: 1.58;
       }
 
       .source-row {
@@ -428,16 +446,22 @@
       .judgement-panel {
         display: grid;
         align-content: start;
+        gap: 14px;
+      }
+
+      .judgement-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
       }
 
       .judgement-box {
         display: grid;
         gap: 7px;
-        padding: 13px 14px;
+        padding: 15px 16px;
         border: 1px solid #dde5ef;
         border-radius: var(--radius);
-        background: var(--paper-warm);
+        background: #fffdf8;
       }
 
       .judgement-box span {
@@ -450,7 +474,7 @@
         color: #263242;
         font-size: 16px;
         font-weight: 820;
-        line-height: 1.42;
+        line-height: 1.55;
       }
 
       .metric-grid {
@@ -459,9 +483,13 @@
         gap: 10px;
       }
 
+      .judgement-panel .metric-grid {
+        margin-top: 2px;
+      }
+
       .metric-tile {
         min-height: auto;
-        padding: 12px 13px;
+        padding: 14px 15px;
         box-shadow: var(--shadow-soft);
       }
 
@@ -495,14 +523,14 @@
       .risk-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
+        gap: 16px;
       }
 
       .risk-card {
         display: grid;
         gap: 8px;
         min-height: auto;
-        padding: 16px;
+        padding: 18px;
         border: 1px solid var(--line);
         border-radius: var(--radius);
         background: #ffffff;
@@ -569,10 +597,16 @@
 
       .analysis-grid {
         display: grid;
-        grid-template-columns: minmax(500px, 0.88fr) minmax(460px, 0.78fr);
-        gap: 18px;
+        grid-template-columns: minmax(360px, 0.44fr) minmax(0, 0.96fr);
+        gap: 22px;
         margin-top: 18px;
         align-items: start;
+      }
+
+      .analysis-grid > .panel:first-child,
+      .evidence-action-grid > .panel:last-child {
+        position: sticky;
+        top: 18px;
       }
 
       .ranking-list {
@@ -587,7 +621,7 @@
         align-items: center;
         width: 100%;
         min-height: auto;
-        padding: 13px 14px;
+        padding: 15px 16px;
         color: inherit;
         text-align: left;
         box-shadow: var(--shadow-soft);
@@ -655,9 +689,9 @@
 
       .rank-main p {
         color: #526274;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 590;
-        line-height: 1.45;
+        line-height: 1.6;
       }
 
       .rank-score {
@@ -675,7 +709,7 @@
 
       .detail-panel {
         display: grid;
-        gap: 14px;
+        gap: 16px;
         background: var(--paper);
         color: var(--ink);
       }
@@ -720,7 +754,7 @@
 
       .detail-section {
         display: grid;
-        gap: 7px;
+        gap: 9px;
       }
 
       .detail-section > span {
@@ -738,9 +772,13 @@
 
       .detail-section li {
         color: #273344;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 610;
-        line-height: 1.52;
+        line-height: 1.68;
+      }
+
+      .detail-section li + li {
+        margin-top: 4px;
       }
 
       .insight-box {
@@ -772,10 +810,10 @@
 
       .path-step {
         display: grid;
-        grid-template-columns: 94px minmax(0, 1fr);
+        grid-template-columns: 88px minmax(0, 1fr);
         gap: 10px;
         align-items: start;
-        padding: 10px 12px;
+        padding: 12px 14px;
         border: 1px solid #dfe6ef;
         border-radius: 6px;
         background: #f8fafc;
@@ -791,13 +829,13 @@
         color: #1f2a37;
         font-size: 15px;
         font-weight: 650;
-        line-height: 1.45;
+        line-height: 1.55;
       }
 
       .evidence-action-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(420px, 0.58fr);
-        gap: 18px;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.62fr);
+        gap: 22px;
         margin-top: 18px;
         align-items: start;
       }
@@ -812,7 +850,7 @@
         display: grid;
         gap: 10px;
         min-height: auto;
-        padding: 16px;
+        padding: 18px;
         box-shadow: var(--shadow-soft);
       }
 
@@ -837,7 +875,7 @@
         color: #46566a;
         font-size: 14px;
         font-weight: 610;
-        line-height: 1.55;
+        line-height: 1.68;
       }
 
       .evidence-link-note {
@@ -882,7 +920,7 @@
       .action-card {
         display: grid;
         gap: 13px;
-        padding: 18px;
+        padding: 20px;
         background: var(--paper-warm);
         box-shadow: var(--shadow-soft);
       }
@@ -896,14 +934,14 @@
         color: #263242;
         font-size: 16px;
         font-weight: 700;
-        line-height: 1.55;
+        line-height: 1.68;
         margin-bottom: 8px;
       }
 
       .case-grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
         margin-top: 18px;
       }
 
@@ -911,7 +949,7 @@
         display: grid;
         gap: 9px;
         min-height: auto;
-        padding: 14px;
+        padding: 16px;
         box-shadow: var(--shadow-soft);
       }
 
@@ -928,8 +966,8 @@
 
       .case-card h3 {
         color: var(--ink);
-        font-size: 16px;
-        line-height: 1.35;
+        font-size: 17px;
+        line-height: 1.42;
       }
 
       .case-card p {
@@ -941,7 +979,7 @@
 
       .case-meta {
         display: grid;
-        gap: 7px;
+        gap: 10px;
         margin: 0;
       }
 
@@ -961,7 +999,7 @@
         color: #405064;
         font-size: 13px;
         font-weight: 650;
-        line-height: 1.42;
+        line-height: 1.58;
       }
 
       .evidence-card a:hover,
@@ -977,6 +1015,7 @@
         font-size: 12px;
         font-weight: 650;
         line-height: 1.5;
+        max-width: 980px;
       }
 
       @media (max-width: 1280px) {
@@ -986,12 +1025,17 @@
           grid-template-columns: 1fr;
         }
 
+        .analysis-grid > .panel:first-child,
+        .evidence-action-grid > .panel:last-child {
+          position: static;
+        }
+
         .report-flow {
           grid-template-columns: 1fr;
         }
 
         .case-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-columns: 1fr;
         }
 
         .flow-card:not(:last-child)::after {
@@ -1015,6 +1059,7 @@
 
         .status-board,
         .scenario-tabs,
+        .judgement-grid,
         .metric-grid,
         .risk-grid,
         .evidence-grid,
@@ -1120,21 +1165,23 @@
             </div>
             <span class="confidence-badge" id="overallConfidence"></span>
           </div>
-          <div class="judgement-box">
-            <span>핵심 질문</span>
-            <strong id="decisionQuestion"></strong>
-          </div>
-          <div class="judgement-box">
-            <span>인사 업무 신호</span>
-            <strong id="peopleSignal"></strong>
-          </div>
-          <div class="judgement-box">
-            <span>기준 기사만 본 직접 영향</span>
-            <strong id="directFinding"></strong>
-          </div>
-          <div class="judgement-box">
-            <span>추가 자료 포함 종합 판단</span>
-            <strong id="researchJudgement"></strong>
+          <div class="judgement-grid">
+            <div class="judgement-box">
+              <span>핵심 질문</span>
+              <strong id="decisionQuestion"></strong>
+            </div>
+            <div class="judgement-box">
+              <span>인사 업무 신호</span>
+              <strong id="peopleSignal"></strong>
+            </div>
+            <div class="judgement-box">
+              <span>기준 기사만 본 직접 영향</span>
+              <strong id="directFinding"></strong>
+            </div>
+            <div class="judgement-box">
+              <span>추가 자료 포함 종합 판단</span>
+              <strong id="researchJudgement"></strong>
+            </div>
           </div>
           <div class="metric-grid" id="metricGrid"></div>
         </aside>

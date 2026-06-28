@@ -1066,8 +1066,7 @@
     <main class="shell">
       <header class="topbar">
         <div class="brand-block">
-          <p class="eyebrow">초안 보고서</p>
-          <h1>인사 시사점 분석 도구</h1>
+          <h1>인사 시사점 분석 레포트</h1>
           <p class="subcopy">
             국내외 주요 이슈가 인사 업무에 미치는 영향과 권고 액션을 제공합니다.
           </p>
@@ -1395,8 +1394,9 @@
           reportFlow: [
             ["기준 기사", token(issueNumber, "SUMMARY")],
             ["직접 영향", token(issueNumber, "IMPACT_PATH")],
+            ["2차 영향", token(issueNumber, "HR_JUDGEMENT")],
             ["검토 필요 리스크", token(issueNumber, "TOP_RISKS")],
-            ["권고 액션", token(issueNumber, "RECOMMENDED_ACTIONS")],
+            ["우선 검토", token(issueNumber, "RECOMMENDED_ACTIONS")],
           ],
           topRisks: [
             ["1", token(issueNumber, "TOP_RISKS"), token(issueNumber, "HR_JUDGEMENT")],

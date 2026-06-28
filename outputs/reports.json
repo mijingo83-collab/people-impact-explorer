@@ -36,11 +36,22 @@
     "date": "2026-06-27",
     "title": "2026-06-27 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260627.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       "광주-전남 반도체 팹, 착공까지 6년 ‘용인 지체’ 되풀이 말아야",
       "현대차 쟁의조정 중지…“30% 성과급 요구” 파업 가능성 커져",
       "Goldman bankers say the next AI boom is in the “physical economy”"
+    ]
+  },
+  {
+    "date": "2026-06-28",
+    "title": "2026-06-28 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260628.html",
+    "latest": true,
+    "issues": [
+      "구직자 5명중 1명은 60대…20대 다음으로 많아",
+      "퇴직금 안주려… 지자체도 ‘쪼개기 계약’",
+      "Anthropic, OpenAI join $500 million AI jobs push"
     ]
   }
 ]
