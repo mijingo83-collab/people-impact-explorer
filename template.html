@@ -1,0 +1,1754 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>인사 시사점 분석 레포트</title>
+    <style>
+      :root {
+        --bg: #f3f5f8;
+        --paper: #ffffff;
+        --paper-soft: #f8fafc;
+        --paper-warm: #fffdf8;
+        --ink: #111827;
+        --ink-2: #273344;
+        --muted: #687789;
+        --faint: #8a98a8;
+        --line: #dfe5ee;
+        --navy: #101820;
+        --blue: #2f55d4;
+        --teal: #0f8f87;
+        --green: #148044;
+        --amber: #b36b14;
+        --red: #bf3d3a;
+        --shadow: 0 14px 30px rgba(28, 42, 58, 0.06);
+        --shadow-soft: 0 8px 18px rgba(28, 42, 58, 0.05);
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Pretendard",
+          "Apple SD Gothic Neo",
+          "Malgun Gothic",
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        letter-spacing: 0;
+      }
+
+      button,
+      textarea,
+      a {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        width: min(1460px, 100%);
+        margin: 0 auto;
+        padding: 28px 28px 38px;
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: start;
+        margin-bottom: 20px;
+      }
+
+      .brand-block {
+        display: grid;
+        gap: 8px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        color: var(--navy);
+        font-size: clamp(32px, 3.6vw, 46px);
+        font-weight: 840;
+        line-height: 1.08;
+      }
+
+      h2 {
+        color: var(--navy);
+        font-size: 24px;
+        font-weight: 820;
+        line-height: 1.25;
+      }
+
+      h3 {
+        color: var(--ink);
+        font-size: 19px;
+        font-weight: 790;
+        line-height: 1.32;
+      }
+
+      .subcopy {
+        max-width: 890px;
+        color: #516173;
+        font-size: 17px;
+        font-weight: 560;
+        line-height: 1.55;
+      }
+
+      .status-board {
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        gap: 6px;
+        align-items: center;
+        padding: 6px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .status-pill {
+        display: grid;
+        gap: 3px;
+        min-width: 112px;
+        min-height: auto;
+        padding: 8px 10px;
+        border: 1px solid #e3e8ef;
+        border-radius: 7px;
+        background: var(--paper);
+      }
+
+      .status-pill span {
+        color: var(--faint);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .status-pill strong {
+        color: var(--ink-2);
+        font-size: 14px;
+        font-weight: 820;
+        white-space: nowrap;
+      }
+
+      .status-link {
+        align-content: center;
+        min-width: 104px;
+        background: var(--navy);
+      }
+
+      .status-link span,
+      .status-link strong {
+        color: #ffffff;
+      }
+
+      .control-band {
+        display: none;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .scenario-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .scenario-tab,
+      .advance-button,
+      .select-area {
+        min-height: 40px;
+        border: 0;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 820;
+      }
+
+      .scenario-tab {
+        padding: 0 14px;
+        background: transparent;
+        color: #5d6d80;
+      }
+
+      .scenario-tab[aria-selected="true"] {
+        background: var(--navy);
+        color: #ffffff;
+        box-shadow: 0 10px 24px rgba(16, 24, 32, 0.2);
+      }
+
+      .advance-button {
+        padding: 0 18px;
+        background: var(--blue);
+        color: #ffffff;
+        box-shadow: 0 14px 28px rgba(47, 85, 212, 0.22);
+      }
+
+      .panel,
+      .metric-tile,
+      .ranking-row,
+      .evidence-card,
+      .case-card,
+      .action-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      .panel {
+        padding: 20px;
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 13px;
+      }
+
+      .panel-title {
+        display: grid;
+        gap: 6px;
+      }
+
+      .panel-title p {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 640;
+        line-height: 1.5;
+      }
+
+      .confidence-badge,
+      .source-chip,
+      .type-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 26px;
+        width: max-content;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 820;
+        white-space: nowrap;
+      }
+
+      .confidence-high {
+        background: #e7f6ed;
+        color: var(--green);
+      }
+
+      .confidence-medium {
+        background: #edf2ff;
+        color: var(--blue);
+      }
+
+      .confidence-watch {
+        background: #fff3dc;
+        color: var(--amber);
+      }
+
+      .input-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.72fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .news-input {
+        display: block;
+        width: 100%;
+        min-height: 224px;
+        padding: 17px 18px;
+        resize: none;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        outline: none;
+        background: var(--paper-soft);
+        color: #243140;
+        font-size: 17px;
+        font-weight: 560;
+        line-height: 1.78;
+      }
+
+      .news-input:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 4px rgba(47, 85, 212, 0.12);
+      }
+
+      .article-card {
+        display: grid;
+        gap: 16px;
+      }
+
+      .article-title-link {
+        color: var(--navy);
+        text-decoration: none;
+      }
+
+      .article-title-link:hover {
+        color: var(--blue);
+      }
+
+      .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .article-meta span,
+      .article-meta a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        padding: 6px 11px;
+        border: 1px solid #d9e2ee;
+        border-radius: 6px;
+        background: #f8fafc;
+        color: #46566a;
+        font-size: 13px;
+        font-weight: 760;
+      }
+
+      .article-meta a {
+        color: var(--blue);
+        background: #f4f7ff;
+      }
+
+      .article-summary {
+        padding: 16px;
+        border: 1px solid #dce5ef;
+        border-radius: var(--radius);
+        background: var(--paper-soft);
+        color: #253244;
+        font-size: 16px;
+        font-weight: 620;
+        line-height: 1.65;
+      }
+
+      .report-flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 0;
+      }
+
+      .flow-card {
+        position: relative;
+        min-height: auto;
+        padding: 12px 13px;
+        border: 1px solid #dce5ef;
+        border-radius: var(--radius);
+        background: #ffffff;
+        box-shadow: none;
+      }
+
+      .flow-card:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        top: 50%;
+        right: -14px;
+        z-index: 1;
+        transform: translateY(-50%);
+        color: #7a8797;
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .flow-card span {
+        display: block;
+        color: var(--faint);
+        font-size: 12px;
+        font-weight: 860;
+      }
+
+      .flow-card strong {
+        display: block;
+        margin-top: 7px;
+        color: var(--ink-2);
+        font-size: 15px;
+        font-weight: 760;
+        line-height: 1.45;
+      }
+
+      .source-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .source-chip {
+        border: 1px solid #cbd7e5;
+        background: #fff;
+        color: #46576a;
+      }
+
+      .judgement-panel {
+        display: grid;
+        align-content: start;
+        gap: 12px;
+      }
+
+      .judgement-box {
+        display: grid;
+        gap: 7px;
+        padding: 13px 14px;
+        border: 1px solid #dde5ef;
+        border-radius: var(--radius);
+        background: var(--paper-warm);
+      }
+
+      .judgement-box span {
+        color: var(--faint);
+        font-size: 13px;
+        font-weight: 820;
+      }
+
+      .judgement-box strong {
+        color: #263242;
+        font-size: 16px;
+        font-weight: 820;
+        line-height: 1.42;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric-tile {
+        min-height: auto;
+        padding: 12px 13px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .metric-tile span {
+        color: var(--faint);
+        font-size: 13px;
+        font-weight: 820;
+      }
+
+      .metric-tile strong {
+        display: block;
+        margin-top: 7px;
+        color: var(--navy);
+        font-size: 21px;
+        font-weight: 860;
+        line-height: 1;
+      }
+
+      .metric-tile p {
+        margin-top: 6px;
+        color: #5a6a7c;
+        font-size: 14px;
+        font-weight: 640;
+        line-height: 1.48;
+      }
+
+      .risk-overview {
+        margin-top: 18px;
+      }
+
+      .risk-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .risk-card {
+        display: grid;
+        gap: 8px;
+        min-height: auto;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #ffffff;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .risk-card span {
+        color: var(--faint);
+        font-size: 13px;
+        font-weight: 840;
+      }
+
+      .risk-card h3 {
+        color: var(--navy);
+        font-size: 22px;
+      }
+
+      .risk-card p {
+        color: #4c5d70;
+        font-size: 16px;
+        font-weight: 650;
+        line-height: 1.45;
+      }
+
+      .impact-level {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 30px;
+        padding: 6px 11px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 860;
+        white-space: nowrap;
+      }
+
+      .level-critical {
+        border: 1px solid #f2b8b5;
+        background: #fff1f0;
+        color: #b42318;
+      }
+
+      .level-high {
+        border: 1px solid #f7c78f;
+        background: #fff7ed;
+        color: #b54708;
+      }
+
+      .level-medium {
+        border: 1px solid #f8df7b;
+        background: #fffbe6;
+        color: #7a5a00;
+      }
+
+      .level-low {
+        border: 1px solid #d4dbe5;
+        background: #f5f7fa;
+        color: #5c6978;
+      }
+
+      .support-score .impact-level {
+        color: #111827;
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: minmax(500px, 0.88fr) minmax(460px, 0.78fr);
+        gap: 18px;
+        margin-top: 18px;
+        align-items: start;
+      }
+
+      .ranking-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .ranking-row {
+        display: grid;
+        grid-template-columns: 36px minmax(0, 1fr) auto;
+        gap: 13px;
+        align-items: center;
+        width: 100%;
+        min-height: auto;
+        padding: 13px 14px;
+        color: inherit;
+        text-align: left;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .ranking-row.active {
+        border-color: rgba(47, 85, 212, 0.72);
+        background: #f4f7ff;
+        box-shadow: 0 12px 28px rgba(47, 85, 212, 0.11);
+      }
+
+      .ranking-row.supporting {
+        background: #fbfcfe;
+        border-color: #e8edf4;
+      }
+
+      .ranking-row.supporting .rank-title strong {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .ranking-row.supporting .rank-main p {
+        color: var(--faint);
+        font-size: 0.88rem;
+      }
+
+      .ranking-row.supporting .rank-no {
+        background: #98a6b7;
+      }
+
+      .rank-no {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 7px;
+        background: var(--navy);
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 860;
+      }
+
+      .ranking-row.active .rank-no {
+        background: var(--blue);
+      }
+
+      .rank-main {
+        display: grid;
+        gap: 7px;
+        min-width: 0;
+      }
+
+      .rank-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .rank-title strong {
+        color: var(--ink);
+        font-size: 19px;
+        font-weight: 820;
+        line-height: 1.3;
+      }
+
+      .rank-main p {
+        color: #526274;
+        font-size: 16px;
+        font-weight: 590;
+        line-height: 1.45;
+      }
+
+      .rank-score {
+        display: grid;
+        justify-items: end;
+        gap: 5px;
+      }
+
+      .rank-score strong {
+        color: var(--navy);
+        font-size: 26px;
+        font-weight: 860;
+        line-height: 1;
+      }
+
+      .detail-panel {
+        display: grid;
+        gap: 14px;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .detail-panel .eyebrow,
+      .detail-panel .panel-title p {
+        color: var(--muted);
+      }
+
+      .detail-panel h2,
+      .detail-panel h3 {
+        color: var(--navy);
+      }
+
+      .detail-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .support-score {
+        display: grid;
+        justify-items: end;
+        gap: 5px;
+      }
+
+      .support-score strong {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 860;
+        line-height: 1;
+      }
+
+      .support-score span {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .detail-section {
+        display: grid;
+        gap: 7px;
+      }
+
+      .detail-section > span {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 820;
+        text-transform: uppercase;
+      }
+
+      .detail-section ul,
+      .action-card ol {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .detail-section li {
+        color: #273344;
+        font-size: 16px;
+        font-weight: 610;
+        line-height: 1.52;
+      }
+
+      .insight-box {
+        padding: 12px 14px;
+        border-left: 3px solid var(--teal);
+        border-radius: 6px;
+        background: #f4fbfa;
+        color: #20313f;
+        font-size: 15px;
+        font-weight: 650;
+        line-height: 1.52;
+      }
+
+      .risk-box {
+        padding: 12px 14px;
+        border-left: 3px solid #f97316;
+        border-radius: 6px;
+        background: #fff7ed;
+        color: #2b3340;
+        font-size: 15px;
+        font-weight: 680;
+        line-height: 1.52;
+      }
+
+      .pathway {
+        display: grid;
+        gap: 8px;
+      }
+
+      .path-step {
+        display: grid;
+        grid-template-columns: 94px minmax(0, 1fr);
+        gap: 10px;
+        align-items: start;
+        padding: 10px 12px;
+        border: 1px solid #dfe6ef;
+        border-radius: 6px;
+        background: #f8fafc;
+      }
+
+      .path-step span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 840;
+      }
+
+      .path-step strong {
+        color: #1f2a37;
+        font-size: 15px;
+        font-weight: 650;
+        line-height: 1.45;
+      }
+
+      .evidence-action-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(420px, 0.58fr);
+        gap: 18px;
+        margin-top: 18px;
+        align-items: start;
+      }
+
+      .evidence-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .evidence-card {
+        display: grid;
+        gap: 10px;
+        min-height: auto;
+        padding: 16px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .type-badge {
+        background: #eef2ff;
+        color: var(--blue);
+      }
+
+      .evidence-card h3 {
+        color: var(--ink);
+        font-size: 17px;
+      }
+
+      .evidence-key {
+        color: var(--navy);
+        font-size: 14px;
+        font-weight: 780;
+        line-height: 1.48;
+      }
+
+      .evidence-summary {
+        color: #46566a;
+        font-size: 14px;
+        font-weight: 610;
+        line-height: 1.55;
+      }
+
+      .evidence-link-note {
+        padding: 10px 11px;
+        border-radius: 6px;
+        background: #f5f8fb;
+        color: #415064;
+        font-size: 13px;
+        font-weight: 720;
+        line-height: 1.45;
+      }
+
+      .source-meta {
+        display: grid;
+        gap: 4px;
+        color: #5a6a7c;
+        font-size: 13px;
+        font-weight: 680;
+        line-height: 1.4;
+      }
+
+      .evidence-card a,
+      .case-card a {
+        align-self: end;
+        color: var(--blue);
+        font-size: 13px;
+        font-weight: 860;
+      }
+
+      .link-missing {
+        align-self: end;
+        color: var(--faint);
+        font-size: 12px;
+        font-weight: 780;
+      }
+
+      .action-stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .action-card {
+        display: grid;
+        gap: 13px;
+        padding: 18px;
+        background: var(--paper-warm);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .action-card h3 {
+        color: var(--navy);
+        font-size: 22px;
+      }
+
+      .action-card li {
+        color: #263242;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.55;
+        margin-bottom: 8px;
+      }
+
+      .case-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .case-card {
+        display: grid;
+        gap: 9px;
+        min-height: auto;
+        padding: 14px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .case-card-strong {
+        border-color: rgba(15, 143, 135, 0.38);
+        background: #f7fbfb;
+      }
+
+      .case-card span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 860;
+      }
+
+      .case-card h3 {
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1.35;
+      }
+
+      .case-card p {
+        color: #596a7c;
+        font-size: 14px;
+        font-weight: 620;
+        line-height: 1.5;
+      }
+
+      .case-meta {
+        display: grid;
+        gap: 7px;
+        margin: 0;
+      }
+
+      .case-meta div {
+        display: grid;
+        gap: 3px;
+      }
+
+      .case-meta dt {
+        color: var(--faint);
+        font-size: 11px;
+        font-weight: 850;
+      }
+
+      .case-meta dd {
+        margin: 0;
+        color: #405064;
+        font-size: 13px;
+        font-weight: 650;
+        line-height: 1.42;
+      }
+
+      .evidence-card a:hover,
+      .case-card a:hover,
+      .case-card:focus-visible a {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 650;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 1280px) {
+        .input-grid,
+        .analysis-grid,
+        .evidence-action-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .report-flow {
+          grid-template-columns: 1fr;
+        }
+
+        .case-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .flow-card:not(:last-child)::after {
+          content: "↓";
+          top: auto;
+          right: 50%;
+          bottom: -18px;
+          transform: translateX(50%);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .shell {
+          padding: 16px;
+        }
+
+        .topbar,
+        .control-band {
+          grid-template-columns: 1fr;
+        }
+
+        .status-board,
+        .scenario-tabs,
+        .metric-grid,
+        .risk-grid,
+        .evidence-grid,
+        .case-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .advance-button {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .shell {
+          padding: 12px;
+        }
+
+        .panel {
+          padding: 16px;
+        }
+
+        .news-input {
+          min-height: 300px;
+          font-size: 15px;
+          line-height: 1.7;
+        }
+
+        .ranking-row {
+          grid-template-columns: 34px minmax(0, 1fr);
+          align-items: start;
+        }
+
+        .rank-score {
+          grid-column: 2;
+          justify-items: start;
+        }
+
+        .detail-head {
+          flex-direction: column;
+        }
+
+        .support-score {
+          justify-items: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <h1>인사 시사점 분석 레포트</h1>
+          <p class="subcopy">
+            국내외 주요 이슈가 인사 업무에 미치는 영향과 권고 액션을 제공합니다.
+          </p>
+        </div>
+        <div class="status-board" aria-label="보고서 상태">
+          <div class="status-pill">
+            <span>자료 유형</span>
+            <strong>리서치 기반</strong>
+          </div>
+          <div class="status-pill">
+            <span>분석 관점</span>
+            <strong>인사 업무</strong>
+          </div>
+          <div class="status-pill">
+            <span>대상 이슈</span>
+            <strong>{{ISSUE_1_TITLE}}</strong>
+          </div>
+          <a class="status-pill status-link" href="../archive.html">
+            <span>이력 보기</span>
+            <strong>달력 열기</strong>
+          </a>
+        </div>
+      </header>
+
+      <nav class="scenario-tabs" id="scenarioTabs" role="tablist" aria-label="데일리 선정 뉴스 3건"></nav>
+
+      <section class="input-grid" aria-label="분석 대상 기사와 인사 판단 요약">
+        <article class="panel article-card">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">분석 대상 기사</p>
+              <h2><a class="article-title-link" id="articleTitleLink" href="#" target="_blank" rel="noopener noreferrer"><span id="headline"></span></a></h2>
+              <div class="article-meta">
+                <span id="articleSource"></span>
+                <span id="articleDate"></span>
+                <a id="articleOriginalLink" href="#" target="_blank" rel="noopener noreferrer">기사 원문 보기</a>
+              </div>
+            </div>
+          </div>
+          <p class="article-summary" id="newsInput"></p>
+          <p id="scenarioContext"></p>
+          <div class="report-flow" id="reportFlow" aria-label="영향 전개 경로 요약"></div>
+        </article>
+
+        <aside class="panel judgement-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">인사 판단 요약</p>
+              <h2>가장 먼저 봐야 할 질문</h2>
+              <p>점수보다 실행 판단을 먼저 보여줍니다.</p>
+            </div>
+            <span class="confidence-badge" id="overallConfidence"></span>
+          </div>
+          <div class="judgement-box">
+            <span>핵심 질문</span>
+            <strong id="decisionQuestion"></strong>
+          </div>
+          <div class="judgement-box">
+            <span>인사 업무 신호</span>
+            <strong id="peopleSignal"></strong>
+          </div>
+          <div class="judgement-box">
+            <span>기준 기사만 본 직접 영향</span>
+            <strong id="directFinding"></strong>
+          </div>
+          <div class="judgement-box">
+            <span>추가 자료 포함 종합 판단</span>
+            <strong id="researchJudgement"></strong>
+          </div>
+          <div class="metric-grid" id="metricGrid"></div>
+        </aside>
+      </section>
+
+      <section class="panel risk-overview" aria-label="상위 리스크 3개">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">상위 리스크 3개</p>
+            <h2>먼저 검토할 인사 리스크</h2>
+            <p>관련 자료를 종합했을 때 인사 조직이 우선 확인해야 할 리스크입니다.</p>
+          </div>
+        </div>
+        <div class="risk-grid" id="riskGrid"></div>
+      </section>
+
+      <section class="analysis-grid" aria-label="영향 영역 순위와 상세 분석">
+        <article class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">영향 영역 순위</p>
+              <h2>인사 기능별 영향도</h2>
+              <p>기사 직접 언급 순서가 아니라, 인사 조직이 먼저 검토해야 할 리스크가 큰 순서로 정렬했습니다.</p>
+            </div>
+          </div>
+          <div class="ranking-list" id="rankingList"></div>
+        </article>
+
+        <aside class="panel detail-panel" aria-live="polite">
+          <div class="detail-head">
+            <div class="panel-title">
+              <p class="eyebrow">상세 분석</p>
+              <h2 id="detailTitle"></h2>
+              <p id="detailOwner"></p>
+            </div>
+            <div class="support-score">
+              <span>영향 수준</span>
+              <strong id="detailImpactLevel"></strong>
+              <span id="detailConfidence"></span>
+            </div>
+          </div>
+          <div class="detail-section">
+            <span>관련 업무 범위</span>
+            <ul id="detailScope"></ul>
+          </div>
+          <div class="detail-section">
+            <span>직접 영향</span>
+            <div class="insight-box" id="detailDirectImpact"></div>
+          </div>
+          <div class="detail-section">
+            <span>영향 전개 경로</span>
+            <div class="pathway" id="detailPathway"></div>
+          </div>
+          <div class="detail-section">
+            <span>검토 필요 리스크</span>
+            <div class="risk-box" id="detailFinalRisk"></div>
+          </div>
+          <div class="detail-section">
+            <span>왜 영향이 있는가</span>
+            <ul id="detailWhy"></ul>
+          </div>
+          <div class="detail-section">
+            <span>핵심 시사점</span>
+            <div class="insight-box" id="detailInsight"></div>
+          </div>
+          <div class="detail-section">
+            <span>확인해야 할 내부 지표</span>
+            <ul id="detailIndicators"></ul>
+          </div>
+        </aside>
+      </section>
+
+      <section class="evidence-action-grid" aria-label="근거 자료와 권고 액션">
+        <article class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">근거 자료</p>
+              <h2>관련 자료 탐색 결과</h2>
+              <p>원문 기사, 공식 발표, 시장 기사, 보상 기사, 연구 보고서를 함께 보며 파급 영향을 판단합니다.</p>
+            </div>
+          </div>
+          <div class="evidence-grid" id="evidenceGrid"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <p class="eyebrow">권고 액션</p>
+              <h2>인사 조직이 바로 검토할 일</h2>
+              <p>선택한 영역 기준으로 실행 과제를 제안합니다.</p>
+            </div>
+          </div>
+          <div class="action-stack" id="actionStack"></div>
+        </article>
+      </section>
+
+      <section class="panel" aria-label="유사·참고 사례">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">유사·참고 사례</p>
+            <h2>비교 근거와 실행 인사이트</h2>
+            <p>현재 이슈의 People 리스크와 권고 액션을 보강하는 참고 사례입니다.</p>
+          </div>
+        </div>
+        <div class="case-grid" id="caseGrid"></div>
+      </section>
+
+      <p class="footer-note">
+        리포트 안내: {{REPORT_DATE}} 기준으로 생성되는 인사 시사점 리포트입니다.
+      </p>
+    </main>
+
+    <script>
+      const axes = ["인력 재배치", "운영비 영향", "규제 리스크", "실행 시급성"];
+
+      const peopleScope = {
+        "조직/임원": ["조직개편", "임원 지원 및 관리", "임원 인사", "차세대 리더 양성 및 관리"],
+        "인력운영": ["인력 운영 계획 수립 및 실적 관리", "인력 충원 및 효율화", "휴직/복직/퇴직 관리"],
+        "제도": ["승격", "평가", "연봉 산정", "시상/징계"],
+        "채용": ["외부 인력 발굴 및 채용", "우수 인력 선확보", "산학교류 및 참여연구원 관리"],
+        "교육": ["직급/직무별 특화 교육", "차세대 리더 육성", "AI/직무/리더십/어학 교육"],
+        "노사": ["대내외 동향 관리", "특이 인력 파악"],
+        "조직문화": ["캠퍼스 행사 운영", "일하는 문화 조성"],
+        "총무": ["의전", "레이아웃 관리", "사무환경/비품", "식당", "인허가", "차량 관리"],
+        "보안": ["보안 시스템 개선 및 관리", "보안 점검"],
+      };
+
+      function area(name, owner, score, confidence, summary, why, insight, stars, actions) {
+        return { name, owner, score, confidence, summary, why, insight, secondaryImpact: insight, stars, actions, scope: peopleScope[name] };
+      }
+
+      const peopleAreaNames = Object.keys(peopleScope);
+
+      const peopleOwners = {
+        "조직/임원": "조직/임원 담당",
+        "인력운영": "인력운영 담당",
+        "제도": "제도 담당",
+        "채용": "채용 담당",
+        "교육": "교육 담당",
+        "노사": "노사 담당",
+        "조직문화": "조직문화 담당",
+        "총무": "총무 담당",
+        "보안": "보안 담당",
+      };
+
+      const supportingScoresByScenario = {};
+
+      const supportingIndicators = {
+        "조직/임원": ["임원 보고 필요 안건", "핵심 조직 영향도", "리더 후보군 영향"],
+        "인력운영": ["충원 계획 변동", "전배·퇴직 신호", "핵심 직무 공백"],
+        "제도": ["평가·승격 기준 영향", "보상 문의", "예외 승인 필요성"],
+        "채용": ["채용 소요기간", "제안 수락률", "후보자 유입 경로"],
+        "교육": ["교육 수요", "이수율", "전환 가능 인력"],
+        "노사": ["구성원 문의", "현장 VOC", "특이 인력 신호"],
+        "조직문화": ["몰입도 변화", "성장기회 체감", "협업 문화 이슈"],
+        "총무": ["좌석·비품 수요", "공간 지원 필요", "입사 운영 부하"],
+        "보안": ["접근권한 변경", "보안 교육 이수", "민감정보 취급 범위"],
+      };
+
+      const supportingActions = {
+        "조직/임원": ["임원 보고 필요 여부를 판단한다.", "핵심 조직과 리더 후보군 영향을 점검한다.", "조직 구조 변경 가능성을 모니터링한다."],
+        "인력운영": ["충원 계획과 실제 배치 가능 인원을 비교한다.", "전배·퇴직 신호를 점검한다.", "핵심 직무 공백 가능성을 확인한다."],
+        "제도": ["평가·승격·보상 기준과 충돌하는 지점을 확인한다.", "예외 승인 기준 필요성을 검토한다.", "구성원 설명 가능성을 점검한다."],
+        "채용": ["경쟁사 채용 신호와 후보자 유입 변화를 확인한다.", "제안 수락률과 거절 사유를 점검한다.", "선확보 파이프라인 영향을 모니터링한다."],
+        "교육": ["직무별 교육 수요 변화를 확인한다.", "전환 교육 필요 인원을 산정한다.", "현업 멘토링 수용력을 점검한다."],
+        "노사": ["현장 문의와 VOC를 모니터링한다.", "구성원 커뮤니케이션 필요성을 판단한다.", "특이 인력 신호를 조기 파악한다."],
+        "조직문화": ["성장기회와 공정성 체감 변화를 확인한다.", "조직문화 메시지 보완 필요성을 검토한다.", "협업 방식 변화 신호를 관찰한다."],
+        "총무": ["공간·비품·좌석 수요 변화를 확인한다.", "입사·이동 운영 부하를 점검한다.", "근무환경 지원 필요성을 산정한다."],
+        "보안": ["접근권한 변경 필요성을 확인한다.", "민감정보 취급 범위를 점검한다.", "보안 교육과 점검 항목 보완 여부를 검토한다."],
+      };
+
+      function supportingStars(score) {
+        if (score >= 68) return { "인력 재배치": 2, "운영비 영향": 2, "규제 리스크": 2, "실행 시급성": 3 };
+        return { "인력 재배치": 1, "운영비 영향": 1, "규제 리스크": 1, "실행 시급성": 2 };
+      }
+
+      function makeSupportingArea(scenario, name) {
+        const score = supportingScoresByScenario[scenario.id]?.[name] ?? 62;
+        return Object.assign(
+          area(
+            name,
+            peopleOwners[name],
+            score,
+            "Watch",
+            `${scenario.label} 이슈와의 직접 연관은 상대적으로 낮지만 ${peopleScope[name].join(", ")} 관점의 확인은 필요하다.`,
+            [
+              "상위 영향 영역은 아니지만 후속 실행 과정에서 업무 범위가 연결될 수 있다.",
+              "초기 판단 단계에서는 낮은 강도로 모니터링하고, 내부 지표 변화가 확인되면 우선순위를 올린다.",
+            ],
+            `${name} 영역은 이번 이슈의 보조 영향 영역으로 두고, 관련 내부 지표를 관찰하는 수준에서 관리한다.`,
+            supportingStars(score),
+            supportingActions[name],
+          ),
+          {
+            supporting: true,
+            directImpact: `${name} 영역의 직접 영향은 제한적이나 후속 점검 대상이다.`,
+            finalRisk: "현재는 낮은 우선순위이나, 내부 지표 변화가 있으면 검토 범위를 확대해야 한다.",
+            indicators: supportingIndicators[name],
+          },
+        );
+      }
+
+      function completePeopleAreas(scenario) {
+        const existing = new Set(scenario.areas.map((item) => item.name));
+        peopleAreaNames.forEach((name) => {
+          if (!existing.has(name)) scenario.areas.push(makeSupportingArea(scenario, name));
+        });
+      }
+
+      // Daily report content placeholders. Replace only this block when generating a report.
+      const placeholderTokens = [
+        "{{REPORT_DATE}}",
+        "{{ISSUE_1_TITLE}}",
+        "{{ISSUE_1_SOURCE}}",
+        "{{ISSUE_1_DATE}}",
+        "{{ISSUE_1_SUMMARY}}",
+        "{{ISSUE_1_IMPACT_PATH}}",
+        "{{ISSUE_1_SECONDARY_IMPACT}}",
+        "{{ISSUE_1_HR_JUDGEMENT}}",
+        "{{ISSUE_1_TOP_RISKS}}",
+        "{{ISSUE_1_PRIORITY_REVIEW}}",
+        "{{ISSUE_1_IMPACT_RANKING}}",
+        "{{ISSUE_1_DETAIL_ANALYSIS}}",
+        "{{ISSUE_1_EVIDENCE}}",
+        "{{ISSUE_1_RECOMMENDED_ACTIONS}}",
+      ];
+
+      function token(issueNumber, key) {
+        return `{{ISSUE_${issueNumber}_${key}}}`;
+      }
+
+      function placeholderScenario(issueNumber) {
+        const fallbackUrl = "#";
+        const areaName = issueNumber === 1 ? "인력운영" : issueNumber === 2 ? "제도" : "노사";
+        const owner = `${areaName} 담당`;
+        const score = issueNumber === 1 ? 92 : issueNumber === 2 ? 86 : 82;
+        return {
+          id: `issue-${issueNumber}-placeholder`,
+          label: token(issueNumber, "TITLE"),
+          headline: token(issueNumber, "TITLE"),
+          article: {
+            title: token(issueNumber, "TITLE"),
+            source: token(issueNumber, "SOURCE"),
+            date: token(issueNumber, "DATE"),
+            url: fallbackUrl,
+          },
+          context: token(issueNumber, "HR_JUDGEMENT"),
+          input: token(issueNumber, "SUMMARY"),
+          sourceMix: [token(issueNumber, "SOURCE"), token(issueNumber, "EVIDENCE")],
+          confidence: "Watch",
+          decisionQuestion: token(issueNumber, "HR_JUDGEMENT"),
+          peopleSignal: token(issueNumber, "HR_JUDGEMENT"),
+          directFinding: token(issueNumber, "IMPACT_PATH"),
+          researchJudgement: token(issueNumber, "HR_JUDGEMENT"),
+          metrics: [
+            ["가장 영향이 큰 영역", areaName, token(issueNumber, "IMPACT_RANKING")],
+            ["가장 시급한 영역", areaName, token(issueNumber, "TOP_RISKS")],
+          ],
+          reportFlow: [
+            ["기준 기사", token(issueNumber, "SUMMARY")],
+            ["직접 영향", token(issueNumber, "IMPACT_PATH")],
+            ["2차 영향", token(issueNumber, "SECONDARY_IMPACT")],
+            ["검토 필요 리스크", token(issueNumber, "TOP_RISKS")],
+            ["우선 검토", token(issueNumber, "PRIORITY_REVIEW")],
+          ],
+          topRisks: [
+            ["1", token(issueNumber, "TOP_RISKS"), token(issueNumber, "HR_JUDGEMENT")],
+            ["2", token(issueNumber, "TOP_RISKS"), token(issueNumber, "IMPACT_PATH")],
+            ["3", token(issueNumber, "TOP_RISKS"), token(issueNumber, "EVIDENCE")],
+          ],
+          areas: [
+            area(areaName, owner, score, "Watch", token(issueNumber, "DETAIL_ANALYSIS"), [token(issueNumber, "IMPACT_PATH")], token(issueNumber, "HR_JUDGEMENT"), { "인력 재배치": 3, "운영비 영향": 3, "규제 리스크": 3, "실행 시급성": 3 }, [token(issueNumber, "RECOMMENDED_ACTIONS")]),
+          ],
+          evidence: [
+            { type: "근거 자료", title: token(issueNumber, "EVIDENCE"), source: token(issueNumber, "SOURCE"), date: token(issueNumber, "DATE"), url: fallbackUrl, summary: token(issueNumber, "EVIDENCE"), impactLink: token(issueNumber, "HR_JUDGEMENT") },
+          ],
+          cases: [
+            { title: token(issueNumber, "TITLE"), type: "확인된 유사 사례", org: token(issueNumber, "SOURCE"), why: token(issueNumber, "HR_JUDGEMENT"), peopleInsight: token(issueNumber, "DETAIL_ANALYSIS"), peopleFunction: areaName, actionLink: token(issueNumber, "RECOMMENDED_ACTIONS"), url: fallbackUrl, priority: true },
+            { title: token(issueNumber, "TITLE"), type: "비교 참고 사례", org: token(issueNumber, "SOURCE"), why: token(issueNumber, "EVIDENCE"), peopleInsight: token(issueNumber, "HR_JUDGEMENT"), peopleFunction: areaName, actionLink: token(issueNumber, "RECOMMENDED_ACTIONS"), url: "" },
+            { title: token(issueNumber, "TITLE"), type: "적용 가능성이 있는 선행 사례", org: token(issueNumber, "SOURCE"), why: token(issueNumber, "IMPACT_PATH"), peopleInsight: token(issueNumber, "DETAIL_ANALYSIS"), peopleFunction: areaName, actionLink: token(issueNumber, "RECOMMENDED_ACTIONS"), url: "" },
+            { title: token(issueNumber, "TITLE"), type: "추가 확인 필요 사례", org: "링크 확인 필요", why: token(issueNumber, "TOP_RISKS"), peopleInsight: token(issueNumber, "HR_JUDGEMENT"), peopleFunction: areaName, actionLink: token(issueNumber, "RECOMMENDED_ACTIONS"), url: "" },
+          ],
+        };
+      }
+
+      const scenarios = [placeholderScenario(1), placeholderScenario(2), placeholderScenario(3)];
+
+      const areaRefinements = {};
+      const evidenceSummaries = {};
+      const evidenceImpactLinks = {};
+      // End daily report content placeholders.
+      scenarios.forEach((scenario) => {
+        completePeopleAreas(scenario);
+        scenario.areas.forEach((item) => Object.assign(item, areaRefinements[scenario.id]?.[item.name] || {}));
+        scenario.evidence.forEach((item) => {
+          item.summary = evidenceSummaries[item.title] || item.summary || "요약: 이 자료는 해당 이슈가 인사 기능에 미치는 영향을 판단하기 위한 참고 근거로 활용된다.";
+          item.impactLink = item.impactLink || evidenceImpactLinks[item.title];
+        });
+      });
+
+      const confidenceLabel = {
+        High: "신뢰도 높음",
+        Medium: "신뢰도 보통",
+        Watch: "관찰 필요",
+      };
+
+      const confidenceClass = {
+        High: "confidence-high",
+        Medium: "confidence-medium",
+        Watch: "confidence-watch",
+      };
+
+      let scenarioIndex = 0;
+      let selectedAreaName = "";
+
+      const nodes = {
+        tabs: document.getElementById("scenarioTabs"),
+        advanceScenario: document.getElementById("advanceScenario"),
+        headline: document.getElementById("headline"),
+        articleTitleLink: document.getElementById("articleTitleLink"),
+        articleSource: document.getElementById("articleSource"),
+        articleDate: document.getElementById("articleDate"),
+        articleOriginalLink: document.getElementById("articleOriginalLink"),
+        scenarioContext: document.getElementById("scenarioContext"),
+        newsInput: document.getElementById("newsInput"),
+        sourceMix: document.getElementById("sourceMix"),
+        reportFlow: document.getElementById("reportFlow"),
+        overallConfidence: document.getElementById("overallConfidence"),
+        decisionQuestion: document.getElementById("decisionQuestion"),
+        peopleSignal: document.getElementById("peopleSignal"),
+        directFinding: document.getElementById("directFinding"),
+        researchJudgement: document.getElementById("researchJudgement"),
+        metricGrid: document.getElementById("metricGrid"),
+        riskGrid: document.getElementById("riskGrid"),
+        rankingList: document.getElementById("rankingList"),
+        detailTitle: document.getElementById("detailTitle"),
+        detailOwner: document.getElementById("detailOwner"),
+        detailImpactLevel: document.getElementById("detailImpactLevel"),
+        detailConfidence: document.getElementById("detailConfidence"),
+        detailScope: document.getElementById("detailScope"),
+        detailDirectImpact: document.getElementById("detailDirectImpact"),
+        detailPathway: document.getElementById("detailPathway"),
+        detailFinalRisk: document.getElementById("detailFinalRisk"),
+        detailWhy: document.getElementById("detailWhy"),
+        detailInsight: document.getElementById("detailInsight"),
+        detailIndicators: document.getElementById("detailIndicators"),
+        evidenceGrid: document.getElementById("evidenceGrid"),
+        actionStack: document.getElementById("actionStack"),
+        caseGrid: document.getElementById("caseGrid"),
+      };
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function hasUrl(value) {
+        return typeof value === "string" && /^https?:\/\//.test(value);
+      }
+
+      function sourceLink(url, label) {
+        if (!hasUrl(url)) return `<span class="link-missing">링크 확인 필요</span>`;
+        return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+      }
+
+      function selectedScenario() {
+        return scenarios[scenarioIndex];
+      }
+
+      function sortedAreas(scenario) {
+        return [...scenario.areas].sort((a, b) => b.score - a.score);
+      }
+
+      function selectedArea(scenario) {
+        const sorted = sortedAreas(scenario);
+        return sorted.find((area) => area.name === selectedAreaName) || sorted[0];
+      }
+
+      function stars(value) {
+        return "★★★★★".slice(0, value) + "☆☆☆☆☆".slice(0, 5 - value);
+      }
+
+      function impactLevel(area) {
+        if (area.score >= 92) return { text: "매우 높음", className: "level-critical" };
+        if (area.score >= 82) return { text: "높음", className: "level-high" };
+        if (area.score >= 68) return { text: "보통", className: "level-medium" };
+        return { text: "낮음", className: "level-low" };
+      }
+
+      function renderTabs() {
+        if (!nodes.tabs) return;
+        nodes.tabs.innerHTML = scenarios
+          .map(
+            (scenario, index) => `
+              <button
+                class="scenario-tab"
+                type="button"
+                role="tab"
+                aria-selected="${index === scenarioIndex}"
+                data-scenario-index="${index}"
+              >${escapeHtml(scenario.label)}</button>
+            `,
+          )
+          .join("");
+
+        nodes.tabs.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", () => {
+            scenarioIndex = Number(button.dataset.scenarioIndex);
+            selectedAreaName = "";
+            render();
+          });
+        });
+      }
+
+      function renderInput(scenario) {
+        const article = scenario.article || scenario.evidence[0] || {};
+        nodes.headline.textContent = article.title || scenario.headline;
+        nodes.articleTitleLink.href = hasUrl(article.url) ? article.url : "#";
+        nodes.articleSource.textContent = `출처: ${article.source || "확인 필요"}`;
+        nodes.articleDate.textContent = `날짜: ${article.date || "확인 필요"}`;
+        nodes.articleOriginalLink.style.display = hasUrl(article.url) ? "inline-flex" : "none";
+        nodes.articleOriginalLink.href = hasUrl(article.url) ? article.url : "#";
+        nodes.scenarioContext.textContent = scenario.context;
+        nodes.newsInput.textContent = scenario.input;
+        if (nodes.sourceMix) {
+          nodes.sourceMix.innerHTML = "";
+        }
+        nodes.reportFlow.innerHTML = (scenario.reportFlow || [])
+          .map(
+            ([label, text]) => `
+              <div class="flow-card">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(text)}</strong>
+              </div>
+            `,
+          )
+          .join("");
+        nodes.overallConfidence.className = `confidence-badge ${confidenceClass[scenario.confidence]}`;
+        nodes.overallConfidence.textContent = confidenceLabel[scenario.confidence];
+        nodes.decisionQuestion.textContent = scenario.decisionQuestion;
+        nodes.peopleSignal.textContent = scenario.peopleSignal;
+        nodes.directFinding.textContent = scenario.directFinding || scenario.context;
+        nodes.researchJudgement.textContent = scenario.researchJudgement || scenario.peopleSignal;
+        nodes.metricGrid.innerHTML = scenario.metrics
+          .map(
+            ([label, value, note]) => `
+              <div class="metric-tile">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(value)}</strong>
+                <p>${escapeHtml(note)}</p>
+              </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderTopRisks(scenario) {
+        nodes.riskGrid.innerHTML = (scenario.topRisks || [])
+          .map(
+            ([index, title, note]) => `
+              <article class="risk-card">
+                <span>${escapeHtml(index)}. 우선 검토</span>
+                <h3>${escapeHtml(title)}</h3>
+                <p>${escapeHtml(note)}</p>
+              </article>
+            `,
+          )
+          .join("");
+      }
+
+      function renderRanking(scenario, activeArea) {
+        nodes.rankingList.innerHTML = sortedAreas(scenario)
+          .map((area, index) => {
+            const level = impactLevel(area);
+            return `
+              <button class="ranking-row ${area.name === activeArea.name ? "active" : ""} ${area.supporting ? "supporting" : ""}" type="button" data-area="${escapeHtml(area.name)}">
+                <span class="rank-no">${index + 1}</span>
+                <span class="rank-main">
+                  <span class="rank-title">
+                    <strong>${escapeHtml(area.name)}</strong>
+                    <span class="confidence-badge ${confidenceClass[area.confidence]}">${confidenceLabel[area.confidence]}</span>
+                  </span>
+                  <p>${escapeHtml(area.summary)}</p>
+                </span>
+                <span class="rank-score">
+                  <span class="impact-level ${level.className}">영향 수준 ${level.text}</span>
+                </span>
+              </button>
+            `;
+          })
+          .join("");
+
+        nodes.rankingList.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", () => {
+            selectedAreaName = button.dataset.area;
+            render();
+          });
+        });
+      }
+
+      function renderDetail(area) {
+        const level = impactLevel(area);
+        const impactPath = area.impactPath || [
+          { stage: "기사 내용", text: area.summary },
+          { stage: "직접 영향", text: area.directImpact || area.summary },
+          { stage: "2차 영향", text: area.secondaryImpact || area.insight },
+          { stage: "검토 필요 리스크", text: area.finalRisk || area.insight },
+          { stage: "우선 검토", text: `${area.name} 관점의 실행 과제 확인` },
+        ];
+        nodes.detailTitle.textContent = area.name;
+        nodes.detailOwner.textContent = `${area.owner} 관점`;
+        nodes.detailImpactLevel.className = `impact-level ${level.className}`;
+        nodes.detailImpactLevel.textContent = level.text;
+        nodes.detailConfidence.textContent = confidenceLabel[area.confidence];
+        nodes.detailScope.innerHTML = area.scope.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+        nodes.detailDirectImpact.textContent = area.directImpact || area.summary;
+        nodes.detailPathway.innerHTML = impactPath
+          .map(
+            (step) => `
+              <div class="path-step">
+                <span>${escapeHtml(step.stage)}</span>
+                <strong>${escapeHtml(step.text)}</strong>
+              </div>
+            `,
+          )
+          .join("");
+        nodes.detailFinalRisk.textContent = area.finalRisk || area.insight;
+        nodes.detailWhy.innerHTML = area.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+        nodes.detailInsight.textContent = area.insight;
+        nodes.detailIndicators.innerHTML = (area.indicators || ["관련 내부 지표 확인 필요"])
+          .map((item) => `<li>${escapeHtml(item)}</li>`)
+          .join("");
+      }
+
+      function renderEvidence(scenario) {
+        nodes.evidenceGrid.innerHTML = scenario.evidence
+          .map(
+            (item) => `
+              <article class="evidence-card">
+                <span class="type-badge">${escapeHtml(item.type)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <p class="evidence-key">핵심 근거: ${escapeHtml(item.keyEvidence || item.summary.replace(/^요약:\s*/, "").split(".")[0])}</p>
+                <p class="evidence-summary">${escapeHtml(item.summary)}</p>
+                <p class="evidence-link-note">${escapeHtml(item.impactLink || "판단 연결: 해당 이슈의 인사 영향 판단 근거")}</p>
+                <div class="source-meta">
+                  <span>출처: ${escapeHtml(item.source)}</span>
+                  <span>날짜: ${escapeHtml(item.date)}</span>
+                </div>
+                ${sourceLink(item.url, "자료 열기")}
+              </article>
+            `,
+          )
+          .join("");
+      }
+
+      function renderActions(area) {
+        nodes.actionStack.innerHTML = `
+          <article class="action-card">
+            <span class="confidence-badge ${confidenceClass[area.confidence]}">${escapeHtml(area.name)}</span>
+            <h3>권고 액션</h3>
+            <ol>
+              ${area.actions.map((action) => `<li>${escapeHtml(action)}</li>`).join("")}
+            </ol>
+          </article>
+        `;
+      }
+
+      function renderCases(scenario) {
+        nodes.caseGrid.innerHTML = scenario.cases
+          .map(
+            (item) => `
+              <article class="case-card ${item.priority ? "case-card-strong" : ""}">
+                <span>${escapeHtml(item.type || item.tag)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <dl class="case-meta">
+                  <div><dt>출처/범위</dt><dd>${escapeHtml(item.org || item.sourceScope || "확인 필요")}</dd></div>
+                  <div><dt>참고 이유</dt><dd>${escapeHtml(item.why || item.note)}</dd></div>
+                  <div><dt>인사 시사점</dt><dd>${escapeHtml(item.peopleInsight || item.note)}</dd></div>
+                  <div><dt>연결 기능</dt><dd>${escapeHtml(item.peopleFunction || item.tag)}</dd></div>
+                  <div><dt>연결 액션</dt><dd>${escapeHtml(item.actionLink || "권고 액션 점검")}</dd></div>
+                </dl>
+                ${sourceLink(item.url, "사례 열기")}
+              </article>
+            `,
+          )
+          .join("");
+      }
+
+      function render() {
+        const scenario = selectedScenario();
+        const area = selectedArea(scenario);
+        renderTabs();
+        renderInput(scenario);
+        renderTopRisks(scenario);
+        renderRanking(scenario, area);
+        renderDetail(area);
+        renderEvidence(scenario);
+        renderActions(area);
+        renderCases(scenario);
+      }
+
+      if (nodes.advanceScenario) {
+        nodes.advanceScenario.addEventListener("click", () => {
+          scenarioIndex = (scenarioIndex + 1) % scenarios.length;
+          selectedAreaName = "";
+          render();
+        });
+      }
+
+      render();
+    </script>
+  </body>
+</html>
