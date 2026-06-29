@@ -17,8 +17,8 @@
     "latest": false,
     "issues": [
       "[단독]SK, 광주-전남 반도체 단지에 신재생 투자도 검토",
-      "“지난해 순이익 30% 성과급 달라”… 현대차 노조 ‘찬성 86%’ 파업 가결",
-      "“앤트로픽 버렸다” 미국 개발자들이 중국 AI로 갈아타는 이유[딥다이브]"
+      "지난해 순이익 30% 성과급 달라… 현대차 노조 찬성 86% 파업 가결",
+      "앤트로픽 버렸다 미국 개발자들이 중국 AI로 갈아타는 이유"
     ]
   },
   {
@@ -27,8 +27,8 @@
     "file": "outputs/데일리_인사시사점리포트_20260626.html",
     "latest": false,
     "issues": [
-      "삼성 ‘호남 팹’ 급물살… K반도체 벨트 키운다",
-      "[단독]노란봉투법 100일… 하청 복지 챙겨도 ‘교섭 폭탄’ 위험",
+      "삼성 호남 팹 급물살… K반도체 벨트 키운다",
+      "[단독]노란봉투법 100일… 하청 복지 챙겨도 교섭 폭탄 위험",
       "AI is plowing through the workplace. This new group wants to help people adapt and have jobs"
     ]
   },
@@ -38,20 +38,31 @@
     "file": "outputs/데일리_인사시사점리포트_20260627.html",
     "latest": false,
     "issues": [
-      "광주-전남 반도체 팹, 착공까지 6년 ‘용인 지체’ 되풀이 말아야",
-      "현대차 쟁의조정 중지…“30% 성과급 요구” 파업 가능성 커져",
-      "Goldman bankers say the next AI boom is in the “physical economy”"
+      "광주-전남 반도체 팹, 착공까지 6년 용인 지체 되풀이 말아야",
+      "현대차 쟁의조정 중지… 30% 성과급 요구 파업 가능성 커져",
+      "Goldman bankers say the next AI boom is in the physical economy"
     ]
   },
   {
     "date": "2026-06-28",
     "title": "2026-06-28 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260628.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       "구직자 5명중 1명은 60대…20대 다음으로 많아",
-      "퇴직금 안주려… 지자체도 ‘쪼개기 계약’",
+      "퇴직금 안주려… 지자체도 쪼개기 계약",
       "Anthropic, OpenAI join $500 million AI jobs push"
+    ]
+  },
+  {
+    "date": "2026-06-29",
+    "title": "2026-06-29 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260629.html",
+    "latest": true,
+    "issues": [
+      "GS, 강원·충청에 기가와트급 AI데이터센터",
+      "AI 연구개발도 주 52시간 근로 족쇄 푸나",
+      "The AI talent perk money can't buy"
     ]
   }
 ]
