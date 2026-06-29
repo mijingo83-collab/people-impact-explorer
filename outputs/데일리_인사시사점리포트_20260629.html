@@ -131,7 +131,7 @@
 
       .status-board {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: repeat(4, auto);
         gap: 6px;
         align-items: center;
         padding: 6px;
@@ -163,6 +163,17 @@
         font-size: 14px;
         font-weight: 820;
         white-space: nowrap;
+      }
+
+      .status-link {
+        align-content: center;
+        min-width: 104px;
+        background: var(--navy);
+      }
+
+      .status-link span,
+      .status-link strong {
+        color: #ffffff;
       }
 
       .control-band {
@@ -1055,7 +1066,6 @@
     <main class="shell">
       <header class="topbar">
         <div class="brand-block">
-          <p class="eyebrow">초안 보고서</p>
           <h1>인사 시사점 분석 레포트</h1>
           <p class="subcopy">
             국내외 주요 이슈가 인사 업무에 미치는 영향과 권고 액션을 제공합니다.
@@ -1074,6 +1084,10 @@
             <span>대상 이슈</span>
             <strong>GS, 강원·충청에 기가와트급 AI데이터센터</strong>
           </div>
+          <a class="status-pill status-link" href="../archive.html">
+            <span>이력 보기</span>
+            <strong>달력 열기</strong>
+          </a>
         </div>
       </header>
 
@@ -1229,7 +1243,7 @@
       </section>
 
       <p class="footer-note">
-        보고서 초안: 2026-06-29 기준으로 생성되는 인사 시사점 리포트입니다.
+        리포트 안내: 2026-06-29 기준으로 생성되는 인사 시사점 리포트입니다.
       </p>
     </main>
 

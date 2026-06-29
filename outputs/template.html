@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>인사 시사점 분석 도구</title>
+    <title>인사 시사점 분석 레포트</title>
     <style>
       :root {
         --bg: #f3f5f8;
@@ -1243,7 +1243,7 @@
       </section>
 
       <p class="footer-note">
-        보고서 초안: {{REPORT_DATE}} 기준으로 생성되는 인사 시사점 리포트입니다.
+        리포트 안내: {{REPORT_DATE}} 기준으로 생성되는 인사 시사점 리포트입니다.
       </p>
     </main>
 
@@ -1263,7 +1263,7 @@
       };
 
       function area(name, owner, score, confidence, summary, why, insight, stars, actions) {
-        return { name, owner, score, confidence, summary, why, insight, stars, actions, scope: peopleScope[name] };
+        return { name, owner, score, confidence, summary, why, insight, secondaryImpact: insight, stars, actions, scope: peopleScope[name] };
       }
 
       const peopleAreaNames = Object.keys(peopleScope);
@@ -1352,8 +1352,10 @@
         "{{ISSUE_1_DATE}}",
         "{{ISSUE_1_SUMMARY}}",
         "{{ISSUE_1_IMPACT_PATH}}",
+        "{{ISSUE_1_SECONDARY_IMPACT}}",
         "{{ISSUE_1_HR_JUDGEMENT}}",
         "{{ISSUE_1_TOP_RISKS}}",
+        "{{ISSUE_1_PRIORITY_REVIEW}}",
         "{{ISSUE_1_IMPACT_RANKING}}",
         "{{ISSUE_1_DETAIL_ANALYSIS}}",
         "{{ISSUE_1_EVIDENCE}}",
@@ -1394,9 +1396,9 @@
           reportFlow: [
             ["기준 기사", token(issueNumber, "SUMMARY")],
             ["직접 영향", token(issueNumber, "IMPACT_PATH")],
-            ["2차 영향", token(issueNumber, "HR_JUDGEMENT")],
+            ["2차 영향", token(issueNumber, "SECONDARY_IMPACT")],
             ["검토 필요 리스크", token(issueNumber, "TOP_RISKS")],
-            ["우선 검토", token(issueNumber, "RECOMMENDED_ACTIONS")],
+            ["우선 검토", token(issueNumber, "PRIORITY_REVIEW")],
           ],
           topRisks: [
             ["1", token(issueNumber, "TOP_RISKS"), token(issueNumber, "HR_JUDGEMENT")],
@@ -1642,7 +1644,8 @@
         const impactPath = area.impactPath || [
           { stage: "기사 내용", text: area.summary },
           { stage: "직접 영향", text: area.directImpact || area.summary },
-          { stage: "최종 리스크", text: area.finalRisk || area.insight },
+          { stage: "2차 영향", text: area.secondaryImpact || area.insight },
+          { stage: "검토 필요 리스크", text: area.finalRisk || area.insight },
           { stage: "우선 검토", text: `${area.name} 관점의 실행 과제 확인` },
         ];
         nodes.detailTitle.textContent = area.name;
