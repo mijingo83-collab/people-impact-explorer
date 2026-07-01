@@ -69,11 +69,22 @@
     "date": "2026-06-30",
     "title": "2026-06-30 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260630.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       "LG전자가 엔비디아 손잡고 피지컬 AI 공략 나선 까닭은",
       "국민 모두의 취업 길라잡이, AI 기반 신규 고용서비스 공개",
       "Companies laying off staff this year include Meta, Amazon, and Groupon"
+    ]
+  },
+  {
+    "date": "2026-07-01",
+    "title": "2026-07-01 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260701.html",
+    "latest": true,
+    "issues": [
+      "인공지능(AI) 강국을 향한 핵심 인재 양성 고용노동부와 싸피(SSAFY)가 함께 합니다",
+      "노 “최저임금 1만1900원” 사 “1만360원”",
+      "Goldman CEO says the bank's entry-level hiring may contract a little as AI changes the talent mix"
     ]
   }
 ]
