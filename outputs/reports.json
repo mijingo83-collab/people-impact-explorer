@@ -1,11 +1,24 @@
-﻿{
-    "date":  "2026-07-03",
-    "title":  "2026-07-03 데일리 인사 시사점 리포트",
-    "file":  "outputs/데일리_인사시사점리포트_20260703.html",
-    "latest":  true,
-    "issues":  [
-                   "삼성은 왜 ‘초콜릿’ 부러뜨렸나 애플과 ‘북 타입 폴더블폰 전쟁’",
-                   "글로벌 기업 직원들 AI 활용 늘었지만… 회사 전체 성과로 안 이어져",
-                   "An AI strategist fired half her AI agents after becoming a \u0027botsitter\u0027"
-               ]
-}
+[
+  {
+    "date": "2026-07-02",
+    "title": "2026-07-02 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260702.html",
+    "latest": false,
+    "issues": [
+      "삼성은 왜 ‘초콜릿’ 부러뜨렸나 애플과 ‘북 타입 폴더블폰 전쟁’",
+      "글로벌 기업 직원들 AI 활용 늘었지만… 회사 전체 성과로 안 이어져",
+      "An AI strategist fired half her AI agents after becoming a 'botsitter'"
+    ]
+  },
+  {
+    "date": "2026-07-03",
+    "title": "2026-07-03 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260703.html",
+    "latest": true,
+    "issues": [
+      "기업의 해외인재유치를 돕는다! K-Tech Pass 신규 트랙 개시",
+      "글로벌 기업 직원들 AI 활용 늘었지만… 회사 전체 성과로 안 이어져",
+      "An AI strategist fired half her AI agents after becoming a 'botsitter'"
+    ]
+  }
+]
