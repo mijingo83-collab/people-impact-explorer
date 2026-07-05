@@ -1,112 +1,46 @@
 [
   {
-    "date": "2026-06-24",
-    "title": "2026-06-24 데일리 인사 시사점 리포트",
-    "file": "outputs/데일리_인사시사점리포트_20260624.html",
-    "latest": false,
-    "issues": [
-      "삼성전자 DS부문 반도체·AI 경력 채용 공고 점검",
-      "한국은행 물가 점검 속 IT 업종 특별급여·성과급 영향 부각",
-      "Google AI 인재 경쟁과 핵심 인력 유지 리스크"
-    ]
-  },
-  {
-    "date": "2026-06-25",
-    "title": "2026-06-25 데일리 인사 시사점 리포트",
-    "file": "outputs/데일리_인사시사점리포트_20260625.html",
-    "latest": false,
-    "issues": [
-      "[단독]SK, 광주-전남 반도체 단지에 신재생 투자도 검토",
-      "지난해 순이익 30% 성과급 달라… 현대차 노조 찬성 86% 파업 가결",
-      "앤트로픽 버렸다 미국 개발자들이 중국 AI로 갈아타는 이유"
-    ]
-  },
-  {
-    "date": "2026-06-26",
-    "title": "2026-06-26 데일리 인사 시사점 리포트",
-    "file": "outputs/데일리_인사시사점리포트_20260626.html",
-    "latest": false,
-    "issues": [
-      "삼성 호남 팹 급물살… K반도체 벨트 키운다",
-      "[단독]노란봉투법 100일… 하청 복지 챙겨도 교섭 폭탄 위험",
-      "AI is plowing through the workplace. This new group wants to help people adapt and have jobs"
-    ]
-  },
-  {
-    "date": "2026-06-27",
-    "title": "2026-06-27 데일리 인사 시사점 리포트",
-    "file": "outputs/데일리_인사시사점리포트_20260627.html",
-    "latest": false,
-    "issues": [
-      "광주-전남 반도체 팹, 착공까지 6년 용인 지체 되풀이 말아야",
-      "현대차 쟁의조정 중지… 30% 성과급 요구 파업 가능성 커져",
-      "Goldman bankers say the next AI boom is in the physical economy"
-    ]
-  },
-  {
-    "date": "2026-06-28",
-    "title": "2026-06-28 데일리 인사 시사점 리포트",
-    "file": "outputs/데일리_인사시사점리포트_20260628.html",
-    "latest": false,
-    "issues": [
-      "구직자 5명중 1명은 60대…20대 다음으로 많아",
-      "퇴직금 안주려… 지자체도 쪼개기 계약",
-      "Anthropic, OpenAI join $500 million AI jobs push"
-    ]
-  },
-  {
-    "date": "2026-06-29",
-    "title": "2026-06-29 데일리 인사 시사점 리포트",
-    "file": "outputs/데일리_인사시사점리포트_20260629.html",
-    "latest": false,
-    "issues": [
-      "GS, 강원·충청에 기가와트급 AI데이터센터",
-      "AI 연구개발도 주 52시간 근로 족쇄 푸나",
-      "The AI talent perk money can't buy"
-    ]
-  },
-  {
-    "date": "2026-06-30",
-    "title": "2026-06-30 데일리 인사 시사점 리포트",
-    "file": "outputs/데일리_인사시사점리포트_20260630.html",
-    "latest": false,
-    "issues": [
-      "LG전자가 엔비디아 손잡고 피지컬 AI 공략 나선 까닭은",
-      "국민 모두의 취업 길라잡이, AI 기반 신규 고용서비스 공개",
-      "Companies laying off staff this year include Meta, Amazon, and Groupon"
-    ]
-  },
-  {
-    "date": "2026-07-01",
-    "title": "2026-07-01 데일리 인사 시사점 리포트",
-    "file": "outputs/데일리_인사시사점리포트_20260701.html",
-    "latest": false,
-    "issues": [
-      "인공지능(AI) 강국을 향한 핵심 인재 양성 고용노동부와 싸피(SSAFY)가 함께 합니다",
-      "노 “최저임금 1만1900원” 사 “1만360원”",
-      "Goldman CEO says the bank's entry-level hiring may contract a little as AI changes the talent mix"
-    ]
-  },
-  {
     "date": "2026-07-02",
     "title": "2026-07-02 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260702.html",
     "latest": false,
     "issues": [
-      "삼성은 왜 ‘초콜릿’ 부러뜨렸나 애플과 ‘북 타입 폴더블폰 전쟁’",
-      "글로벌 기업 직원들 AI 활용 늘었지만… 회사 전체 성과로 안 이어져",
-      "An AI strategist fired half her AI agents after becoming a 'botsitter'"
+      "삼성전자·SK하이닉스 반도체 인재·보상 이슈",
+      "글로벌 기업 AI 사용과 성과관리 이슈",
+      "AI 에이전트 운영과 직무 재설계 이슈"
     ]
   },
   {
     "date": "2026-07-03",
     "title": "2026-07-03 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260703.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       "삼성 140조, SK 100조…충청 첨단산업에 392조 메가 투자",
       "카카오 노사협상안을 네이버 노조가 재가 … 황당한 IT노조들",
       "① 反AI 정서 완화 ② 정부 규제 회피 … 승부수 던진 오픈AI"
+    ]
+  },
+  {
+    "date": "2026-07-04",
+    "title": "2026-07-04 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260704.html",
+    "latest": false,
+    "issues": [
+      "마이크론, 14조 들여 日히로시마에 공장… 삼전닉스 HBM 추격 나서",
+      "'올해도 지각' 내년도 최저임금…다음주 결론나올까",
+      "[특파원 시선] 무한리필 커피와 AI시대 인간의 가치"
+    ]
+  },
+  {
+    "date": "2026-07-05",
+    "title": "2026-07-05 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260705.html",
+    "latest": true,
+    "issues": [
+      "반도체 '날개'에도 고용 부진…고용탄성치 8년 만에 최저 전망",
+      "작년 韓 연평균 노동시간 1833시간… OECD 6위",
+      "If you're worried AI will take your job, here's what to do in the next 30 days, according to an executive coach"
     ]
   }
 ]
