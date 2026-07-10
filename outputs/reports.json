@@ -163,11 +163,64 @@
     "date": "2026-07-10",
     "title": "2026-07-10 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260710.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LGD 주사율 검증과 게임용 OLED 경쟁"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SK하이닉스 ADR 공모와 반도체 자금 경쟁"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 AI PC 가속기와 온디바이스 AI 역량"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 최저임금 격차 축소와 보상 하단 점검"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 경력단절과 유연근무 저조가 보여준 인력 활용 리스크"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] Uber agentic pods와 AI 직무 운영 재설계"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-11",
+    "title": "2026-07-11 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260711.html",
     "latest": true,
     "issues": [
-      "[단독]이재용, 이달 말 젠슨 황과 회동 추진… ‘광주 팹’ 투자 등 논의 전망",
-      "勞 1만1220원 vs 使 1만530원… 최저임금 격차 690원으로 좁혀",
-      "Jensen Huang says his software engineers prefer building agents to writing code"
+      {
+        "category": "업계",
+        "title": "[업계] 삼성D 中 서브컬처 전시와 OLED 체험 경쟁"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 인천 반도체 기업 투자와 첨단 제조 인재 수요"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 패턴 웨이퍼 확대와 협력사 상생 인력"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 메가특구 구상과 지역 인재·근무지 전략"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 전기차 캐즘과 제조 인력운영 변동성"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 메타 유료 AI 모델 검토와 AI 인재 경쟁"
+      }
     ]
   }
 ]
