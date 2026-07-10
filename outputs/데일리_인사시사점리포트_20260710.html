@@ -1,2729 +1,1718 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>인사 시사점 분석 리포트</title>
-    <style>
-      :root {
-        --bg: #f3f5f8;
-        --paper: #ffffff;
-        --paper-soft: #f8fafc;
-        --paper-warm: #fffdf8;
-        --ink: #111827;
-        --ink-2: #273344;
-        --muted: #687789;
-        --faint: #8a98a8;
-        --line: #dfe5ee;
-        --navy: #101820;
-        --blue: #2f55d4;
-        --teal: #0f8f87;
-        --green: #148044;
-        --amber: #b36b14;
-        --red: #bf3d3a;
-        --shadow: 0 14px 30px rgba(28, 42, 58, 0.06);
-        --shadow-soft: 0 8px 18px rgba(28, 42, 58, 0.05);
-        --radius: 8px;
-      }
 
-      * {
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>인사 시사점 분석 리포트</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --paper: #ffffff;
+      --paper-soft: #f8fafc;
+      --paper-warm: #fffdf8;
+      --ink: #111827;
+      --ink-2: #273344;
+      --muted: #687789;
+      --faint: #8a98a8;
+      --line: #dfe5ee;
+      --navy: #101820;
+      --blue: #2f55d4;
+      --teal: #0f8f87;
+      --green: #148044;
+      --amber: #b36b14;
+      --red: #bf3d3a;
+      --shadow: 0 14px 30px rgba(28, 42, 58, 0.06);
+      --shadow-soft: 0 8px 18px rgba(28, 42, 58, 0.05);
+      --radius: 8px;
+    }
 
-      html {
-        background: var(--bg);
-        color: var(--ink);
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      body {
-        min-height: 100vh;
-        margin: 0;
-        background: var(--bg);
-        color: var(--ink);
-        font-family:
-          "Pretendard",
-          "Apple SD Gothic Neo",
-          "Malgun Gothic",
-          "Segoe UI",
-          Arial,
-          sans-serif;
-        letter-spacing: 0;
-      }
+    html {
+      background: var(--bg);
+      color: var(--ink);
+    }
 
-      button,
-      textarea,
-      a {
-        font: inherit;
-      }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family:
+        "Pretendard",
+        "Apple SD Gothic Neo",
+        "Malgun Gothic",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      letter-spacing: 0;
+    }
 
-      button {
-        cursor: pointer;
-      }
+    button,
+    textarea,
+    a {
+      font: inherit;
+    }
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
+    button {
+      cursor: pointer;
+    }
 
-      .shell {
-        width: min(1460px, 100%);
-        margin: 0 auto;
-        padding: 28px 28px 38px;
-      }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-      .topbar {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 18px;
-        align-items: start;
-        margin-bottom: 20px;
-      }
+    .shell {
+      width: min(1460px, 100%);
+      margin: 0 auto;
+      padding: 28px 28px 38px;
+    }
 
-      .brand-block {
-        display: grid;
-        gap: 8px;
-      }
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
 
-      .eyebrow {
-        margin: 0;
-        color: var(--muted);
-        font-size: 13px;
-        font-weight: 800;
-        line-height: 1.2;
-        text-transform: uppercase;
-      }
+    .brand-block {
+      display: grid;
+      gap: 8px;
+    }
 
-      h1,
-      h2,
-      h3,
-      p {
-        margin: 0;
-      }
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
 
-      h1 {
-        color: var(--navy);
-        font-size: clamp(32px, 3.6vw, 46px);
-        font-weight: 840;
-        line-height: 1.08;
-      }
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
 
-      h2 {
-        color: var(--navy);
-        font-size: 24px;
-        font-weight: 820;
-        line-height: 1.25;
-      }
+    h1 {
+      color: var(--navy);
+      font-size: clamp(32px, 3.6vw, 46px);
+      font-weight: 840;
+      line-height: 1.08;
+    }
 
-      h3 {
-        color: var(--ink);
-        font-size: 19px;
-        font-weight: 790;
-        line-height: 1.32;
-      }
+    h2 {
+      color: var(--navy);
+      font-size: 24px;
+      font-weight: 820;
+      line-height: 1.25;
+    }
 
-      .subcopy {
-        max-width: 890px;
-        color: #516173;
-        font-size: 17px;
-        font-weight: 560;
-        line-height: 1.55;
-      }
+    h3 {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 790;
+      line-height: 1.32;
+    }
 
-      .status-board {
-        display: grid;
-        grid-template-columns: repeat(4, auto);
-        gap: 6px;
-        align-items: center;
-        padding: 6px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: rgba(255, 255, 255, 0.76);
-        box-shadow: var(--shadow-soft);
-      }
+    .subcopy {
+      max-width: 890px;
+      color: #516173;
+      font-size: 17px;
+      font-weight: 560;
+      line-height: 1.55;
+    }
 
-      .status-pill {
-        display: grid;
-        gap: 3px;
-        min-width: 112px;
-        min-height: auto;
-        padding: 8px 10px;
-        border: 1px solid #e3e8ef;
-        border-radius: 7px;
-        background: var(--paper);
-      }
+    .status-board {
+      display: grid;
+      grid-template-columns: auto;
+      gap: 6px;
+      align-items: center;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow-soft);
+    }
 
-      .status-pill span {
-        color: var(--faint);
-        font-size: 12px;
-        font-weight: 800;
-      }
+    .status-pill {
+      display: grid;
+      gap: 3px;
+      min-width: 112px;
+      min-height: auto;
+      padding: 8px 10px;
+      border: 1px solid #e3e8ef;
+      border-radius: 7px;
+      background: var(--paper);
+    }
 
-      .status-pill strong {
-        color: var(--ink-2);
-        font-size: 14px;
-        font-weight: 820;
-        white-space: nowrap;
-      }
+    .status-pill span {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 800;
+    }
 
-      .status-link {
-        align-content: center;
-        min-width: 104px;
-        background: var(--navy);
-      }
+    .status-pill strong {
+      color: var(--ink-2);
+      font-size: 14px;
+      font-weight: 820;
+      white-space: nowrap;
+    }
 
-      .status-link span,
-      .status-link strong {
-        color: #ffffff;
-      }
+    .status-link {
+      align-content: center;
+      min-width: 132px;
+      background: var(--navy);
+    }
 
-      .control-band {
-        display: none;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 14px;
-        align-items: center;
-        margin-bottom: 18px;
-      }
+    .status-link span,
+    .status-link strong {
+      color: #ffffff;
+    }
 
-      .scenario-tabs {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 4px;
-        padding: 4px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: rgba(255, 255, 255, 0.72);
-      }
+    .control-band {
+      display: none;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
 
-      .scenario-tab,
-      .advance-button,
-      .select-area {
-        min-height: 40px;
-        border: 0;
-        border-radius: 6px;
-        font-size: 14px;
-        font-weight: 820;
-      }
+    .scenario-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+    }
 
-      .scenario-tab {
-        padding: 0 14px;
-        background: transparent;
-        color: #5d6d80;
-      }
+    .scenario-tab,
+    .advance-button,
+    .select-area {
+      min-height: 40px;
+      border: 0;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 820;
+    }
 
-      .scenario-tab[aria-selected="true"] {
-        background: var(--navy);
-        color: #ffffff;
-        box-shadow: 0 10px 24px rgba(16, 24, 32, 0.2);
-      }
+    .scenario-tab {
+      padding: 0 14px;
+      background: transparent;
+      color: #5d6d80;
+    }
 
-      .advance-button {
-        padding: 0 18px;
-        background: var(--blue);
-        color: #ffffff;
-        box-shadow: 0 14px 28px rgba(47, 85, 212, 0.22);
-      }
+    .scenario-tab[aria-selected="true"] {
+      background: var(--navy);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(16, 24, 32, 0.2);
+    }
 
-      .panel,
-      .metric-tile,
-      .ranking-row,
-      .evidence-card,
-      .case-card,
-      .action-card {
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: var(--paper);
-        box-shadow: var(--shadow);
-      }
+    .advance-button {
+      padding: 0 18px;
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 14px 28px rgba(47, 85, 212, 0.22);
+    }
 
-      .panel {
-        padding: 20px;
-      }
+    .panel,
+    .metric-tile,
+    .ranking-row,
+    .evidence-card,
+    .case-card,
+    .action-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
 
-      .panel-header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 14px;
-        margin-bottom: 13px;
-      }
+    .panel {
+      padding: 20px;
+    }
 
-      .panel-title {
-        display: grid;
-        gap: 6px;
-      }
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 13px;
+    }
 
-      .panel-title p {
-        color: var(--muted);
-        font-size: 15px;
-        font-weight: 640;
-        line-height: 1.5;
-      }
+    .panel-title {
+      display: grid;
+      gap: 6px;
+    }
 
-      .confidence-badge,
-      .source-chip,
-      .type-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 26px;
-        width: max-content;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 13px;
-        font-weight: 820;
-        white-space: nowrap;
-      }
+    .panel-title p {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 640;
+      line-height: 1.5;
+    }
 
-      .confidence-high {
-        background: #e7f6ed;
-        color: var(--green);
-      }
+    .confidence-badge,
+    .source-chip,
+    .type-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 26px;
+      width: max-content;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 820;
+      white-space: nowrap;
+    }
 
-      .confidence-medium {
-        background: #edf2ff;
-        color: var(--blue);
-      }
+    .confidence-high {
+      background: #e7f6ed;
+      color: var(--green);
+    }
 
-      .confidence-watch {
-        background: #fff3dc;
-        color: var(--amber);
-      }
+    .confidence-medium {
+      background: #edf2ff;
+      color: var(--blue);
+    }
 
-      .input-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.72fr);
-        gap: 18px;
-        align-items: start;
-      }
+    .confidence-watch {
+      background: #fff3dc;
+      color: var(--amber);
+    }
 
-      .news-input {
-        display: block;
-        width: 100%;
-        min-height: 224px;
-        padding: 17px 18px;
-        resize: none;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        outline: none;
-        background: var(--paper-soft);
-        color: #243140;
-        font-size: 17px;
-        font-weight: 560;
-        line-height: 1.78;
-      }
+    .input-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.72fr);
+      gap: 18px;
+      align-items: start;
+    }
 
-      .news-input:focus {
-        border-color: var(--blue);
-        box-shadow: 0 0 0 4px rgba(47, 85, 212, 0.12);
-      }
+    .news-input {
+      display: block;
+      width: 100%;
+      min-height: 224px;
+      padding: 17px 18px;
+      resize: none;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      outline: none;
+      background: var(--paper-soft);
+      color: #243140;
+      font-size: 17px;
+      font-weight: 560;
+      line-height: 1.78;
+    }
 
-      .article-card {
-        display: grid;
-        gap: 16px;
-      }
+    .news-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(47, 85, 212, 0.12);
+    }
 
-      .article-title-link {
-        color: var(--navy);
-        text-decoration: none;
-      }
+    .article-card {
+      display: grid;
+      gap: 16px;
+    }
 
-      .article-title-link:hover {
-        color: var(--blue);
-      }
+    .article-title-link {
+      color: var(--navy);
+      text-decoration: none;
+    }
 
-      .article-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
+    .article-title-link:hover {
+      color: var(--blue);
+    }
 
-      .article-meta span,
-      .article-meta a {
-        display: inline-flex;
-        align-items: center;
-        min-height: 30px;
-        padding: 6px 11px;
-        border: 1px solid #d9e2ee;
-        border-radius: 6px;
-        background: #f8fafc;
-        color: #46566a;
-        font-size: 13px;
-        font-weight: 760;
-      }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-      .article-meta a {
-        color: var(--blue);
-        background: #f4f7ff;
-      }
+    .article-meta span,
+    .article-meta a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 11px;
+      border: 1px solid #d9e2ee;
+      border-radius: 6px;
+      background: #f8fafc;
+      color: #46566a;
+      font-size: 13px;
+      font-weight: 760;
+    }
 
-      .article-summary {
-        padding: 16px;
-        border: 1px solid #dce5ef;
-        border-radius: var(--radius);
-        background: var(--paper-soft);
-        color: #253244;
-        font-size: 16px;
-        font-weight: 620;
-        line-height: 1.65;
+    .article-meta a {
+      color: var(--blue);
+      background: #f4f7ff;
+    }
+
+    .article-summary {
+      padding: 16px;
+      border: 1px solid #dce5ef;
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+      color: #253244;
+      font-size: 16px;
+      font-weight: 620;
+      line-height: 1.65;
+    }
+
+    .report-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 0;
+    }
+
+    .flow-card {
+      position: relative;
+      min-height: auto;
+      padding: 12px 13px;
+      border: 1px solid #dce5ef;
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: none;
+    }
+
+    .flow-card:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -14px;
+      z-index: 1;
+      transform: translateY(-50%);
+      color: #7a8797;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .flow-card span {
+      display: block;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 860;
+    }
+
+    .flow-card strong {
+      display: block;
+      margin-top: 7px;
+      color: var(--ink-2);
+      font-size: 15px;
+      font-weight: 760;
+      line-height: 1.45;
+    }
+
+    .source-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .source-chip {
+      border: 1px solid #cbd7e5;
+      background: #fff;
+      color: #46576a;
+    }
+
+    .judgement-panel {
+      display: grid;
+      align-content: start;
+      gap: 12px;
+    }
+
+    .judgement-box {
+      display: grid;
+      gap: 7px;
+      padding: 13px 14px;
+      border: 1px solid #dde5ef;
+      border-radius: var(--radius);
+      background: var(--paper-warm);
+    }
+
+    .judgement-box span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 820;
+    }
+
+    .judgement-box strong {
+      color: #263242;
+      font-size: 16px;
+      font-weight: 820;
+      line-height: 1.42;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric-tile {
+      min-height: auto;
+      padding: 12px 13px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .metric-tile span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 820;
+    }
+
+    .metric-tile strong {
+      display: block;
+      margin-top: 7px;
+      color: var(--navy);
+      font-size: 21px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .metric-tile p {
+      margin-top: 6px;
+      color: #5a6a7c;
+      font-size: 14px;
+      font-weight: 640;
+      line-height: 1.48;
+    }
+
+    .risk-overview {
+      margin-top: 18px;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .risk-card {
+      display: grid;
+      gap: 8px;
+      min-height: auto;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .risk-card span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 840;
+    }
+
+    .risk-card h3 {
+      color: var(--navy);
+      font-size: 22px;
+    }
+
+    .risk-card p {
+      color: #4c5d70;
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .impact-level {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+
+    .level-critical {
+      border: 1px solid #f2b8b5;
+      background: #fff1f0;
+      color: #b42318;
+    }
+
+    .level-high {
+      border: 1px solid #f7c78f;
+      background: #fff7ed;
+      color: #b54708;
+    }
+
+    .level-medium {
+      border: 1px solid #f8df7b;
+      background: #fffbe6;
+      color: #7a5a00;
+    }
+
+    .level-low {
+      border: 1px solid #d4dbe5;
+      background: #f5f7fa;
+      color: #5c6978;
+    }
+
+    .support-score .impact-level {
+      color: #111827;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: minmax(500px, 0.88fr) minmax(460px, 0.78fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .ranking-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .ranking-row {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      gap: 13px;
+      align-items: center;
+      width: 100%;
+      min-height: auto;
+      padding: 13px 14px;
+      color: inherit;
+      text-align: left;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .ranking-row.active {
+      border-color: rgba(47, 85, 212, 0.72);
+      background: #f4f7ff;
+      box-shadow: 0 12px 28px rgba(47, 85, 212, 0.11);
+    }
+
+    .ranking-row.supporting {
+      background: #fbfcfe;
+      border-color: #e8edf4;
+    }
+
+    .ranking-row.supporting .rank-title strong {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .ranking-row.supporting .rank-main p {
+      color: var(--faint);
+      font-size: 0.88rem;
+    }
+
+    .ranking-row.supporting .rank-no {
+      background: #98a6b7;
+    }
+
+    .rank-no {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 7px;
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 860;
+    }
+
+    .ranking-row.active .rank-no {
+      background: var(--blue);
+    }
+
+    .rank-main {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .rank-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rank-title strong {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 820;
+      line-height: 1.3;
+    }
+
+    .rank-main p {
+      color: #526274;
+      font-size: 16px;
+      font-weight: 590;
+      line-height: 1.45;
+    }
+
+    .rank-score {
+      display: grid;
+      justify-items: end;
+      gap: 5px;
+    }
+
+    .rank-score strong {
+      color: var(--navy);
+      font-size: 26px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .detail-panel {
+      display: grid;
+      gap: 14px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .detail-panel .eyebrow,
+    .detail-panel .panel-title p {
+      color: var(--muted);
+    }
+
+    .detail-panel h2,
+    .detail-panel h3 {
+      color: var(--navy);
+    }
+
+    .detail-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 13px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .support-score {
+      display: grid;
+      justify-items: end;
+      gap: 5px;
+    }
+
+    .support-score strong {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .support-score span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .detail-section {
+      display: grid;
+      gap: 7px;
+    }
+
+    .detail-section>span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 820;
+      text-transform: uppercase;
+    }
+
+    .detail-section ul,
+    .action-card ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .detail-section li {
+      color: #273344;
+      font-size: 16px;
+      font-weight: 610;
+      line-height: 1.52;
+    }
+
+    .insight-box {
+      padding: 12px 14px;
+      border-left: 3px solid var(--teal);
+      border-radius: 6px;
+      background: #f4fbfa;
+      color: #20313f;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.52;
+    }
+
+    .risk-box {
+      padding: 12px 14px;
+      border-left: 3px solid #f97316;
+      border-radius: 6px;
+      background: #fff7ed;
+      color: #2b3340;
+      font-size: 15px;
+      font-weight: 680;
+      line-height: 1.52;
+    }
+
+    .pathway {
+      display: grid;
+      gap: 8px;
+    }
+
+    .path-step {
+      display: grid;
+      grid-template-columns: 94px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid #dfe6ef;
+      border-radius: 6px;
+      background: #f8fafc;
+    }
+
+    .path-step span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 840;
+    }
+
+    .path-step strong {
+      color: #1f2a37;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .evidence-action-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, 0.58fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .evidence-card {
+      display: grid;
+      gap: 10px;
+      min-height: auto;
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .type-badge {
+      background: #eef2ff;
+      color: var(--blue);
+    }
+
+    .evidence-card h3 {
+      color: var(--ink);
+      font-size: 17px;
+    }
+
+    .evidence-key {
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 780;
+      line-height: 1.48;
+    }
+
+    .evidence-summary {
+      color: #46566a;
+      font-size: 14px;
+      font-weight: 610;
+      line-height: 1.55;
+    }
+
+    .evidence-link-note {
+      padding: 10px 11px;
+      border-radius: 6px;
+      background: #f5f8fb;
+      color: #415064;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+
+    .source-meta {
+      display: grid;
+      gap: 4px;
+      color: #5a6a7c;
+      font-size: 13px;
+      font-weight: 680;
+      line-height: 1.4;
+    }
+
+    .evidence-card a,
+    .case-card a {
+      align-self: end;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 860;
+    }
+
+    .link-missing {
+      align-self: end;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 780;
+    }
+
+    .action-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .action-card {
+      display: grid;
+      gap: 13px;
+      padding: 18px;
+      background: var(--paper-warm);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .action-card h3 {
+      color: var(--navy);
+      font-size: 22px;
+    }
+
+    .action-card li {
+      color: #263242;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .case-card {
+      display: grid;
+      gap: 9px;
+      min-height: auto;
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .case-card-strong {
+      border-color: rgba(15, 143, 135, 0.38);
+      background: #f7fbfb;
+    }
+
+    .case-card span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 860;
+    }
+
+    .case-card h3 {
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .case-card p {
+      color: #596a7c;
+      font-size: 14px;
+      font-weight: 620;
+      line-height: 1.5;
+    }
+
+    .case-meta {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+    }
+
+    .case-meta div {
+      display: grid;
+      gap: 3px;
+    }
+
+    .case-meta dt {
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .case-meta dd {
+      margin: 0;
+      color: #405064;
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.42;
+    }
+
+    .evidence-card a:hover,
+    .case-card a:hover,
+    .case-card:focus-visible a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1280px) {
+
+      .input-grid,
+      .analysis-grid,
+      .evidence-action-grid {
+        grid-template-columns: 1fr;
       }
 
       .report-flow {
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 12px;
-        margin-top: 0;
-      }
-
-      .flow-card {
-        position: relative;
-        min-height: auto;
-        padding: 12px 13px;
-        border: 1px solid #dce5ef;
-        border-radius: var(--radius);
-        background: #ffffff;
-        box-shadow: none;
-      }
-
-      .flow-card:not(:last-child)::after {
-        content: "→";
-        position: absolute;
-        top: 50%;
-        right: -14px;
-        z-index: 1;
-        transform: translateY(-50%);
-        color: #7a8797;
-        font-size: 18px;
-        font-weight: 900;
-      }
-
-      .flow-card span {
-        display: block;
-        color: var(--faint);
-        font-size: 12px;
-        font-weight: 860;
-      }
-
-      .flow-card strong {
-        display: block;
-        margin-top: 7px;
-        color: var(--ink-2);
-        font-size: 15px;
-        font-weight: 760;
-        line-height: 1.45;
-      }
-
-      .source-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 14px;
-      }
-
-      .source-chip {
-        border: 1px solid #cbd7e5;
-        background: #fff;
-        color: #46576a;
-      }
-
-      .judgement-panel {
-        display: grid;
-        align-content: start;
-        gap: 12px;
-      }
-
-      .judgement-box {
-        display: grid;
-        gap: 7px;
-        padding: 13px 14px;
-        border: 1px solid #dde5ef;
-        border-radius: var(--radius);
-        background: var(--paper-warm);
-      }
-
-      .judgement-box span {
-        color: var(--faint);
-        font-size: 13px;
-        font-weight: 820;
-      }
-
-      .judgement-box strong {
-        color: #263242;
-        font-size: 16px;
-        font-weight: 820;
-        line-height: 1.42;
-      }
-
-      .metric-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .metric-tile {
-        min-height: auto;
-        padding: 12px 13px;
-        box-shadow: var(--shadow-soft);
-      }
-
-      .metric-tile span {
-        color: var(--faint);
-        font-size: 13px;
-        font-weight: 820;
-      }
-
-      .metric-tile strong {
-        display: block;
-        margin-top: 7px;
-        color: var(--navy);
-        font-size: 21px;
-        font-weight: 860;
-        line-height: 1;
-      }
-
-      .metric-tile p {
-        margin-top: 6px;
-        color: #5a6a7c;
-        font-size: 14px;
-        font-weight: 640;
-        line-height: 1.48;
-      }
-
-      .risk-overview {
-        margin-top: 18px;
-      }
-
-      .risk-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .risk-card {
-        display: grid;
-        gap: 8px;
-        min-height: auto;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: #ffffff;
-        box-shadow: var(--shadow-soft);
-      }
-
-      .risk-card span {
-        color: var(--faint);
-        font-size: 13px;
-        font-weight: 840;
-      }
-
-      .risk-card h3 {
-        color: var(--navy);
-        font-size: 22px;
-      }
-
-      .risk-card p {
-        color: #4c5d70;
-        font-size: 16px;
-        font-weight: 650;
-        line-height: 1.45;
-      }
-
-      .impact-level {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 30px;
-        padding: 6px 11px;
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 860;
-        white-space: nowrap;
-      }
-
-      .level-critical {
-        border: 1px solid #f2b8b5;
-        background: #fff1f0;
-        color: #b42318;
-      }
-
-      .level-high {
-        border: 1px solid #f7c78f;
-        background: #fff7ed;
-        color: #b54708;
-      }
-
-      .level-medium {
-        border: 1px solid #f8df7b;
-        background: #fffbe6;
-        color: #7a5a00;
-      }
-
-      .level-low {
-        border: 1px solid #d4dbe5;
-        background: #f5f7fa;
-        color: #5c6978;
-      }
-
-      .support-score .impact-level {
-        color: #111827;
-      }
-
-      .analysis-grid {
-        display: grid;
-        grid-template-columns: minmax(500px, 0.88fr) minmax(460px, 0.78fr);
-        gap: 18px;
-        margin-top: 18px;
-        align-items: start;
-      }
-
-      .ranking-list {
-        display: grid;
-        gap: 10px;
-      }
-
-      .ranking-row {
-        display: grid;
-        grid-template-columns: 36px minmax(0, 1fr) auto;
-        gap: 13px;
-        align-items: center;
-        width: 100%;
-        min-height: auto;
-        padding: 13px 14px;
-        color: inherit;
-        text-align: left;
-        box-shadow: var(--shadow-soft);
-      }
-
-      .ranking-row.active {
-        border-color: rgba(47, 85, 212, 0.72);
-        background: #f4f7ff;
-        box-shadow: 0 12px 28px rgba(47, 85, 212, 0.11);
-      }
-
-      .ranking-row.supporting {
-        background: #fbfcfe;
-        border-color: #e8edf4;
-      }
-
-      .ranking-row.supporting .rank-title strong {
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      .ranking-row.supporting .rank-main p {
-        color: var(--faint);
-        font-size: 0.88rem;
-      }
-
-      .ranking-row.supporting .rank-no {
-        background: #98a6b7;
-      }
-
-      .rank-no {
-        display: grid;
-        place-items: center;
-        width: 38px;
-        height: 38px;
-        border-radius: 7px;
-        background: var(--navy);
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: 860;
-      }
-
-      .ranking-row.active .rank-no {
-        background: var(--blue);
-      }
-
-      .rank-main {
-        display: grid;
-        gap: 7px;
-        min-width: 0;
-      }
-
-      .rank-title {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .rank-title strong {
-        color: var(--ink);
-        font-size: 19px;
-        font-weight: 820;
-        line-height: 1.3;
-      }
-
-      .rank-main p {
-        color: #526274;
-        font-size: 16px;
-        font-weight: 590;
-        line-height: 1.45;
-      }
-
-      .rank-score {
-        display: grid;
-        justify-items: end;
-        gap: 5px;
-      }
-
-      .rank-score strong {
-        color: var(--navy);
-        font-size: 26px;
-        font-weight: 860;
-        line-height: 1;
-      }
-
-      .detail-panel {
-        display: grid;
-        gap: 14px;
-        background: var(--paper);
-        color: var(--ink);
-      }
-
-      .detail-panel .eyebrow,
-      .detail-panel .panel-title p {
-        color: var(--muted);
-      }
-
-      .detail-panel h2,
-      .detail-panel h3 {
-        color: var(--navy);
-      }
-
-      .detail-head {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 14px;
-        padding-bottom: 13px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .support-score {
-        display: grid;
-        justify-items: end;
-        gap: 5px;
-      }
-
-      .support-score strong {
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: 860;
-        line-height: 1;
-      }
-
-      .support-score span {
-        color: var(--muted);
-        font-size: 13px;
-        font-weight: 800;
-      }
-
-      .detail-section {
-        display: grid;
-        gap: 7px;
-      }
-
-      .detail-section > span {
-        color: var(--muted);
-        font-size: 14px;
-        font-weight: 820;
-        text-transform: uppercase;
-      }
-
-      .detail-section ul,
-      .action-card ol {
-        margin: 0;
-        padding-left: 20px;
-      }
-
-      .detail-section li {
-        color: #273344;
-        font-size: 16px;
-        font-weight: 610;
-        line-height: 1.52;
-      }
-
-      .insight-box {
-        padding: 12px 14px;
-        border-left: 3px solid var(--teal);
-        border-radius: 6px;
-        background: #f4fbfa;
-        color: #20313f;
-        font-size: 15px;
-        font-weight: 650;
-        line-height: 1.52;
-      }
-
-      .risk-box {
-        padding: 12px 14px;
-        border-left: 3px solid #f97316;
-        border-radius: 6px;
-        background: #fff7ed;
-        color: #2b3340;
-        font-size: 15px;
-        font-weight: 680;
-        line-height: 1.52;
-      }
-
-      .pathway {
-        display: grid;
-        gap: 8px;
-      }
-
-      .path-step {
-        display: grid;
-        grid-template-columns: 94px minmax(0, 1fr);
-        gap: 10px;
-        align-items: start;
-        padding: 10px 12px;
-        border: 1px solid #dfe6ef;
-        border-radius: 6px;
-        background: #f8fafc;
-      }
-
-      .path-step span {
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 840;
-      }
-
-      .path-step strong {
-        color: #1f2a37;
-        font-size: 15px;
-        font-weight: 650;
-        line-height: 1.45;
-      }
-
-      .evidence-action-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(420px, 0.58fr);
-        gap: 18px;
-        margin-top: 18px;
-        align-items: start;
-      }
-
-      .evidence-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .evidence-card {
-        display: grid;
-        gap: 10px;
-        min-height: auto;
-        padding: 16px;
-        box-shadow: var(--shadow-soft);
-      }
-
-      .type-badge {
-        background: #eef2ff;
-        color: var(--blue);
-      }
-
-      .evidence-card h3 {
-        color: var(--ink);
-        font-size: 17px;
-      }
-
-      .evidence-key {
-        color: var(--navy);
-        font-size: 14px;
-        font-weight: 780;
-        line-height: 1.48;
-      }
-
-      .evidence-summary {
-        color: #46566a;
-        font-size: 14px;
-        font-weight: 610;
-        line-height: 1.55;
-      }
-
-      .evidence-link-note {
-        padding: 10px 11px;
-        border-radius: 6px;
-        background: #f5f8fb;
-        color: #415064;
-        font-size: 13px;
-        font-weight: 720;
-        line-height: 1.45;
-      }
-
-      .source-meta {
-        display: grid;
-        gap: 4px;
-        color: #5a6a7c;
-        font-size: 13px;
-        font-weight: 680;
-        line-height: 1.4;
-      }
-
-      .evidence-card a,
-      .case-card a {
-        align-self: end;
-        color: var(--blue);
-        font-size: 13px;
-        font-weight: 860;
-      }
-
-      .link-missing {
-        align-self: end;
-        color: var(--faint);
-        font-size: 12px;
-        font-weight: 780;
-      }
-
-      .action-stack {
-        display: grid;
-        gap: 12px;
-      }
-
-      .action-card {
-        display: grid;
-        gap: 13px;
-        padding: 18px;
-        background: var(--paper-warm);
-        box-shadow: var(--shadow-soft);
-      }
-
-      .action-card h3 {
-        color: var(--navy);
-        font-size: 22px;
-      }
-
-      .action-card li {
-        color: #263242;
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 1.55;
-        margin-bottom: 8px;
+        grid-template-columns: 1fr;
       }
 
       .case-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .case-card {
-        display: grid;
-        gap: 9px;
-        min-height: auto;
-        padding: 14px;
-        box-shadow: var(--shadow-soft);
+      .flow-card:not(:last-child)::after {
+        content: "↓";
+        top: auto;
+        right: 50%;
+        bottom: -18px;
+        transform: translateX(50%);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        padding: 16px;
       }
 
-      .case-card-strong {
-        border-color: rgba(15, 143, 135, 0.38);
-        background: #f7fbfb;
+      .topbar,
+      .control-band {
+        grid-template-columns: 1fr;
       }
 
-      .case-card span {
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 860;
+      .status-board,
+      .scenario-tabs,
+      .metric-grid,
+      .risk-grid,
+      .evidence-grid,
+      .case-grid {
+        grid-template-columns: 1fr;
       }
 
-      .case-card h3 {
-        color: var(--ink);
-        font-size: 16px;
-        line-height: 1.35;
+      .advance-button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        padding: 12px;
       }
 
-      .case-card p {
-        color: #596a7c;
-        font-size: 14px;
-        font-weight: 620;
-        line-height: 1.5;
+      .panel {
+        padding: 16px;
       }
 
-      .case-meta {
-        display: grid;
-        gap: 7px;
-        margin: 0;
+      .news-input {
+        min-height: 300px;
+        font-size: 15px;
+        line-height: 1.7;
       }
 
-      .case-meta div {
-        display: grid;
-        gap: 3px;
+      .ranking-row {
+        grid-template-columns: 34px minmax(0, 1fr);
+        align-items: start;
       }
 
-      .case-meta dt {
-        color: var(--faint);
-        font-size: 11px;
-        font-weight: 850;
+      .rank-score {
+        grid-column: 2;
+        justify-items: start;
       }
 
-      .case-meta dd {
-        margin: 0;
-        color: #405064;
-        font-size: 13px;
-        font-weight: 650;
-        line-height: 1.42;
+      .detail-head {
+        flex-direction: column;
       }
 
-      .evidence-card a:hover,
-      .case-card a:hover,
-      .case-card:focus-visible a {
-        text-decoration: underline;
-        text-underline-offset: 3px;
+      .support-score {
+        justify-items: start;
       }
+    }
+  </style>
+</head>
 
-      .footer-note {
-        margin-top: 18px;
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 650;
-        line-height: 1.5;
-      }
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <h1>인사 시사점 분석 리포트</h1>
+        <p class="subcopy">
+          국내외 주요 이슈가 인사 업무에 미치는 영향과 권고 액션을 제공합니다.
+        </p>
+      </div>
+      <div class="status-board" aria-label="보고서 상태">
+        <a class="status-pill status-link" href="../archive.html">
+          <span>이력 보기</span>
+          <strong>달력 열기</strong>
+        </a>
+      </div>
+    </header>
 
-      @media (max-width: 1280px) {
-        .input-grid,
-        .analysis-grid,
-        .evidence-action-grid {
-          grid-template-columns: 1fr;
-        }
+    <nav class="scenario-tabs" id="scenarioTabs" role="tablist" aria-label="데일리 6개 헤더별 이슈"></nav>
 
-        .report-flow {
-          grid-template-columns: 1fr;
-        }
-
-        .case-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .flow-card:not(:last-child)::after {
-          content: "↓";
-          top: auto;
-          right: 50%;
-          bottom: -18px;
-          transform: translateX(50%);
-        }
-      }
-
-      @media (max-width: 900px) {
-        .shell {
-          padding: 16px;
-        }
-
-        .topbar,
-        .control-band {
-          grid-template-columns: 1fr;
-        }
-
-        .status-board,
-        .scenario-tabs,
-        .metric-grid,
-        .risk-grid,
-        .evidence-grid,
-        .case-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .advance-button {
-          width: 100%;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .shell {
-          padding: 12px;
-        }
-
-        .panel {
-          padding: 16px;
-        }
-
-        .news-input {
-          min-height: 300px;
-          font-size: 15px;
-          line-height: 1.7;
-        }
-
-        .ranking-row {
-          grid-template-columns: 34px minmax(0, 1fr);
-          align-items: start;
-        }
-
-        .rank-score {
-          grid-column: 2;
-          justify-items: start;
-        }
-
-        .detail-head {
-          flex-direction: column;
-        }
-
-        .support-score {
-          justify-items: start;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="shell">
-      <header class="topbar">
-        <div class="brand-block">
-          <h1>인사 시사점 분석 리포트</h1>
-          <p class="subcopy">
-            국내외 주요 이슈가 인사 업무에 미치는 영향과 권고 액션을 제공합니다.
-          </p>
-        </div>
-        <div class="status-board" aria-label="보고서 상태">
-          <div class="status-pill">
-            <span>자료 유형</span>
-            <strong>리서치 기반</strong>
-          </div>
-          <div class="status-pill">
-            <span>분석 관점</span>
-            <strong>인사 업무</strong>
-          </div>
-          <div class="status-pill">
-            <span>대상 이슈</span>
-            <strong>광주 팹 투자와 AI 인프라 인력</strong>
-          </div>
-          <a class="status-pill status-link" href="../archive.html">
-            <span>이력 보기</span>
-            <strong>달력 열기</strong>
-          </a>
-        </div>
-      </header>
-
-      <nav class="scenario-tabs" id="scenarioTabs" role="tablist" aria-label="데일리 선정 뉴스 3건"></nav>
-
-      <section class="input-grid" aria-label="분석 대상 기사와 인사 판단 요약">
-        <article class="panel article-card">
-          <div class="panel-header">
-            <div class="panel-title">
-              <p class="eyebrow">분석 대상 기사</p>
-              <h2><a class="article-title-link" id="articleTitleLink" href="#" target="_blank" rel="noopener noreferrer"><span id="headline"></span></a></h2>
-              <div class="article-meta">
-                <span id="articleSource"></span>
-                <span id="articleDate"></span>
-                <a id="articleOriginalLink" href="#" target="_blank" rel="noopener noreferrer">기사 원문 보기</a>
-              </div>
-            </div>
-          </div>
-          <p class="article-summary" id="newsInput"></p>
-          <p id="scenarioContext"></p>
-          <div class="report-flow" id="reportFlow" aria-label="영향 전개 경로 요약"></div>
-        </article>
-
-        <aside class="panel judgement-panel">
-          <div class="panel-header">
-            <div class="panel-title">
-              <p class="eyebrow">인사 판단 요약</p>
-              <h2>가장 먼저 봐야 할 질문</h2>
-              <p>People 조직이 먼저 확인할 질문과 조치 방향을 요약합니다.</p>
-            </div>
-            <span class="confidence-badge" id="overallConfidence"></span>
-          </div>
-          <div class="judgement-box">
-            <span>핵심 질문</span>
-            <strong id="decisionQuestion"></strong>
-          </div>
-          <div class="judgement-box">
-            <span>인사 업무 신호</span>
-            <strong id="peopleSignal"></strong>
-          </div>
-          <div class="judgement-box">
-            <span>기준 기사만 본 직접 영향</span>
-            <strong id="directFinding"></strong>
-          </div>
-          <div class="judgement-box">
-            <span>추가 자료 포함 종합 판단</span>
-            <strong id="researchJudgement"></strong>
-          </div>
-          <div class="metric-grid" id="metricGrid"></div>
-        </aside>
-      </section>
-
-      <section class="panel risk-overview" aria-label="상위 리스크 3개">
+    <section class="input-grid" aria-label="분석 대상 기사와 인사 판단 요약">
+      <article class="panel article-card">
         <div class="panel-header">
           <div class="panel-title">
-            <p class="eyebrow">상위 리스크 3개</p>
-            <h2>먼저 검토할 인사 리스크</h2>
-            <p>관련 자료를 종합했을 때 인사 조직이 우선 확인해야 할 리스크입니다.</p>
+            <p class="eyebrow">분석 대상 기사</p>
+            <h2><a class="article-title-link" id="articleTitleLink" href="#" target="_blank"
+                rel="noopener noreferrer"><span id="headline"></span></a></h2>
+            <div class="article-meta">
+              <span id="articleSource"></span>
+              <span id="articleDate"></span>
+              <a id="articleOriginalLink" href="#" target="_blank" rel="noopener noreferrer">기사 원문 보기</a>
+            </div>
           </div>
         </div>
-        <div class="risk-grid" id="riskGrid"></div>
-      </section>
+        <p class="article-summary" id="newsInput"></p>
+        <p id="scenarioContext"></p>
+        <div class="report-flow" id="reportFlow" aria-label="영향 전개 경로 요약"></div>
+      </article>
 
-      <section class="analysis-grid" aria-label="영향 영역 순위와 상세 분석">
-        <article class="panel">
-          <div class="panel-header">
-            <div class="panel-title">
-              <p class="eyebrow">영향 영역 순위</p>
-              <h2>인사 기능별 영향도</h2>
-              <p>기사 직접 언급 순서가 아니라, 인사 조직이 먼저 검토해야 할 리스크가 큰 순서로 정렬했습니다.</p>
-            </div>
-          </div>
-          <div class="ranking-list" id="rankingList"></div>
-        </article>
-
-        <aside class="panel detail-panel" aria-live="polite">
-          <div class="detail-head">
-            <div class="panel-title">
-              <p class="eyebrow">상세 분석</p>
-              <h2 id="detailTitle"></h2>
-              <p id="detailOwner"></p>
-            </div>
-            <div class="support-score">
-              <span>영향 수준</span>
-              <strong id="detailImpactLevel"></strong>
-              <span id="detailConfidence"></span>
-            </div>
-          </div>
-          <div class="detail-section">
-            <span>관련 업무 범위</span>
-            <ul id="detailScope"></ul>
-          </div>
-          <div class="detail-section">
-            <span>직접 영향</span>
-            <div class="insight-box" id="detailDirectImpact"></div>
-          </div>
-          <div class="detail-section">
-            <span>영향 전개 경로</span>
-            <div class="pathway" id="detailPathway"></div>
-          </div>
-          <div class="detail-section">
-            <span>검토 필요 리스크</span>
-            <div class="risk-box" id="detailFinalRisk"></div>
-          </div>
-          <div class="detail-section">
-            <span>왜 영향이 있는가</span>
-            <ul id="detailWhy"></ul>
-          </div>
-          <div class="detail-section">
-            <span>핵심 시사점</span>
-            <div class="insight-box" id="detailInsight"></div>
-          </div>
-          <div class="detail-section">
-            <span>확인해야 할 내부 지표</span>
-            <ul id="detailIndicators"></ul>
-          </div>
-        </aside>
-      </section>
-
-      <section class="evidence-action-grid" aria-label="근거 자료와 권고 액션">
-        <article class="panel">
-          <div class="panel-header">
-            <div class="panel-title">
-              <p class="eyebrow">근거 자료</p>
-              <h2>관련 자료 탐색 결과</h2>
-              <p>원문 기사, 공식 발표, 시장 기사, 보상 기사, 연구 보고서를 함께 보며 파급 영향을 판단합니다.</p>
-            </div>
-          </div>
-          <div class="evidence-grid" id="evidenceGrid"></div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-header">
-            <div class="panel-title">
-              <p class="eyebrow">권고 액션</p>
-              <h2>인사 조직이 바로 검토할 일</h2>
-              <p>선택한 영역 기준으로 실행 과제를 제안합니다.</p>
-            </div>
-          </div>
-          <div class="action-stack" id="actionStack"></div>
-        </article>
-      </section>
-
-      <section class="panel" aria-label="유사·참고 사례">
+      <aside class="panel judgement-panel">
         <div class="panel-header">
           <div class="panel-title">
-            <p class="eyebrow">유사·참고 사례</p>
-            <h2>비교 근거와 실행 인사이트</h2>
-            <p>현재 이슈의 People 리스크와 권고 액션을 보강하는 참고 사례입니다.</p>
+            <p class="eyebrow">인사 판단 요약</p>
+            <h2>가장 먼저 봐야 할 질문</h2>
+            <p>People 조직이 먼저 확인할 질문과 조치 방향을 요약합니다.</p>
+          </div>
+          <span class="confidence-badge" id="overallConfidence"></span>
+        </div>
+        <div class="judgement-box">
+          <span>핵심 질문</span>
+          <strong id="decisionQuestion"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>인사 업무 신호</span>
+          <strong id="peopleSignal"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>기준 기사만 본 직접 영향</span>
+          <strong id="directFinding"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>추가 자료 포함 종합 판단</span>
+          <strong id="researchJudgement"></strong>
+        </div>
+        <div class="metric-grid" id="metricGrid"></div>
+      </aside>
+    </section>
+
+    <section class="panel risk-overview" aria-label="상위 리스크 3개">
+      <div class="panel-header">
+        <div class="panel-title">
+          <p class="eyebrow">상위 리스크 3개</p>
+          <h2>먼저 검토할 인사 리스크</h2>
+          <p>관련 자료를 종합했을 때 인사 조직이 우선 확인해야 할 리스크입니다.</p>
+        </div>
+      </div>
+      <div class="risk-grid" id="riskGrid"></div>
+    </section>
+
+    <section class="analysis-grid" aria-label="영향 영역 순위와 상세 분석">
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">영향 영역 순위</p>
+            <h2>인사 기능별 영향도</h2>
+            <p>기사 직접 언급 순서가 아니라, 인사 조직이 먼저 검토해야 할 리스크가 큰 순서로 정렬했습니다.</p>
           </div>
         </div>
-        <div class="case-grid" id="caseGrid"></div>
-      </section>
+        <div class="ranking-list" id="rankingList"></div>
+      </article>
 
-      <p class="footer-note">
-        리포트 안내: 2026-07-10 기준으로 생성되는 인사 시사점 리포트입니다.
-      </p>
-    </main>
-<style>.static-report-text{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}</style>
-<section class="static-report-text" aria-label="정적 리포트 본문">
-<h2>정적 리포트 본문</h2>
-<p>이 영역은 검색, GitHub 미리보기, 텍스트 추출 도구가 자바스크립트를 실행하지 않아도 리포트 본문을 읽을 수 있도록 제공됩니다.</p>
-<article>
-<h3>광주 팹 투자와 AI 인프라 인력</h3>
-<p>기준 기사: [단독]이재용, 이달 말 젠슨 황과 회동 추진… ‘광주 팹’ 투자 등 논의 전망</p>
-<p>출처: 동아일보 / 날짜: 2026-07-10</p>
-<p>원문 URL: https://www.donga.com/news/Economy/article/all/20260709/134270039/2</p>
-<p>인사 판단 요약: 기준 기사는 삼성과 엔비디아 협력, 광주 반도체 팹, AI 데이터센터 구축 논의가 맞물리는 산업 이슈다. 삼성디스플레이 People 관점에서는 반도체·AI 인프라 투자가 지역 인재 확보, 핵심 기술직 충원, 보안·협업 권한 관리, 임원 보고 이슈로 확산될 수 있다.</p>
-<p>직접 영향: 기준 기사는 삼성-엔비디아 협력 논의가 광주 팹과 AI 데이터센터 인력 수요로 이어질 수 있음을 보여준다.</p>
-<p>종합 판단: 기술 변화에 따른 직무 재편 흐름을 함께 보면, 투자 발표 이후 People 조직은 지역 인재 파이프라인과 보안형 협업 체계를 먼저 준비해야 한다.</p>
-<h4>상위 리스크 3개</h4>
-<ol>
-<li>핵심 직무 후보자 풀 부족 - 광주 팹과 AI 인프라 투자 논의가 구체화되면 공정·설비·AI 인프라 인재 수요가 빠르게 커질 수 있다.</li>
-<li>외부 협업 보안 공백 - 엔비디아 등 외부 파트너 협업이 늘면 고객사·기술 정보 접근권한 관리가 중요해진다.</li>
-<li>지역 배치 수용성 리스크 - 지역 근무·전환배치가 필요해질 경우 주거, 이동, 가족 사정 등 구성원 수용성 이슈가 생길 수 있다.</li>
-</ol>
-<h4>상세 분석</h4>
-<section>
-<h5>채용</h5>
-<p>관련 업무 범위: 외부 인력 발굴 및 채용, 우수 인력 선확보, 산학교류 및 참여연구원 관리</p>
-<p>직접 영향: 광주 팹·AI 인프라 관련 핵심 직무의 후보자 풀과 선확보 채널을 재점검해야 한다.</p>
-<p>2차 영향: 채용은 공정·설비·AI 인프라 직무를 나눠 지역 대학, 경력직, 산학 채널을 동시에 관리해야 한다.</p>
-<p>검토 필요 리스크: 채용은 공정·설비·AI 인프라 직무를 나눠 지역 대학, 경력직, 산학 채널을 동시에 관리해야 한다.</p>
-<p>왜 영향이 있는가: 기준 기사는 광주 팹과 AI 데이터센터가 투자 논의의 중심에 있음을 보여준다. 지역 기반 기술직 충원은 채용 리드타임과 후보자 수락률에 큰 영향을 받는다.</p>
-<p>핵심 시사점: 채용은 공정·설비·AI 인프라 직무를 나눠 지역 대학, 경력직, 산학 채널을 동시에 관리해야 한다.</p>
-<p>확인해야 할 내부 지표: 핵심 직무 후보자 수, 제안 수락률, 지역별 채용 리드타임</p>
-<p>권고 액션:</p>
-<ol>
-<li>광주·호남권 및 수도권 핵심 직무 후보자 풀을 분리해 작성한다.</li>
-<li>공정·설비·AI 인프라 직무별 제안 수락률과 거절 사유를 추적한다.</li>
-<li>산학교류·참여연구원 전환율을 지역 인재 확보 지표로 관리한다.</li>
-</ol>
-</section>
-<section>
-<h5>인력운영</h5>
-<p>관련 업무 범위: 인력 운영 계획 수립 및 실적 관리, 인력 충원 및 효율화, 휴직/복직/퇴직 관리</p>
-<p>직접 영향: 대규모 투자 논의에 맞춰 지역 배치와 전환 가능 인력을 함께 산정해야 한다.</p>
-<p>2차 영향: 인력운영은 신규 채용, 내부 전환, 단기 프로젝트 파견을 같은 수급표에서 관리해야 한다.</p>
-<p>검토 필요 리스크: 인력운영은 신규 채용, 내부 전환, 단기 프로젝트 파견을 같은 수급표에서 관리해야 한다.</p>
-<p>왜 영향이 있는가: 투자 논의가 구체화되면 신규 충원만으로는 초기 실행 인력을 채우기 어렵다. 기존 핵심 인력의 전환배치와 프로젝트 지원 수요가 동시에 발생할 수 있다.</p>
-<p>핵심 시사점: 인력운영은 신규 채용, 내부 전환, 단기 프로젝트 파견을 같은 수급표에서 관리해야 한다.</p>
-<p>확인해야 할 내부 지표: 전환 가능 인력 수, 지역 배치 수용성, 프로젝트 파견 기간</p>
-<p>권고 액션:</p>
-<ol>
-<li>광주 팹·AI 인프라 관련 내부 전환 가능 직무를 표시한다.</li>
-<li>지역 배치 필요 인원과 전환배치 수용성 조사를 분리한다.</li>
-<li>초기 프로젝트 파견 인력의 복귀·보상 원칙을 정리한다.</li>
-</ol>
-</section>
-<section>
-<h5>보안</h5>
-<p>관련 업무 범위: 보안 시스템 개선 및 관리, 보안 점검</p>
-<p>직접 영향: 외부 파트너 협업과 차세대 인프라 논의의 접근권한 기준을 점검해야 한다.</p>
-<p>2차 영향: 보안은 협업 참여자, 자료 등급, 외부 공유 승인, 회의록 보관 기준을 사전에 정리해야 한다.</p>
-<p>검토 필요 리스크: 보안은 협업 참여자, 자료 등급, 외부 공유 승인, 회의록 보관 기준을 사전에 정리해야 한다.</p>
-<p>왜 영향이 있는가: 엔비디아 등 외부 파트너와의 협력 논의는 기술·고객 정보 민감도를 높인다. 투자 초기에는 협의 참여자가 늘면서 권한 회수와 자료 공유 기준이 느슨해지기 쉽다.</p>
-<p>핵심 시사점: 보안은 협업 참여자, 자료 등급, 외부 공유 승인, 회의록 보관 기준을 사전에 정리해야 한다.</p>
-<p>확인해야 할 내부 지표: 협업 권한 보유자 수, 외부 공유 승인 건수, 권한 회수 지연 건수</p>
-<p>권고 액션:</p>
-<ol>
-<li>외부 파트너 협업 참여자의 접근권한 목록을 갱신한다.</li>
-<li>AI 데이터센터·팹 투자 관련 자료의 등급과 공유 가능 범위를 정의한다.</li>
-<li>회의·자료 공유 후 권한 회수 로그를 점검한다.</li>
-</ol>
-</section>
-<h4>근거 자료</h4>
-<ul>
-<li>기준 기사: [단독]이재용, 이달 말 젠슨 황과 회동 추진… ‘광주 팹’ 투자 등 논의 전망 - 요약: 삼성-엔비디아 회동과 광주 팹·AI 데이터센터 논의 가능성을 보도한 기준 기사다. / URL: https://www.donga.com/news/Economy/article/all/20260709/134270039/2</li>
-<li>연구 보고서: Future of Jobs Report 2025 - 요약: 기술 변화가 직무 수요와 재교육 우선순위를 바꾸는 흐름을 정리한 보고서다. / URL: https://www.weforum.org/publications/the-future-of-jobs-report-2025/</li>
-<li>해외 보완 기사: Jensen Huang says his software engineers prefer building agents to writing code - 요약: 엔비디아 내부에서 엔지니어 업무가 코드 작성보다 AI 에이전트 구축으로 옮겨가는 흐름을 다룬 기사다. / URL: https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7</li>
-<li>확인 필요: 광주 팹·AI 인프라 관련 내부 직무 수급표 - 요약: 실제 영향은 내부 직무 목록, 후보자 풀, 전환배치 가능 인력으로 검증해야 한다. / 링크 확인 필요</li>
-</ul>
-<h4>유사·참고 사례</h4>
-<ul>
-<li>삼성-엔비디아 광주 팹 협력 논의: 투자 논의가 AI 인프라와 핵심 직무 수요로 연결되는 사례다. / 인사 시사점: 지역 인재 확보와 외부 협업 보안을 함께 설계해야 한다. / URL: https://www.donga.com/news/Economy/article/all/20260709/134270039/2</li>
-<li>Future of Jobs Report 2025: 기술 변화가 직무 수요와 재교육 우선순위를 바꾸는 큰 흐름을 제공한다. / 인사 시사점: 투자 이슈는 직무 전환 교육과 연결해 봐야 한다. / URL: https://www.weforum.org/publications/the-future-of-jobs-report-2025/</li>
-<li>엔비디아 엔지니어의 AI 에이전트 구축 전환: AI 인프라 경쟁이 개발 직무 자체를 에이전트 설계와 검증 중심으로 바꾸는 사례다. / 인사 시사점: AI 인프라 투자는 채용뿐 아니라 기존 기술직의 역할 재정의와 교육으로 연결해야 한다. / URL: https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7</li>
-<li>내부 지역 배치 수용성 점검: 광주 팹 영향은 실제 배치 가능 인력과 후보자 풀에 따라 달라진다. / 인사 시사점: 지역 배치 수용성과 백업 인력 계획을 사전에 봐야 한다. / 링크 확인 필요</li>
-</ul>
-</article>
-<article>
-<h3>최저임금 격차 축소와 보상 하단</h3>
-<p>기준 기사: 勞 1만1220원 vs 使 1만530원… 최저임금 격차 690원으로 좁혀</p>
-<p>출처: 동아일보 / 날짜: 2026-07-10</p>
-<p>원문 URL: https://www.donga.com/news/Society/article/all/20260710/134270941/2</p>
-<p>인사 판단 요약: 기준 기사는 최저임금 논의가 노사 간 격차 축소 단계로 이동했다는 정책·보상 이슈다. 기존 7월 1일 최저임금 수정안 보도와 달리 이번에는 격차가 690원까지 좁혀진 협상 진전이라는 점에서 보상 하단과 협력사 비용 점검의 시급성이 커졌다.</p>
-<p>직접 영향: 기준 기사는 최저임금 논의가 노사 제시안 격차 축소 단계로 진입해 보상·노사 준비 필요성이 높아졌음을 보여준다.</p>
-<p>종합 판단: 원청교섭 압박 기사와 함께 보면, 최저임금 이슈는 직접 고용 보상뿐 아니라 협력사 계약·현장 운영·노사 커뮤니케이션으로 확산될 수 있다.</p>
-<h4>상위 리스크 3개</h4>
-<ol>
-<li>보상 하단 재산정 리스크 - 최저임금이 조정되면 시급·월급 하단과 수당 기준을 다시 계산해야 한다.</li>
-<li>협력사 단가 전가 리스크 - 시설·보안·식당 등 협력사 계약의 인건비 연동 조항이 비용 압박으로 이어질 수 있다.</li>
-<li>현장 문의 증가 - 확정 전에도 구성원과 협력사 문의가 늘 수 있어 답변 기준이 필요하다.</li>
-</ol>
-<h4>상세 분석</h4>
-<section>
-<h5>제도</h5>
-<p>관련 업무 범위: 승격, 평가, 연봉 산정, 시상/징계</p>
-<p>직접 영향: 최저임금 조정 시나리오별 보상 하단과 수당 산식을 재점검해야 한다.</p>
-<p>2차 영향: 제도는 영향 직군, 수당 항목, 계약 형태별 계산 기준을 미리 정리해야 한다.</p>
-<p>검토 필요 리스크: 제도는 영향 직군, 수당 항목, 계약 형태별 계산 기준을 미리 정리해야 한다.</p>
-<p>왜 영향이 있는가: 협상 격차 축소는 확정 가능성이 높아지는 신호다. 보상 하단과 수당 산식은 확정 후가 아니라 사전 시뮬레이션이 필요하다.</p>
-<p>핵심 시사점: 제도는 영향 직군, 수당 항목, 계약 형태별 계산 기준을 미리 정리해야 한다.</p>
-<p>확인해야 할 내부 지표: 최저임금 영향 직군 수, 수당 산식 변경 대상, 보상 문의 건수</p>
-<p>권고 액션:</p>
-<ol>
-<li>최저임금 시나리오별 보상 하단 영향 직군을 목록화한다.</li>
-<li>수당·상여·포괄임금 산식과 충돌하는 지점을 점검한다.</li>
-<li>확정 후 공지 문구와 예외 처리 기준을 미리 작성한다.</li>
-</ol>
-</section>
-<section>
-<h5>노사</h5>
-<p>관련 업무 범위: 대내외 동향 관리, 특이 인력 파악</p>
-<p>직접 영향: 최저임금 확정 전후 예상 문의와 협력사 쟁점을 선제 정리해야 한다.</p>
-<p>2차 영향: 노사는 적용 시점, 영향 범위, 협력사 문의 대응 원칙을 FAQ로 준비해야 한다.</p>
-<p>검토 필요 리스크: 노사는 적용 시점, 영향 범위, 협력사 문의 대응 원칙을 FAQ로 준비해야 한다.</p>
-<p>왜 영향이 있는가: 최저임금은 구성원과 협력사 모두가 민감하게 보는 보상 이슈다. 협상 단계에서도 문의가 늘면 HR 답변 일관성이 중요해진다.</p>
-<p>핵심 시사점: 노사는 적용 시점, 영향 범위, 협력사 문의 대응 원칙을 FAQ로 준비해야 한다.</p>
-<p>확인해야 할 내부 지표: 노사 VOC, FAQ 처리 리드타임, 협력사 문의 건수</p>
-<p>권고 액션:</p>
-<ol>
-<li>구성원·협력사 예상 질문과 답변 기준을 분리한다.</li>
-<li>보상 하단과 수당 적용 원칙을 관리자에게 먼저 안내한다.</li>
-<li>노사 채널의 최저임금·보상 키워드를 주간으로 모니터링한다.</li>
-</ol>
-</section>
-<section>
-<h5>총무</h5>
-<p>관련 업무 범위: 의전, 레이아웃 관리, 사무환경/비품, 식당, 인허가, 차량 관리</p>
-<p>직접 영향: 협력사 인건비 연동 계약과 현장 서비스 비용 영향을 점검해야 한다.</p>
-<p>2차 영향: 총무는 협력사별 계약 조항과 단가 산식을 확인해 비용·서비스 영향도를 미리 봐야 한다.</p>
-<p>검토 필요 리스크: 총무는 협력사별 계약 조항과 단가 산식을 확인해 비용·서비스 영향도를 미리 봐야 한다.</p>
-<p>왜 영향이 있는가: 식당, 보안, 시설, 차량 등 총무 영역은 협력사 인건비 영향을 받을 수 있다. 단가 조정 기준이 불명확하면 서비스 품질과 민원 리스크가 생긴다.</p>
-<p>핵심 시사점: 총무는 협력사별 계약 조항과 단가 산식을 확인해 비용·서비스 영향도를 미리 봐야 한다.</p>
-<p>확인해야 할 내부 지표: 최저임금 연동 계약 수, 협력사 단가 조정 요청, 현장 서비스 민원</p>
-<p>권고 액션:</p>
-<ol>
-<li>최저임금 연동 협력사 계약 목록을 작성한다.</li>
-<li>식당·보안·시설·차량 운영 단가 조정 가능성을 계산한다.</li>
-<li>서비스 품질 저하 또는 민원 발생 가능성을 모니터링한다.</li>
-</ol>
-</section>
-<h4>근거 자료</h4>
-<ul>
-<li>기준 기사: 勞 1만1220원 vs 使 1만530원… 최저임금 격차 690원으로 좁혀 - 요약: 최저임금 노사 제시안 격차가 줄어든 협상 진전 기사다. / URL: https://www.donga.com/news/Society/article/all/20260710/134270941/2</li>
-<li>관련 기사: 400곳 원청교섭 압박 나선 민노총 “15일 총파업” - 요약: 원청교섭 압박과 총파업 예고로 현장 노사 리스크가 커지는 흐름을 보여준다. / URL: https://www.donga.com/news/Society/article/all/20260709/134263189/2</li>
-<li>관련 기사: [단독]이재용, 이달 말 젠슨 황과 회동 추진 - 요약: 대규모 투자와 지역 인력 수요를 시사하는 산업 기사다. / URL: https://www.donga.com/news/Economy/article/all/20260709/134270039/2</li>
-<li>확인 필요: 최저임금 연동 직군·협력사 계약 목록 - 요약: 실제 영향은 내부 보상 산식과 협력사 계약 조항으로 검증해야 한다. / 링크 확인 필요</li>
-</ul>
-<h4>유사·참고 사례</h4>
-<ul>
-<li>최저임금 노사 격차 축소: 최저임금 확정 가능성에 더 가까워진 협상 단계다. / 인사 시사점: 보상 하단과 수당 산식을 사전 계산해야 한다. / URL: https://www.donga.com/news/Society/article/all/20260710/134270941/2</li>
-<li>원청교섭 압박과 총파업 예고: 보상·노동 이슈가 원청과 협력사 관계로 확산되는 흐름이다. / 인사 시사점: 협력사 문의와 현장 운영 영향을 같이 봐야 한다. / URL: https://www.donga.com/news/Society/article/all/20260709/134263189/2</li>
-<li>광주 팹 투자 논의: 대규모 투자와 채용경쟁력 이슈가 동시에 발생할 수 있다. / 인사 시사점: 보상 하단 변화는 지역 채용 경쟁력과도 연결된다. / URL: https://www.donga.com/news/Economy/article/all/20260709/134270039/2</li>
-<li>내부 협력사 단가 점검: 최저임금 영향은 협력사 계약 구조에 따라 달라진다. / 인사 시사점: 총무·보안·식당 운영비를 HR 리스크로 같이 봐야 한다. / 링크 확인 필요</li>
-</ul>
-</article>
-<article>
-<h3>AI 에이전트 구축과 엔지니어 역할 재설계</h3>
-<p>기준 기사: Jensen Huang says his software engineers prefer building agents to writing code</p>
-<p>출처: Business Insider / 날짜: 2026-07-09</p>
-<p>원문 URL: https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7</p>
-<p>인사 판단 요약: 기준 기사는 젠슨 황이 엔비디아 소프트웨어 엔지니어들이 코드 작성보다 AI 에이전트 구축을 더 선호한다고 언급한 해외 AI 인재 이슈다. 국내 People 관점에서는 AI 도구 도입을 단순 생산성 캠페인이 아니라 직무 재설계, 관리자 코칭, 검증 책임, 보안 기준으로 연결해 봐야 한다.</p>
-<p>직접 영향: 기준 기사는 AI 선도 기업 내부에서도 엔지니어 역할이 코드 작성에서 에이전트 구축과 오케스트레이션으로 이동하고 있음을 보여준다.</p>
-<p>종합 판단: AI 업무 보고서와 직무 변화 보고서를 함께 보면, AI 에이전트 확산은 툴 도입보다 직무 재정의와 관리자 교육의 문제로 다뤄야 한다.</p>
-<h4>상위 리스크 3개</h4>
-<ol>
-<li>직무 역할 정의 지연 - AI 에이전트가 들어오면 작성 업무보다 설계·검증·예외 처리 비중이 커지는데 직무기술서가 이를 따라가지 못할 수 있다.</li>
-<li>검증 책임 공백 - AI 결과물을 누가 최종 검토하고 책임지는지 불명확하면 품질 문제와 재작업이 늘어난다.</li>
-<li>관리자 코칭 기준 부족 - 관리자가 AI 기반 업무 배분과 성과 판단 기준을 모르면 팀별 편차가 커질 수 있다.</li>
-</ol>
-<h4>상세 분석</h4>
-<section>
-<h5>교육</h5>
-<p>관련 업무 범위: 직급/직무별 특화 교육, 차세대 리더 육성, AI/직무/리더십/어학 교육</p>
-<p>직접 영향: AI 에이전트 설계, 감독, 검증 역량을 직무 교육에 반영해야 한다.</p>
-<p>2차 영향: 교육은 어떤 업무에 AI를 쓰고, 어떤 결과를 사람이 검증하며, 언제 사용을 중단할지까지 포함해야 한다.</p>
-<p>검토 필요 리스크: 교육은 어떤 업무에 AI를 쓰고, 어떤 결과를 사람이 검증하며, 언제 사용을 중단할지까지 포함해야 한다.</p>
-<p>왜 영향이 있는가: 기준 기사는 엔지니어 역할이 코드 작성에서 에이전트 구축으로 이동하고 있음을 보여준다. 교육이 프롬프트 작성에만 머물면 검증 책임과 업무 재설계를 다루지 못한다.</p>
-<p>핵심 시사점: 교육은 어떤 업무에 AI를 쓰고, 어떤 결과를 사람이 검증하며, 언제 사용을 중단할지까지 포함해야 한다.</p>
-<p>확인해야 할 내부 지표: AI 교육 이수율, AI 오류 보고 건수, AI 사용 후 재작업 시간</p>
-<p>권고 액션:</p>
-<ol>
-<li>직무별 AI 에이전트 사용 가능 업무와 금지 업무를 구분한다.</li>
-<li>AI 산출물 검증 체크리스트와 오류 보고 양식을 만든다.</li>
-<li>관리자 교육에 AI 사용 후 업무 재배분과 성과 판단 기준을 넣는다.</li>
-</ol>
-</section>
-<section>
-<h5>제도</h5>
-<p>관련 업무 범위: 승격, 평가, 연봉 산정, 시상/징계</p>
-<p>직접 영향: AI 에이전트 활용 성과를 사용량이 아니라 품질, 리드타임, 재작업 감소로 측정해야 한다.</p>
-<p>2차 영향: 제도는 AI 활용 KPI를 사용 횟수보다 결과 품질과 업무 리드타임 중심으로 정의해야 한다.</p>
-<p>검토 필요 리스크: 제도는 AI 활용 KPI를 사용 횟수보다 결과 품질과 업무 리드타임 중심으로 정의해야 한다.</p>
-<p>왜 영향이 있는가: AI 사용 증가가 곧 성과 개선을 뜻하지 않는다. 검증 시간과 오류 재작업을 빼면 실제 생산성 개선 폭이 달라질 수 있다.</p>
-<p>핵심 시사점: 제도는 AI 활용 KPI를 사용 횟수보다 결과 품질과 업무 리드타임 중심으로 정의해야 한다.</p>
-<p>확인해야 할 내부 지표: AI 적용 업무 리드타임, 재작업 감소율, AI 사용 비용</p>
-<p>권고 액션:</p>
-<ol>
-<li>AI 활용 KPI를 품질, 리드타임, 재작업 감소 기준으로 정의한다.</li>
-<li>AI 산출물 책임 기준을 평가 안내에 반영한다.</li>
-<li>부서별 AI 사용 비용과 업무성과를 함께 비교한다.</li>
-</ol>
-</section>
-<section>
-<h5>보안</h5>
-<p>관련 업무 범위: 보안 시스템 개선 및 관리, 보안 점검</p>
-<p>직접 영향: AI 에이전트가 내부 자료와 외부 도구를 연결할 때 데이터 입력과 권한 기준을 명확히 해야 한다.</p>
-<p>2차 영향: 보안은 승인 도구 목록, 입력 금지 데이터, 외부 연동 권한을 직무별로 제시해야 한다.</p>
-<p>검토 필요 리스크: 보안은 승인 도구 목록, 입력 금지 데이터, 외부 연동 권한을 직무별로 제시해야 한다.</p>
-<p>왜 영향이 있는가: AI 에이전트는 업무 맥락과 자료를 지속적으로 입력받기 때문에 보안 리스크가 커질 수 있다. 직무 재설계가 진행될수록 내부 시스템 권한과 API 연동 관리가 중요해진다.</p>
-<p>핵심 시사점: 보안은 승인 도구 목록, 입력 금지 데이터, 외부 연동 권한을 직무별로 제시해야 한다.</p>
-<p>확인해야 할 내부 지표: 비승인 AI 도구 탐지 건수, AI 데이터 입력 위반, 외부 연동 권한 보유자 수</p>
-<p>권고 액션:</p>
-<ol>
-<li>승인 AI 도구와 비승인 도구 기준을 정리한다.</li>
-<li>AI 에이전트 입력 가능 데이터 등급과 금지 정보를 공지한다.</li>
-<li>외부 자동화 연동 권한과 API 사용 로그를 점검한다.</li>
-</ol>
-</section>
-<h4>근거 자료</h4>
-<ul>
-<li>기준 기사: Jensen Huang says his software engineers prefer building agents to writing code - 요약: 엔비디아 엔지니어들이 코드 작성보다 AI 에이전트 구축을 선호한다는 젠슨 황 발언을 다룬 기사다. / URL: https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7</li>
-<li>시장 보고서: State of AI at Work - 요약: 근로자가 AI를 관리·수정·맥락화하는 데 시간을 쓰는 현실을 다룬 보고서다. / URL: https://www.glean.com/report/state-of-ai-at-work</li>
-<li>연구 보고서: Future of Jobs Report 2025 - 요약: 기술 변화가 직무 수요와 재교육 우선순위를 바꾸는 흐름을 정리한 보고서다. / URL: https://www.weforum.org/publications/the-future-of-jobs-report-2025/</li>
-<li>확인 필요: 사내 AI 에이전트 사용 현황과 비용 지표 - 요약: 실제 영향은 내부 승인 도구 목록, 사용 비용, 재작업 시간으로 검증해야 한다. / 링크 확인 필요</li>
-</ul>
-<h4>유사·참고 사례</h4>
-<ul>
-<li>엔비디아 엔지니어의 AI 에이전트 구축 전환: AI 선도 기업 내부에서도 직무가 에이전트 설계와 검증 중심으로 바뀌는 흐름이다. / 인사 시사점: AI 교육은 사용법보다 역할 재정의와 검증 책임을 포함해야 한다. / URL: https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7</li>
-<li>Glean AI 업무 보고서: 근로자가 AI를 관리하는 시간이 생산성 기대를 잠식할 수 있음을 보여준다. / 인사 시사점: AI 업무량은 사용 횟수보다 재작업 시간으로 검증해야 한다. / URL: https://www.glean.com/report/state-of-ai-at-work</li>
-<li>Future of Jobs Report 2025: 기술 변화가 핵심 역량과 재교육 우선순위를 바꾸는 흐름을 제공한다. / 인사 시사점: AI 도구 확산은 직무별 재교육 기준과 연결된다. / URL: https://www.weforum.org/publications/the-future-of-jobs-report-2025/</li>
-<li>사내 비승인 AI 도구 점검: AI 에이전트가 비승인 사용으로 빠르게 확산될 수 있다. / 인사 시사점: AI 사용 가이드는 보안 정책과 실제 사용 로그를 맞춰 업데이트해야 한다. / 링크 확인 필요</li>
-</ul>
-</article>
-</section>
+      <aside class="panel detail-panel" aria-live="polite">
+        <div class="detail-head">
+          <div class="panel-title">
+            <p class="eyebrow">상세 분석</p>
+            <h2 id="detailTitle"></h2>
+            <p id="detailOwner"></p>
+          </div>
+          <div class="support-score">
+            <span>영향 수준</span>
+            <strong id="detailImpactLevel"></strong>
+            <span id="detailConfidence"></span>
+          </div>
+        </div>
+        <div class="detail-section">
+          <span>관련 업무 범위</span>
+          <ul id="detailScope"></ul>
+        </div>
+        <div class="detail-section">
+          <span>직접 영향</span>
+          <div class="insight-box" id="detailDirectImpact"></div>
+        </div>
+        <div class="detail-section">
+          <span>영향 전개 경로</span>
+          <div class="pathway" id="detailPathway"></div>
+        </div>
+        <div class="detail-section">
+          <span>검토 필요 리스크</span>
+          <div class="risk-box" id="detailFinalRisk"></div>
+        </div>
+        <div class="detail-section">
+          <span>왜 영향이 있는가</span>
+          <ul id="detailWhy"></ul>
+        </div>
+        <div class="detail-section">
+          <span>핵심 시사점</span>
+          <div class="insight-box" id="detailInsight"></div>
+        </div>
+        <div class="detail-section">
+          <span>확인해야 할 내부 지표</span>
+          <ul id="detailIndicators"></ul>
+        </div>
+      </aside>
+    </section>
 
-    <script>
-      const axes = ["인력 재배치", "운영비 영향", "규제 리스크", "실행 시급성"];
+    <section class="evidence-action-grid" aria-label="근거 자료와 권고 액션">
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">근거 자료</p>
+            <h2>관련 자료 탐색 결과</h2>
+            <p>원문 기사, 공식 발표, 시장 기사, 보상 기사, 연구 보고서를 함께 보며 파급 영향을 판단합니다.</p>
+          </div>
+        </div>
+        <div class="evidence-grid" id="evidenceGrid"></div>
+      </article>
 
-      const peopleScope = {
-        "조직/임원": ["조직개편", "임원 지원 및 관리", "임원 인사", "차세대 리더 양성 및 관리"],
-        "인력운영": ["인력 운영 계획 수립 및 실적 관리", "인력 충원 및 효율화", "휴직/복직/퇴직 관리"],
-        "제도": ["승격", "평가", "연봉 산정", "시상/징계"],
-        "채용": ["외부 인력 발굴 및 채용", "우수 인력 선확보", "산학교류 및 참여연구원 관리"],
-        "교육": ["직급/직무별 특화 교육", "차세대 리더 육성", "AI/직무/리더십/어학 교육"],
-        "노사": ["대내외 동향 관리", "특이 인력 파악"],
-        "조직문화": ["캠퍼스 행사 운영", "일하는 문화 조성"],
-        "총무": ["의전", "레이아웃 관리", "사무환경/비품", "식당", "인허가", "차량 관리"],
-        "보안": ["보안 시스템 개선 및 관리", "보안 점검"],
-      };
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">권고 액션</p>
+            <h2>인사 조직이 바로 검토할 일</h2>
+            <p>선택한 영역 기준으로 실행 과제를 제안합니다.</p>
+          </div>
+        </div>
+        <div class="action-stack" id="actionStack"></div>
+      </article>
+    </section>
 
-      function area(name, owner, score, confidence, summary, why, insight, stars, actions) {
-        return { name, owner, score, confidence, summary, why, insight, secondaryImpact: insight, stars, actions, scope: peopleScope[name] };
-      }
+    <section class="panel" aria-label="유사·참고 사례">
+      <div class="panel-header">
+        <div class="panel-title">
+          <p class="eyebrow">유사·참고 사례</p>
+          <h2>비교 근거와 실행 인사이트</h2>
+          <p>현재 이슈의 People 리스크와 권고 액션을 보강하는 참고 사례입니다.</p>
+        </div>
+      </div>
+      <div class="case-grid" id="caseGrid"></div>
+    </section>
 
-      const peopleAreaNames = Object.keys(peopleScope);
+    <p class="footer-note">
+      리포트 안내: 2026-07-10 기준으로 생성되는 인사 시사점 리포트입니다.
+    </p>
+  </main>
 
-      const peopleOwners = {
-        "조직/임원": "조직/임원 담당",
-        "인력운영": "인력운영 담당",
-        "제도": "제도 담당",
-        "채용": "채용 담당",
-        "교육": "교육 담당",
-        "노사": "노사 담당",
-        "조직문화": "조직문화 담당",
-        "총무": "총무 담당",
-        "보안": "보안 담당",
-      };
+  <script>
+    const axes = ["인력 재배치", "운영비 영향", "규제 리스크", "실행 시급성"];
 
-      const supportingScoresByScenario = {};
+    const peopleScope = {
+      "조직/임원": ["조직개편", "임원 지원 및 관리", "임원 인사", "차세대 리더 양성 및 관리"],
+      "인력운영": ["인력 운영 계획 수립 및 실적 관리", "인력 충원 및 효율화", "휴직/복직/퇴직 관리"],
+      "제도": ["승격", "평가", "연봉 산정", "시상/징계"],
+      "채용": ["외부 인력 발굴 및 채용", "우수 인력 선확보", "산학교류 및 참여연구원 관리"],
+      "교육": ["직급/직무별 특화 교육", "차세대 리더 육성", "AI/직무/리더십/어학 교육"],
+      "노사": ["대내외 동향 관리", "특이 인력 파악"],
+      "조직문화": ["캠퍼스 행사 운영", "일하는 문화 조성"],
+      "총무": ["의전", "레이아웃 관리", "사무환경/비품", "식당", "인허가", "차량 관리"],
+      "보안": ["보안 시스템 개선 및 관리", "보안 점검"],
+    };
 
-      const supportingIndicators = {
-        "조직/임원": ["임원 보고 필요 안건", "핵심 조직 영향도", "리더 후보군 영향"],
-        "인력운영": ["충원 계획 변동", "전배·퇴직 신호", "핵심 직무 공백"],
-        "제도": ["평가·승격 기준 영향", "보상 문의", "예외 승인 필요성"],
-        "채용": ["채용 소요기간", "제안 수락률", "후보자 유입 경로"],
-        "교육": ["교육 수요", "이수율", "전환 가능 인력"],
-        "노사": ["구성원 문의", "현장 VOC", "특이 인력 신호"],
-        "조직문화": ["몰입도 변화", "성장기회 체감", "협업 문화 이슈"],
-        "총무": ["좌석·비품 수요", "공간 지원 필요", "입사 운영 부하"],
-        "보안": ["접근권한 변경", "보안 교육 이수", "민감정보 취급 범위"],
-      };
+    function area(name, owner, score, confidence, summary, why, insight, stars, actions) {
+      return { name, owner, score, confidence, summary, why, insight, secondaryImpact: insight, stars, actions, scope: peopleScope[name] };
+    }
 
-      const supportingActions = {
-        "조직/임원": ["임원 보고 필요 여부를 판단한다.", "핵심 조직과 리더 후보군 영향을 점검한다.", "조직 구조 변경 가능성을 모니터링한다."],
-        "인력운영": ["충원 계획과 실제 배치 가능 인원을 비교한다.", "전배·퇴직 신호를 점검한다.", "핵심 직무 공백 가능성을 확인한다."],
-        "제도": ["평가·승격·보상 기준과 충돌하는 지점을 확인한다.", "예외 승인 기준 필요성을 검토한다.", "구성원 설명 가능성을 점검한다."],
-        "채용": ["경쟁사 채용 신호와 후보자 유입 변화를 확인한다.", "제안 수락률과 거절 사유를 점검한다.", "선확보 파이프라인 영향을 모니터링한다."],
-        "교육": ["직무별 교육 수요 변화를 확인한다.", "전환 교육 필요 인원을 산정한다.", "현업 멘토링 수용력을 점검한다."],
-        "노사": ["현장 문의와 VOC를 모니터링한다.", "구성원 커뮤니케이션 필요성을 판단한다.", "특이 인력 신호를 조기 파악한다."],
-        "조직문화": ["성장기회와 공정성 체감 변화를 확인한다.", "조직문화 메시지 보완 필요성을 검토한다.", "협업 방식 변화 신호를 관찰한다."],
-        "총무": ["공간·비품·좌석 수요 변화를 확인한다.", "입사·이동 운영 부하를 점검한다.", "근무환경 지원 필요성을 산정한다."],
-        "보안": ["접근권한 변경 필요성을 확인한다.", "민감정보 취급 범위를 점검한다.", "보안 교육과 점검 항목 보완 여부를 검토한다."],
-      };
+    const peopleAreaNames = Object.keys(peopleScope);
 
-      function supportingStars(score) {
-        if (score >= 68) return { "인력 재배치": 2, "운영비 영향": 2, "규제 리스크": 2, "실행 시급성": 3 };
-        return { "인력 재배치": 1, "운영비 영향": 1, "규제 리스크": 1, "실행 시급성": 2 };
-      }
+    const peopleOwners = {
+      "조직/임원": "조직/임원 담당",
+      "인력운영": "인력운영 담당",
+      "제도": "제도 담당",
+      "채용": "채용 담당",
+      "교육": "교육 담당",
+      "노사": "노사 담당",
+      "조직문화": "조직문화 담당",
+      "총무": "총무 담당",
+      "보안": "보안 담당",
+    };
 
-      function makeSupportingArea(scenario, name) {
-        const score = supportingScoresByScenario[scenario.id]?.[name] ?? 62;
-        return Object.assign(
-          area(
-            name,
-            peopleOwners[name],
-            score,
-            "Watch",
-            `${scenario.label} 이슈와의 직접 연관은 상대적으로 낮지만 ${peopleScope[name].join(", ")} 관점의 확인은 필요하다.`,
-            [
-              "상위 영향 영역은 아니지만 후속 실행 과정에서 업무 범위가 연결될 수 있다.",
-              "초기 판단 단계에서는 낮은 강도로 모니터링하고, 내부 지표 변화가 확인되면 우선순위를 올린다.",
-            ],
-            `${name} 영역은 이번 이슈의 보조 영향 영역으로 두고, 관련 내부 지표를 관찰하는 수준에서 관리한다.`,
-            supportingStars(score),
-            supportingActions[name],
-          ),
-          {
-            supporting: true,
-            directImpact: `${name} 영역의 직접 영향은 제한적이나 후속 점검 대상이다.`,
-            finalRisk: "현재는 낮은 우선순위이나, 내부 지표 변화가 있으면 검토 범위를 확대해야 한다.",
-            indicators: supportingIndicators[name],
-          },
-        );
-      }
+    const supportingScoresByScenario = {};
 
-      function completePeopleAreas(scenario) {
-        const existing = new Set(scenario.areas.map((item) => item.name));
-        peopleAreaNames.forEach((name) => {
-          if (!existing.has(name)) scenario.areas.push(makeSupportingArea(scenario, name));
-        });
-      }
+    const supportingIndicators = {
+      "조직/임원": ["임원 보고 필요 안건", "핵심 조직 영향도", "리더 후보군 영향"],
+      "인력운영": ["충원 계획 변동", "전배·퇴직 신호", "핵심 직무 공백"],
+      "제도": ["평가·승격 기준 영향", "보상 문의", "예외 승인 필요성"],
+      "채용": ["채용 소요기간", "제안 수락률", "후보자 유입 경로"],
+      "교육": ["교육 수요", "이수율", "전환 가능 인력"],
+      "노사": ["구성원 문의", "현장 VOC", "특이 인력 신호"],
+      "조직문화": ["몰입도 변화", "성장기회 체감", "협업 문화 이슈"],
+      "총무": ["좌석·비품 수요", "공간 지원 필요", "입사 운영 부하"],
+      "보안": ["접근권한 변경", "보안 교육 이수", "민감정보 취급 범위"],
+    };
 
-      // Daily report content generated for 2026-07-10. Replace this block on each run.
-      Object.assign(supportingScoresByScenario, {
-  "kr-samsung-nvidia-gwangju-fab-20260710": {
-    "조직/임원": 82,
-    "제도": 68,
-    "교육": 80,
-    "노사": 58,
-    "조직문화": 76,
-    "총무": 64
-  },
-  "kr-minimum-wage-gap-20260710": {
-    "조직/임원": 68,
-    "인력운영": 78,
-    "채용": 72,
-    "교육": 58,
-    "조직문화": 70,
-    "보안": 54
-  },
-  "global-ai-agent-engineering-20260710": {
-    "조직/임원": 76,
-    "인력운영": 80,
-    "채용": 66,
-    "노사": 58,
-    "조직문화": 78,
-    "총무": 54
-  }
-});
+    const supportingActions = {
+      "조직/임원": ["임원 보고 필요 여부를 판단한다.", "핵심 조직과 리더 후보군 영향을 점검한다.", "조직 구조 변경 가능성을 모니터링한다."],
+      "인력운영": ["충원 계획과 실제 배치 가능 인원을 비교한다.", "전배·퇴직 신호를 점검한다.", "핵심 직무 공백 가능성을 확인한다."],
+      "제도": ["평가·승격·보상 기준과 충돌하는 지점을 확인한다.", "예외 승인 기준 필요성을 검토한다.", "구성원 설명 가능성을 점검한다."],
+      "채용": ["경쟁사 채용 신호와 후보자 유입 변화를 확인한다.", "제안 수락률과 거절 사유를 점검한다.", "선확보 파이프라인 영향을 모니터링한다."],
+      "교육": ["직무별 교육 수요 변화를 확인한다.", "전환 교육 필요 인원을 산정한다.", "현업 멘토링 수용력을 점검한다."],
+      "노사": ["현장 문의와 VOC를 모니터링한다.", "구성원 커뮤니케이션 필요성을 판단한다.", "특이 인력 신호를 조기 파악한다."],
+      "조직문화": ["성장기회와 공정성 체감 변화를 확인한다.", "조직문화 메시지 보완 필요성을 검토한다.", "협업 방식 변화 신호를 관찰한다."],
+      "총무": ["공간·비품·좌석 수요 변화를 확인한다.", "입사·이동 운영 부하를 점검한다.", "근무환경 지원 필요성을 산정한다."],
+      "보안": ["접근권한 변경 필요성을 확인한다.", "민감정보 취급 범위를 점검한다.", "보안 교육과 점검 항목 보완 여부를 검토한다."],
+    };
 
-      const scenarios = [
-  {
-    "id": "kr-samsung-nvidia-gwangju-fab-20260710",
-    "label": "광주 팹 투자와 AI 인프라 인력",
-    "headline": "이재용, 이달 말 젠슨 황과 회동 추진… ‘광주 팹’ 투자 등 논의 전망",
-    "article": {
-      "title": "[단독]이재용, 이달 말 젠슨 황과 회동 추진… ‘광주 팹’ 투자 등 논의 전망",
-      "source": "동아일보",
-      "date": "2026-07-10",
-      "url": "https://www.donga.com/news/Economy/article/all/20260709/134270039/2"
-    },
-    "context": "기준 기사는 삼성과 엔비디아 협력, 광주 반도체 팹, AI 데이터센터 구축 논의가 맞물리는 산업 이슈다. 삼성디스플레이 People 관점에서는 반도체·AI 인프라 투자가 지역 인재 확보, 핵심 기술직 충원, 보안·협업 권한 관리, 임원 보고 이슈로 확산될 수 있다.",
-    "input": "광주 팹과 AI 데이터센터 논의는 단순 투자 뉴스가 아니라 지역 기술인재 확보와 핵심 직무 수요 변화 신호다. People 조직은 반도체·디스플레이·AI 인프라 직무의 채용 파이프라인, 전환교육, 핵심인재 리텐션, 대외 협업 보안 기준을 함께 봐야 한다.",
-    "sourceMix": [
-      "동아일보 기준 기사",
-      "기존 광주 반도체 팹 보도와 달리 엔비디아 회동·AI 데이터센터 협력 가능성이 새로 결합된 후속 이슈",
-      "Business Insider 엔비디아 AI 에이전트 기사",
-      "Future of Jobs Report 2025"
-    ],
-    "confidence": "High",
-    "decisionQuestion": "광주 팹·AI 인프라 투자 논의가 지역 인재 확보, 핵심 직무 충원, 보안 권한 기준에 반영되어 있는가?",
-    "peopleSignal": "대규모 반도체·AI 인프라 투자는 채용 규모보다 어느 지역에서 어떤 핵심 직무를 확보할지의 문제로 먼저 나타난다.",
-    "directFinding": "기준 기사는 삼성-엔비디아 협력 논의가 광주 팹과 AI 데이터센터 인력 수요로 이어질 수 있음을 보여준다.",
-    "researchJudgement": "기술 변화에 따른 직무 재편 흐름을 함께 보면, 투자 발표 이후 People 조직은 지역 인재 파이프라인과 보안형 협업 체계를 먼저 준비해야 한다.",
-    "metrics": [
-      [
-        "가장 큰 영향 영역",
-        "채용",
-        "반도체·AI 인프라 핵심 직무의 지역 후보자 풀과 선확보 채널을 점검해야 한다."
-      ],
-      [
-        "가장 시급한 리스크",
-        "보안",
-        "엔비디아 등 외부 협업 논의가 늘면 접근권한과 정보 공유 기준이 중요해진다."
-      ]
-    ],
-    "reportFlow": [
-      [
-        "기준 기사",
-        "삼성-엔비디아 회동과 광주 팹·AI 데이터센터 논의 전망"
-      ],
-      [
-        "직접 영향",
-        "반도체·AI 인프라 직무 수요와 외부 협업 보안 민감도 상승"
-      ],
-      [
-        "2차 영향",
-        "채용, 교육, 인력운영, 보안, 임원 보고 체계로 확산"
-      ],
-      [
-        "검토 필요 리스크",
-        "지역 인재 파이프라인과 보안 기준 없이 투자 논의만 앞서면 실행 병목 발생"
-      ],
-      [
-        "우선 검토",
-        "핵심 직무 목록, 지역 채용 채널, 협업 권한, 리텐션 신호를 점검"
-      ]
-    ],
-    "topRisks": [
-      [
-        "1",
-        "핵심 직무 후보자 풀 부족",
-        "광주 팹과 AI 인프라 투자 논의가 구체화되면 공정·설비·AI 인프라 인재 수요가 빠르게 커질 수 있다."
-      ],
-      [
-        "2",
-        "외부 협업 보안 공백",
-        "엔비디아 등 외부 파트너 협업이 늘면 고객사·기술 정보 접근권한 관리가 중요해진다."
-      ],
-      [
-        "3",
-        "지역 배치 수용성 리스크",
-        "지역 근무·전환배치가 필요해질 경우 주거, 이동, 가족 사정 등 구성원 수용성 이슈가 생길 수 있다."
-      ]
-    ],
-    "areas": [
-      {
-        "name": "채용",
-        "owner": "채용 담당",
-        "score": 94,
-        "confidence": "High",
-        "summary": "광주 팹·AI 인프라 관련 핵심 직무의 후보자 풀과 선확보 채널을 재점검해야 한다.",
-        "directImpact": "광주 팹·AI 인프라 관련 핵심 직무의 후보자 풀과 선확보 채널을 재점검해야 한다.",
-        "why": [
-          "기준 기사는 광주 팹과 AI 데이터센터가 투자 논의의 중심에 있음을 보여준다.",
-          "지역 기반 기술직 충원은 채용 리드타임과 후보자 수락률에 큰 영향을 받는다."
-        ],
-        "insight": "채용은 공정·설비·AI 인프라 직무를 나눠 지역 대학, 경력직, 산학 채널을 동시에 관리해야 한다.",
-        "secondaryImpact": "채용은 공정·설비·AI 인프라 직무를 나눠 지역 대학, 경력직, 산학 채널을 동시에 관리해야 한다.",
-        "finalRisk": "채용은 공정·설비·AI 인프라 직무를 나눠 지역 대학, 경력직, 산학 채널을 동시에 관리해야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
+    function supportingStars(score) {
+      if (score >= 68) return { "인력 재배치": 2, "운영비 영향": 2, "규제 리스크": 2, "실행 시급성": 3 };
+      return { "인력 재배치": 1, "운영비 영향": 1, "규제 리스크": 1, "실행 시급성": 2 };
+    }
+
+    function makeSupportingArea(scenario, name) {
+      const score = supportingScoresByScenario[scenario.id]?.[name] ?? 62;
+      return Object.assign(
+        area(
+          name,
+          peopleOwners[name],
+          score,
+          "Watch",
+          `${scenario.label} 이슈와의 직접 연관은 상대적으로 낮지만 ${peopleScope[name].join(", ")} 관점의 확인은 필요하다.`,
+          [
+            "상위 영향 영역은 아니지만 후속 실행 과정에서 업무 범위가 연결될 수 있다.",
+            "초기 판단 단계에서는 낮은 강도로 모니터링하고, 내부 지표 변화가 확인되면 우선순위를 올린다.",
+          ],
+          `${name} 영역은 이번 이슈의 보조 영향 영역으로 두고, 관련 내부 지표를 관찰하는 수준에서 관리한다.`,
+          supportingStars(score),
+          supportingActions[name],
+        ),
+        {
+          supporting: true,
+          directImpact: `${name} 영역의 직접 영향은 제한적이나 후속 점검 대상이다.`,
+          finalRisk: "현재는 낮은 우선순위이나, 내부 지표 변화가 있으면 검토 범위를 확대해야 한다.",
+          indicators: supportingIndicators[name],
         },
-        "actions": [
-          "광주·호남권 및 수도권 핵심 직무 후보자 풀을 분리해 작성한다.",
-          "공정·설비·AI 인프라 직무별 제안 수락률과 거절 사유를 추적한다.",
-          "산학교류·참여연구원 전환율을 지역 인재 확보 지표로 관리한다."
-        ],
-        "scope": [
-          "외부 인력 발굴 및 채용",
-          "우수 인력 선확보",
-          "산학교류 및 참여연구원 관리"
-        ],
-        "indicators": [
-          "핵심 직무 후보자 수",
-          "제안 수락률",
-          "지역별 채용 리드타임"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "광주 팹·AI 인프라 관련 핵심 직무의 후보자 풀과 선확보 채널을 재점검해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "채용은 공정·설비·AI 인프라 직무를 나눠 지역 대학, 경력직, 산학 채널을 동시에 관리해야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "광주·호남권 및 수도권 핵심 직무 후보자 풀을 분리해 작성한다."
-          }
-        ]
-      },
-      {
-        "name": "인력운영",
-        "owner": "인력운영 담당",
-        "score": 88,
-        "confidence": "High",
-        "summary": "대규모 투자 논의에 맞춰 지역 배치와 전환 가능 인력을 함께 산정해야 한다.",
-        "directImpact": "대규모 투자 논의에 맞춰 지역 배치와 전환 가능 인력을 함께 산정해야 한다.",
-        "why": [
-          "투자 논의가 구체화되면 신규 충원만으로는 초기 실행 인력을 채우기 어렵다.",
-          "기존 핵심 인력의 전환배치와 프로젝트 지원 수요가 동시에 발생할 수 있다."
-        ],
-        "insight": "인력운영은 신규 채용, 내부 전환, 단기 프로젝트 파견을 같은 수급표에서 관리해야 한다.",
-        "secondaryImpact": "인력운영은 신규 채용, 내부 전환, 단기 프로젝트 파견을 같은 수급표에서 관리해야 한다.",
-        "finalRisk": "인력운영은 신규 채용, 내부 전환, 단기 프로젝트 파견을 같은 수급표에서 관리해야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
-        },
-        "actions": [
-          "광주 팹·AI 인프라 관련 내부 전환 가능 직무를 표시한다.",
-          "지역 배치 필요 인원과 전환배치 수용성 조사를 분리한다.",
-          "초기 프로젝트 파견 인력의 복귀·보상 원칙을 정리한다."
-        ],
-        "scope": [
-          "인력 운영 계획 수립 및 실적 관리",
-          "인력 충원 및 효율화",
-          "휴직/복직/퇴직 관리"
-        ],
-        "indicators": [
-          "전환 가능 인력 수",
-          "지역 배치 수용성",
-          "프로젝트 파견 기간"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "대규모 투자 논의에 맞춰 지역 배치와 전환 가능 인력을 함께 산정해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "인력운영은 신규 채용, 내부 전환, 단기 프로젝트 파견을 같은 수급표에서 관리해야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "광주 팹·AI 인프라 관련 내부 전환 가능 직무를 표시한다."
-          }
-        ]
-      },
-      {
-        "name": "보안",
-        "owner": "보안 담당",
-        "score": 86,
-        "confidence": "High",
-        "summary": "외부 파트너 협업과 차세대 인프라 논의의 접근권한 기준을 점검해야 한다.",
-        "directImpact": "외부 파트너 협업과 차세대 인프라 논의의 접근권한 기준을 점검해야 한다.",
-        "why": [
-          "엔비디아 등 외부 파트너와의 협력 논의는 기술·고객 정보 민감도를 높인다.",
-          "투자 초기에는 협의 참여자가 늘면서 권한 회수와 자료 공유 기준이 느슨해지기 쉽다."
-        ],
-        "insight": "보안은 협업 참여자, 자료 등급, 외부 공유 승인, 회의록 보관 기준을 사전에 정리해야 한다.",
-        "secondaryImpact": "보안은 협업 참여자, 자료 등급, 외부 공유 승인, 회의록 보관 기준을 사전에 정리해야 한다.",
-        "finalRisk": "보안은 협업 참여자, 자료 등급, 외부 공유 승인, 회의록 보관 기준을 사전에 정리해야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
-        },
-        "actions": [
-          "외부 파트너 협업 참여자의 접근권한 목록을 갱신한다.",
-          "AI 데이터센터·팹 투자 관련 자료의 등급과 공유 가능 범위를 정의한다.",
-          "회의·자료 공유 후 권한 회수 로그를 점검한다."
-        ],
-        "scope": [
-          "보안 시스템 개선 및 관리",
-          "보안 점검"
-        ],
-        "indicators": [
-          "협업 권한 보유자 수",
-          "외부 공유 승인 건수",
-          "권한 회수 지연 건수"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "외부 파트너 협업과 차세대 인프라 논의의 접근권한 기준을 점검해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "보안은 협업 참여자, 자료 등급, 외부 공유 승인, 회의록 보관 기준을 사전에 정리해야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "외부 파트너 협업 참여자의 접근권한 목록을 갱신한다."
-          }
-        ]
-      }
-    ],
-    "evidence": [
-      {
-        "type": "기준 기사",
-        "title": "[단독]이재용, 이달 말 젠슨 황과 회동 추진… ‘광주 팹’ 투자 등 논의 전망",
-        "source": "동아일보",
-        "date": "2026-07-10",
-        "url": "https://www.donga.com/news/Economy/article/all/20260709/134270039/2",
-        "summary": "요약: 삼성-엔비디아 회동과 광주 팹·AI 데이터센터 논의 가능성을 보도한 기준 기사다.",
-        "impactLink": "판단 연결: 핵심 직무 채용, 지역 배치, 외부 협업 보안 점검의 직접 근거다."
-      },
-      {
-        "type": "연구 보고서",
-        "title": "Future of Jobs Report 2025",
-        "source": "World Economic Forum",
-        "date": "2025-01-07",
-        "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/",
-        "summary": "요약: 기술 변화가 직무 수요와 재교육 우선순위를 바꾸는 흐름을 정리한 보고서다.",
-        "impactLink": "판단 연결: 반도체·AI 인프라 투자도 직무 전환과 교육 수요로 이어진다."
-      },
-      {
-        "type": "해외 보완 기사",
-        "title": "Jensen Huang says his software engineers prefer building agents to writing code",
-        "source": "Business Insider",
-        "date": "2026-07-09",
-        "url": "https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7",
-        "summary": "요약: 엔비디아 내부에서 엔지니어 업무가 코드 작성보다 AI 에이전트 구축으로 옮겨가는 흐름을 다룬 기사다.",
-        "impactLink": "판단 연결: AI 인프라 투자와 핵심 기술직 직무 재설계를 함께 봐야 한다는 보완 근거다."
-      },
-      {
-        "type": "확인 필요",
-        "title": "광주 팹·AI 인프라 관련 내부 직무 수급표",
-        "source": "내부 점검 필요",
-        "date": "2026-07-10",
-        "url": "",
-        "summary": "요약: 실제 영향은 내부 직무 목록, 후보자 풀, 전환배치 가능 인력으로 검증해야 한다.",
-        "impactLink": "판단 연결: 최종 우선순위는 내부 수급 데이터로 확정한다."
-      }
-    ],
-    "cases": [
-      {
-        "title": "삼성-엔비디아 광주 팹 협력 논의",
-        "type": "확인된 유사 사례",
-        "org": "동아일보",
-        "why": "투자 논의가 AI 인프라와 핵심 직무 수요로 연결되는 사례다.",
-        "peopleInsight": "지역 인재 확보와 외부 협업 보안을 함께 설계해야 한다.",
-        "peopleFunction": "채용, 보안",
-        "actionLink": "핵심 직무 후보자 풀과 협업 권한 목록 점검",
-        "url": "https://www.donga.com/news/Economy/article/all/20260709/134270039/2",
-        "priority": true
-      },
-      {
-        "title": "Future of Jobs Report 2025",
-        "type": "연구 보고서 사례",
-        "org": "World Economic Forum",
-        "why": "기술 변화가 직무 수요와 재교육 우선순위를 바꾸는 큰 흐름을 제공한다.",
-        "peopleInsight": "투자 이슈는 직무 전환 교육과 연결해 봐야 한다.",
-        "peopleFunction": "교육, 인력운영",
-        "actionLink": "AI 인프라 직무 교육 로드맵 작성",
-        "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/",
-        "priority": true
-      },
-      {
-        "title": "엔비디아 엔지니어의 AI 에이전트 구축 전환",
-        "type": "해외 AI 인재 사례",
-        "org": "Business Insider",
-        "why": "AI 인프라 경쟁이 개발 직무 자체를 에이전트 설계와 검증 중심으로 바꾸는 사례다.",
-        "peopleInsight": "AI 인프라 투자는 채용뿐 아니라 기존 기술직의 역할 재정의와 교육으로 연결해야 한다.",
-        "peopleFunction": "교육, 채용",
-        "actionLink": "AI 인프라 직무 교육 로드맵 작성",
-        "url": "https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7"
-      },
-      {
-        "title": "내부 지역 배치 수용성 점검",
-        "type": "추가 확인 필요 사례",
-        "org": "내부 인력운영 데이터 확인 필요",
-        "why": "광주 팹 영향은 실제 배치 가능 인력과 후보자 풀에 따라 달라진다.",
-        "peopleInsight": "지역 배치 수용성과 백업 인력 계획을 사전에 봐야 한다.",
-        "peopleFunction": "인력운영, 조직문화",
-        "actionLink": "지역 배치 수용성 조사",
-        "url": ""
-      }
-    ]
-  },
-  {
-    "id": "kr-minimum-wage-gap-20260710",
-    "label": "최저임금 격차 축소와 보상 하단",
-    "headline": "勞 1만1220원 vs 使 1만530원… 최저임금 격차 690원으로 좁혀",
-    "article": {
-      "title": "勞 1만1220원 vs 使 1만530원… 최저임금 격차 690원으로 좁혀",
-      "source": "동아일보",
-      "date": "2026-07-10",
-      "url": "https://www.donga.com/news/Society/article/all/20260710/134270941/2"
-    },
-    "context": "기준 기사는 최저임금 논의가 노사 간 격차 축소 단계로 이동했다는 정책·보상 이슈다. 기존 7월 1일 최저임금 수정안 보도와 달리 이번에는 격차가 690원까지 좁혀진 협상 진전이라는 점에서 보상 하단과 협력사 비용 점검의 시급성이 커졌다.",
-    "input": "최저임금 협상이 좁혀지면 확정 전이라도 보상 하단, 수당 산식, 협력사 계약, 현장 문의 대응을 준비해야 한다. 특히 제조·시설·보안·식당 등 협력사 의존 업무는 원가와 현장 커뮤니케이션이 동시에 영향을 받을 수 있다.",
-    "sourceMix": [
-      "동아일보 기준 기사",
-      "기존 7월 1일 리포트와 차별점: 협상 격차 축소로 확정 가능성에 더 가까워짐",
-      "동아일보 원청교섭 압박 기사"
-    ],
-    "confidence": "High",
-    "decisionQuestion": "최저임금 조정 가능성이 내부 보상 하단, 수당 산식, 협력사 계약 단가에 미치는 영향을 계산했는가?",
-    "peopleSignal": "협상 격차가 줄어들수록 확정 전 문의와 비용 시뮬레이션 필요성이 커진다.",
-    "directFinding": "기준 기사는 최저임금 논의가 노사 제시안 격차 축소 단계로 진입해 보상·노사 준비 필요성이 높아졌음을 보여준다.",
-    "researchJudgement": "원청교섭 압박 기사와 함께 보면, 최저임금 이슈는 직접 고용 보상뿐 아니라 협력사 계약·현장 운영·노사 커뮤니케이션으로 확산될 수 있다.",
-    "metrics": [
-      [
-        "가장 큰 영향 영역",
-        "제도",
-        "보상 하단과 수당 산식의 시나리오별 영향 계산이 필요하다."
-      ],
-      [
-        "가장 시급한 리스크",
-        "노사",
-        "확정 전 문의와 협력사 비용 전가 가능성에 대한 답변 기준이 필요하다."
-      ]
-    ],
-    "reportFlow": [
-      [
-        "기준 기사",
-        "최저임금 노사 제시안 격차가 690원으로 축소"
-      ],
-      [
-        "직접 영향",
-        "보상 하단, 수당 산식, 협력사 단가 영향 계산 필요"
-      ],
-      [
-        "2차 영향",
-        "노사 FAQ, 총무·보안·식당 운영비, 채용 조건으로 확산"
-      ],
-      [
-        "검토 필요 리스크",
-        "확정 전 설명 공백이 보상 불만과 협력사 비용 이슈로 번질 수 있음"
-      ],
-      [
-        "우선 검토",
-        "영향 직군, 협력사 계약, 수당 산식, 예상 문의를 정리"
-      ]
-    ],
-    "topRisks": [
-      [
-        "1",
-        "보상 하단 재산정 리스크",
-        "최저임금이 조정되면 시급·월급 하단과 수당 기준을 다시 계산해야 한다."
-      ],
-      [
-        "2",
-        "협력사 단가 전가 리스크",
-        "시설·보안·식당 등 협력사 계약의 인건비 연동 조항이 비용 압박으로 이어질 수 있다."
-      ],
-      [
-        "3",
-        "현장 문의 증가",
-        "확정 전에도 구성원과 협력사 문의가 늘 수 있어 답변 기준이 필요하다."
-      ]
-    ],
-    "areas": [
-      {
-        "name": "제도",
-        "owner": "제도 담당",
-        "score": 94,
-        "confidence": "High",
-        "summary": "최저임금 조정 시나리오별 보상 하단과 수당 산식을 재점검해야 한다.",
-        "directImpact": "최저임금 조정 시나리오별 보상 하단과 수당 산식을 재점검해야 한다.",
-        "why": [
-          "협상 격차 축소는 확정 가능성이 높아지는 신호다.",
-          "보상 하단과 수당 산식은 확정 후가 아니라 사전 시뮬레이션이 필요하다."
-        ],
-        "insight": "제도는 영향 직군, 수당 항목, 계약 형태별 계산 기준을 미리 정리해야 한다.",
-        "secondaryImpact": "제도는 영향 직군, 수당 항목, 계약 형태별 계산 기준을 미리 정리해야 한다.",
-        "finalRisk": "제도는 영향 직군, 수당 항목, 계약 형태별 계산 기준을 미리 정리해야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
-        },
-        "actions": [
-          "최저임금 시나리오별 보상 하단 영향 직군을 목록화한다.",
-          "수당·상여·포괄임금 산식과 충돌하는 지점을 점검한다.",
-          "확정 후 공지 문구와 예외 처리 기준을 미리 작성한다."
-        ],
-        "scope": [
-          "승격",
-          "평가",
-          "연봉 산정",
-          "시상/징계"
-        ],
-        "indicators": [
-          "최저임금 영향 직군 수",
-          "수당 산식 변경 대상",
-          "보상 문의 건수"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "최저임금 조정 시나리오별 보상 하단과 수당 산식을 재점검해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "제도는 영향 직군, 수당 항목, 계약 형태별 계산 기준을 미리 정리해야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "최저임금 시나리오별 보상 하단 영향 직군을 목록화한다."
-          }
-        ]
-      },
-      {
-        "name": "노사",
-        "owner": "노사 담당",
-        "score": 90,
-        "confidence": "High",
-        "summary": "최저임금 확정 전후 예상 문의와 협력사 쟁점을 선제 정리해야 한다.",
-        "directImpact": "최저임금 확정 전후 예상 문의와 협력사 쟁점을 선제 정리해야 한다.",
-        "why": [
-          "최저임금은 구성원과 협력사 모두가 민감하게 보는 보상 이슈다.",
-          "협상 단계에서도 문의가 늘면 HR 답변 일관성이 중요해진다."
-        ],
-        "insight": "노사는 적용 시점, 영향 범위, 협력사 문의 대응 원칙을 FAQ로 준비해야 한다.",
-        "secondaryImpact": "노사는 적용 시점, 영향 범위, 협력사 문의 대응 원칙을 FAQ로 준비해야 한다.",
-        "finalRisk": "노사는 적용 시점, 영향 범위, 협력사 문의 대응 원칙을 FAQ로 준비해야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
-        },
-        "actions": [
-          "구성원·협력사 예상 질문과 답변 기준을 분리한다.",
-          "보상 하단과 수당 적용 원칙을 관리자에게 먼저 안내한다.",
-          "노사 채널의 최저임금·보상 키워드를 주간으로 모니터링한다."
-        ],
-        "scope": [
-          "대내외 동향 관리",
-          "특이 인력 파악"
-        ],
-        "indicators": [
-          "노사 VOC",
-          "FAQ 처리 리드타임",
-          "협력사 문의 건수"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "최저임금 확정 전후 예상 문의와 협력사 쟁점을 선제 정리해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "노사는 적용 시점, 영향 범위, 협력사 문의 대응 원칙을 FAQ로 준비해야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "구성원·협력사 예상 질문과 답변 기준을 분리한다."
-          }
-        ]
-      },
-      {
-        "name": "총무",
-        "owner": "총무 담당",
-        "score": 84,
-        "confidence": "Medium",
-        "summary": "협력사 인건비 연동 계약과 현장 서비스 비용 영향을 점검해야 한다.",
-        "directImpact": "협력사 인건비 연동 계약과 현장 서비스 비용 영향을 점검해야 한다.",
-        "why": [
-          "식당, 보안, 시설, 차량 등 총무 영역은 협력사 인건비 영향을 받을 수 있다.",
-          "단가 조정 기준이 불명확하면 서비스 품질과 민원 리스크가 생긴다."
-        ],
-        "insight": "총무는 협력사별 계약 조항과 단가 산식을 확인해 비용·서비스 영향도를 미리 봐야 한다.",
-        "secondaryImpact": "총무는 협력사별 계약 조항과 단가 산식을 확인해 비용·서비스 영향도를 미리 봐야 한다.",
-        "finalRisk": "총무는 협력사별 계약 조항과 단가 산식을 확인해 비용·서비스 영향도를 미리 봐야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
-        },
-        "actions": [
-          "최저임금 연동 협력사 계약 목록을 작성한다.",
-          "식당·보안·시설·차량 운영 단가 조정 가능성을 계산한다.",
-          "서비스 품질 저하 또는 민원 발생 가능성을 모니터링한다."
-        ],
-        "scope": [
-          "의전",
-          "레이아웃 관리",
-          "사무환경/비품",
-          "식당",
-          "인허가",
-          "차량 관리"
-        ],
-        "indicators": [
-          "최저임금 연동 계약 수",
-          "협력사 단가 조정 요청",
-          "현장 서비스 민원"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "협력사 인건비 연동 계약과 현장 서비스 비용 영향을 점검해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "총무는 협력사별 계약 조항과 단가 산식을 확인해 비용·서비스 영향도를 미리 봐야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "최저임금 연동 협력사 계약 목록을 작성한다."
-          }
-        ]
-      }
-    ],
-    "evidence": [
-      {
-        "type": "기준 기사",
-        "title": "勞 1만1220원 vs 使 1만530원… 최저임금 격차 690원으로 좁혀",
-        "source": "동아일보",
-        "date": "2026-07-10",
-        "url": "https://www.donga.com/news/Society/article/all/20260710/134270941/2",
-        "summary": "요약: 최저임금 노사 제시안 격차가 줄어든 협상 진전 기사다.",
-        "impactLink": "판단 연결: 보상 하단과 수당 산식 사전 계산 필요성을 보여준다."
-      },
-      {
-        "type": "관련 기사",
-        "title": "400곳 원청교섭 압박 나선 민노총 “15일 총파업”",
-        "source": "동아일보",
-        "date": "2026-07-10",
-        "url": "https://www.donga.com/news/Society/article/all/20260709/134263189/2",
-        "summary": "요약: 원청교섭 압박과 총파업 예고로 현장 노사 리스크가 커지는 흐름을 보여준다.",
-        "impactLink": "판단 연결: 보상·협력사 이슈가 노사 대응과 연결될 수 있음을 보완한다."
-      },
-      {
-        "type": "관련 기사",
-        "title": "[단독]이재용, 이달 말 젠슨 황과 회동 추진",
-        "source": "동아일보",
-        "date": "2026-07-10",
-        "url": "https://www.donga.com/news/Economy/article/all/20260709/134270039/2",
-        "summary": "요약: 대규모 투자와 지역 인력 수요를 시사하는 산업 기사다.",
-        "impactLink": "판단 연결: 인건비와 채용 경쟁력이 동시에 People 이슈가 될 수 있다."
-      },
-      {
-        "type": "확인 필요",
-        "title": "최저임금 연동 직군·협력사 계약 목록",
-        "source": "내부 점검 필요",
-        "date": "2026-07-10",
-        "url": "",
-        "summary": "요약: 실제 영향은 내부 보상 산식과 협력사 계약 조항으로 검증해야 한다.",
-        "impactLink": "판단 연결: 비용 영향은 내부 계약과 급여 데이터로 확정한다."
-      }
-    ],
-    "cases": [
-      {
-        "title": "최저임금 노사 격차 축소",
-        "type": "정책·제도 변화 대응 사례",
-        "org": "동아일보",
-        "why": "최저임금 확정 가능성에 더 가까워진 협상 단계다.",
-        "peopleInsight": "보상 하단과 수당 산식을 사전 계산해야 한다.",
-        "peopleFunction": "제도, 노사",
-        "actionLink": "보상 하단 시나리오별 계산",
-        "url": "https://www.donga.com/news/Society/article/all/20260710/134270941/2",
-        "priority": true
-      },
-      {
-        "title": "원청교섭 압박과 총파업 예고",
-        "type": "비교 참고 사례",
-        "org": "동아일보",
-        "why": "보상·노동 이슈가 원청과 협력사 관계로 확산되는 흐름이다.",
-        "peopleInsight": "협력사 문의와 현장 운영 영향을 같이 봐야 한다.",
-        "peopleFunction": "노사, 총무",
-        "actionLink": "협력사 계약과 FAQ 점검",
-        "url": "https://www.donga.com/news/Society/article/all/20260709/134263189/2",
-        "priority": true
-      },
-      {
-        "title": "광주 팹 투자 논의",
-        "type": "산업 비교 사례",
-        "org": "동아일보",
-        "why": "대규모 투자와 채용경쟁력 이슈가 동시에 발생할 수 있다.",
-        "peopleInsight": "보상 하단 변화는 지역 채용 경쟁력과도 연결된다.",
-        "peopleFunction": "채용, 제도",
-        "actionLink": "지역 채용 조건과 보상 하단 비교",
-        "url": "https://www.donga.com/news/Economy/article/all/20260709/134270039/2"
-      },
-      {
-        "title": "내부 협력사 단가 점검",
-        "type": "추가 확인 필요 사례",
-        "org": "내부 계약 데이터 확인 필요",
-        "why": "최저임금 영향은 협력사 계약 구조에 따라 달라진다.",
-        "peopleInsight": "총무·보안·식당 운영비를 HR 리스크로 같이 봐야 한다.",
-        "peopleFunction": "총무, 노사",
-        "actionLink": "최저임금 연동 계약과 단가 산식 점검",
-        "url": ""
-      }
-    ]
-  },
-  {
-    "id": "global-ai-agent-engineering-20260710",
-    "label": "AI 에이전트 구축과 엔지니어 역할 재설계",
-    "headline": "엔비디아 엔지니어가 코드 작성보다 AI 에이전트 구축을 선호한다는 젠슨 황 발언",
-    "article": {
-      "title": "Jensen Huang says his software engineers prefer building agents to writing code",
-      "source": "Business Insider",
-      "date": "2026-07-09",
-      "url": "https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7"
-    },
-    "context": "기준 기사는 젠슨 황이 엔비디아 소프트웨어 엔지니어들이 코드 작성보다 AI 에이전트 구축을 더 선호한다고 언급한 해외 AI 인재 이슈다. 국내 People 관점에서는 AI 도구 도입을 단순 생산성 캠페인이 아니라 직무 재설계, 관리자 코칭, 검증 책임, 보안 기준으로 연결해 봐야 한다.",
-    "input": "AI 에이전트가 개발·분석·문서 업무에 들어오면 현업의 역할은 직접 작성에서 설계, 검증, 예외 처리, 책임 판단으로 이동한다. People 조직은 직무기술서, 교육 과정, 성과 기준, 보안 가이드를 이 변화에 맞게 업데이트해야 한다.",
-    "sourceMix": [
-      "Business Insider 기준 기사",
-      "Glean State of AI at Work",
-      "Future of Jobs Report 2025"
-    ],
-    "confidence": "Medium",
-    "decisionQuestion": "AI 에이전트 확산으로 직무별 역할, 교육, 성과 기준, 보안 책임을 다시 정의할 준비가 되어 있는가?",
-    "peopleSignal": "AI 활용률보다 중요한 것은 어떤 업무가 에이전트 설계·감독·검증 업무로 바뀌는지다.",
-    "directFinding": "기준 기사는 AI 선도 기업 내부에서도 엔지니어 역할이 코드 작성에서 에이전트 구축과 오케스트레이션으로 이동하고 있음을 보여준다.",
-    "researchJudgement": "AI 업무 보고서와 직무 변화 보고서를 함께 보면, AI 에이전트 확산은 툴 도입보다 직무 재정의와 관리자 교육의 문제로 다뤄야 한다.",
-    "metrics": [
-      [
-        "가장 큰 영향 영역",
-        "교육",
-        "AI 에이전트 사용·검증·중단 기준 교육을 앞당겨야 한다."
-      ],
-      [
-        "가장 시급한 리스크",
-        "보안",
-        "저가 AI 도구 확산이 비승인 사용과 민감 데이터 입력으로 이어질 수 있다."
-      ]
-    ],
-    "reportFlow": [
-      [
-        "기준 기사",
-        "엔비디아 엔지니어 업무가 AI 에이전트 구축 중심으로 이동"
-      ],
-      [
-        "직접 영향",
-        "개발·분석·기획 직무의 역할 기준과 교육 수요 변화"
-      ],
-      [
-        "2차 영향",
-        "교육, 제도, 보안, 조직문화, 인력운영 지표로 확산"
-      ],
-      [
-        "검토 필요 리스크",
-        "검증 책임과 보안 기준 없이 AI 에이전트가 확산되면 품질·책임 공백 발생"
-      ],
-      [
-        "우선 검토",
-        "직무별 AI 역할 정의, 승인 도구, 검증 교육, 관리자 코칭 기준 점검"
-      ]
-    ],
-    "topRisks": [
-      [
-        "1",
-        "직무 역할 정의 지연",
-        "AI 에이전트가 들어오면 작성 업무보다 설계·검증·예외 처리 비중이 커지는데 직무기술서가 이를 따라가지 못할 수 있다."
-      ],
-      [
-        "2",
-        "검증 책임 공백",
-        "AI 결과물을 누가 최종 검토하고 책임지는지 불명확하면 품질 문제와 재작업이 늘어난다."
-      ],
-      [
-        "3",
-        "관리자 코칭 기준 부족",
-        "관리자가 AI 기반 업무 배분과 성과 판단 기준을 모르면 팀별 편차가 커질 수 있다."
-      ]
-    ],
-    "areas": [
-      {
-        "name": "교육",
-        "owner": "교육 담당",
-        "score": 92,
-        "confidence": "High",
-        "summary": "AI 에이전트 설계, 감독, 검증 역량을 직무 교육에 반영해야 한다.",
-        "directImpact": "AI 에이전트 설계, 감독, 검증 역량을 직무 교육에 반영해야 한다.",
-        "why": [
-          "기준 기사는 엔지니어 역할이 코드 작성에서 에이전트 구축으로 이동하고 있음을 보여준다.",
-          "교육이 프롬프트 작성에만 머물면 검증 책임과 업무 재설계를 다루지 못한다."
-        ],
-        "insight": "교육은 어떤 업무에 AI를 쓰고, 어떤 결과를 사람이 검증하며, 언제 사용을 중단할지까지 포함해야 한다.",
-        "secondaryImpact": "교육은 어떤 업무에 AI를 쓰고, 어떤 결과를 사람이 검증하며, 언제 사용을 중단할지까지 포함해야 한다.",
-        "finalRisk": "교육은 어떤 업무에 AI를 쓰고, 어떤 결과를 사람이 검증하며, 언제 사용을 중단할지까지 포함해야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
-        },
-        "actions": [
-          "직무별 AI 에이전트 사용 가능 업무와 금지 업무를 구분한다.",
-          "AI 산출물 검증 체크리스트와 오류 보고 양식을 만든다.",
-          "관리자 교육에 AI 사용 후 업무 재배분과 성과 판단 기준을 넣는다."
-        ],
-        "scope": [
-          "직급/직무별 특화 교육",
-          "차세대 리더 육성",
-          "AI/직무/리더십/어학 교육"
-        ],
-        "indicators": [
-          "AI 교육 이수율",
-          "AI 오류 보고 건수",
-          "AI 사용 후 재작업 시간"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "AI 에이전트 설계, 감독, 검증 역량을 직무 교육에 반영해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "교육은 어떤 업무에 AI를 쓰고, 어떤 결과를 사람이 검증하며, 언제 사용을 중단할지까지 포함해야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "직무별 AI 에이전트 사용 가능 업무와 금지 업무를 구분한다."
-          }
-        ]
-      },
-      {
-        "name": "제도",
-        "owner": "제도 담당",
-        "score": 86,
-        "confidence": "High",
-        "summary": "AI 에이전트 활용 성과를 사용량이 아니라 품질, 리드타임, 재작업 감소로 측정해야 한다.",
-        "directImpact": "AI 에이전트 활용 성과를 사용량이 아니라 품질, 리드타임, 재작업 감소로 측정해야 한다.",
-        "why": [
-          "AI 사용 증가가 곧 성과 개선을 뜻하지 않는다.",
-          "검증 시간과 오류 재작업을 빼면 실제 생산성 개선 폭이 달라질 수 있다."
-        ],
-        "insight": "제도는 AI 활용 KPI를 사용 횟수보다 결과 품질과 업무 리드타임 중심으로 정의해야 한다.",
-        "secondaryImpact": "제도는 AI 활용 KPI를 사용 횟수보다 결과 품질과 업무 리드타임 중심으로 정의해야 한다.",
-        "finalRisk": "제도는 AI 활용 KPI를 사용 횟수보다 결과 품질과 업무 리드타임 중심으로 정의해야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
-        },
-        "actions": [
-          "AI 활용 KPI를 품질, 리드타임, 재작업 감소 기준으로 정의한다.",
-          "AI 산출물 책임 기준을 평가 안내에 반영한다.",
-          "부서별 AI 사용 비용과 업무성과를 함께 비교한다."
-        ],
-        "scope": [
-          "승격",
-          "평가",
-          "연봉 산정",
-          "시상/징계"
-        ],
-        "indicators": [
-          "AI 적용 업무 리드타임",
-          "재작업 감소율",
-          "AI 사용 비용"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "AI 에이전트 활용 성과를 사용량이 아니라 품질, 리드타임, 재작업 감소로 측정해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "제도는 AI 활용 KPI를 사용 횟수보다 결과 품질과 업무 리드타임 중심으로 정의해야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "AI 활용 KPI를 품질, 리드타임, 재작업 감소 기준으로 정의한다."
-          }
-        ]
-      },
-      {
-        "name": "보안",
-        "owner": "보안 담당",
-        "score": 84,
-        "confidence": "Medium",
-        "summary": "AI 에이전트가 내부 자료와 외부 도구를 연결할 때 데이터 입력과 권한 기준을 명확히 해야 한다.",
-        "directImpact": "AI 에이전트가 내부 자료와 외부 도구를 연결할 때 데이터 입력과 권한 기준을 명확히 해야 한다.",
-        "why": [
-          "AI 에이전트는 업무 맥락과 자료를 지속적으로 입력받기 때문에 보안 리스크가 커질 수 있다.",
-          "직무 재설계가 진행될수록 내부 시스템 권한과 API 연동 관리가 중요해진다."
-        ],
-        "insight": "보안은 승인 도구 목록, 입력 금지 데이터, 외부 연동 권한을 직무별로 제시해야 한다.",
-        "secondaryImpact": "보안은 승인 도구 목록, 입력 금지 데이터, 외부 연동 권한을 직무별로 제시해야 한다.",
-        "finalRisk": "보안은 승인 도구 목록, 입력 금지 데이터, 외부 연동 권한을 직무별로 제시해야 한다.",
-        "stars": {
-          "인력 재배치": 4,
-          "운영비 영향": 3,
-          "규제 리스크": 4,
-          "실행 시급성": 5
-        },
-        "actions": [
-          "승인 AI 도구와 비승인 도구 기준을 정리한다.",
-          "AI 에이전트 입력 가능 데이터 등급과 금지 정보를 공지한다.",
-          "외부 자동화 연동 권한과 API 사용 로그를 점검한다."
-        ],
-        "scope": [
-          "보안 시스템 개선 및 관리",
-          "보안 점검"
-        ],
-        "indicators": [
-          "비승인 AI 도구 탐지 건수",
-          "AI 데이터 입력 위반",
-          "외부 연동 권한 보유자 수"
-        ],
-        "impactPath": [
-          {
-            "stage": "기준 기사",
-            "text": "기준 자료 확인"
-          },
-          {
-            "stage": "직접 영향",
-            "text": "AI 에이전트가 내부 자료와 외부 도구를 연결할 때 데이터 입력과 권한 기준을 명확히 해야 한다."
-          },
-          {
-            "stage": "2차 영향",
-            "text": "보안은 승인 도구 목록, 입력 금지 데이터, 외부 연동 권한을 직무별로 제시해야 한다."
-          },
-          {
-            "stage": "검토 필요 리스크",
-            "text": "내부 지표로 영향 범위 검증 필요"
-          },
-          {
-            "stage": "우선 검토",
-            "text": "승인 AI 도구와 비승인 도구 기준을 정리한다."
-          }
-        ]
-      }
-    ],
-    "evidence": [
-      {
-        "type": "기준 기사",
-        "title": "Jensen Huang says his software engineers prefer building agents to writing code",
-        "source": "Business Insider",
-        "date": "2026-07-09",
-        "url": "https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7",
-        "summary": "요약: 엔비디아 엔지니어들이 코드 작성보다 AI 에이전트 구축을 선호한다는 젠슨 황 발언을 다룬 기사다.",
-        "impactLink": "판단 연결: AI 확산을 직무 재설계와 교육·성과 기준 문제로 봐야 한다는 근거다."
-      },
-      {
-        "type": "시장 보고서",
-        "title": "State of AI at Work",
-        "source": "Glean",
-        "date": "2026",
-        "url": "https://www.glean.com/report/state-of-ai-at-work",
-        "summary": "요약: 근로자가 AI를 관리·수정·맥락화하는 데 시간을 쓰는 현실을 다룬 보고서다.",
-        "impactLink": "판단 연결: AI 사용률보다 검증·재작업 시간을 봐야 한다."
-      },
-      {
-        "type": "연구 보고서",
-        "title": "Future of Jobs Report 2025",
-        "source": "World Economic Forum",
-        "date": "2025-01-07",
-        "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/",
-        "summary": "요약: 기술 변화가 직무 수요와 재교육 우선순위를 바꾸는 흐름을 정리한 보고서다.",
-        "impactLink": "판단 연결: AI 에이전트 확산은 직무 전환 교육과 연결된다."
-      },
-      {
-        "type": "확인 필요",
-        "title": "사내 AI 에이전트 사용 현황과 비용 지표",
-        "source": "내부 점검 필요",
-        "date": "2026-07-10",
-        "url": "",
-        "summary": "요약: 실제 영향은 내부 승인 도구 목록, 사용 비용, 재작업 시간으로 검증해야 한다.",
-        "impactLink": "판단 연결: 생산성 효과는 내부 사용 로그와 업무성과 지표로 확인한다."
-      }
-    ],
-    "cases": [
-      {
-        "title": "엔비디아 엔지니어의 AI 에이전트 구축 전환",
-        "type": "해외 AI/자동화 사례",
-        "org": "Business Insider",
-        "why": "AI 선도 기업 내부에서도 직무가 에이전트 설계와 검증 중심으로 바뀌는 흐름이다.",
-        "peopleInsight": "AI 교육은 사용법보다 역할 재정의와 검증 책임을 포함해야 한다.",
-        "peopleFunction": "교육, 제도",
-        "actionLink": "직무별 AI 역할과 검증 기준 정의",
-        "url": "https://www.businessinsider.com/jensen-huang-my-engineers-prefer-building-agents-to-writing-code-2026-7",
-        "priority": true
-      },
-      {
-        "title": "Glean AI 업무 보고서",
-        "type": "비교 참고 사례",
-        "org": "Glean",
-        "why": "근로자가 AI를 관리하는 시간이 생산성 기대를 잠식할 수 있음을 보여준다.",
-        "peopleInsight": "AI 업무량은 사용 횟수보다 재작업 시간으로 검증해야 한다.",
-        "peopleFunction": "인력운영, 조직문화",
-        "actionLink": "AI 사용 후 재작업 시간 추적",
-        "url": "https://www.glean.com/report/state-of-ai-at-work",
-        "priority": true
-      },
-      {
-        "title": "Future of Jobs Report 2025",
-        "type": "연구 보고서 사례",
-        "org": "World Economic Forum",
-        "why": "기술 변화가 핵심 역량과 재교육 우선순위를 바꾸는 흐름을 제공한다.",
-        "peopleInsight": "AI 도구 확산은 직무별 재교육 기준과 연결된다.",
-        "peopleFunction": "교육, 제도",
-        "actionLink": "직무별 AI 활용 성숙도 점검",
-        "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
-      },
-      {
-        "title": "사내 비승인 AI 도구 점검",
-        "type": "추가 확인 필요 사례",
-        "org": "내부 보안 로그 확인 필요",
-        "why": "AI 에이전트가 비승인 사용으로 빠르게 확산될 수 있다.",
-        "peopleInsight": "AI 사용 가이드는 보안 정책과 실제 사용 로그를 맞춰 업데이트해야 한다.",
-        "peopleFunction": "보안, 조직문화",
-        "actionLink": "승인 도구 목록과 API 권한 점검",
-        "url": ""
-      }
-    ]
-  }
-];
+      );
+    }
 
-      const areaRefinements = {};
-      const evidenceSummaries = {};
-      const evidenceImpactLinks = {};
-      // End daily report content placeholders.
-      scenarios.forEach((scenario) => {
-        completePeopleAreas(scenario);
-        scenario.areas.forEach((item) => Object.assign(item, areaRefinements[scenario.id]?.[item.name] || {}));
-        scenario.evidence.forEach((item) => {
-          item.summary = evidenceSummaries[item.title] || item.summary || "요약: 이 자료는 해당 이슈가 인사 기능에 미치는 영향을 판단하기 위한 참고 근거로 활용된다.";
-          item.impactLink = item.impactLink || evidenceImpactLinks[item.title];
-        });
+    function completePeopleAreas(scenario) {
+      const existing = new Set(scenario.areas.map((item) => item.name));
+      peopleAreaNames.forEach((name) => {
+        if (!existing.has(name)) scenario.areas.push(makeSupportingArea(scenario, name));
       });
+    }
 
-      const confidenceLabel = {
-        High: "신뢰도 높음",
-        Medium: "신뢰도 보통",
-        Watch: "관찰 필요",
-      };
+    // Daily report content placeholders. Replace only this block when generating a report.
+    const HEADER_ORDER = ["업계", "산업", "관계사", "정책", "경제", "글로벌"];
+    const DEFAULT_TAB = "업계";
 
-      const confidenceClass = {
-        High: "confidence-high",
-        Medium: "confidence-medium",
-        Watch: "confidence-watch",
-      };
+    function impactPath(article, direct, secondary, risk, priority) {
+      return [
+        { stage: "기준 기사", text: article },
+        { stage: "직접 영향", text: direct },
+        { stage: "2차 영향", text: secondary },
+        { stage: "검토 필요 리스크", text: risk },
+        { stage: "우선 검토", text: priority },
+      ];
+    }
 
-      let scenarioIndex = 0;
-      let selectedAreaName = "";
+    function topArea(name, score, confidence, summary, why, insight, actions, extras = {}) {
+      return Object.assign(
+        area(name, peopleOwners[name], score, confidence, summary, why, insight, extras.stars || { "인력 재배치": 3, "운영비 영향": 3, "규제 리스크": 3, "실행 시급성": 4 }, actions),
+        {
+          directImpact: extras.directImpact || summary,
+          finalRisk: extras.finalRisk || insight,
+          indicators: extras.indicators || supportingIndicators[name],
+          impactPath: extras.impactPath,
+        },
+      );
+    }
 
-      const nodes = {
-        tabs: document.getElementById("scenarioTabs"),
-        advanceScenario: document.getElementById("advanceScenario"),
-        headline: document.getElementById("headline"),
-        articleTitleLink: document.getElementById("articleTitleLink"),
-        articleSource: document.getElementById("articleSource"),
-        articleDate: document.getElementById("articleDate"),
-        articleOriginalLink: document.getElementById("articleOriginalLink"),
-        scenarioContext: document.getElementById("scenarioContext"),
-        newsInput: document.getElementById("newsInput"),
-        sourceMix: document.getElementById("sourceMix"),
-        reportFlow: document.getElementById("reportFlow"),
-        overallConfidence: document.getElementById("overallConfidence"),
-        decisionQuestion: document.getElementById("decisionQuestion"),
-        peopleSignal: document.getElementById("peopleSignal"),
-        directFinding: document.getElementById("directFinding"),
-        researchJudgement: document.getElementById("researchJudgement"),
-        metricGrid: document.getElementById("metricGrid"),
-        riskGrid: document.getElementById("riskGrid"),
-        rankingList: document.getElementById("rankingList"),
-        detailTitle: document.getElementById("detailTitle"),
-        detailOwner: document.getElementById("detailOwner"),
-        detailImpactLevel: document.getElementById("detailImpactLevel"),
-        detailConfidence: document.getElementById("detailConfidence"),
-        detailScope: document.getElementById("detailScope"),
-        detailDirectImpact: document.getElementById("detailDirectImpact"),
-        detailPathway: document.getElementById("detailPathway"),
-        detailFinalRisk: document.getElementById("detailFinalRisk"),
-        detailWhy: document.getElementById("detailWhy"),
-        detailInsight: document.getElementById("detailInsight"),
-        detailIndicators: document.getElementById("detailIndicators"),
-        evidenceGrid: document.getElementById("evidenceGrid"),
-        actionStack: document.getElementById("actionStack"),
-        caseGrid: document.getElementById("caseGrid"),
-      };
+    function evidence(type, title, source, date, url, summary, impactLink) {
+      return { type, title, source, date, url, summary, impactLink };
+    }
 
-      function escapeHtml(value) {
-        return String(value)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#039;");
-      }
+    function caseItem(title, type, org, why, peopleInsight, peopleFunction, actionLink, url, priority = false) {
+      return { title, type, org, why, peopleInsight, peopleFunction, actionLink, url, priority };
+    }
 
-      function hasUrl(value) {
-        return typeof value === "string" && /^https?:\/\//.test(value);
-      }
+    const scenarios = [
+      {
+        id: "display-lgd-refresh-rate-20260710",
+        category: "업계",
+        status: "complete_url_pending",
+        label: "[업계] LGD 주사율 검증과 게임용 OLED 경쟁",
+        headline: "[업계] LGD 주사율 검증과 게임용 OLED 경쟁",
+        article: {
+          title: "LGD \"주사율 높을수록 게임 수행능력 높여\"",
+          source: "전자신문",
+          date: "2026-07-10",
+          url: "",
+        },
+        context: "디스플레이 업계의 고주사율 OLED 경쟁은 제품 홍보 이슈를 넘어 패널 개발, 고객 대응, 품질 검증, 게이밍 생태계 협업 역량을 동시에 요구한다. 원문 URL은 추가 확인 필요로 두되, 2026-07-10 전자신문 보도 제목 기준으로 업계 탭에 우선 반영한다.",
+        input: "고주사율이 실제 게임 수행능력과 연결된다는 보도는 OLED 성능 경쟁이 사용자 경험 검증과 데이터 기반 고객 설득으로 이동하고 있음을 보여준다. People 조직은 R&D, 품질, 기술마케팅, 고객 대응 직무의 피크 업무량과 핵심 인력 리텐션을 함께 점검해야 한다.",
+        sourceMix: ["전자신문 제목 확인", "디스플레이 업계 고주사율 OLED 경쟁 동향", "원문 링크 추가 확인 필요"],
+        confidence: "Medium",
+        decisionQuestion: "고주사율 OLED 경쟁이 R&D·품질·기술마케팅 핵심 직무의 업무량, 역량 기준, 리텐션 관리에 반영되어 있는가?",
+        peopleSignal: "제품 성능 검증이 기술개발, 품질 데이터, 고객사 커뮤니케이션 역량을 묶어 요구하면서 핵심 직무 의존도가 높아질 수 있다.",
+        directFinding: "기준 제목은 LG디스플레이가 고주사율과 게임 수행능력의 관계를 전면에 내세운 업계 신호다.",
+        researchJudgement: "원문 URL 확인 전이므로 세부 수치 인용은 보류한다. 다만 디스플레이 업계 People 관점에서는 고주사율 OLED 경쟁이 핵심 개발·품질·응용검증 인력 수요로 이어질 가능성이 높아 검토 필요다.",
+        metrics: [
+          ["헤더", "업계", "디스플레이 업계 기사만 배치하는 첫 번째 탭입니다."],
+          ["원문 링크", "확인 필요", "Scrapmaster 단서가 아닌 언론사 원문 URL 추가 확인이 필요합니다."],
+          ["우선 영향 영역", "채용·교육·보안", "핵심 기술직 확보, 응용 검증 교육, 고객사 정보 보안이 함께 연결됩니다."],
+        ],
+        reportFlow: [
+          ["기준 기사", "LGD 고주사율과 게임 수행능력 관련 전자신문 2026-07-10 보도 제목을 확인했다."],
+          ["직접 영향", "OLED 개발·품질·응용검증·기술마케팅 직무의 역량 수요가 커질 수 있다."],
+          ["2차 영향", "고객사 대응과 외부 검증 데이터 활용이 늘면 보안, 교육, 프로젝트 배치 부담으로 확산될 수 있다."],
+          ["검토 필요 리스크", "핵심 직무 업무량 증가와 경쟁사 기술인재 스카우트 위험을 함께 봐야 한다."],
+          ["우선 검토", "고주사율·게이밍 OLED 관련 핵심 직무와 후보자 파이프라인을 점검한다."],
+        ],
+        topRisks: [
+          ["1", "핵심 기술직 리텐션", "고주사율 OLED 경쟁이 R&D·품질·검증 인력의 피크 업무와 이탈 리스크를 키울 수 있다."],
+          ["2", "기술마케팅 역량 공백", "성능 검증을 고객·시장 언어로 설명할 수 있는 직무 역량이 부족하면 고객 대응 부담이 커진다."],
+          ["3", "고객사·검증 데이터 보안", "게임 성능 검증 자료와 고객 로드맵 접근권한을 재점검할 필요가 있다."],
+        ],
+        areas: [
+          topArea("채용", 88, "Medium", "고주사율 OLED, 응용검증, 기술마케팅 후보자 선확보가 필요하다.", ["제품 경쟁이 성능 검증 기반으로 이동하면 개발자뿐 아니라 응용검증·고객 대응형 인재 수요가 늘어난다.", "디스플레이 업계 내 유사 직무 경쟁이 커질 수 있다."], "채용은 단순 충원이 아니라 게이밍·IT OLED 경험이 있는 후보군을 미리 확보하는 과제가 된다.", ["고주사율 OLED 관련 핵심 직무와 대체 가능 후보군을 정의한다.", "R&D·품질·응용검증 직무별 채용 소요기간과 제안 수락률을 점검한다.", "경쟁사·협력사 출신 후보자 유입 경로를 모니터링한다."], { directImpact: "핵심 개발·검증 직무의 선확보 필요성이 커진다.", finalRisk: "후보군 확보가 늦어지면 고객 대응과 검증 일정의 병목이 People 리스크로 전환된다.", indicators: ["고주사율 OLED 관련 채용 오픈 포지션", "채용 소요기간", "제안 수락률", "후보자 거절 사유"], impactPath: impactPath("고주사율 OLED 경쟁 보도", "핵심 기술·검증 직무 수요 증가", "기술마케팅·고객 대응 직무까지 확산", "후보군 부족과 리텐션 위험", "핵심 직무별 후보자 파이프라인 점검") }),
+          topArea("교육", 84, "Medium", "고주사율, 게이밍 성능 검증, 고객 설명 역량 교육이 필요하다.", ["성능 경쟁은 현업이 기술 수치와 사용자 경험을 함께 설명할 수 있어야 한다.", "고객 대응 담당자와 기술 담당자의 공통 언어가 중요해진다."], "교육은 OLED 기술 교육뿐 아니라 응용 검증 데이터 해석과 고객 커뮤니케이션 과정으로 확장되어야 한다.", ["고주사율 OLED 기술·응용검증 교육 대상을 정의한다.", "기술마케팅 담당자의 제품 설명 자료 이해도를 점검한다.", "현업 멘토링 가능한 전문가 풀을 지정한다."], { directImpact: "직무별 특화 교육 수요가 증가한다.", finalRisk: "교육이 늦으면 제품 성능 차별점을 현장과 고객에게 일관되게 설명하기 어렵다.", indicators: ["관련 교육 수요", "기술 교육 이수율", "고객 대응 자료 오류·질의 건수"], impactPath: impactPath("게임 수행능력 검증 보도", "기술 설명 역량 필요", "품질·마케팅·영업 협업 교육 수요", "현업 이해도 편차", "직무별 교육과 설명자료 정비") }),
+          topArea("보안", 82, "Watch", "성능 검증 데이터와 고객 로드맵 관련 접근권한 점검이 필요하다.", ["게임 성능 검증 자료는 제품 차별화와 고객 대응에 직접 연결될 수 있다.", "고객사 요구와 검증 조건이 포함되면 보안 민감도가 높아진다."], "보안은 제품 개발 자료뿐 아니라 검증 데이터, 외부 협업 자료, 고객 커뮤니케이션 권한까지 봐야 한다.", ["고주사율 OLED 프로젝트 접근권한을 점검한다.", "외부 검증·협업 자료 반출 기준을 확인한다.", "관련 직무 보안 교육 이수 여부를 점검한다."], { directImpact: "검증 자료 접근권한과 반출 기준 확인이 필요하다.", finalRisk: "민감 데이터가 확대 공유되면 기술 유출과 고객사 신뢰 리스크가 발생할 수 있다.", indicators: ["프로젝트 접근권한 변경", "외부 공유 자료 승인 건수", "보안 교육 이수율"], impactPath: impactPath("고주사율 검증 보도", "검증 데이터 활용 증가", "고객·외부 협업 자료 공유 확대", "민감정보 취급 리스크", "접근권한과 반출 기준 점검") }),
+        ],
+        evidence: [
+          evidence("기준 기사", "LGD \"주사율 높을수록 게임 수행능력 높여\"", "전자신문", "2026-07-10", "", "요약: 고주사율이 게임 수행능력과 연결된다는 디스플레이 업계 보도 제목을 확인했다. 원문 URL은 추가 확인 필요다.", "판단 연결: 고주사율 OLED 경쟁이 핵심 기술직, 응용 검증, 고객 대응 직무 역량으로 이어지는 신호다."),
+          evidence("보완 근거", "폴더블폰 경쟁과 디스플레이 역량", "중앙일보", "2026-07-02", "https://www.joongang.co.kr/article/25441697", "요약: 폴더블 폼팩터 경쟁이 디스플레이 기술·품질 경쟁과 연결되는 사례다.", "판단 연결: 제품 경쟁이 R&D·품질·고객 대응 핵심 인력 관리로 이어진다는 비교 근거다."),
+        ],
+        cases: [
+          caseItem("고주사율 OLED 성능 검증", "확인된 업계 신호", "전자신문", "성능 검증을 전면에 내세운 업계 보도다.", "핵심 기술직과 응용검증 직무 수요를 함께 봐야 한다.", "채용", "고주사율 OLED 후보군 정의", "", true),
+          caseItem("폴더블폰 경쟁과 패널 역량", "동일 산업 참고 사례", "중앙일보", "제품 폼팩터 경쟁이 디스플레이 역량 경쟁으로 확산된 사례다.", "품질·고객 대응 직무의 업무량과 리텐션을 함께 점검해야 한다.", "인력운영", "핵심 직무 업무량 점검", "https://www.joongang.co.kr/article/25441697"),
+          caseItem("게이밍 OLED 기술마케팅", "비교 참고 사례", "업계 동향", "기술 수치와 사용자 경험을 연결하는 설명 역량이 중요해진다.", "기술마케팅 교육과 설명자료 정비가 필요하다.", "교육", "기술 설명 교육 운영", ""),
+          caseItem("고객사 검증 데이터 관리", "추가 확인 필요 사례", "내부 점검 범위", "검증 데이터가 외부 협업으로 확산될 수 있다.", "접근권한과 자료 반출 기준을 점검해야 한다.", "보안", "프로젝트 보안 기준 점검", ""),
+        ],
+      },
+      {
+        id: "industry-sk-hynix-adr-20260710",
+        category: "산업",
+        status: "complete",
+        label: "[산업] SK하이닉스 ADR 공모와 반도체 자금 경쟁",
+        headline: "[산업] SK하이닉스 ADR 공모와 반도체 자금 경쟁",
+        article: { title: "SK하이닉스, ADR 공모가 149.16달러 확정", source: "전자신문", date: "2026-07-10", url: "https://www.etnews.com/20260710000011" },
+        context: "반도체 기업의 대규모 자금 조달은 설비·R&D 투자 여력뿐 아니라 핵심 인재 확보와 보상 경쟁으로 이어질 수 있다. 삼성디스플레이 People 관점에서는 직접 경쟁 산업은 아니지만 첨단 제조 인재 시장의 보상 기대와 채용 경쟁을 자극하는 신호다.",
+        input: "ADR 공모가는 단순 금융 뉴스가 아니라 AI 반도체 투자 경쟁, 장비·공정 인력 수요, 핵심 인재 리텐션 압력을 함께 보여주는 산업 신호다.",
+        sourceMix: ["전자신문", "반도체 자금 조달 기사", "첨단 제조 인재 경쟁 맥락"],
+        confidence: "High",
+        decisionQuestion: "반도체 투자 여력이 커지는 환경에서 디스플레이 핵심 기술직 보상·채용 경쟁력을 어떻게 점검할 것인가?",
+        peopleSignal: "자금 조달 확대는 투자 실행과 인재 확보 메시지를 강화해 인접 산업 핵심 인력의 이동 가능성을 높일 수 있다.",
+        directFinding: "기준 기사는 SK하이닉스가 ADR 공모가를 확정했다는 산업 금융 이벤트를 보도했다.",
+        researchJudgement: "People 관점의 핵심은 주가 자체가 아니라 인접 반도체 산업의 투자 여력이 채용·보상·리텐션 경쟁으로 확산될 수 있다는 점이다.",
+        metrics: [["헤더", "산업", "디스플레이 외 인접 첨단산업 이슈입니다."], ["주요 People 영향", "채용·제도", "핵심 기술직 보상 기대와 후보자 이동 가능성을 점검합니다."], ["시급성", "보통 이상", "공모 이후 투자·채용 메시지 변화를 모니터링합니다."]],
+        reportFlow: [["기준 기사", "SK하이닉스 ADR 공모가 확정 보도"], ["직접 영향", "반도체 투자 재원과 시장 신뢰 회복 신호"], ["2차 영향", "첨단 제조 핵심 인력 보상 기대와 채용 경쟁 심화 가능성"], ["검토 필요 리스크", "인접 산업 인재 유출과 보상 비교 문의"], ["우선 검토", "핵심 직무 보상 밴드와 후보자 이탈 사유 점검"]],
+        topRisks: [["1", "핵심 직무 보상 경쟁", "반도체 투자 경쟁이 보상 비교와 리텐션 압력으로 확산될 수 있다."], ["2", "채용 후보자 이탈", "AI 반도체 관련 직무로 후보자 관심이 이동할 수 있다."], ["3", "성과급 기대 관리", "인접 산업의 투자 뉴스가 내부 보상 기대와 설명 부담을 높일 수 있다."]],
+        areas: [
+          topArea("제도", 84, "Medium", "보상 밴드와 성과급 설명자료의 경쟁력 점검이 필요하다.", ["반도체 투자 확대는 핵심 기술직의 외부 보상 기대를 높일 수 있다.", "내부 평가·보상 기준의 설명 가능성이 중요해진다."], "제도 영역은 보상 수준 자체뿐 아니라 보상 산식과 성과 메시지를 구성원이 납득할 수 있게 정비해야 한다.", ["핵심 직무별 외부 보상 벤치마크를 갱신한다.", "성과급 산식과 보상 결정 요인을 설명 가능한 형태로 정리한다.", "보상 문의와 이탈 면담 사유를 월 단위로 점검한다."], { directImpact: "핵심 기술직의 보상 비교 압력이 올라갈 수 있다.", finalRisk: "외부 보상 기대가 커지면 내부 공정성 인식과 리텐션이 흔들릴 수 있다.", indicators: ["핵심 직무 보상 밴드", "보상 문의 건수", "이탈 면담 사유", "성과급 설명회 질문"], impactPath: impactPath("ADR 공모가 확정", "반도체 투자 여력 신호", "핵심 인재 보상 경쟁 확산", "보상 비교와 공정성 이슈", "보상 벤치마크 갱신") }),
+          topArea("채용", 82, "Medium", "AI 반도체 인접 직무로 후보자 관심이 이동할 수 있어 선확보 파이프라인 점검이 필요하다.", ["반도체 투자 뉴스는 장비·공정·AI 인프라 후보자에게 강한 신호가 된다.", "디스플레이 핵심 직무와 일부 후보군이 겹칠 수 있다."], "채용은 후보자 유입 경로와 거절 사유를 통해 경쟁 산업의 흡인력을 조기에 파악해야 한다.", ["핵심 직무 후보자 이탈 사유를 반도체·AI 직무 이동과 구분해 기록한다.", "우수 인력 선확보 리스트를 갱신한다.", "산학교류·참여연구원 전환율을 점검한다."], { directImpact: "후보자 경쟁 환경이 강화된다.", finalRisk: "채용 소요기간이 늘면 핵심 프로젝트 배치가 지연될 수 있다.", indicators: ["채용 소요기간", "후보자 거절 사유", "산학교류 전환율", "경쟁사 오퍼 언급 빈도"], impactPath: impactPath("반도체 자금 조달", "투자·채용 기대 증가", "후보자 관심 이동", "핵심 직무 채용 지연", "후보자 파이프라인 점검") }),
+        ],
+        evidence: [
+          evidence("기준 기사", "SK하이닉스, ADR 공모가 149.16달러 확정", "전자신문", "2026-07-10", "", "요약: SK하이닉스 ADR 공모가 확정 소식을 전했다.", "판단 연결: 인접 반도체 산업의 자금 조달은 투자·채용·보상 경쟁 신호로 해석할 수 있다."),
+          evidence("보완 근거", "AI 반도체 투자 확대와 제조 인재 수요", "시장 기사 범위", "2026-07-10", "", "요약: 반도체 투자 확대는 장비, 공정, AI 인프라 직무 수요와 연결된다.", "판단 연결: 디스플레이 핵심 직무와 겹치는 후보군의 이동 가능성을 점검하는 근거다."),
+        ],
+        cases: [
+          caseItem("반도체 투자 확대와 보상 경쟁", "인접 산업 참고 사례", "전자신문", "자금 조달 이벤트가 투자와 인재 확보 메시지를 강화할 수 있다.", "핵심 직무 보상 경쟁력 점검이 필요하다.", "제도", "보상 벤치마크 갱신", "", true),
+          caseItem("AI 반도체 인재 확보 경쟁", "비교 참고 사례", "시장 기사 범위", "AI 반도체 직무는 디스플레이 일부 후보군과 겹칠 수 있다.", "후보자 거절 사유와 오퍼 비교를 구조화해야 한다.", "채용", "후보자 이탈 사유 기록", ""),
+          caseItem("산학교류 전환율 점검", "적용 가능성이 있는 선행 사례", "내부 점검 범위", "첨단 제조 투자 경쟁 시 조기 후보군 확보가 중요하다.", "참여연구원·장학생 전환율을 지표화해야 한다.", "채용", "선확보 파이프라인 점검", ""),
+          caseItem("성과급 설명자료 정비", "국내 대기업 참고 사례", "보상 커뮤니케이션 범위", "투자·실적 뉴스는 보상 기대와 질문을 자극한다.", "성과급 산식과 판단 기준을 사전에 설명해야 한다.", "제도", "보상 FAQ 정비", ""),
+        ],
+      },
+      {
+        id: "affiliate-samsung-ai-pc-accelerator-20260710",
+        category: "관계사",
+        status: "complete",
+        label: "[관계사] 삼성전자 AI PC 가속기와 온디바이스 AI 역량",
+        headline: "[관계사] 삼성전자 AI PC 가속기와 온디바이스 AI 역량",
+        article: { title: "삼성전자, AI PC용 가속기 개발", source: "전자신문", date: "2026-07-10 지면", url: "https://www.etnews.com/20260709000420" },
+        context: "삼성전자의 AI PC용 가속기 개발은 관계사 기술 전략과 인재 수요가 온디바이스 AI, 반도체, 소프트웨어, 보안 역량으로 이동하고 있음을 보여준다. 삼성디스플레이 People 관점에서는 관계사 기술 전환이 임원 보고, 교육, 보안, 협업 직무 수요로 파급될 수 있다.",
+        input: "온디바이스 AI와 AI PC 흐름은 디스플레이 제품 자체의 사용자 경험, 고객사 협업, 보안 기준과도 연결된다. People 조직은 AI 응용 역량 교육, 대외 협업 보안, 관계사 인재 이동 가능성을 점검해야 한다.",
+        sourceMix: ["전자신문", "삼성전자 AI PC 가속기 기사", "관계사 기술 전환 신호"],
+        confidence: "High",
+        decisionQuestion: "관계사 온디바이스 AI 전환에 맞춰 디스플레이 조직의 AI 응용 교육과 협업 보안 기준이 준비되어 있는가?",
+        peopleSignal: "AI PC 가속기 개발은 하드웨어와 소프트웨어 역량이 결합되는 직무 수요를 강화한다.",
+        directFinding: "기준 기사는 삼성전자가 AI PC용 가속기를 개발했다는 관계사 기술 이슈다.",
+        researchJudgement: "관계사 이슈이므로 삼성디스플레이 내부 상황으로 단정하지 않는다. 다만 AI 응용 역량, 고객사 협업, 보안 기준은 공개 뉴스만으로도 검토 가치가 높다.",
+        metrics: [["헤더", "관계사", "삼성 관계사 공개 언론 기사입니다."], ["우선 영향", "교육·보안", "온디바이스 AI 기술 전환과 협업 보안이 핵심입니다."], ["판단 강도", "높음", "관계사 기술 전환은 내부 교육·협업 기준에 참고 가치가 큽니다."]],
+        reportFlow: [["기준 기사", "삼성전자 AI PC용 가속기 개발 보도"], ["직접 영향", "온디바이스 AI·반도체·소프트웨어 결합 역량 중요도 상승"], ["2차 영향", "디스플레이 제품·고객 대응에서 AI 이해도와 보안 기준 수요 증가"], ["검토 필요 리스크", "AI 협업 자료 접근권한과 현업 교육 공백"], ["우선 검토", "AI 응용 교육 대상과 관계사 협업 보안 기준 점검"]],
+        topRisks: [["1", "AI 응용 역량 격차", "현업별 AI 이해도 차이가 고객 대응과 제품 기획 협업의 병목이 될 수 있다."], ["2", "관계사 협업 보안", "AI PC 관련 자료 공유 과정에서 접근권한과 반출 기준이 중요해진다."], ["3", "인재 이동 가능성", "AI 반도체·소프트웨어 직무로 핵심 인력 관심이 이동할 수 있다."]],
+        areas: [
+          topArea("교육", 86, "High", "온디바이스 AI와 AI PC 흐름을 이해하는 직무별 교육이 필요하다.", ["AI PC 가속기는 하드웨어, 소프트웨어, 사용자 경험이 결합된 이슈다.", "디스플레이 현업도 고객사·제품 협업에서 AI 기초 이해가 필요해질 수 있다."], "교육은 AI 일반론보다 직무별 적용 지점과 고객 대응 언어를 중심으로 설계되어야 한다.", ["AI PC·온디바이스 AI 기초 교육 대상을 정의한다.", "제품기획·영업·R&D 직무별 AI 응용 교육안을 분리한다.", "관계사 기술 전환 이슈를 임원·리더 브리핑 자료에 반영한다."], { directImpact: "직무별 AI 이해도 격차 점검이 필요하다.", finalRisk: "교육 공백이 크면 고객 대응과 현업 협업에서 정보 비대칭이 발생할 수 있다.", indicators: ["AI 교육 수요", "직무별 이수율", "고객 대응 질의 유형", "리더 브리핑 요청 건수"], impactPath: impactPath("AI PC 가속기 개발", "AI 응용 이해 필요", "제품·고객 협업 교육 수요", "직무별 역량 격차", "직무별 AI 교육 편성") }),
+          topArea("보안", 84, "Medium", "관계사 AI 기술 협업 자료의 접근권한과 반출 기준 점검이 필요하다.", ["AI PC와 온디바이스 AI 자료는 기술 전략과 고객 로드맵을 포함할 수 있다.", "관계사 협업은 자료 접근 범위가 넓어지는 순간 보안 리스크가 커진다."], "보안은 AI 기술 자체보다 협업 문서, 회의체, 데이터 공유 범위를 관리하는 실행 과제다.", ["AI 관련 협업 폴더 접근권한을 점검한다.", "관계사 회의 자료의 반출·재공유 기준을 확인한다.", "AI 도구 사용 가이드와 보안 교육을 업데이트한다."], { directImpact: "협업 자료 접근권한 점검 필요성이 커진다.", finalRisk: "권한 관리가 느슨하면 민감 기술·고객 정보 노출 위험이 높아진다.", indicators: ["접근권한 변경 이력", "공유 문서 수", "보안 교육 이수율", "AI 도구 사용 신청"], impactPath: impactPath("관계사 AI 개발 보도", "협업 자료 증가 가능성", "AI·고객 정보 공유 확대", "민감정보 관리 리스크", "접근권한과 AI 가이드 점검") }),
+        ],
+        evidence: [
+          evidence("기준 기사", "삼성전자, AI PC용 가속기 개발", "전자신문", "2026-07-10 지면", "", "요약: 삼성전자의 AI PC용 가속기 개발 소식을 다룬 관계사 기사다.", "판단 연결: 관계사 AI 기술 전환은 교육, 보안, 협업 기준 점검 근거다."),
+          evidence("보완 근거", "온디바이스 AI 확산과 직무 역량 변화", "시장 기사 범위", "2026-07-10", "", "요약: 온디바이스 AI 확산은 제품, 소프트웨어, 고객 대응 역량을 함께 요구한다.", "판단 연결: AI 교육을 전 직무 일반교육이 아니라 직무별 적용 교육으로 설계해야 한다."),
+        ],
+        cases: [
+          caseItem("삼성전자 AI PC 가속기 개발", "관계사 참고 사례", "전자신문", "관계사 AI 기술 전환이 공개 기사로 확인된다.", "디스플레이 현업도 AI 응용 이해와 협업 보안 기준을 점검해야 한다.", "교육", "직무별 AI 교육 편성", "", true),
+          caseItem("온디바이스 AI 제품 협업", "적용 가능성이 있는 선행 사례", "시장 기사 범위", "제품과 AI 기능의 연결이 고객 대응 역량을 요구한다.", "제품기획·영업·R&D 교육을 분리해야 한다.", "교육", "직무별 교육 과정 분리", ""),
+          caseItem("AI 협업 자료 접근권한", "추가 확인 필요 사례", "내부 점검 범위", "관계사 협업 과정에서 민감자료 접근 범위가 넓어질 수 있다.", "공유 문서와 회의체 권한을 점검해야 한다.", "보안", "접근권한 정비", ""),
+          caseItem("AI 직무 이동 가능성", "비교 참고 사례", "인재시장 범위", "AI 반도체와 소프트웨어 직무는 핵심 인재를 끌어당긴다.", "핵심 직무 리텐션 인터뷰가 필요하다.", "인력운영", "리텐션 인터뷰 운영", ""),
+        ],
+      },
+      {
+        id: "policy-minimum-wage-gap-20260710",
+        category: "정책",
+        status: "complete",
+        label: "[정책] 최저임금 격차 축소와 보상 하단 점검",
+        headline: "[정책] 최저임금 격차 축소와 보상 하단 점검",
+        article: { title: "勞 1만1220원 vs 使 1만530원… 최저임금 격차 690원으로 좁혀", source: "동아일보", date: "2026-07-10", url: "https://www.donga.com/news/Society/article/all/20260710/134270941/2" },
+        context: "최저임금 협상 격차 축소는 보상 하단, 협력사 인건비, 구성원 보상 문의, 노사 커뮤니케이션으로 이어질 수 있는 정책·노동 이슈다.",
+        input: "단순 임금 숫자 뉴스가 아니라 보상 하단과 현장 커뮤니케이션 리스크를 점검해야 하는 신호다. People 조직은 직접 적용 대상 여부와 무관하게 협력사·저임금 직군·복리후생 기준과 연결해 봐야 한다.",
+        sourceMix: ["동아일보", "최저임금위원회 논의 기사", "노사 교섭 동향"],
+        confidence: "High",
+        decisionQuestion: "최저임금 인상 가능성이 보상 하단, 협력사 비용, 노사 문의 대응에 반영되어 있는가?",
+        peopleSignal: "최저임금은 직접 적용 인력뿐 아니라 협력사 비용, 현장 VOC, 보상 공정성 인식으로 확산된다.",
+        directFinding: "기준 기사는 노사 제시안 격차가 690원으로 좁혀졌다는 최저임금 협상 상황을 보도했다.",
+        researchJudgement: "정확한 최종액은 확정 전이므로 단정하지 않는다. 다만 보상 하단과 협력사 비용, 현장 문의 대응은 선제 점검이 가능하다.",
+        metrics: [["헤더", "정책", "노동·보상 정책 기사입니다."], ["우선 영향", "제도·노사", "보상 하단과 문의 대응을 먼저 봅니다."], ["신뢰도", "높음", "기준 기사 URL과 날짜가 확인되었습니다."]],
+        reportFlow: [["기준 기사", "최저임금 노사 제시안 격차 축소"], ["직접 영향", "보상 하단과 협력사 인건비 기준 점검 필요"], ["2차 영향", "구성원 보상 문의와 노사 커뮤니케이션 증가 가능성"], ["검토 필요 리스크", "확정 전 과잉 단정, 협력사 비용 전가, 공정성 문의"], ["우선 검토", "보상 하단 영향 대상과 예상 FAQ 정리"]],
+        topRisks: [["1", "보상 하단 재점검", "확정액에 따라 일부 직군·협력사 기준 영향 여부를 확인해야 한다."], ["2", "노사 커뮤니케이션 부담", "임금 관련 문의와 공정성 질문이 늘 수 있다."], ["3", "협력사 비용 파급", "총무·구매·현장 운영 비용과 연결될 수 있다." ]],
+        areas: [
+          topArea("제도", 90, "High", "보상 하단과 예외 승인 기준 점검이 필요하다.", ["최저임금 인상은 직접 적용 대상이 제한적이어도 보상 기준의 기준점 역할을 한다.", "평가·연봉 산정·수당 기준과 충돌 가능성을 사전에 봐야 한다."], "제도 영역은 확정 전에는 시나리오로, 확정 후에는 대상자·비용·설명자료로 전환해 관리해야 한다.", ["최저임금 시나리오별 보상 하단 영향 대상을 산정한다.", "수당·복리후생 기준과 충돌하는 항목을 점검한다.", "확정 후 구성원 설명자료와 FAQ를 준비한다."], { directImpact: "보상 하단과 산식 영향 점검이 필요하다.", finalRisk: "영향 대상 파악이 늦으면 보상 문의와 예외 승인 요청이 급증할 수 있다.", indicators: ["보상 하단 대상 인원", "수당 산식 영향", "예상 비용", "보상 문의 건수"], impactPath: impactPath("최저임금 격차 축소", "보상 하단 영향 가능성", "수당·협력사 비용·FAQ로 확산", "공정성 문의 증가", "시나리오별 영향 대상 산정") }),
+          topArea("노사", 88, "High", "현장 문의와 노사 쟁점 관리를 위한 예상 질문 정리가 필요하다.", ["최저임금 논의는 노사 모두가 민감하게 보는 보상 의제다.", "확정 전에도 현장 문의와 비교 질문이 생길 수 있다."], "노사 영역은 협상 상황을 단정하지 않고, 예상 문의와 회사 기준을 설명 가능한 언어로 정리해야 한다.", ["최저임금 관련 예상 문의와 답변 초안을 만든다.", "현장 VOC와 노조 문의 키워드를 모니터링한다.", "확정 전후 커뮤니케이션 타이밍을 정한다."], { directImpact: "보상 관련 VOC 대응 준비가 필요하다.", finalRisk: "불명확한 답변은 공정성 논쟁으로 확산될 수 있다.", indicators: ["현장 VOC", "노조 문의", "보상 설명회 질문", "FAQ 조회"], impactPath: impactPath("최저임금 협상", "보상 문의 가능성", "현장·노조 쟁점 확산", "공정성 논쟁", "FAQ와 커뮤니케이션 계획") }),
+        ],
+        evidence: [
+          evidence("기준 기사", "勞 1만1220원 vs 使 1만530원… 최저임금 격차 690원으로 좁혀", "동아일보", "2026-07-10", "", "요약: 최저임금 노사 제시안 격차가 줄어든 협상 상황을 보도했다.", "판단 연결: 보상 하단, 노사 문의, 협력사 비용 영향 점검 근거다."),
+          evidence("보완 근거", "민주노총 총파업 동향", "동아일보", "2026-07-09", "https://www.donga.com/news/Society/article/all/20260709/134263189/2", "요약: 노동계 집단행동과 교섭 압박 흐름을 보도했다.", "판단 연결: 최저임금 이슈가 현장 노사 커뮤니케이션으로 확산될 수 있다는 보완 근거다."),
+        ],
+        cases: [
+          caseItem("최저임금 협상 격차 축소", "정책 변화 사례", "동아일보", "최저임금 논의가 보상 하단 기준에 직접 영향을 줄 수 있다.", "보상 시나리오와 FAQ를 사전에 준비해야 한다.", "제도", "보상 하단 영향 산정", "", true),
+          caseItem("노동계 총파업 동향", "노사 참고 사례", "동아일보", "노동 이슈가 현장 문의와 집단행동 논리로 확산될 수 있다.", "노사 예상 쟁점과 답변을 정리해야 한다.", "노사", "노사 FAQ 작성", "https://www.donga.com/news/Society/article/all/20260709/134263189/2"),
+          caseItem("협력사 인건비 전가", "적용 가능성이 있는 선행 사례", "협력사 운영 범위", "최저임금 변화는 식당·시설·경비 등 운영 비용에 영향을 줄 수 있다.", "총무·구매와 비용 영향 범위를 함께 확인해야 한다.", "총무", "협력사 비용 영향 점검", ""),
+          caseItem("보상 공정성 문의 증가", "국내 기업 참고 사례", "보상 커뮤니케이션 범위", "임금 뉴스는 구성원 비교 질문을 만들 수 있다.", "성과급·연봉 기준 설명자료를 정비해야 한다.", "제도", "보상 설명자료 정비", ""),
+        ],
+      },
+      {
+        id: "economy-career-break-flexwork-20260710",
+        category: "경제",
+        status: "complete",
+        label: "[경제] 경력단절과 유연근무 저조가 보여준 인력 활용 리스크",
+        headline: "[경제] 경력단절과 유연근무 저조가 보여준 인력 활용 리스크",
+        article: { title: "여성 28만 명, 육아로 구직 포기… 유연근무제 이용은 저조", source: "동아일보", date: "2026-07-10", url: "https://www.donga.com/news/Society/article/all/20260710/134270935/2" },
+        context: "경력단절과 유연근무 이용 저조는 고용시장 내 가용 인재 풀 축소, 복귀 인력 관리, 일하는 방식 제도 설계와 연결되는 경제·노동시장 이슈다.",
+        input: "People 관점에서는 채용 시장의 후보자 공급, 휴직·복직 운영, 유연근무 제도 실효성, 여성 리더 후보군 관리가 함께 연결된다.",
+        sourceMix: ["동아일보", "고용시장 기사", "유연근무·경력단절 지표"],
+        confidence: "High",
+        decisionQuestion: "휴직·복직, 유연근무, 경력 복귀 제도가 실제 인력 확보와 리텐션에 작동하고 있는가?",
+        peopleSignal: "경제활동 참여 저하는 후보자 풀과 내부 복귀율을 동시에 낮추며 인력운영 계획의 숨은 리스크가 된다.",
+        directFinding: "기준 기사는 육아로 구직을 포기한 여성과 유연근무제 이용 저조 문제를 보도했다.",
+        researchJudgement: "단일 기업 이슈는 아니지만 고용시장 공급과 복귀 제도 실효성 측면에서 People 영향이 명확하다.",
+        metrics: [["헤더", "경제", "고용시장 변화에 따른 People 영향입니다."], ["우선 영향", "인력운영", "휴직·복직과 유연근무 실효성이 핵심입니다."], ["검토 강도", "높음", "제도 존재와 실제 사용 사이의 차이를 봐야 합니다."]],
+        reportFlow: [["기준 기사", "육아로 구직 포기와 유연근무 이용 저조 보도"], ["직접 영향", "후보자 풀 축소와 복귀 인력 운영 리스크"], ["2차 영향", "유연근무 제도, 조직문화, 여성 리더 후보군 관리로 확산"], ["검토 필요 리스크", "제도는 있으나 실제 사용이 낮은 형식화 리스크"], ["우선 검토", "휴직·복직 지표와 유연근무 이용률 점검"]],
+        topRisks: [["1", "가용 인재 풀 축소", "육아·돌봄 부담이 후보자와 내부 복귀 인력을 줄일 수 있다."], ["2", "유연근무 실효성 부족", "제도는 있어도 사용률이 낮으면 리텐션 효과가 제한된다."], ["3", "리더 후보군 단절", "경력 공백이 차세대 리더 후보군 축소로 이어질 수 있다." ]],
+        areas: [
+          topArea("인력운영", 88, "High", "휴직·복직과 유연근무 이용률을 인력 계획의 핵심 지표로 봐야 한다.", ["육아로 인한 구직 포기는 외부 후보자 풀과 내부 복귀율 모두에 영향을 준다.", "유연근무 사용률이 낮으면 제도 존재만으로는 인력 유지 효과가 부족하다."], "인력운영은 충원 계획뿐 아니라 복귀 가능 인력과 일하는 방식 제도의 실제 활용도를 함께 관리해야 한다.", ["휴직·복직 예정 인원과 복귀 후 6개월 유지율을 점검한다.", "부서별 유연근무 이용률과 미사용 사유를 비교한다.", "복귀 인력의 업무 재배치와 교육 필요성을 사전에 산정한다."], { directImpact: "휴직·복직 운영과 충원 계획의 정확도 점검이 필요하다.", finalRisk: "복귀율 저하와 유연근무 미사용이 겹치면 핵심 직무 공백이 길어질 수 있다.", indicators: ["휴직·복직 예정 인원", "복귀 후 6개월 유지율", "유연근무 이용률", "미사용 사유"], impactPath: impactPath("경력단절·유연근무 기사", "가용 인력 축소", "충원·복귀·배치 계획 영향", "핵심 직무 공백", "복귀율과 유연근무 이용률 점검") }),
+          topArea("조직문화", 82, "Medium", "유연근무를 실제로 사용할 수 있는 문화와 관리자 태도 점검이 필요하다.", ["유연근무 이용 저조는 제도보다 문화와 관리자의 승인 태도가 원인일 수 있다.", "사용 불이익 인식이 있으면 리텐션과 몰입에 영향을 준다."], "조직문화는 유연근무를 쓰는 사람의 문제가 아니라 팀 운영 방식과 관리자 기준의 문제로 봐야 한다.", ["유연근무 미사용 사유를 조직문화 설문에 포함한다.", "관리자별 승인 편차를 점검한다.", "복귀 인력의 업무 배치 만족도와 몰입도를 확인한다."], { directImpact: "일하는 문화와 관리자 운영 기준 점검이 필요하다.", finalRisk: "제도 사용이 눈치 보이는 문화는 여성·돌봄 인력 리텐션을 낮출 수 있다.", indicators: ["유연근무 미사용 사유", "관리자 승인 편차", "복귀자 몰입도", "퇴직 면담 키워드"], impactPath: impactPath("유연근무 이용 저조", "제도 실효성 문제", "팀 문화·관리자 기준 영향", "사용 불이익 인식", "관리자 운영 기준 점검") }),
+        ],
+        evidence: [
+          evidence("기준 기사", "여성 28만 명, 육아로 구직 포기… 유연근무제 이용은 저조", "동아일보", "2026-07-10", "", "요약: 육아로 인한 구직 포기와 유연근무제 이용 저조 문제를 보도했다.", "판단 연결: 후보자 풀, 휴직·복직, 유연근무 제도 실효성 점검 근거다."),
+          evidence("보완 근거", "AI 고용충격 카나리아 대시보드", "동아일보", "2026-07-10", "https://www.donga.com/news/Society/article/all/20260710/134270943/2", "요약: 고용시장 변화를 조기 감지하기 위한 지표화 필요성을 다룬 기사다.", "판단 연결: People 지표를 사후 집계가 아니라 조기 신호로 관리해야 한다는 보완 근거다."),
+        ],
+        cases: [
+          caseItem("육아로 인한 구직 포기", "고용시장 사례", "동아일보", "외부 후보자 풀과 내부 복귀 인력 모두에 영향을 줄 수 있다.", "휴직·복직과 채용 계획을 함께 봐야 한다.", "인력운영", "복귀율 지표 점검", "", true),
+          caseItem("유연근무 이용 저조", "제도 실효성 사례", "동아일보", "제도 도입과 실제 사용 사이에 간극이 있을 수 있다.", "관리자 승인 기준과 사용 불이익 인식을 점검해야 한다.", "조직문화", "미사용 사유 조사", ""),
+          caseItem("고용시장 조기 경보", "지표 관리 참고 사례", "동아일보", "고용 변화는 늦게 보이면 대응이 어렵다.", "채용·퇴직·복귀 지표를 조기 신호로 봐야 한다.", "인력운영", "조기 지표 대시보드화", "https://www.donga.com/news/Society/article/all/20260710/134270943/2"),
+          caseItem("여성 리더 후보군 단절", "추가 확인 필요 사례", "내부 점검 범위", "경력 공백이 리더 후보군 관리에 장기 영향을 줄 수 있다.", "차세대 리더 풀의 복귀·승격 흐름을 점검해야 한다.", "조직/임원", "리더 후보군 영향 점검", ""),
+        ],
+      },
+      {
+        id: "global-uber-agentic-pods-20260710",
+        category: "글로벌",
+        status: "complete",
+        label: "[글로벌] Uber agentic pods와 AI 직무 운영 재설계",
+        headline: "[글로벌] Uber agentic pods와 AI 직무 운영 재설계",
+        article: { title: "Uber CTO bets on 'agentic pods' to make AI more efficient", source: "Business Insider", date: "2026-07-10", url: "https://www.businessinsider.com/uber-cto-bets-on-agentic-pods-make-ai-more-efficient-2026-7" },
+        context: "Uber의 agentic pods 접근은 AI를 개별 도구가 아니라 팀 운영 단위에 통합하는 글로벌 신호다. 국내 People 조직에는 직무 재설계, 관리자 교육, AI 사용 가이드, 보안 기준 정비라는 시사점이 있다.",
+        input: "AI 에이전트가 팀 단위 업무 방식에 들어오면 채용보다 먼저 직무 정의, 역할 분담, 관리자 역량, 산출물 검증 기준이 바뀐다.",
+        sourceMix: ["Business Insider", "AI 직무 운영 기사", "WEF·Glean 보완 자료"],
+        confidence: "High",
+        decisionQuestion: "AI 에이전트 활용을 개인 생산성 실험이 아니라 팀 운영·직무 재설계 기준으로 관리하고 있는가?",
+        peopleSignal: "AI가 개별 업무 자동화를 넘어 팀 구조와 역할 분담으로 확장되고 있다.",
+        directFinding: "기준 기사는 Uber CTO가 agentic pods 방식으로 AI 효율성을 높이려 한다는 내용을 다룬다.",
+        researchJudgement: "국내 직접 규제 이슈는 아니지만 AI 직무 전환, 교육, 보안 가이드 측면에서 People 영향이 명확하다.",
+        metrics: [["헤더", "글로벌", "해외 AI·직무 재편 기사입니다."], ["우선 영향", "교육·조직/임원·보안", "AI 운영 방식 변화가 조직 설계와 관리 역량으로 연결됩니다."], ["해외 비중", "1건", "글로벌 헤더 1건만 사용했습니다."]],
+        reportFlow: [["기준 기사", "Uber CTO의 agentic pods 구상"], ["직접 영향", "AI를 팀 운영 단위로 통합하는 방식 부상"], ["2차 영향", "직무 정의, 관리자 교육, 산출물 검증, 보안 정책으로 확산"], ["검토 필요 리스크", "AI 사용 격차와 검증 책임 불명확"], ["우선 검토", "AI 활용 역할 정의와 관리자 교육 과정 점검"]],
+        topRisks: [["1", "직무 책임 불명확", "AI 에이전트 산출물의 검증 책임이 정리되지 않으면 품질 리스크가 커진다."], ["2", "관리자 역량 격차", "팀 단위 AI 운영을 리드할 관리자 교육이 부족할 수 있다."], ["3", "AI 보안 기준 미흡", "에이전트 사용 과정에서 민감정보 입력과 외부 도구 권한이 문제될 수 있다." ]],
+        areas: [
+          topArea("교육", 88, "High", "AI 에이전트 활용을 직무별·관리자별 교육으로 분리해야 한다.", ["agentic pods는 개인 도구 교육보다 팀 운영 교육을 요구한다.", "관리자는 AI 산출물 검증과 역할 배분 방식을 배워야 한다."], "교육은 프롬프트 사용법보다 업무 프로세스 재설계와 검증 책임을 포함해야 한다.", ["AI 에이전트 사용 직무를 분류한다.", "관리자용 AI 운영·검증 교육 과정을 만든다.", "AI 산출물 검토 체크리스트를 직무별로 정리한다."], { directImpact: "AI 직무 교육 체계 재정비가 필요하다.", finalRisk: "교육 없이 도구만 확산되면 생산성보다 품질·보안 리스크가 커질 수 있다.", indicators: ["AI 교육 이수율", "AI 사용 직무 수", "산출물 재작업률", "관리자 교육 수요"], impactPath: impactPath("Uber agentic pods", "팀 단위 AI 운영 부상", "관리자·직무별 교육 수요", "검증 책임 공백", "AI 운영 교육 설계") }),
+          topArea("보안", 84, "Medium", "AI 에이전트 사용 가이드와 민감정보 입력 기준을 업데이트해야 한다.", ["AI 에이전트는 외부 도구 권한, 데이터 입력, 자동 실행 범위가 결합된다.", "보안 기준이 없으면 현업이 편의 중심으로 사용할 수 있다."], "보안은 금지보다 사용 가능한 범위와 승인 절차를 명확히 하는 방향으로 설계해야 한다.", ["AI 도구별 입력 금지 정보를 정의한다.", "에이전트 권한 부여와 로그 점검 기준을 만든다.", "민감정보 취급 직무의 AI 사용 예외 승인 절차를 정리한다."], { directImpact: "AI 사용 가이드 보완이 필요하다.", finalRisk: "민감정보 입력과 자동화 권한 남용이 보안 사고로 이어질 수 있다.", indicators: ["AI 도구 사용 신청", "보안 예외 승인", "민감정보 입력 신고", "AI 로그 점검 결과"], impactPath: impactPath("AI 에이전트 확산", "외부 도구 권한 확대", "민감정보 처리 위험", "보안 사고 가능성", "AI 사용 가이드 업데이트") }),
+          topArea("조직/임원", 82, "Medium", "AI 운영 단위가 팀 구조와 역할 정의에 영향을 줄 수 있다.", ["팀 단위 AI 운영은 조직 설계와 역할 배분의 문제다.", "임원은 생산성 목표뿐 아니라 위험 통제 기준을 함께 제시해야 한다."], "조직/임원 영역은 AI 도입을 업무 효율화가 아니라 역할 재정의와 관리 체계 변화로 보고 브리핑해야 한다.", ["AI 적용 조직의 역할 변화 시나리오를 정리한다.", "임원 보고용 AI 운영 리스크 지표를 만든다.", "리더 후보군의 AI 활용 역량을 평가 항목에 반영할지 검토한다."], { directImpact: "조직 역할 정의와 임원 보고 주제가 생긴다.", finalRisk: "AI 도입 목표가 불명확하면 구성원 불안과 책임 공백이 동시에 발생할 수 있다.", indicators: ["AI 적용 조직 수", "역할 변경 요청", "임원 보고 안건", "리더 AI 역량 평가"], impactPath: impactPath("팀 단위 AI 운영", "역할 재정의 필요", "조직 설계·리더십 기준 변화", "책임 공백과 불안", "AI 운영 원칙 임원 보고") }),
+        ],
+        evidence: [
+          evidence("기준 기사", "Uber CTO bets on 'agentic pods' to make AI more efficient", "Business Insider", "2026-07-10", "", "요약: Uber CTO가 agentic pods 방식으로 AI 효율성을 높이는 구상을 다룬 기사다.", "판단 연결: AI를 팀 운영 방식으로 통합할 때 직무·교육·보안 기준이 필요하다는 근거다."),
+          evidence("보완 근거", "The Future of Jobs Report 2025", "World Economic Forum", "2025", "https://www.weforum.org/publications/the-future-of-jobs-report-2025/", "요약: 기술 변화가 직무 전환과 역량 재교육 필요성을 키운다는 글로벌 고용 보고서다.", "판단 연결: AI 도입을 교육과 직무 재설계 과제로 봐야 한다는 보완 근거다."),
+          evidence("보완 근거", "State of AI at Work", "Glean", "2025", "https://www.glean.com/report/state-of-ai-at-work", "요약: 직장 내 AI 활용 확산과 생산성·거버넌스 과제를 다룬 자료다.", "판단 연결: AI 사용 가이드와 관리자 교육의 필요성을 뒷받침한다."),
+        ],
+        cases: [
+          caseItem("Uber agentic pods", "해외 선행 사례", "Business Insider", "AI를 팀 운영 단위로 묶는 접근이다.", "직무 정의와 관리자 교육을 함께 설계해야 한다.", "교육", "관리자 AI 운영 교육", "", true),
+          caseItem("WEF 직무 전환 전망", "글로벌 연구 참고", "World Economic Forum", "기술 변화가 직무와 스킬 수요를 바꾼다는 보고서다.", "직무별 전환 교육과 리스킬링 계획이 필요하다.", "교육", "직무 전환 교육 설계", "https://www.weforum.org/publications/the-future-of-jobs-report-2025/"),
+          caseItem("직장 내 AI 활용 확산", "글로벌 조사 참고", "Glean", "현업 AI 활용은 생산성과 거버넌스 이슈를 동시에 만든다.", "사용 가이드와 관리자 교육을 함께 운영해야 한다.", "보안", "AI 사용 가이드 업데이트", "https://www.glean.com/report/state-of-ai-at-work"),
+          caseItem("AI 산출물 검증 책임", "추가 확인 필요 사례", "내부 점검 범위", "AI 에이전트가 만든 산출물은 최종 책임자가 불명확해질 수 있다.", "업무별 검토 책임과 승인 절차를 정의해야 한다.", "조직/임원", "검증 책임 정의", ""),
+        ],
+      },
+    ];
 
-      function sourceLink(url, label) {
-        if (!hasUrl(url)) return `<span class="link-missing">링크 확인 필요</span>`;
-        return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
-      }
+    Object.assign(supportingScoresByScenario, {
+      "display-lgd-refresh-rate-20260710": { "조직/임원": 66, "인력운영": 78, "제도": 64, "노사": 58, "조직문화": 62, "총무": 52 },
+      "industry-sk-hynix-adr-20260710": { "조직/임원": 70, "인력운영": 76, "교육": 66, "노사": 62, "조직문화": 58, "총무": 52, "보안": 60 },
+      "affiliate-samsung-ai-pc-accelerator-20260710": { "조직/임원": 76, "인력운영": 68, "제도": 60, "채용": 72, "노사": 56, "조직문화": 64, "총무": 50 },
+      "policy-minimum-wage-gap-20260710": { "조직/임원": 66, "인력운영": 76, "채용": 58, "교육": 54, "조직문화": 70, "총무": 72, "보안": 48 },
+      "economy-career-break-flexwork-20260710": { "조직/임원": 74, "제도": 76, "채용": 78, "교육": 68, "노사": 64, "총무": 58, "보안": 48 },
+      "global-uber-agentic-pods-20260710": { "인력운영": 76, "제도": 68, "채용": 66, "노사": 58, "조직문화": 74, "총무": 50 },
+    });
 
-      function selectedScenario() {
-        return scenarios[scenarioIndex];
-      }
+    const areaRefinements = {};
+    const evidenceSummaries = {};
+    const evidenceImpactLinks = {};
+    // End daily report content placeholders.
+    scenarios.forEach((scenario) => {
+      completePeopleAreas(scenario);
+      scenario.areas.forEach((item) => Object.assign(item, areaRefinements[scenario.id]?.[item.name] || {}));
+      scenario.evidence.forEach((item) => {
+        item.summary = evidenceSummaries[item.title] || item.summary || "요약: 이 자료는 해당 이슈가 인사 기능에 미치는 영향을 판단하기 위한 참고 근거로 활용된다.";
+        item.impactLink = item.impactLink || evidenceImpactLinks[item.title];
+      });
+    });
 
-      function sortedAreas(scenario) {
-        return [...scenario.areas].sort((a, b) => b.score - a.score);
-      }
+    const confidenceLabel = {
+      High: "신뢰도 높음",
+      Medium: "신뢰도 보통",
+      Watch: "관찰 필요",
+    };
 
-      function selectedArea(scenario) {
-        const sorted = sortedAreas(scenario);
-        return sorted.find((area) => area.name === selectedAreaName) || sorted[0];
-      }
+    const confidenceClass = {
+      High: "confidence-high",
+      Medium: "confidence-medium",
+      Watch: "confidence-watch",
+    };
 
-      function stars(value) {
-        return "★★★★★".slice(0, value) + "☆☆☆☆☆".slice(0, 5 - value);
-      }
+    let scenarioIndex = Math.max(0, scenarios.findIndex((scenario) => scenario.category === DEFAULT_TAB));
+    let selectedAreaName = "";
 
-      function impactLevel(area) {
-        if (area.score >= 92) return { text: "매우 높음", className: "level-critical" };
-        if (area.score >= 82) return { text: "높음", className: "level-high" };
-        if (area.score >= 68) return { text: "보통", className: "level-medium" };
-        return { text: "낮음", className: "level-low" };
-      }
+    const nodes = {
+      tabs: document.getElementById("scenarioTabs"),
+      advanceScenario: document.getElementById("advanceScenario"),
+      headline: document.getElementById("headline"),
+      articleTitleLink: document.getElementById("articleTitleLink"),
+      articleSource: document.getElementById("articleSource"),
+      articleDate: document.getElementById("articleDate"),
+      articleOriginalLink: document.getElementById("articleOriginalLink"),
+      scenarioContext: document.getElementById("scenarioContext"),
+      newsInput: document.getElementById("newsInput"),
+      sourceMix: document.getElementById("sourceMix"),
+      reportFlow: document.getElementById("reportFlow"),
+      overallConfidence: document.getElementById("overallConfidence"),
+      decisionQuestion: document.getElementById("decisionQuestion"),
+      peopleSignal: document.getElementById("peopleSignal"),
+      directFinding: document.getElementById("directFinding"),
+      researchJudgement: document.getElementById("researchJudgement"),
+      metricGrid: document.getElementById("metricGrid"),
+      riskGrid: document.getElementById("riskGrid"),
+      rankingList: document.getElementById("rankingList"),
+      detailTitle: document.getElementById("detailTitle"),
+      detailOwner: document.getElementById("detailOwner"),
+      detailImpactLevel: document.getElementById("detailImpactLevel"),
+      detailConfidence: document.getElementById("detailConfidence"),
+      detailScope: document.getElementById("detailScope"),
+      detailDirectImpact: document.getElementById("detailDirectImpact"),
+      detailPathway: document.getElementById("detailPathway"),
+      detailFinalRisk: document.getElementById("detailFinalRisk"),
+      detailWhy: document.getElementById("detailWhy"),
+      detailInsight: document.getElementById("detailInsight"),
+      detailIndicators: document.getElementById("detailIndicators"),
+      evidenceGrid: document.getElementById("evidenceGrid"),
+      actionStack: document.getElementById("actionStack"),
+      caseGrid: document.getElementById("caseGrid"),
+    };
 
-      function renderTabs() {
-        if (!nodes.tabs) return;
-        nodes.tabs.innerHTML = scenarios
-          .map(
-            (scenario, index) => `
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function hasUrl(value) {
+      return typeof value === "string" && /^https?:\/\//.test(value);
+    }
+
+    function sourceLink(url, label) {
+      if (!hasUrl(url)) return `<span class="link-missing">링크 확인 필요</span>`;
+      return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+    }
+
+    function selectedScenario() {
+      return scenarios[scenarioIndex];
+    }
+
+    function sortedAreas(scenario) {
+      return [...scenario.areas].sort((a, b) => b.score - a.score);
+    }
+
+    function selectedArea(scenario) {
+      const sorted = sortedAreas(scenario);
+      return sorted.find((area) => area.name === selectedAreaName) || sorted[0];
+    }
+
+    function stars(value) {
+      return "★★★★★".slice(0, value) + "☆☆☆☆☆".slice(0, 5 - value);
+    }
+
+    function impactLevel(area) {
+      if (area.score >= 92) return { text: "매우 높음", className: "level-critical" };
+      if (area.score >= 82) return { text: "높음", className: "level-high" };
+      if (area.score >= 68) return { text: "보통", className: "level-medium" };
+      return { text: "낮음", className: "level-low" };
+    }
+
+    function renderTabs() {
+      if (!nodes.tabs) return;
+      nodes.tabs.innerHTML = scenarios
+        .map(
+          (scenario, index) => `
               <button
                 class="scenario-tab"
                 type="button"
@@ -2732,79 +1721,79 @@
                 data-scenario-index="${index}"
               >${escapeHtml(scenario.label)}</button>
             `,
-          )
-          .join("");
+        )
+        .join("");
 
-        nodes.tabs.querySelectorAll("button").forEach((button) => {
-          button.addEventListener("click", () => {
-            scenarioIndex = Number(button.dataset.scenarioIndex);
-            selectedAreaName = "";
-            render();
-          });
+      nodes.tabs.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          scenarioIndex = Number(button.dataset.scenarioIndex);
+          selectedAreaName = "";
+          render();
         });
-      }
+      });
+    }
 
-      function renderInput(scenario) {
-        const article = scenario.article || scenario.evidence[0] || {};
-        nodes.headline.textContent = article.title || scenario.headline;
-        nodes.articleTitleLink.href = hasUrl(article.url) ? article.url : "#";
-        nodes.articleSource.textContent = `출처: ${article.source || "확인 필요"}`;
-        nodes.articleDate.textContent = `날짜: ${article.date || "확인 필요"}`;
-        nodes.articleOriginalLink.style.display = hasUrl(article.url) ? "inline-flex" : "none";
-        nodes.articleOriginalLink.href = hasUrl(article.url) ? article.url : "#";
-        nodes.scenarioContext.textContent = scenario.context;
-        nodes.newsInput.textContent = scenario.input;
-        if (nodes.sourceMix) {
-          nodes.sourceMix.innerHTML = "";
-        }
-        nodes.reportFlow.innerHTML = (scenario.reportFlow || [])
-          .map(
-            ([label, text]) => `
+    function renderInput(scenario) {
+      const article = scenario.article || scenario.evidence[0] || {};
+      nodes.headline.textContent = article.title || scenario.headline;
+      nodes.articleTitleLink.href = hasUrl(article.url) ? article.url : "#";
+      nodes.articleSource.textContent = `출처: ${article.source || "확인 필요"}`;
+      nodes.articleDate.textContent = `날짜: ${article.date || "확인 필요"}`;
+      nodes.articleOriginalLink.style.display = hasUrl(article.url) ? "inline-flex" : "none";
+      nodes.articleOriginalLink.href = hasUrl(article.url) ? article.url : "#";
+      nodes.scenarioContext.textContent = scenario.context;
+      nodes.newsInput.textContent = scenario.input;
+      if (nodes.sourceMix) {
+        nodes.sourceMix.innerHTML = "";
+      }
+      nodes.reportFlow.innerHTML = (scenario.reportFlow || [])
+        .map(
+          ([label, text]) => `
               <div class="flow-card">
                 <span>${escapeHtml(label)}</span>
                 <strong>${escapeHtml(text)}</strong>
               </div>
             `,
-          )
-          .join("");
-        nodes.overallConfidence.className = `confidence-badge ${confidenceClass[scenario.confidence]}`;
-        nodes.overallConfidence.textContent = confidenceLabel[scenario.confidence];
-        nodes.decisionQuestion.textContent = scenario.decisionQuestion;
-        nodes.peopleSignal.textContent = scenario.peopleSignal;
-        nodes.directFinding.textContent = scenario.directFinding || scenario.context;
-        nodes.researchJudgement.textContent = scenario.researchJudgement || scenario.peopleSignal;
-        nodes.metricGrid.innerHTML = scenario.metrics
-          .map(
-            ([label, value, note]) => `
+        )
+        .join("");
+      nodes.overallConfidence.className = `confidence-badge ${confidenceClass[scenario.confidence]}`;
+      nodes.overallConfidence.textContent = confidenceLabel[scenario.confidence];
+      nodes.decisionQuestion.textContent = scenario.decisionQuestion;
+      nodes.peopleSignal.textContent = scenario.peopleSignal;
+      nodes.directFinding.textContent = scenario.directFinding || scenario.context;
+      nodes.researchJudgement.textContent = scenario.researchJudgement || scenario.peopleSignal;
+      nodes.metricGrid.innerHTML = scenario.metrics
+        .map(
+          ([label, value, note]) => `
               <div class="metric-tile">
                 <span>${escapeHtml(label)}</span>
                 <strong>${escapeHtml(value)}</strong>
                 <p>${escapeHtml(note)}</p>
               </div>
             `,
-          )
-          .join("");
-      }
+        )
+        .join("");
+    }
 
-      function renderTopRisks(scenario) {
-        nodes.riskGrid.innerHTML = (scenario.topRisks || [])
-          .map(
-            ([index, title, note]) => `
+    function renderTopRisks(scenario) {
+      nodes.riskGrid.innerHTML = (scenario.topRisks || [])
+        .map(
+          ([index, title, note]) => `
               <article class="risk-card">
                 <span>${escapeHtml(index)}. 우선 검토</span>
                 <h3>${escapeHtml(title)}</h3>
                 <p>${escapeHtml(note)}</p>
               </article>
             `,
-          )
-          .join("");
-      }
+        )
+        .join("");
+    }
 
-      function renderRanking(scenario, activeArea) {
-        nodes.rankingList.innerHTML = sortedAreas(scenario)
-          .map((area, index) => {
-            const level = impactLevel(area);
-            return `
+    function renderRanking(scenario, activeArea) {
+      nodes.rankingList.innerHTML = sortedAreas(scenario)
+        .map((area, index) => {
+          const level = impactLevel(area);
+          return `
               <button class="ranking-row ${area.name === activeArea.name ? "active" : ""} ${area.supporting ? "supporting" : ""}" type="button" data-area="${escapeHtml(area.name)}">
                 <span class="rank-no">${index + 1}</span>
                 <span class="rank-main">
@@ -2819,55 +1808,55 @@
                 </span>
               </button>
             `;
-          })
-          .join("");
+        })
+        .join("");
 
-        nodes.rankingList.querySelectorAll("button").forEach((button) => {
-          button.addEventListener("click", () => {
-            selectedAreaName = button.dataset.area;
-            render();
-          });
+      nodes.rankingList.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedAreaName = button.dataset.area;
+          render();
         });
-      }
+      });
+    }
 
-      function renderDetail(area) {
-        const level = impactLevel(area);
-        const impactPath = area.impactPath || [
-          { stage: "기사 내용", text: area.summary },
-          { stage: "직접 영향", text: area.directImpact || area.summary },
-          { stage: "2차 영향", text: area.secondaryImpact || area.insight },
-          { stage: "검토 필요 리스크", text: area.finalRisk || area.insight },
-          { stage: "우선 검토", text: `${area.name} 관점의 실행 과제 확인` },
-        ];
-        nodes.detailTitle.textContent = area.name;
-        nodes.detailOwner.textContent = `${area.owner} 관점`;
-        nodes.detailImpactLevel.className = `impact-level ${level.className}`;
-        nodes.detailImpactLevel.textContent = level.text;
-        nodes.detailConfidence.textContent = confidenceLabel[area.confidence];
-        nodes.detailScope.innerHTML = area.scope.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-        nodes.detailDirectImpact.textContent = area.directImpact || area.summary;
-        nodes.detailPathway.innerHTML = impactPath
-          .map(
-            (step) => `
+    function renderDetail(area) {
+      const level = impactLevel(area);
+      const impactPath = area.impactPath || [
+        { stage: "기사 내용", text: area.summary },
+        { stage: "직접 영향", text: area.directImpact || area.summary },
+        { stage: "2차 영향", text: area.secondaryImpact || area.insight },
+        { stage: "검토 필요 리스크", text: area.finalRisk || area.insight },
+        { stage: "우선 검토", text: `${area.name} 관점의 실행 과제 확인` },
+      ];
+      nodes.detailTitle.textContent = area.name;
+      nodes.detailOwner.textContent = `${area.owner} 관점`;
+      nodes.detailImpactLevel.className = `impact-level ${level.className}`;
+      nodes.detailImpactLevel.textContent = level.text;
+      nodes.detailConfidence.textContent = confidenceLabel[area.confidence];
+      nodes.detailScope.innerHTML = area.scope.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      nodes.detailDirectImpact.textContent = area.directImpact || area.summary;
+      nodes.detailPathway.innerHTML = impactPath
+        .map(
+          (step) => `
               <div class="path-step">
                 <span>${escapeHtml(step.stage)}</span>
                 <strong>${escapeHtml(step.text)}</strong>
               </div>
             `,
-          )
-          .join("");
-        nodes.detailFinalRisk.textContent = area.finalRisk || area.insight;
-        nodes.detailWhy.innerHTML = area.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-        nodes.detailInsight.textContent = area.insight;
-        nodes.detailIndicators.innerHTML = (area.indicators || ["관련 내부 지표 확인 필요"])
-          .map((item) => `<li>${escapeHtml(item)}</li>`)
-          .join("");
-      }
+        )
+        .join("");
+      nodes.detailFinalRisk.textContent = area.finalRisk || area.insight;
+      nodes.detailWhy.innerHTML = area.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      nodes.detailInsight.textContent = area.insight;
+      nodes.detailIndicators.innerHTML = (area.indicators || ["관련 내부 지표 확인 필요"])
+        .map((item) => `<li>${escapeHtml(item)}</li>`)
+        .join("");
+    }
 
-      function renderEvidence(scenario) {
-        nodes.evidenceGrid.innerHTML = scenario.evidence
-          .map(
-            (item) => `
+    function renderEvidence(scenario) {
+      nodes.evidenceGrid.innerHTML = scenario.evidence
+        .map(
+          (item) => `
               <article class="evidence-card">
                 <span class="type-badge">${escapeHtml(item.type)}</span>
                 <h3>${escapeHtml(item.title)}</h3>
@@ -2881,12 +1870,12 @@
                 ${sourceLink(item.url, "자료 열기")}
               </article>
             `,
-          )
-          .join("");
-      }
+        )
+        .join("");
+    }
 
-      function renderActions(area) {
-        nodes.actionStack.innerHTML = `
+    function renderActions(area) {
+      nodes.actionStack.innerHTML = `
           <article class="action-card">
             <span class="confidence-badge ${confidenceClass[area.confidence]}">${escapeHtml(area.name)}</span>
             <h3>권고 액션</h3>
@@ -2895,12 +1884,12 @@
             </ol>
           </article>
         `;
-      }
+    }
 
-      function renderCases(scenario) {
-        nodes.caseGrid.innerHTML = scenario.cases
-          .map(
-            (item) => `
+    function renderCases(scenario) {
+      nodes.caseGrid.innerHTML = scenario.cases
+        .map(
+          (item) => `
               <article class="case-card ${item.priority ? "case-card-strong" : ""}">
                 <span>${escapeHtml(item.type || item.tag)}</span>
                 <h3>${escapeHtml(item.title)}</h3>
@@ -2914,32 +1903,33 @@
                 ${sourceLink(item.url, "사례 열기")}
               </article>
             `,
-          )
-          .join("");
-      }
+        )
+        .join("");
+    }
 
-      function render() {
-        const scenario = selectedScenario();
-        const area = selectedArea(scenario);
-        renderTabs();
-        renderInput(scenario);
-        renderTopRisks(scenario);
-        renderRanking(scenario, area);
-        renderDetail(area);
-        renderEvidence(scenario);
-        renderActions(area);
-        renderCases(scenario);
-      }
+    function render() {
+      const scenario = selectedScenario();
+      const area = selectedArea(scenario);
+      renderTabs();
+      renderInput(scenario);
+      renderTopRisks(scenario);
+      renderRanking(scenario, area);
+      renderDetail(area);
+      renderEvidence(scenario);
+      renderActions(area);
+      renderCases(scenario);
+    }
 
-      if (nodes.advanceScenario) {
-        nodes.advanceScenario.addEventListener("click", () => {
-          scenarioIndex = (scenarioIndex + 1) % scenarios.length;
-          selectedAreaName = "";
-          render();
-        });
-      }
+    if (nodes.advanceScenario) {
+      nodes.advanceScenario.addEventListener("click", () => {
+        scenarioIndex = (scenarioIndex + 1) % scenarios.length;
+        selectedAreaName = "";
+        render();
+      });
+    }
 
-      render();
-    </script>
-  </body>
+    render();
+  </script>
+</body>
+
 </html>
