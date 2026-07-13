@@ -268,8 +268,8 @@
           <p class="subcopy">날짜를 선택하면 해당일 리포트와 선정 이슈를 확인할 수 있습니다.</p>
         </div>
         <nav class="button-row" aria-label="빠른 이동">
-          <a class="button" href="index.html">홈</a>
-          <a class="button primary" href="outputs/latest.html">최신 리포트</a>
+          <a class="button" id="homeLink" href="index.html">홈</a>
+          <a class="button primary" id="latestLink" href="outputs/latest.html">최신 리포트</a>
         </nav>
       </header>
 
@@ -322,7 +322,46 @@
         detail: document.getElementById("detail"),
         prevMonth: document.getElementById("prevMonth"),
         nextMonth: document.getElementById("nextMonth"),
+        homeLink: document.getElementById("homeLink"),
+        latestLink: document.getElementById("latestLink"),
       };
+
+      function isInOutputsPage() {
+        return location.pathname.replaceAll("\\", "/").includes("/outputs/");
+      }
+
+      function resolvePath(path) {
+        if (!path) return "#";
+        if (/^https?:\/\//.test(path)) return path;
+        return isInOutputsPage() ? path.replace(/^outputs\//, "") : path;
+      }
+
+      function issueTitle(issue) {
+        if (typeof issue === "string") return issue;
+        if (issue && typeof issue === "object") {
+          if (issue.title) return issue.title;
+          if (issue.label) return issue.label;
+          if (issue.headline) return issue.headline;
+          if (issue.category) return `[${issue.category}] 제목 확인 필요`;
+        }
+        return "제목 확인 필요";
+      }
+
+      async function loadReports() {
+        const paths = [resolvePath("outputs/reports.json"), isInOutputsPage() ? "reports.json" : "outputs/reports.json"];
+        const uniquePaths = [...new Set(paths)];
+        let lastError;
+        for (const path of uniquePaths) {
+          try {
+            const response = await fetch(path, { cache: "no-store" });
+            if (!response.ok) throw new Error("reports.json unavailable");
+            return await response.json();
+          } catch (error) {
+            lastError = error;
+          }
+        }
+        throw lastError || new Error("reports.json unavailable");
+      }
 
       function pad(value) {
         return String(value).padStart(2, "0");
@@ -358,9 +397,9 @@
           <h2>${escapeHtml(report.date)}</h2>
           <p>${escapeHtml(report.title || "데일리 인사 시사점 리포트")}</p>
           <ul class="issue-list">
-            ${(report.issues || []).map((issue) => `<li>${escapeHtml(issue)}</li>`).join("")}
+            ${(report.issues || []).map((issue) => `<li>${escapeHtml(issueTitle(issue))}</li>`).join("")}
           </ul>
-          <a class="button primary" href="${escapeHtml(report.file)}">이 날짜 리포트 열기</a>
+          <a class="button primary" href="${escapeHtml(resolvePath(report.file))}">이 날짜 리포트 열기</a>
         `;
       }
 
@@ -401,12 +440,13 @@
 
       async function init() {
         try {
-          const response = await fetch("outputs/reports.json", { cache: "no-store" });
-          if (!response.ok) throw new Error("reports.json unavailable");
-          state.reports = await response.json();
+          state.reports = await loadReports();
         } catch (error) {
           state.reports = fallbackReports;
         }
+
+        nodes.homeLink.href = isInOutputsPage() ? "../index.html" : "index.html";
+        nodes.latestLink.href = resolvePath("outputs/latest.html");
 
         state.reports.sort((a, b) => b.date.localeCompare(a.date));
         const latest = state.reports[0];
