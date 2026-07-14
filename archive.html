@@ -347,6 +347,34 @@
         return "제목 확인 필요";
       }
 
+      function normalizeReports(data) {
+        const found = [];
+        const seen = new Set();
+
+        function visit(value) {
+          if (!value || typeof value !== "object") return;
+          if (Array.isArray(value)) {
+            value.forEach(visit);
+            return;
+          }
+
+          if (value.date && value.file) {
+            const key = String(value.date);
+            if (!seen.has(key)) {
+              seen.add(key);
+              found.push(value);
+            }
+          }
+
+          Object.entries(value).forEach(([key, nested]) => {
+            if (key !== "issues") visit(nested);
+          });
+        }
+
+        visit(data);
+        return found;
+      }
+
       async function loadReports() {
         const paths = [resolvePath("outputs/reports.json"), isInOutputsPage() ? "reports.json" : "outputs/reports.json"];
         const uniquePaths = [...new Set(paths)];
@@ -440,9 +468,9 @@
 
       async function init() {
         try {
-          state.reports = await loadReports();
+          state.reports = normalizeReports(await loadReports());
         } catch (error) {
-          state.reports = fallbackReports;
+          state.reports = normalizeReports(fallbackReports);
         }
 
         nodes.homeLink.href = isInOutputsPage() ? "../index.html" : "index.html";
