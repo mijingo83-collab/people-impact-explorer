@@ -1,0 +1,3769 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>인사 시사점 분석 리포트</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --paper: #ffffff;
+      --paper-soft: #f8fafc;
+      --paper-warm: #fffdf8;
+      --ink: #111827;
+      --ink-2: #273344;
+      --muted: #687789;
+      --faint: #8a98a8;
+      --line: #dfe5ee;
+      --navy: #101820;
+      --blue: #2f55d4;
+      --teal: #0f8f87;
+      --green: #148044;
+      --amber: #b36b14;
+      --red: #bf3d3a;
+      --shadow: 0 14px 30px rgba(28, 42, 58, 0.06);
+      --shadow-soft: 0 8px 18px rgba(28, 42, 58, 0.05);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family:
+        "Pretendard",
+        "Apple SD Gothic Neo",
+        "Malgun Gothic",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      letter-spacing: 0;
+    }
+
+    button,
+    textarea,
+    a {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1460px, 100%);
+      margin: 0 auto;
+      padding: 28px 28px 38px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    .brand-block {
+      display: grid;
+      gap: 8px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      color: var(--navy);
+      font-size: clamp(32px, 3.6vw, 46px);
+      font-weight: 840;
+      line-height: 1.08;
+    }
+
+    h2 {
+      color: var(--navy);
+      font-size: 24px;
+      font-weight: 820;
+      line-height: 1.25;
+    }
+
+    h3 {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 790;
+      line-height: 1.32;
+    }
+
+    .subcopy {
+      max-width: 890px;
+      color: #516173;
+      font-size: 17px;
+      font-weight: 560;
+      line-height: 1.55;
+    }
+
+    .status-board {
+      display: grid;
+      grid-template-columns: auto;
+      gap: 6px;
+      align-items: center;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .status-pill {
+      display: grid;
+      gap: 3px;
+      min-width: 112px;
+      min-height: auto;
+      padding: 8px 10px;
+      border: 1px solid #e3e8ef;
+      border-radius: 7px;
+      background: var(--paper);
+    }
+
+    .status-pill span {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .status-pill strong {
+      color: var(--ink-2);
+      font-size: 14px;
+      font-weight: 820;
+      white-space: nowrap;
+    }
+
+    .status-link {
+      align-content: center;
+      min-width: 132px;
+      background: var(--navy);
+    }
+
+    .status-link span,
+    .status-link strong {
+      color: #ffffff;
+    }
+
+    .control-band {
+      display: none;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .scenario-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .scenario-tab,
+    .advance-button,
+    .select-area {
+      min-height: 40px;
+      border: 0;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 820;
+    }
+
+    .scenario-tab {
+      padding: 0 14px;
+      background: transparent;
+      color: #5d6d80;
+    }
+
+    .scenario-tab[aria-selected="true"] {
+      background: var(--navy);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(16, 24, 32, 0.2);
+    }
+
+    .advance-button {
+      padding: 0 18px;
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 14px 28px rgba(47, 85, 212, 0.22);
+    }
+
+    .panel,
+    .metric-tile,
+    .ranking-row,
+    .evidence-card,
+    .case-card,
+    .action-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 13px;
+    }
+
+    .panel-title {
+      display: grid;
+      gap: 6px;
+    }
+
+    .panel-title p {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 640;
+      line-height: 1.5;
+    }
+
+    .confidence-badge,
+    .source-chip,
+    .type-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 26px;
+      width: max-content;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 820;
+      white-space: nowrap;
+    }
+
+    .confidence-high {
+      background: #e7f6ed;
+      color: var(--green);
+    }
+
+    .confidence-medium {
+      background: #edf2ff;
+      color: var(--blue);
+    }
+
+    .confidence-watch {
+      background: #fff3dc;
+      color: var(--amber);
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.72fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .news-input {
+      display: block;
+      width: 100%;
+      min-height: 224px;
+      padding: 17px 18px;
+      resize: none;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      outline: none;
+      background: var(--paper-soft);
+      color: #243140;
+      font-size: 17px;
+      font-weight: 560;
+      line-height: 1.78;
+    }
+
+    .news-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(47, 85, 212, 0.12);
+    }
+
+    .article-card {
+      display: grid;
+      gap: 16px;
+    }
+
+    .article-title-link {
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .article-title-link:hover {
+      color: var(--blue);
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .article-meta span,
+    .article-meta a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 11px;
+      border: 1px solid #d9e2ee;
+      border-radius: 6px;
+      background: #f8fafc;
+      color: #46566a;
+      font-size: 13px;
+      font-weight: 760;
+    }
+
+    .article-meta a {
+      color: var(--blue);
+      background: #f4f7ff;
+    }
+
+    .article-summary {
+      padding: 16px;
+      border: 1px solid #dce5ef;
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+      color: #253244;
+      font-size: 16px;
+      font-weight: 620;
+      line-height: 1.65;
+    }
+
+    .report-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 0;
+    }
+
+    .flow-card {
+      position: relative;
+      min-height: auto;
+      padding: 12px 13px;
+      border: 1px solid #dce5ef;
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: none;
+    }
+
+    .flow-card:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -14px;
+      z-index: 1;
+      transform: translateY(-50%);
+      color: #7a8797;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .flow-card span {
+      display: block;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 860;
+    }
+
+    .flow-card strong {
+      display: block;
+      margin-top: 7px;
+      color: var(--ink-2);
+      font-size: 15px;
+      font-weight: 760;
+      line-height: 1.45;
+    }
+
+    .source-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .source-chip {
+      border: 1px solid #cbd7e5;
+      background: #fff;
+      color: #46576a;
+    }
+
+    .judgement-panel {
+      display: grid;
+      align-content: start;
+      gap: 12px;
+    }
+
+    .judgement-box {
+      display: grid;
+      gap: 7px;
+      padding: 13px 14px;
+      border: 1px solid #dde5ef;
+      border-radius: var(--radius);
+      background: var(--paper-warm);
+    }
+
+    .judgement-box span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 820;
+    }
+
+    .judgement-box strong {
+      color: #263242;
+      font-size: 16px;
+      font-weight: 820;
+      line-height: 1.42;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric-tile {
+      min-height: auto;
+      padding: 12px 13px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .metric-tile span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 820;
+    }
+
+    .metric-tile strong {
+      display: block;
+      margin-top: 7px;
+      color: var(--navy);
+      font-size: 21px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .metric-tile p {
+      margin-top: 6px;
+      color: #5a6a7c;
+      font-size: 14px;
+      font-weight: 640;
+      line-height: 1.48;
+    }
+
+    .risk-overview {
+      margin-top: 18px;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .risk-card {
+      display: grid;
+      gap: 8px;
+      min-height: auto;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .risk-card span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 840;
+    }
+
+    .risk-card h3 {
+      color: var(--navy);
+      font-size: 22px;
+    }
+
+    .risk-card p {
+      color: #4c5d70;
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .impact-level {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+
+    .level-critical {
+      border: 1px solid #f2b8b5;
+      background: #fff1f0;
+      color: #b42318;
+    }
+
+    .level-high {
+      border: 1px solid #f7c78f;
+      background: #fff7ed;
+      color: #b54708;
+    }
+
+    .level-medium {
+      border: 1px solid #f8df7b;
+      background: #fffbe6;
+      color: #7a5a00;
+    }
+
+    .level-low {
+      border: 1px solid #d4dbe5;
+      background: #f5f7fa;
+      color: #5c6978;
+    }
+
+    .support-score .impact-level {
+      color: #111827;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: minmax(500px, 0.88fr) minmax(460px, 0.78fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .ranking-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .ranking-row {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      gap: 13px;
+      align-items: center;
+      width: 100%;
+      min-height: auto;
+      padding: 13px 14px;
+      color: inherit;
+      text-align: left;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .ranking-row.active {
+      border-color: rgba(47, 85, 212, 0.72);
+      background: #f4f7ff;
+      box-shadow: 0 12px 28px rgba(47, 85, 212, 0.11);
+    }
+
+    .ranking-row.supporting {
+      background: #fbfcfe;
+      border-color: #e8edf4;
+    }
+
+    .ranking-row.supporting .rank-title strong {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .ranking-row.supporting .rank-main p {
+      color: var(--faint);
+      font-size: 0.88rem;
+    }
+
+    .ranking-row.supporting .rank-no {
+      background: #98a6b7;
+    }
+
+    .rank-no {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 7px;
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 860;
+    }
+
+    .ranking-row.active .rank-no {
+      background: var(--blue);
+    }
+
+    .rank-main {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .rank-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rank-title strong {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 820;
+      line-height: 1.3;
+    }
+
+    .rank-main p {
+      color: #526274;
+      font-size: 16px;
+      font-weight: 590;
+      line-height: 1.45;
+    }
+
+    .rank-score {
+      display: grid;
+      justify-items: end;
+      gap: 5px;
+    }
+
+    .rank-score strong {
+      color: var(--navy);
+      font-size: 26px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .detail-panel {
+      display: grid;
+      gap: 14px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .detail-panel .eyebrow,
+    .detail-panel .panel-title p {
+      color: var(--muted);
+    }
+
+    .detail-panel h2,
+    .detail-panel h3 {
+      color: var(--navy);
+    }
+
+    .detail-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 13px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .support-score {
+      display: grid;
+      justify-items: end;
+      gap: 5px;
+    }
+
+    .support-score strong {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .support-score span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .detail-section {
+      display: grid;
+      gap: 7px;
+    }
+
+    .detail-section>span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 820;
+      text-transform: uppercase;
+    }
+
+    .detail-section ul,
+    .action-card ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .detail-section li {
+      color: #273344;
+      font-size: 16px;
+      font-weight: 610;
+      line-height: 1.52;
+    }
+
+    .insight-box {
+      padding: 12px 14px;
+      border-left: 3px solid var(--teal);
+      border-radius: 6px;
+      background: #f4fbfa;
+      color: #20313f;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.52;
+    }
+
+    .risk-box {
+      padding: 12px 14px;
+      border-left: 3px solid #f97316;
+      border-radius: 6px;
+      background: #fff7ed;
+      color: #2b3340;
+      font-size: 15px;
+      font-weight: 680;
+      line-height: 1.52;
+    }
+
+    .pathway {
+      display: grid;
+      gap: 8px;
+    }
+
+    .path-step {
+      display: grid;
+      grid-template-columns: 94px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid #dfe6ef;
+      border-radius: 6px;
+      background: #f8fafc;
+    }
+
+    .path-step span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 840;
+    }
+
+    .path-step strong {
+      color: #1f2a37;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .evidence-action-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, 0.58fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .evidence-card {
+      display: grid;
+      gap: 10px;
+      min-height: auto;
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .type-badge {
+      background: #eef2ff;
+      color: var(--blue);
+    }
+
+    .evidence-card h3 {
+      color: var(--ink);
+      font-size: 17px;
+    }
+
+    .evidence-key {
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 780;
+      line-height: 1.48;
+    }
+
+    .evidence-summary {
+      color: #46566a;
+      font-size: 14px;
+      font-weight: 610;
+      line-height: 1.55;
+    }
+
+    .evidence-link-note {
+      padding: 10px 11px;
+      border-radius: 6px;
+      background: #f5f8fb;
+      color: #415064;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+
+    .source-meta {
+      display: grid;
+      gap: 4px;
+      color: #5a6a7c;
+      font-size: 13px;
+      font-weight: 680;
+      line-height: 1.4;
+    }
+
+    .evidence-card a,
+    .case-card a {
+      align-self: end;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 860;
+    }
+
+    .link-missing {
+      align-self: end;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 780;
+    }
+
+    .action-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .action-card {
+      display: grid;
+      gap: 13px;
+      padding: 18px;
+      background: var(--paper-warm);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .action-card h3 {
+      color: var(--navy);
+      font-size: 22px;
+    }
+
+    .action-card li {
+      color: #263242;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .case-card {
+      display: grid;
+      gap: 9px;
+      min-height: auto;
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .case-card-strong {
+      border-color: rgba(15, 143, 135, 0.38);
+      background: #f7fbfb;
+    }
+
+    .case-card span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 860;
+    }
+
+    .case-card h3 {
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .case-card p {
+      color: #596a7c;
+      font-size: 14px;
+      font-weight: 620;
+      line-height: 1.5;
+    }
+
+    .case-meta {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+    }
+
+    .case-meta div {
+      display: grid;
+      gap: 3px;
+    }
+
+    .case-meta dt {
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .case-meta dd {
+      margin: 0;
+      color: #405064;
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.42;
+    }
+
+    .evidence-card a:hover,
+    .case-card a:hover,
+    .case-card:focus-visible a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1280px) {
+
+      .input-grid,
+      .analysis-grid,
+      .evidence-action-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .report-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .case-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-card:not(:last-child)::after {
+        content: "↓";
+        top: auto;
+        right: 50%;
+        bottom: -18px;
+        transform: translateX(50%);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        padding: 16px;
+      }
+
+      .topbar,
+      .control-band {
+        grid-template-columns: 1fr;
+      }
+
+      .status-board,
+      .scenario-tabs,
+      .metric-grid,
+      .risk-grid,
+      .evidence-grid,
+      .case-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .advance-button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        padding: 12px;
+      }
+
+      .panel {
+        padding: 16px;
+      }
+
+      .news-input {
+        min-height: 300px;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .ranking-row {
+        grid-template-columns: 34px minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .rank-score {
+        grid-column: 2;
+        justify-items: start;
+      }
+
+      .detail-head {
+        flex-direction: column;
+      }
+
+      .support-score {
+        justify-items: start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <h1>인사 시사점 분석 리포트</h1>
+        <p class="subcopy">
+          국내외 주요 이슈가 인사 업무에 미치는 영향과 권고 액션을 제공합니다.
+        </p>
+      </div>
+      <div class="status-board" aria-label="보고서 상태">
+        <a class="status-pill status-link" href="../archive.html">
+          <span>이력 보기</span>
+          <strong>달력 열기</strong>
+        </a>
+      </div>
+    </header>
+
+    <nav class="scenario-tabs" id="scenarioTabs" role="tablist" aria-label="데일리 6개 헤더별 이슈"></nav>
+
+    <section class="input-grid" aria-label="분석 대상 기사와 인사 판단 요약">
+      <article class="panel article-card">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">분석 대상 기사</p>
+            <h2><a class="article-title-link" id="articleTitleLink" href="#" target="_blank"
+                rel="noopener noreferrer"><span id="headline"></span></a></h2>
+            <div class="article-meta">
+              <span id="articleSource"></span>
+              <span id="articleDate"></span>
+              <a id="articleOriginalLink" href="#" target="_blank" rel="noopener noreferrer">기사 원문 보기</a>
+            </div>
+          </div>
+        </div>
+        <p class="article-summary" id="newsInput"></p>
+        <p id="scenarioContext"></p>
+        <div class="report-flow" id="reportFlow" aria-label="영향 전개 경로 요약"></div>
+      </article>
+
+      <aside class="panel judgement-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">인사 판단 요약</p>
+            <h2>가장 먼저 봐야 할 질문</h2>
+            <p>People 조직이 먼저 확인할 질문과 조치 방향을 요약합니다.</p>
+          </div>
+          <span class="confidence-badge" id="overallConfidence"></span>
+        </div>
+        <div class="judgement-box">
+          <span>핵심 질문</span>
+          <strong id="decisionQuestion"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>인사 업무 신호</span>
+          <strong id="peopleSignal"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>기준 기사만 본 직접 영향</span>
+          <strong id="directFinding"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>추가 자료 포함 종합 판단</span>
+          <strong id="researchJudgement"></strong>
+        </div>
+        <div class="metric-grid" id="metricGrid"></div>
+      </aside>
+    </section>
+
+    <section class="panel risk-overview" aria-label="상위 리스크 3개">
+      <div class="panel-header">
+        <div class="panel-title">
+          <p class="eyebrow">상위 리스크 3개</p>
+          <h2>먼저 검토할 인사 리스크</h2>
+          <p>관련 자료를 종합했을 때 인사 조직이 우선 확인해야 할 리스크입니다.</p>
+        </div>
+      </div>
+      <div class="risk-grid" id="riskGrid"></div>
+    </section>
+
+    <section class="analysis-grid" aria-label="영향 영역 순위와 상세 분석">
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">영향 영역 순위</p>
+            <h2>인사 기능별 영향도</h2>
+            <p>기사 직접 언급 순서가 아니라, 인사 조직이 먼저 검토해야 할 리스크가 큰 순서로 정렬했습니다.</p>
+          </div>
+        </div>
+        <div class="ranking-list" id="rankingList"></div>
+      </article>
+
+      <aside class="panel detail-panel" aria-live="polite">
+        <div class="detail-head">
+          <div class="panel-title">
+            <p class="eyebrow">상세 분석</p>
+            <h2 id="detailTitle"></h2>
+            <p id="detailOwner"></p>
+          </div>
+          <div class="support-score">
+            <span>영향 수준</span>
+            <strong id="detailImpactLevel"></strong>
+            <span id="detailConfidence"></span>
+          </div>
+        </div>
+        <div class="detail-section">
+          <span>관련 업무 범위</span>
+          <ul id="detailScope"></ul>
+        </div>
+        <div class="detail-section">
+          <span>직접 영향</span>
+          <div class="insight-box" id="detailDirectImpact"></div>
+        </div>
+        <div class="detail-section">
+          <span>영향 전개 경로</span>
+          <div class="pathway" id="detailPathway"></div>
+        </div>
+        <div class="detail-section">
+          <span>검토 필요 리스크</span>
+          <div class="risk-box" id="detailFinalRisk"></div>
+        </div>
+        <div class="detail-section">
+          <span>왜 영향이 있는가</span>
+          <ul id="detailWhy"></ul>
+        </div>
+        <div class="detail-section">
+          <span>핵심 시사점</span>
+          <div class="insight-box" id="detailInsight"></div>
+        </div>
+        <div class="detail-section">
+          <span>확인해야 할 내부 지표</span>
+          <ul id="detailIndicators"></ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="evidence-action-grid" aria-label="근거 자료와 권고 액션">
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">근거 자료</p>
+            <h2>관련 자료 탐색 결과</h2>
+            <p>원문 기사, 공식 발표, 시장 기사, 보상 기사, 연구 보고서를 함께 보며 파급 영향을 판단합니다.</p>
+          </div>
+        </div>
+        <div class="evidence-grid" id="evidenceGrid"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">권고 액션</p>
+            <h2>인사 조직이 바로 검토할 일</h2>
+            <p>선택한 영역 기준으로 실행 과제를 제안합니다.</p>
+          </div>
+        </div>
+        <div class="action-stack" id="actionStack"></div>
+      </article>
+    </section>
+
+    <section class="panel" aria-label="유사·참고 사례">
+      <div class="panel-header">
+        <div class="panel-title">
+          <p class="eyebrow">유사·참고 사례</p>
+          <h2>비교 근거와 실행 인사이트</h2>
+          <p>현재 이슈의 People 리스크와 권고 액션을 보강하는 참고 사례입니다.</p>
+        </div>
+      </div>
+      <div class="case-grid" id="caseGrid"></div>
+    </section>
+
+    <p class="footer-note">
+      리포트 안내: 2026-07-15 기준으로 생성되는 인사 시사점 리포트입니다.
+    </p>
+  </main>
+
+  <script>
+    const axes = ["인력 재배치", "운영비 영향", "규제 리스크", "실행 시급성"];
+
+    const peopleScope = {
+      "조직/임원": ["조직개편", "임원 지원 및 관리", "임원 인사", "차세대 리더 양성 및 관리"],
+      "인력운영": ["인력 운영 계획 수립 및 실적 관리", "인력 충원 및 효율화", "휴직/복직/퇴직 관리"],
+      "제도": ["승격", "평가", "연봉 산정", "시상/징계"],
+      "채용": ["외부 인력 발굴 및 채용", "우수 인력 선확보", "산학교류 및 참여연구원 관리"],
+      "교육": ["직급/직무별 특화 교육", "차세대 리더 육성", "AI/직무/리더십/어학 교육"],
+      "노사": ["대내외 동향 관리", "특이 인력 파악"],
+      "조직문화": ["캠퍼스 행사 운영", "일하는 문화 조성"],
+      "총무": ["의전", "레이아웃 관리", "사무환경/비품", "식당", "인허가", "차량 관리"],
+      "보안": ["보안 시스템 개선 및 관리", "보안 점검"],
+    };
+
+    function area(name, owner, score, confidence, summary, why, insight, stars, actions) {
+      return { name, owner, score, confidence, summary, why, insight, secondaryImpact: insight, stars, actions, scope: peopleScope[name] };
+    }
+
+    const peopleAreaNames = Object.keys(peopleScope);
+
+    const peopleOwners = {
+      "조직/임원": "조직/임원 담당",
+      "인력운영": "인력운영 담당",
+      "제도": "제도 담당",
+      "채용": "채용 담당",
+      "교육": "교육 담당",
+      "노사": "노사 담당",
+      "조직문화": "조직문화 담당",
+      "총무": "총무 담당",
+      "보안": "보안 담당",
+    };
+
+    const supportingScoresByScenario = {};
+
+    const supportingIndicators = {
+      "조직/임원": ["임원 보고 필요 안건", "핵심 조직 영향도", "리더 후보군 영향"],
+      "인력운영": ["충원 계획 변동", "전배·퇴직 신호", "핵심 직무 공백"],
+      "제도": ["평가·승격 기준 영향", "보상 문의", "예외 승인 필요성"],
+      "채용": ["채용 소요기간", "제안 수락률", "후보자 유입 경로"],
+      "교육": ["교육 수요", "이수율", "전환 가능 인력"],
+      "노사": ["구성원 문의", "현장 VOC", "특이 인력 신호"],
+      "조직문화": ["몰입도 변화", "성장기회 체감", "협업 문화 이슈"],
+      "총무": ["좌석·비품 수요", "공간 지원 필요", "입사 운영 부하"],
+      "보안": ["접근권한 변경", "보안 교육 이수", "민감정보 취급 범위"],
+    };
+
+    const supportingActions = {
+      "조직/임원": ["임원 보고 필요 여부를 판단한다.", "핵심 조직과 리더 후보군 영향을 점검한다.", "조직 구조 변경 가능성을 모니터링한다."],
+      "인력운영": ["충원 계획과 실제 배치 가능 인원을 비교한다.", "전배·퇴직 신호를 점검한다.", "핵심 직무 공백 가능성을 확인한다."],
+      "제도": ["평가·승격·보상 기준과 충돌하는 지점을 확인한다.", "예외 승인 기준 필요성을 검토한다.", "구성원 설명 가능성을 점검한다."],
+      "채용": ["경쟁사 채용 신호와 후보자 유입 변화를 확인한다.", "제안 수락률과 거절 사유를 점검한다.", "선확보 파이프라인 영향을 모니터링한다."],
+      "교육": ["직무별 교육 수요 변화를 확인한다.", "전환 교육 필요 인원을 산정한다.", "현업 멘토링 수용력을 점검한다."],
+      "노사": ["현장 문의와 VOC를 모니터링한다.", "구성원 커뮤니케이션 필요성을 판단한다.", "특이 인력 신호를 조기 파악한다."],
+      "조직문화": ["성장기회와 공정성 체감 변화를 확인한다.", "조직문화 메시지 보완 필요성을 검토한다.", "협업 방식 변화 신호를 관찰한다."],
+      "총무": ["공간·비품·좌석 수요 변화를 확인한다.", "입사·이동 운영 부하를 점검한다.", "근무환경 지원 필요성을 산정한다."],
+      "보안": ["접근권한 변경 필요성을 확인한다.", "민감정보 취급 범위를 점검한다.", "보안 교육과 점검 항목 보완 여부를 검토한다."],
+    };
+
+    function supportingStars(score) {
+      if (score >= 68) return { "인력 재배치": 2, "운영비 영향": 2, "규제 리스크": 2, "실행 시급성": 3 };
+      return { "인력 재배치": 1, "운영비 영향": 1, "규제 리스크": 1, "실행 시급성": 2 };
+    }
+
+    function makeSupportingArea(scenario, name) {
+      const score = supportingScoresByScenario[scenario.id]?.[name] ?? 62;
+      return Object.assign(
+        area(
+          name,
+          peopleOwners[name],
+          score,
+          "Watch",
+          `${scenario.label} 이슈와의 직접 연관은 상대적으로 낮지만 ${peopleScope[name].join(", ")} 관점의 확인은 필요하다.`,
+          [
+            "상위 영향 영역은 아니지만 후속 실행 과정에서 업무 범위가 연결될 수 있다.",
+            "초기 판단 단계에서는 낮은 강도로 모니터링하고, 내부 지표 변화가 확인되면 우선순위를 올린다.",
+          ],
+          `${name} 영역은 이번 이슈의 보조 영향 영역으로 두고, 관련 내부 지표를 관찰하는 수준에서 관리한다.`,
+          supportingStars(score),
+          supportingActions[name],
+        ),
+        {
+          supporting: true,
+          directImpact: `${name} 영역의 직접 영향은 제한적이나 후속 점검 대상이다.`,
+          finalRisk: "현재는 낮은 우선순위이나, 내부 지표 변화가 있으면 검토 범위를 확대해야 한다.",
+          indicators: supportingIndicators[name],
+        },
+      );
+    }
+
+    function completePeopleAreas(scenario) {
+      const existing = new Set(scenario.areas.map((item) => item.name));
+      peopleAreaNames.forEach((name) => {
+        if (!existing.has(name)) scenario.areas.push(makeSupportingArea(scenario, name));
+      });
+    }
+
+    // Daily report content generated for 2026-07-15. Replace this block on each run.
+    const HEADER_ORDER = ["산업/인재", "정책/제도", "글로벌"];
+    const DEFAULT_TAB = "산업/인재";
+    const scenarios = [
+    {
+        "id": "kr-semiconductor-ai-talent-20260715",
+        "category": "산업/인재",
+        "status": "complete",
+        "label": "[산업/인재] 반도체 성장과 AI 인재 카드가 드러낸 고용 없는 성장 리스크",
+        "headline": "[산업/인재] 반도체 성장과 AI 인재 카드가 드러낸 고용 없는 성장 리스크",
+        "article": {
+            "title": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드",
+            "source": "머니투데이",
+            "date": "2026-07-15",
+            "url": "https://www.mt.co.kr/amp/economy/2026/07/15/2026071422503987204"
+        },
+        "context": "기준 기사는 반도체 호황이 성장률과 수출을 끌어올리지만 고용시장, 특히 청년 고용에는 온기가 충분히 확산되지 않는다고 봤다. People 관점에서는 AI 인재 20만명 육성이라는 외부 정책 신호보다, 내부 직무 전환·채용 믹스·핵심 인력 확보 계획이 실제 수요와 맞는지가 더 중요하다.",
+        "input": "반도체와 AI가 성장의 중심이 될수록 인력운영은 단순 증원보다 어느 직무를 자동화하고, 어느 직무를 선확보하며, 어느 인력을 재교육할지 구분해야 한다. 삼성디스플레이 People 조직은 공개 기사에 기반해 고용 없는 성장, AI 직무 전환, 산학 파이프라인, 핵심 직무 리텐션을 함께 봐야 한다.",
+        "sourceMix": [
+            "머니투데이 기준 기사",
+            "파이낸셜뉴스 삼성전자 경력 채용 기사",
+            "뉴시스 AI 사회계약 토론 기사",
+            "국내 고용·채용 보완 기사"
+        ],
+        "confidence": "High",
+        "decisionQuestion": "반도체·AI 성장 신호가 내부 충원 계획, 직무 전환 교육, 핵심 인재 선확보 기준에 반영되어 있는가?",
+        "peopleSignal": "성장률과 수출 지표가 좋아도 People 리스크는 채용 공백, 전환 교육 지연, 핵심 직무 외부 유출에서 먼저 나타난다.",
+        "directFinding": "기준 기사는 반도체 성장이 고용시장 전반의 회복으로 바로 연결되지 않고, AI 전환으로 기업 고용 여력이 줄 수 있다는 점을 보여준다.",
+        "researchJudgement": "종합 판단은 채용 확대보다 직무별 인력 포트폴리오 정밀화가 우선이라는 것이다. AI 인재 육성은 외부 숫자 목표가 아니라 내부 수요 직무와 교육 이수 후 배치 가능성으로 검증해야 한다.",
+        "metrics": [
+            [
+                "자료 유형",
+                "국내 산업·인재 기준 기사",
+                "머니투데이"
+            ],
+            [
+                "분석 관점",
+                "인력운영·교육·채용",
+                "고용 없는 성장과 AI 인재 전환"
+            ],
+            [
+                "대상 이슈",
+                "2026-07-15",
+                "3개 시나리오 중 1번 탭"
+            ]
+        ],
+        "reportFlow": [
+            [
+                "기준 기사",
+                "반도체 호황과 AI 인재 육성 카드가 고용시장 회복으로 바로 이어지지 않는다는 신호"
+            ],
+            [
+                "직접 영향",
+                "인력운영, 교육, 채용의 우선순위를 직무별로 다시 나눠야 함"
+            ],
+            [
+                "2차 영향",
+                "보상·평가 기준, 현장 커뮤니케이션, 보안 권한 관리로 확산"
+            ],
+            [
+                "검토 필요 리스크",
+                "고용 없는 성장, 전환 교육 지연, 핵심 직무 채용 경쟁 심화"
+            ],
+            [
+                "우선 검토",
+                "AI 전환 대상 직무, 핵심 후보자 풀, 교육 후 배치율"
+            ]
+        ],
+        "topRisks": [
+            [
+                "1",
+                "고용 없는 성장에 따른 인력계획 착시",
+                "수출·실적 지표만 보고 증원 또는 동결을 판단하면 핵심 직무 공백을 놓칠 수 있다."
+            ],
+            [
+                "2",
+                "AI 직무 전환 교육 지연",
+                "20만 AI 인재 같은 외부 목표와 내부 직무 수요가 맞지 않으면 교육 예산이 실배치로 연결되지 않는다."
+            ],
+            [
+                "3",
+                "핵심 인재 선확보 경쟁 심화",
+                "반도체·AI 수요가 동시에 커지면 연구·공정·데이터 직무 후보자 확보 비용이 높아질 수 있다."
+            ]
+        ],
+        "areas": [
+            {
+                "name": "인력운영",
+                "owner": "인력운영 담당",
+                "score": 94,
+                "confidence": "High",
+                "summary": "반도체 성장·AI 인재 이슈는 충원 계획, 배치, 효율화, 퇴직 리스크에 직접적인 점검을 요구한다.",
+                "why": [
+                    "기준 기사는 성장 지표와 고용 지표의 괴리를 보여주므로 운영 계획의 전제가 흔들릴 수 있다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "실적이 좋아도 인력 계획은 자동 증원이 아니라 직무별 수요·공급 차이로 판단해야 한다.",
+                "secondaryImpact": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다.",
+                "stars": {
+                    "인력 재배치": 5,
+                    "운영비 영향": 4,
+                    "규제 리스크": 3,
+                    "실행 시급성": 5
+                },
+                "actions": [
+                    "핵심 직무별 충원 계획과 실제 배치 가능 인원을 다시 대조한다.",
+                    "공석 지속일수와 퇴직 예정 인력의 업무 커버리지를 함께 점검한다.",
+                    "반도체 성장·AI 인재 영향이 큰 조직의 전배·재배치 기준을 사전에 정한다."
+                ],
+                "scope": [
+                    "인력 운영 계획 수립 및 실적 관리",
+                    "인력 충원 및 효율화",
+                    "휴직/복직/퇴직 관리"
+                ],
+                "directImpact": "AI 전환 대상 직무와 추가 충원이 필요한 직무를 분리한 headcount 계획이 필요하다.",
+                "finalRisk": "직무별 수요 구분 없이 인력계획을 세우면 성장 부문과 지원 부문 모두에서 공백이 생긴다.",
+                "indicators": [
+                    "AI 전환 대상 직무 수",
+                    "핵심 직무 공석 지속일수",
+                    "충원 계획 대비 실제 배치율"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "인력운영 관점에서 AI 전환 대상 직무와 추가 충원이 필요한 직무를 분리한 headcount 계획이 필요하다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "직무별 수요 구분 없이 인력계획을 세우면 성장 부문과 지원 부문 모두에서 공백이 생긴다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "충원 계획, 배치, 효율화, 퇴직 리스크 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "교육",
+                "owner": "교육 담당",
+                "score": 91,
+                "confidence": "High",
+                "summary": "반도체 성장·AI 인재 이슈는 직무 전환, AI 활용, 리더십 교육에 직접적인 점검을 요구한다.",
+                "why": [
+                    "AI 인재 육성은 단기 강의보다 직무별 전환 경로와 배치 성공률이 핵심이다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "AI 교육은 수강 완료가 아니라 현업 배치와 성과 기준 변경까지 이어져야 한다.",
+                "secondaryImpact": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다.",
+                "stars": {
+                    "인력 재배치": 5,
+                    "운영비 영향": 4,
+                    "규제 리스크": 3,
+                    "실행 시급성": 5
+                },
+                "actions": [
+                    "직무 전환 교육 대상과 필수 이수 시점을 현업 계획과 맞춘다.",
+                    "관리자 교육에 변화 이유, 평가 기준, 구성원 질문 대응 스크립트를 포함한다.",
+                    "AI·직무 교육의 이수율보다 전환 배치 성공률을 함께 본다."
+                ],
+                "scope": [
+                    "직급/직무별 특화 교육",
+                    "차세대 리더 육성",
+                    "AI/직무/리더십/어학 교육"
+                ],
+                "directImpact": "AI·공정·데이터 교육이 실제 전환 배치와 연결되는지 확인해야 한다.",
+                "finalRisk": "교육 이수율만 관리하면 실제 직무 전환 성과를 놓칠 수 있다.",
+                "indicators": [
+                    "AI·공정 교육 이수 후 배치율",
+                    "전환 교육 대기 인원",
+                    "현업 멘토링 가능 인원"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "교육 관점에서 AI·공정·데이터 교육이 실제 전환 배치와 연결되는지 확인해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "교육 이수율만 관리하면 실제 직무 전환 성과를 놓칠 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "직무 전환, AI 활용, 리더십 교육 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "채용",
+                "owner": "채용 담당",
+                "score": 89,
+                "confidence": "High",
+                "summary": "반도체 성장·AI 인재 이슈는 핵심 후보자 발굴과 선확보 파이프라인에 직접적인 점검을 요구한다.",
+                "why": [
+                    "반도체와 AI 수요가 겹치면 후보자 시장에서 직무 매력과 보상 설명력이 더 중요해진다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "핵심 후보자 확보는 공고가 아니라 사전 관계, 성장경로, 보상 설명의 경쟁이다.",
+                "secondaryImpact": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다.",
+                "stars": {
+                    "인력 재배치": 5,
+                    "운영비 영향": 4,
+                    "규제 리스크": 3,
+                    "실행 시급성": 5
+                },
+                "actions": [
+                    "핵심 후보자 풀을 직무·경력·AI 활용 역량 기준으로 재분류한다.",
+                    "오퍼 거절 사유를 보상, 성장기회, 근무지, 직무매력으로 나눠 기록한다.",
+                    "선확보가 필요한 직무의 산학·경력 채널을 별도 관리한다."
+                ],
+                "scope": [
+                    "외부 인력 발굴 및 채용",
+                    "우수 인력 선확보",
+                    "산학교류 및 참여연구원 관리"
+                ],
+                "directImpact": "HBM, 공정, 데이터, AI 활용 직무의 경력 후보자 풀을 선확보해야 한다.",
+                "finalRisk": "핵심 후보자에게 제시할 성장경로와 보상 설명이 약하면 오퍼 수락률이 낮아진다.",
+                "indicators": [
+                    "핵심 후보자 풀 규모",
+                    "오퍼 수락률",
+                    "반도체·AI 직무별 거절 사유"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "채용 관점에서 HBM, 공정, 데이터, AI 활용 직무의 경력 후보자 풀을 선확보해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "핵심 후보자에게 제시할 성장경로와 보상 설명이 약하면 오퍼 수락률이 낮아진다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "핵심 후보자 발굴과 선확보 파이프라인 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "조직/임원",
+                "owner": "조직/임원 담당",
+                "score": 84,
+                "confidence": "High",
+                "summary": "반도체 성장·AI 인재 이슈는 전사 People 우선순위와 임원 보고 기준에 직접적인 점검을 요구한다.",
+                "why": [
+                    "반도체 성장·AI 인재 변화는 전사 People 우선순위와 임원 보고 기준의 우선순위를 바꿀 수 있다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "조직/임원 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 3,
+                    "규제 리스크": 2,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "반도체 성장·AI 인재 이슈를 임원 보고 안건으로 올릴지 판단 기준을 정한다.",
+                    "핵심 조직과 리더 후보군에 미치는 영향을 분기 리뷰 항목에 추가한다.",
+                    "현업별 대응 기준이 다르게 운영되지 않도록 공통 메시지를 정리한다."
+                ],
+                "scope": [
+                    "조직개편",
+                    "임원 지원 및 관리",
+                    "임원 인사",
+                    "차세대 리더 양성 및 관리"
+                ],
+                "directImpact": "직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다.",
+                "finalRisk": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다.",
+                "indicators": [
+                    "조직/임원 관련 문의 건수",
+                    "조직/임원 실행 지표 변동",
+                    "조직/임원 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "조직/임원 관점에서 직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "전사 People 우선순위와 임원 보고 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "제도",
+                "owner": "제도 담당",
+                "score": 80,
+                "confidence": "Medium",
+                "summary": "반도체 성장·AI 인재 이슈는 평가, 보상, 승격, 예외 승인 기준에 보조적인 확인을 요구한다.",
+                "why": [
+                    "반도체 성장·AI 인재 변화는 평가, 보상, 승격, 예외 승인 기준의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "제도 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "AI 역량이 평가·보상 기준에 반영되는 속도가 늦으면 구성원 공정성 질문이 늘어난다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 4,
+                    "규제 리스크": 2,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "평가·보상·승격 기준과 충돌하는 예외 승인 항목을 표시한다.",
+                    "구성원 문의에 답할 수 있도록 제도 변경 여부와 미변경 사유를 문서화한다.",
+                    "직무군별 보상 하단과 성과급 설명자료의 차이를 점검한다."
+                ],
+                "scope": [
+                    "승격",
+                    "평가",
+                    "연봉 산정",
+                    "시상/징계"
+                ],
+                "directImpact": "직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다.",
+                "finalRisk": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다.",
+                "indicators": [
+                    "제도 관련 문의 건수",
+                    "제도 실행 지표 변동",
+                    "제도 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "제도 관점에서 직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "AI 역량이 평가·보상 기준에 반영되는 속도가 늦으면 구성원 공정성 질문이 늘어난다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "평가, 보상, 승격, 예외 승인 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "조직문화",
+                "owner": "조직문화 담당",
+                "score": 76,
+                "confidence": "Medium",
+                "summary": "반도체 성장·AI 인재 이슈는 일하는 방식, 공정성 체감, 변화 수용성에 보조적인 확인을 요구한다.",
+                "why": [
+                    "반도체 성장·AI 인재 변화는 일하는 방식, 공정성 체감, 변화 수용성의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "조직문화 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 3,
+                    "규제 리스크": 2,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "변화 수용성이 낮은 조직의 공정성 체감과 성장기회 체감을 점검한다.",
+                    "관리자 1:1에서 구성원이 묻는 우려를 공통 질문 목록으로 수집한다.",
+                    "캠페인성 메시지보다 일하는 방식 변화와 지원 기준을 구체화한다."
+                ],
+                "scope": [
+                    "캠퍼스 행사 운영",
+                    "일하는 문화 조성"
+                ],
+                "directImpact": "직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다.",
+                "finalRisk": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다.",
+                "indicators": [
+                    "조직문화 관련 문의 건수",
+                    "조직문화 실행 지표 변동",
+                    "조직문화 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "조직문화 관점에서 직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "일하는 방식, 공정성 체감, 변화 수용성 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "노사",
+                "owner": "노사 담당",
+                "score": 72,
+                "confidence": "Medium",
+                "summary": "반도체 성장·AI 인재 이슈는 대내외 동향, 현장 VOC, 특이 인력 신호에 보조적인 확인을 요구한다.",
+                "why": [
+                    "반도체 성장·AI 인재 변화는 대내외 동향, 현장 VOC, 특이 인력 신호의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "노사 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다.",
+                "stars": {
+                    "인력 재배치": 2,
+                    "운영비 영향": 2,
+                    "규제 리스크": 3,
+                    "실행 시급성": 3
+                },
+                "actions": [
+                    "예상 문의와 불만 쟁점을 FAQ로 정리해 현장 관리자에게 공유한다.",
+                    "노조·구성원 커뮤니케이션에서 단정 표현보다 확인 가능한 지표를 사용한다.",
+                    "현장 VOC를 보상, 고용안정, 업무강도, 공정성 항목으로 분류한다."
+                ],
+                "scope": [
+                    "대내외 동향 관리",
+                    "특이 인력 파악"
+                ],
+                "directImpact": "직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다.",
+                "finalRisk": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다.",
+                "indicators": [
+                    "노사 관련 문의 건수",
+                    "노사 실행 지표 변동",
+                    "노사 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "노사 관점에서 직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "대내외 동향, 현장 VOC, 특이 인력 신호 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "보안",
+                "owner": "보안 담당",
+                "score": 68,
+                "confidence": "Medium",
+                "summary": "반도체 성장·AI 인재 이슈는 접근권한, 기술자료, AI 사용 보안 기준에 보조적인 확인을 요구한다.",
+                "why": [
+                    "반도체 성장·AI 인재 변화는 접근권한, 기술자료, AI 사용 보안 기준의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "보안 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "AI 도구와 외부 협업이 늘면 기술자료 접근권한 관리가 중요해진다.",
+                "stars": {
+                    "인력 재배치": 2,
+                    "운영비 영향": 2,
+                    "규제 리스크": 3,
+                    "실행 시급성": 3
+                },
+                "actions": [
+                    "직무 전환 또는 외부 협업 확대 시 접근권한 변경이 필요한 계정을 점검한다.",
+                    "AI 도구 입력 금지 데이터와 기술자료 반출 기준을 최신화한다.",
+                    "핵심 직무 인력 이동과 보안 교육 이수 상태를 함께 확인한다."
+                ],
+                "scope": [
+                    "보안 시스템 개선 및 관리",
+                    "보안 점검"
+                ],
+                "directImpact": "직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다.",
+                "finalRisk": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다.",
+                "indicators": [
+                    "보안 관련 문의 건수",
+                    "보안 실행 지표 변동",
+                    "보안 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "보안 관점에서 직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "AI 도구와 외부 협업이 늘면 기술자료 접근권한 관리가 중요해진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "접근권한, 기술자료, AI 사용 보안 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "총무",
+                "owner": "총무 담당",
+                "score": 61,
+                "confidence": "Watch",
+                "summary": "반도체 성장·AI 인재 이슈는 좌석, 통근, 식당, 사무환경 운영 부하에 낮은 강도의 모니터링을 요구한다.",
+                "why": [
+                    "반도체 성장·AI 인재 변화는 좌석, 통근, 식당, 사무환경 운영 부하의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "총무 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다.",
+                "stars": {
+                    "인력 재배치": 1,
+                    "운영비 영향": 1,
+                    "규제 리스크": 1,
+                    "실행 시급성": 2
+                },
+                "actions": [
+                    "공간, 좌석, 통근, 식당 등 운영 부하가 바뀌는 사업장을 먼저 확인한다.",
+                    "채용·교육 일정이 몰리는 기간의 의전과 입사 운영 리소스를 산정한다.",
+                    "근무환경 관련 VOC를 People 의사결정 지표와 연결해 본다."
+                ],
+                "scope": [
+                    "의전",
+                    "레이아웃 관리",
+                    "사무환경/비품",
+                    "식당",
+                    "인허가",
+                    "차량 관리"
+                ],
+                "directImpact": "직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다.",
+                "finalRisk": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다.",
+                "indicators": [
+                    "총무 관련 문의 건수",
+                    "총무 실행 지표 변동",
+                    "총무 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "반도체만 잘 나갔다…고용절벽에 꺼낸 '20만 AI 인재' 카드"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "총무 관점에서 직무별 인력 수요와 실제 확보 가능성의 차이를 재점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "채용, 교육, 제도, 보안 기준이 함께 움직이지 않으면 현업 실행 속도가 떨어진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "성장 산업이라는 이유만으로 일괄 대응하면 핵심 직무 공백과 교육 예산 낭비가 동시에 발생할 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "좌석, 통근, 식당, 사무환경 운영 부하 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            }
+        ],
+        "evidence": [
+            {
+                "type": "보완 근거",
+                "title": "'피터팬 증후군' 막는다…중기→중견 세제혜택 감소폭 조정[하반기 경제]",
+                "source": "뉴시스",
+                "date": "2026-07-15",
+                "url": "https://nwww.newsis.com/view/NISX20260714_0003707857",
+                "summary": "하반기 경제정책에서 신산업·과학기술 일자리와 채용 연계형 일경험 확대가 언급됐다.",
+                "impactLink": "AI 인재와 청년 일자리 정책이 내부 산학·채용 파이프라인 점검으로 연결된다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "삼성전자, 반도체 인재 확보 속도…82개 직군 경력 채용",
+                "source": "파이낸셜뉴스",
+                "date": "2026-07-13",
+                "url": "https://www.fnnews.com/news/202607131825582366",
+                "summary": "삼성전자 DS부문이 82개 직군 경력 채용에 나서며 AI 반도체 수요 대응 인재 확보를 강조했다.",
+                "impactLink": "인접 반도체 인재 경쟁이 디스플레이 핵심 직무 후보자 시장에도 압력을 줄 수 있다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "\"특별목적세\"·\"사회연대투자\"…쟁점만 쏟아진 '초과이윤' 첫 토론",
+                "source": "뉴시스",
+                "date": "2026-07-15",
+                "url": "https://mobile.newsis.com/view_amp.html?ar_id=NISX20260714_0003709292",
+                "summary": "반도체 초과이윤, 청년 채용, 원하청 복지, AI 시대 사회계약 논의가 함께 제기됐다.",
+                "impactLink": "고용 없는 성장 논의가 보상·노사·채용 커뮤니케이션으로 확산될 수 있다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "삼성전자, 반도체 경력직 채용 확대 … 82개 직무 인재 선발",
+                "source": "뉴데일리경제",
+                "date": "2026-07-13",
+                "url": "https://biz.newdaily.co.kr/site/data/html/2026/07/13/2026071300325.html",
+                "summary": "반도체 설계·공정·연구 직무 중심 경력 채용 확대 흐름을 보도했다.",
+                "impactLink": "채용팀은 같은 후보자 풀을 두고 경쟁하는 인접 산업 신호를 별도 지표로 관리해야 한다."
+            }
+        ],
+        "cases": [
+            {
+                "title": "삼성전자 DS 경력 채용 확대",
+                "type": "동일 그룹 인접 산업 사례",
+                "org": "파이낸셜뉴스",
+                "why": "AI 반도체 수요 확대가 직무별 경력 채용으로 직접 연결되는 사례다.",
+                "peopleInsight": "직무별 후보자 풀과 오퍼 수락률을 별도 지표로 관리해야 한다.",
+                "peopleFunction": "채용/인력운영",
+                "actionLink": "핵심 후보자 풀을 직무·경력·AI 활용 역량 기준으로 재분류한다.",
+                "url": "https://www.fnnews.com/news/202607131825582366",
+                "priority": true
+            },
+            {
+                "title": "삼성·SK 반도체 인재 쟁탈전",
+                "type": "국내 인재 경쟁 사례",
+                "org": "머니투데이",
+                "why": "반도체 슈퍼사이클과 신입·경력 채용 경쟁이 동시에 나타난 사례다.",
+                "peopleInsight": "산학·신입 파이프라인과 경력 선확보 전략을 분리해야 한다.",
+                "peopleFunction": "채용/교육",
+                "actionLink": "선확보가 필요한 직무의 산학·경력 채널을 별도 관리한다.",
+                "url": "https://www.mt.co.kr/industry/2026/03/08/2026030811245422007"
+            },
+            {
+                "title": "국내 IT개발자 일자리 감소",
+                "type": "AI 고용 전환 참고 사례",
+                "org": "매일경제",
+                "why": "AI 도구 확산이 주니어 채용 축소와 기존 인력 재교육 요구로 이어지는 흐름을 보여준다.",
+                "peopleInsight": "AI 교육은 도구 사용법보다 직무 재설계와 평가 기준까지 포함해야 한다.",
+                "peopleFunction": "교육/제도",
+                "actionLink": "AI·직무 교육의 이수율보다 전환 배치 성공률을 함께 본다.",
+                "url": "https://www.mk.co.kr/news/economy/11973369"
+            },
+            {
+                "title": "반도체업계 보상 요구와 인건비 부담",
+                "type": "보상·노사 참고 사례",
+                "org": "연합뉴스",
+                "why": "호황 업종에서 보상 요구, 노사 갈등, 인건비 부담이 함께 커질 수 있음을 보여준다.",
+                "peopleInsight": "성장 산업일수록 보상 설명자료와 인력 운영 비용 시나리오가 필요하다.",
+                "peopleFunction": "제도/노사",
+                "actionLink": "직무군별 보상 하단과 성과급 설명자료의 차이를 점검한다.",
+                "url": "https://www.yna.co.kr/view/AKR20260220127200003"
+            }
+        ]
+    },
+    {
+        "id": "kr-minimum-wage-2027-20260715",
+        "category": "정책/제도",
+        "status": "complete",
+        "label": "[정책/제도] 2027년 최저임금 1만700원 결정과 보상 하단 점검",
+        "headline": "[정책/제도] 2027년 최저임금 1만700원 결정과 보상 하단 점검",
+        "article": {
+            "title": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)",
+            "source": "연합뉴스",
+            "date": "2026-07-15",
+            "url": "https://www.yna.co.kr/amp/view/AKR20260714185552530"
+        },
+        "context": "기준 기사는 2027년 적용 최저임금이 시간당 1만700원으로 결정됐고, 합의가 불발되어 표결로 정해졌다고 보도했다. People 관점에서는 직접 임금 하단뿐 아니라 주휴·수당·협력사 비용, 플랫폼·도급제 제도개선 논의, 구성원 커뮤니케이션까지 함께 점검해야 한다.",
+        "input": "최저임금 인상률 3.7%는 대기업 정규직 임금에 직접 충격이 크지 않을 수 있지만, 협력사·파견·도급·식당·시설·단시간 근무 운영에는 비용과 노무 문의를 만든다. 보상 하단, 수당 연동, 협력사 계약, 노사 FAQ를 같은 일정으로 점검해야 한다.",
+        "sourceMix": [
+            "연합뉴스 기준 기사",
+            "연합뉴스 제도개선 권고 기사",
+            "연합뉴스 노사 반응 기사",
+            "뉴시스 초과이윤 토론 기사"
+        ],
+        "confidence": "High",
+        "decisionQuestion": "최저임금 인상과 제도개선 논의가 보상 하단, 협력사 인건비, 현장 노무 FAQ에 반영되어 있는가?",
+        "peopleSignal": "최저임금 이슈는 임금 테이블보다 협력사 비용, 총무 운영비, 노무 커뮤니케이션에서 먼저 체감될 수 있다.",
+        "directFinding": "기준 기사는 2027년 최저임금의 금액, 인상률, 노사 표결 과정, 영향 근로자 규모를 확인시켜 준다.",
+        "researchJudgement": "종합 판단은 보상 하단과 노무 커뮤니케이션을 분리하지 말아야 한다는 것이다. 법정 금액 확정 이후에는 수당 연동, 협력사 계약 단가, 현장 문의 대응이 동시에 움직인다.",
+        "metrics": [
+            [
+                "자료 유형",
+                "국내 정책·제도 기준 기사",
+                "연합뉴스"
+            ],
+            [
+                "분석 관점",
+                "제도·노사·인력운영",
+                "최저임금과 보상 하단"
+            ],
+            [
+                "대상 이슈",
+                "2026-07-15",
+                "3개 시나리오 중 2번 탭"
+            ]
+        ],
+        "reportFlow": [
+            [
+                "기준 기사",
+                "2027년 최저임금 1만700원 확정과 노사 표결"
+            ],
+            [
+                "직접 영향",
+                "보상 하단, 수당 연동, 협력사 인건비 기준 점검"
+            ],
+            [
+                "2차 영향",
+                "총무 비용, 노사 FAQ, 단시간·도급 운영 기준으로 확산"
+            ],
+            [
+                "검토 필요 리스크",
+                "하단 보상 설명 부족, 협력사 비용 전가 논란, 현장 문의 급증"
+            ],
+            [
+                "우선 검토",
+                "임금 하단, 주휴·수당 연동, 협력사 계약, 노무 FAQ"
+            ]
+        ],
+        "topRisks": [
+            [
+                "1",
+                "보상 하단과 수당 연동 누락",
+                "최저임금 자체보다 주휴·수당·단시간 기준이 뒤늦게 수정되면 정산 오류가 생길 수 있다."
+            ],
+            [
+                "2",
+                "협력사·총무 운영비 상승",
+                "식당, 시설, 보안, 통근 등 위탁 운영비가 계약 단가와 품질 이슈로 이어질 수 있다."
+            ],
+            [
+                "3",
+                "노사 커뮤니케이션 공백",
+                "표결 결정과 제도개선 논의가 맞물리며 구성원 문의가 보상 공정성 논쟁으로 커질 수 있다."
+            ]
+        ],
+        "areas": [
+            {
+                "name": "노사",
+                "owner": "노사 담당",
+                "score": 93,
+                "confidence": "High",
+                "summary": "최저임금 1만700원 이슈는 대내외 동향, 현장 VOC, 특이 인력 신호에 직접적인 점검을 요구한다.",
+                "why": [
+                    "기준 기사는 합의가 아닌 표결로 결정됐고 노사 반응이 엇갈렸다는 점을 보여준다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "노사 대응은 입장문보다 현장 질문에 답할 수 있는 숫자와 적용 기준이 중요하다.",
+                "secondaryImpact": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다.",
+                "stars": {
+                    "인력 재배치": 4,
+                    "운영비 영향": 4,
+                    "규제 리스크": 5,
+                    "실행 시급성": 5
+                },
+                "actions": [
+                    "예상 문의와 불만 쟁점을 FAQ로 정리해 현장 관리자에게 공유한다.",
+                    "노조·구성원 커뮤니케이션에서 단정 표현보다 확인 가능한 지표를 사용한다.",
+                    "현장 VOC를 보상, 고용안정, 업무강도, 공정성 항목으로 분류한다."
+                ],
+                "scope": [
+                    "대내외 동향 관리",
+                    "특이 인력 파악"
+                ],
+                "directImpact": "현장 문의, 노동계 반응, 제도개선 요구를 반영한 FAQ가 필요하다.",
+                "finalRisk": "금액 확정 후 설명자료가 늦으면 불만 쟁점이 외부 노동 이슈와 결합할 수 있다.",
+                "indicators": [
+                    "최저임금 관련 문의 건수",
+                    "현장 VOC 유형",
+                    "노무 FAQ 조회수"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "노사 관점에서 현장 문의, 노동계 반응, 제도개선 요구를 반영한 FAQ가 필요하다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "금액 확정 후 설명자료가 늦으면 불만 쟁점이 외부 노동 이슈와 결합할 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "대내외 동향, 현장 VOC, 특이 인력 신호 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "제도",
+                "owner": "제도 담당",
+                "score": 91,
+                "confidence": "High",
+                "summary": "최저임금 1만700원 이슈는 평가, 보상, 승격, 예외 승인 기준에 직접적인 점검을 요구한다.",
+                "why": [
+                    "최저임금은 직접 임금뿐 아니라 주휴수당과 여러 법정 기준에 연동된다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "최저임금 대응은 하단 급여표만이 아니라 산식과 예외 승인 기준의 문제다.",
+                "secondaryImpact": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다.",
+                "stars": {
+                    "인력 재배치": 4,
+                    "운영비 영향": 5,
+                    "규제 리스크": 3,
+                    "실행 시급성": 5
+                },
+                "actions": [
+                    "평가·보상·승격 기준과 충돌하는 예외 승인 항목을 표시한다.",
+                    "구성원 문의에 답할 수 있도록 제도 변경 여부와 미변경 사유를 문서화한다.",
+                    "직무군별 보상 하단과 성과급 설명자료의 차이를 점검한다."
+                ],
+                "scope": [
+                    "승격",
+                    "평가",
+                    "연봉 산정",
+                    "시상/징계"
+                ],
+                "directImpact": "보상 하단, 수당 산식, 단시간 근무 기준을 확정 금액과 대조해야 한다.",
+                "finalRisk": "주휴·수당·단시간 기준을 놓치면 소급 정산과 예외 승인 부담이 커진다.",
+                "indicators": [
+                    "보상 하단 미달 점검 건수",
+                    "수당 산식 변경 항목",
+                    "단시간 근무자 적용 대상"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "제도 관점에서 보상 하단, 수당 산식, 단시간 근무 기준을 확정 금액과 대조해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "주휴·수당·단시간 기준을 놓치면 소급 정산과 예외 승인 부담이 커진다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "평가, 보상, 승격, 예외 승인 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "인력운영",
+                "owner": "인력운영 담당",
+                "score": 86,
+                "confidence": "High",
+                "summary": "최저임금 1만700원 이슈는 충원 계획, 배치, 효율화, 퇴직 리스크에 직접적인 점검을 요구한다.",
+                "why": [
+                    "최저임금 1만700원 변화는 충원 계획, 배치, 효율화, 퇴직 리스크의 우선순위를 바꿀 수 있다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "인력운영 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다.",
+                "stars": {
+                    "인력 재배치": 4,
+                    "운영비 영향": 3,
+                    "규제 리스크": 2,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "핵심 직무별 충원 계획과 실제 배치 가능 인원을 다시 대조한다.",
+                    "공석 지속일수와 퇴직 예정 인력의 업무 커버리지를 함께 점검한다.",
+                    "최저임금 1만700원 영향이 큰 조직의 전배·재배치 기준을 사전에 정한다."
+                ],
+                "scope": [
+                    "인력 운영 계획 수립 및 실적 관리",
+                    "인력 충원 및 효율화",
+                    "휴직/복직/퇴직 관리"
+                ],
+                "directImpact": "최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다.",
+                "finalRisk": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다.",
+                "indicators": [
+                    "인력운영 관련 문의 건수",
+                    "인력운영 실행 지표 변동",
+                    "인력운영 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "인력운영 관점에서 최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "충원 계획, 배치, 효율화, 퇴직 리스크 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "총무",
+                "owner": "총무 담당",
+                "score": 81,
+                "confidence": "Medium",
+                "summary": "최저임금 1만700원 이슈는 좌석, 통근, 식당, 사무환경 운영 부하에 보조적인 확인을 요구한다.",
+                "why": [
+                    "운영 협력사 인건비가 바뀌면 식당, 시설, 보안, 차량 등 일상 운영비가 흔들릴 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "총무 비용은 People 이슈가 아니라는 인식이 강하지만, 실제 구성원 체감은 총무 서비스에서 먼저 나타난다.",
+                "secondaryImpact": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 4,
+                    "규제 리스크": 2,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "공간, 좌석, 통근, 식당 등 운영 부하가 바뀌는 사업장을 먼저 확인한다.",
+                    "채용·교육 일정이 몰리는 기간의 의전과 입사 운영 리소스를 산정한다.",
+                    "근무환경 관련 VOC를 People 의사결정 지표와 연결해 본다."
+                ],
+                "scope": [
+                    "의전",
+                    "레이아웃 관리",
+                    "사무환경/비품",
+                    "식당",
+                    "인허가",
+                    "차량 관리"
+                ],
+                "directImpact": "식당·시설·보안·통근 등 위탁 운영비와 계약 단가 변동 가능성을 확인해야 한다.",
+                "finalRisk": "위탁 협력사의 비용 압박이 서비스 품질과 인력 공백으로 전이될 수 있다.",
+                "indicators": [
+                    "위탁 계약 단가 변경 요청",
+                    "식당·시설 운영 인력 공백",
+                    "총무 VOC"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "총무 관점에서 식당·시설·보안·통근 등 위탁 운영비와 계약 단가 변동 가능성을 확인해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "위탁 협력사의 비용 압박이 서비스 품질과 인력 공백으로 전이될 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "좌석, 통근, 식당, 사무환경 운영 부하 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "조직문화",
+                "owner": "조직문화 담당",
+                "score": 78,
+                "confidence": "Medium",
+                "summary": "최저임금 1만700원 이슈는 일하는 방식, 공정성 체감, 변화 수용성에 보조적인 확인을 요구한다.",
+                "why": [
+                    "최저임금 1만700원 변화는 일하는 방식, 공정성 체감, 변화 수용성의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "조직문화 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "보상 공정성 문의가 커지면 임금 하단 이슈가 조직 신뢰 이슈로 번질 수 있다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 3,
+                    "규제 리스크": 4,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "변화 수용성이 낮은 조직의 공정성 체감과 성장기회 체감을 점검한다.",
+                    "관리자 1:1에서 구성원이 묻는 우려를 공통 질문 목록으로 수집한다.",
+                    "캠페인성 메시지보다 일하는 방식 변화와 지원 기준을 구체화한다."
+                ],
+                "scope": [
+                    "캠퍼스 행사 운영",
+                    "일하는 문화 조성"
+                ],
+                "directImpact": "최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다.",
+                "finalRisk": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다.",
+                "indicators": [
+                    "조직문화 관련 문의 건수",
+                    "조직문화 실행 지표 변동",
+                    "조직문화 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "조직문화 관점에서 최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "보상 공정성 문의가 커지면 임금 하단 이슈가 조직 신뢰 이슈로 번질 수 있다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "일하는 방식, 공정성 체감, 변화 수용성 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "조직/임원",
+                "owner": "조직/임원 담당",
+                "score": 76,
+                "confidence": "Medium",
+                "summary": "최저임금 1만700원 이슈는 전사 People 우선순위와 임원 보고 기준에 보조적인 확인을 요구한다.",
+                "why": [
+                    "최저임금 1만700원 변화는 전사 People 우선순위와 임원 보고 기준의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "조직/임원 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 3,
+                    "규제 리스크": 2,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "최저임금 1만700원 이슈를 임원 보고 안건으로 올릴지 판단 기준을 정한다.",
+                    "핵심 조직과 리더 후보군에 미치는 영향을 분기 리뷰 항목에 추가한다.",
+                    "현업별 대응 기준이 다르게 운영되지 않도록 공통 메시지를 정리한다."
+                ],
+                "scope": [
+                    "조직개편",
+                    "임원 지원 및 관리",
+                    "임원 인사",
+                    "차세대 리더 양성 및 관리"
+                ],
+                "directImpact": "최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다.",
+                "finalRisk": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다.",
+                "indicators": [
+                    "조직/임원 관련 문의 건수",
+                    "조직/임원 실행 지표 변동",
+                    "조직/임원 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "조직/임원 관점에서 최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "전사 People 우선순위와 임원 보고 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "채용",
+                "owner": "채용 담당",
+                "score": 72,
+                "confidence": "Medium",
+                "summary": "최저임금 1만700원 이슈는 핵심 후보자 발굴과 선확보 파이프라인에 보조적인 확인을 요구한다.",
+                "why": [
+                    "최저임금 1만700원 변화는 핵심 후보자 발굴과 선확보 파이프라인의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "채용 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "저임금 직무와 단시간 직무의 채용 조건 비교가 다시 필요해진다.",
+                "stars": {
+                    "인력 재배치": 2,
+                    "운영비 영향": 2,
+                    "규제 리스크": 1,
+                    "실행 시급성": 3
+                },
+                "actions": [
+                    "핵심 후보자 풀을 직무·경력·AI 활용 역량 기준으로 재분류한다.",
+                    "오퍼 거절 사유를 보상, 성장기회, 근무지, 직무매력으로 나눠 기록한다.",
+                    "선확보가 필요한 직무의 산학·경력 채널을 별도 관리한다."
+                ],
+                "scope": [
+                    "외부 인력 발굴 및 채용",
+                    "우수 인력 선확보",
+                    "산학교류 및 참여연구원 관리"
+                ],
+                "directImpact": "최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다.",
+                "finalRisk": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다.",
+                "indicators": [
+                    "채용 관련 문의 건수",
+                    "채용 실행 지표 변동",
+                    "채용 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "채용 관점에서 최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "저임금 직무와 단시간 직무의 채용 조건 비교가 다시 필요해진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "핵심 후보자 발굴과 선확보 파이프라인 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "교육",
+                "owner": "교육 담당",
+                "score": 68,
+                "confidence": "Medium",
+                "summary": "최저임금 1만700원 이슈는 직무 전환, AI 활용, 리더십 교육에 보조적인 확인을 요구한다.",
+                "why": [
+                    "최저임금 1만700원 변화는 직무 전환, AI 활용, 리더십 교육의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "교육 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다.",
+                "stars": {
+                    "인력 재배치": 2,
+                    "운영비 영향": 2,
+                    "규제 리스크": 1,
+                    "실행 시급성": 3
+                },
+                "actions": [
+                    "직무 전환 교육 대상과 필수 이수 시점을 현업 계획과 맞춘다.",
+                    "관리자 교육에 변화 이유, 평가 기준, 구성원 질문 대응 스크립트를 포함한다.",
+                    "AI·직무 교육의 이수율보다 전환 배치 성공률을 함께 본다."
+                ],
+                "scope": [
+                    "직급/직무별 특화 교육",
+                    "차세대 리더 육성",
+                    "AI/직무/리더십/어학 교육"
+                ],
+                "directImpact": "최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다.",
+                "finalRisk": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다.",
+                "indicators": [
+                    "교육 관련 문의 건수",
+                    "교육 실행 지표 변동",
+                    "교육 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "교육 관점에서 최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "직무 전환, AI 활용, 리더십 교육 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "보안",
+                "owner": "보안 담당",
+                "score": 59,
+                "confidence": "Watch",
+                "summary": "최저임금 1만700원 이슈는 접근권한, 기술자료, AI 사용 보안 기준에 낮은 강도의 모니터링을 요구한다.",
+                "why": [
+                    "최저임금 1만700원 변화는 접근권한, 기술자료, AI 사용 보안 기준의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "보안 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다.",
+                "stars": {
+                    "인력 재배치": 1,
+                    "운영비 영향": 1,
+                    "규제 리스크": 1,
+                    "실행 시급성": 2
+                },
+                "actions": [
+                    "직무 전환 또는 외부 협업 확대 시 접근권한 변경이 필요한 계정을 점검한다.",
+                    "AI 도구 입력 금지 데이터와 기술자료 반출 기준을 최신화한다.",
+                    "핵심 직무 인력 이동과 보안 교육 이수 상태를 함께 확인한다."
+                ],
+                "scope": [
+                    "보안 시스템 개선 및 관리",
+                    "보안 점검"
+                ],
+                "directImpact": "최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다.",
+                "finalRisk": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다.",
+                "indicators": [
+                    "보안 관련 문의 건수",
+                    "보안 실행 지표 변동",
+                    "보안 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "내년 최저임금 시간당 1만700원…올해보다 3.7% 인상(종합2보)"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "보안 관점에서 최저임금 확정에 따른 임금·수당·운영비 기준을 점검해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "보상 하단, 협력사 계약, 총무 운영, 현장 커뮤니케이션으로 후속 영향이 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "법정 금액은 확정됐지만 내부 설명과 계약 반영이 늦으면 문의와 비용 갈등이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "접근권한, 기술자료, AI 사용 보안 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            }
+        ],
+        "evidence": [
+            {
+                "type": "보완 근거",
+                "title": "최저임금위 공익위원 \"플랫폼 노동 고려 제도개선 추진 권고\"",
+                "source": "연합뉴스",
+                "date": "2026-07-15",
+                "url": "https://www.yna.co.kr/amp/view/AKR20260714141651530",
+                "summary": "공익위원들이 플랫폼·도급제·업종별 차등 적용 등 최저임금 제도 전반의 개선을 권고했다.",
+                "impactLink": "비정형 인력과 도급 운영 기준 점검 필요성을 높인다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "최저임금위원장 \"초과세수 최저임금근로자·소상공인 지원에 써야\"",
+                "source": "연합뉴스",
+                "date": "2026-07-15",
+                "url": "https://www.yna.co.kr/amp/view/AKR20260715001100530",
+                "summary": "반도체 등 초과세수와 저임금 근로자·중소기업 지원의 연결 논의가 제기됐다.",
+                "impactLink": "대기업 성과와 협력사·저임금 인력 지원 논의가 노사 커뮤니케이션에 영향을 줄 수 있다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "최저임금 380원 인상…노 \"턱없이 부족\" vs 사 \"소상공인 족쇄\"",
+                "source": "연합뉴스",
+                "date": "2026-07-15",
+                "url": "https://www.yna.co.kr/amp/view/AKR20260715000400530",
+                "summary": "노동계와 경영계가 모두 아쉬움을 표하며 향후 제도개선과 부담 완화 논의가 이어질 가능성을 보였다.",
+                "impactLink": "현장 커뮤니케이션에서 양측 논리를 모두 이해한 설명자료가 필요하다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "소상공인업계 \"내년 최저임금 인상 유감…부담 완화 대책 시급\"",
+                "source": "연합뉴스",
+                "date": "2026-07-15",
+                "url": "https://www.yna.co.kr/amp/view/AKR20260714187300030",
+                "summary": "소상공인·중소기업 부담 우려가 제기되며 위탁·협력사 비용 전이 가능성을 보여준다.",
+                "impactLink": "총무 위탁 계약과 협력사 운영비 변동을 사전에 점검해야 한다."
+            }
+        ],
+        "cases": [
+            {
+                "title": "최저임금 심의와 27개 법령 연동",
+                "type": "정책 연동 참고 사례",
+                "org": "연합뉴스",
+                "why": "최저임금이 주휴수당, 구직급여 등 여러 법령과 연동된다는 점을 보여준다.",
+                "peopleInsight": "보상 하단은 기본급만이 아니라 수당과 복지 산식까지 함께 봐야 한다.",
+                "peopleFunction": "제도/노사",
+                "actionLink": "보상 하단, 수당 산식, 단시간 근무 기준을 확정 금액과 대조한다.",
+                "url": "https://www.yna.co.kr/amp/view/AKR20260714167500530",
+                "priority": true
+            },
+            {
+                "title": "연합뉴스TV 최저임금 결정 보도",
+                "type": "대중 커뮤니케이션 사례",
+                "org": "연합뉴스TV",
+                "why": "최저임금 확정 뉴스가 일반 구성원에게 빠르게 확산되는 방식을 보여준다.",
+                "peopleInsight": "내부 FAQ는 기사 확산 직후 바로 답할 수 있는 수준으로 준비해야 한다.",
+                "peopleFunction": "노사/조직문화",
+                "actionLink": "예상 문의와 불만 쟁점을 FAQ로 정리해 현장 관리자에게 공유한다.",
+                "url": "https://www.yonhapnewstv.co.kr/news/MYH20260715052904cz2"
+            },
+            {
+                "title": "노사 반응 엇갈린 최저임금 인상",
+                "type": "노사 쟁점 참고 사례",
+                "org": "연합뉴스TV",
+                "why": "노동계와 사용자 측 모두의 불만이 같은 사안에서 동시에 발생할 수 있음을 보여준다.",
+                "peopleInsight": "People 커뮤니케이션은 한쪽 입장만 인용하지 말고 내부 적용 기준을 중심에 둬야 한다.",
+                "peopleFunction": "노사/제도",
+                "actionLink": "노조·구성원 커뮤니케이션에서 확인 가능한 지표를 사용한다.",
+                "url": "https://www.yonhapnewstv.co.kr/news/AKR20260714235326V4B"
+            },
+            {
+                "title": "AI 사회계약과 초과이윤 배분 토론",
+                "type": "보상·사회적 대화 참고 사례",
+                "org": "뉴시스",
+                "why": "반도체 성과, 청년 채용, 원하청 복지 논의가 보상 의제로 연결되는 사례다.",
+                "peopleInsight": "보상 이슈는 사내 제도에 머물지 않고 사회적 기대와 함께 해석될 수 있다.",
+                "peopleFunction": "제도/조직·임원",
+                "actionLink": "현업별 대응 기준이 다르게 운영되지 않도록 공통 메시지를 정리한다.",
+                "url": "https://mobile.newsis.com/view_amp.html?ar_id=NISX20260714_0003709292"
+            }
+        ]
+    },
+    {
+        "id": "global-thomson-reuters-ai-cuts-20260715",
+        "category": "글로벌",
+        "status": "complete",
+        "label": "[글로벌] Thomson Reuters 500명 감원과 AI 도입 기술직 재편",
+        "headline": "[글로벌] Thomson Reuters 500명 감원과 AI 도입 기술직 재편",
+        "article": {
+            "title": "Thomson Reuters cuts 500 jobs as AI adoption deepens",
+            "source": "SiliconRepublic",
+            "date": "2026-07-15",
+            "url": "https://www.siliconrepublic.com/business/reuters-ai-job-cuts-thomson-engineering-technology"
+        },
+        "context": "기준 기사는 Thomson Reuters가 AI 도입 확대 속에서 엔지니어링 직무 중심으로 최대 500명을 감원한다고 전했다. People 관점에서는 해외 사례를 국내에 단정 적용하지 않되, AI 도구 도입이 직무 설계, 재교육, 성과 기준, 채용 기준을 동시에 흔드는 신호로 봐야 한다.",
+        "input": "AI 자동화가 단순 보조 도구를 넘어 조직 구조와 기술직 규모에 영향을 주면, 국내 제조 People 조직도 사무·개발·품질·지원 직무의 역할 변화를 미리 설명해야 한다. 감원 자체보다 어떤 직무가 줄고 어떤 역량이 남는지, 교육과 평가 기준이 어떻게 바뀌는지가 핵심이다.",
+        "sourceMix": [
+            "SiliconRepublic 기준 기사",
+            "MarketWatch AI 대체 일자리 기사",
+            "Times of India Microsoft HR 메모 기사",
+            "Economic Times 글로벌 감원 기사"
+        ],
+        "confidence": "Medium",
+        "decisionQuestion": "AI 도구 도입이 내부 직무별 역할 정의, 교육, 평가, 채용 기준에 반영되어 있는가?",
+        "peopleSignal": "AI 관련 감원 뉴스는 국내 직접 감원 신호가 아니라 직무 재설계와 구성원 불안 관리 신호로 읽어야 한다.",
+        "directFinding": "기준 기사는 AI 도입이 엔지니어링 직무 구조조정과 연결되는 해외 기업 사례를 제공한다.",
+        "researchJudgement": "종합 판단은 AI 도입을 생산성 프로젝트로만 관리하면 People 리스크를 놓친다는 것이다. 직무 변화 설명, 전환 교육, 평가 기준, 보안 가이드를 함께 업데이트해야 한다.",
+        "metrics": [
+            [
+                "자료 유형",
+                "해외 AI·인재 기준 기사",
+                "SiliconRepublic"
+            ],
+            [
+                "분석 관점",
+                "교육·인력운영·제도",
+                "AI 도입과 기술직 재편"
+            ],
+            [
+                "대상 이슈",
+                "2026-07-15",
+                "해외 이슈 최대 1건"
+            ]
+        ],
+        "reportFlow": [
+            [
+                "기준 기사",
+                "AI 도입 확대 속 Thomson Reuters 엔지니어링 직무 감원"
+            ],
+            [
+                "직접 영향",
+                "AI 직무 재설계, 전환 교육, 평가 기준 설명 필요"
+            ],
+            [
+                "2차 영향",
+                "채용 기준, 조직문화, 보안 가이드, 노사 커뮤니케이션으로 확산"
+            ],
+            [
+                "검토 필요 리스크",
+                "AI 불안 확산, 교육-배치 미연계, 평가 기준 불명확"
+            ],
+            [
+                "우선 검토",
+                "AI 적용 직무, 전환 가능 인력, 관리자 설명자료"
+            ]
+        ],
+        "topRisks": [
+            [
+                "1",
+                "AI 불안의 내부 확산",
+                "해외 감원 뉴스가 내부 직무 안정성 질문으로 번지면 관리자 설명력이 중요해진다."
+            ],
+            [
+                "2",
+                "전환 교육과 배치의 단절",
+                "AI 교육을 실시해도 실제 역할과 평가 기준이 바뀌지 않으면 불신이 커질 수 있다."
+            ],
+            [
+                "3",
+                "AI 사용 보안 공백",
+                "업무 자동화 도구 확산 시 입력 금지 데이터와 책임 기준이 늦게 정리될 수 있다."
+            ]
+        ],
+        "areas": [
+            {
+                "name": "교육",
+                "owner": "교육 담당",
+                "score": 93,
+                "confidence": "High",
+                "summary": "Thomson Reuters AI 감원 이슈는 직무 전환, AI 활용, 리더십 교육에 직접적인 점검을 요구한다.",
+                "why": [
+                    "해외 감원 사례는 AI 교육이 선택 과정이 아니라 직무 안정성과 연결되는 신호다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "AI 교육은 전환 가능 직무와 연결될 때만 불안 완화와 생산성 개선을 동시에 만든다.",
+                "secondaryImpact": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다.",
+                "stars": {
+                    "인력 재배치": 5,
+                    "운영비 영향": 4,
+                    "규제 리스크": 3,
+                    "실행 시급성": 5
+                },
+                "actions": [
+                    "직무 전환 교육 대상과 필수 이수 시점을 현업 계획과 맞춘다.",
+                    "관리자 교육에 변화 이유, 평가 기준, 구성원 질문 대응 스크립트를 포함한다.",
+                    "AI·직무 교육의 이수율보다 전환 배치 성공률을 함께 본다."
+                ],
+                "scope": [
+                    "직급/직무별 특화 교육",
+                    "차세대 리더 육성",
+                    "AI/직무/리더십/어학 교육"
+                ],
+                "directImpact": "AI 도구 교육을 직무 전환 교육과 관리자 커뮤니케이션 교육으로 확장해야 한다.",
+                "finalRisk": "교육이 도구 사용법에 머물면 전환 배치와 성과 개선으로 이어지지 않는다.",
+                "indicators": [
+                    "AI 교육 이수 후 업무 적용률",
+                    "전환 배치 성공률",
+                    "관리자 설명 교육 참여율"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "교육 관점에서 AI 도구 교육을 직무 전환 교육과 관리자 커뮤니케이션 교육으로 확장해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "교육이 도구 사용법에 머물면 전환 배치와 성과 개선으로 이어지지 않는다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "직무 전환, AI 활용, 리더십 교육 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "인력운영",
+                "owner": "인력운영 담당",
+                "score": 88,
+                "confidence": "High",
+                "summary": "Thomson Reuters AI 감원 이슈는 충원 계획, 배치, 효율화, 퇴직 리스크에 직접적인 점검을 요구한다.",
+                "why": [
+                    "AI 도입은 인원 증감보다 역할 재배치와 업무량 재산정 문제를 먼저 만든다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "감원 뉴스에 반응하기보다 내부 직무 영향도를 공개 가능한 수준으로 정리해야 한다.",
+                "secondaryImpact": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다.",
+                "stars": {
+                    "인력 재배치": 5,
+                    "운영비 영향": 4,
+                    "규제 리스크": 3,
+                    "실행 시급성": 5
+                },
+                "actions": [
+                    "핵심 직무별 충원 계획과 실제 배치 가능 인원을 다시 대조한다.",
+                    "공석 지속일수와 퇴직 예정 인력의 업무 커버리지를 함께 점검한다.",
+                    "Thomson Reuters AI 감원 영향이 큰 조직의 전배·재배치 기준을 사전에 정한다."
+                ],
+                "scope": [
+                    "인력 운영 계획 수립 및 실적 관리",
+                    "인력 충원 및 효율화",
+                    "휴직/복직/퇴직 관리"
+                ],
+                "directImpact": "AI로 축소·확대될 직무를 구분하고 전환 가능 인력을 사전에 표시해야 한다.",
+                "finalRisk": "직무 영향도를 표시하지 않으면 구성원 불안과 현업의 비공식 추측이 늘어난다.",
+                "indicators": [
+                    "AI 영향 직무 목록",
+                    "전환 가능 인력 수",
+                    "직무별 생산성 지표 변화"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "인력운영 관점에서 AI로 축소·확대될 직무를 구분하고 전환 가능 인력을 사전에 표시해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "직무 영향도를 표시하지 않으면 구성원 불안과 현업의 비공식 추측이 늘어난다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "충원 계획, 배치, 효율화, 퇴직 리스크 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "제도",
+                "owner": "제도 담당",
+                "score": 85,
+                "confidence": "High",
+                "summary": "Thomson Reuters AI 감원 이슈는 평가, 보상, 승격, 예외 승인 기준에 직접적인 점검을 요구한다.",
+                "why": [
+                    "AI를 활용한 결과물의 책임과 평가 기준이 불명확하면 구성원 간 공정성 인식이 흔들린다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "AI 성과를 평가에 넣기 전에 사용 가능 범위와 책임 기준부터 명확히 해야 한다.",
+                "secondaryImpact": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 3,
+                    "규제 리스크": 4,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "평가·보상·승격 기준과 충돌하는 예외 승인 항목을 표시한다.",
+                    "구성원 문의에 답할 수 있도록 제도 변경 여부와 미변경 사유를 문서화한다.",
+                    "직무군별 보상 하단과 성과급 설명자료의 차이를 점검한다."
+                ],
+                "scope": [
+                    "승격",
+                    "평가",
+                    "연봉 산정",
+                    "시상/징계"
+                ],
+                "directImpact": "AI 활용도와 결과 책임을 평가·보상 기준에 어떻게 반영할지 정해야 한다.",
+                "finalRisk": "AI 성과 기여도를 평가 기준으로 설명하지 못하면 공정성 논란이 생길 수 있다.",
+                "indicators": [
+                    "AI 활용 평가 항목 수",
+                    "성과 기준 문의 건수",
+                    "예외 승인 요청 건수"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "제도 관점에서 AI 활용도와 결과 책임을 평가·보상 기준에 어떻게 반영할지 정해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "AI 성과 기여도를 평가 기준으로 설명하지 못하면 공정성 논란이 생길 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "평가, 보상, 승격, 예외 승인 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "채용",
+                "owner": "채용 담당",
+                "score": 84,
+                "confidence": "High",
+                "summary": "Thomson Reuters AI 감원 이슈는 핵심 후보자 발굴과 선확보 파이프라인에 직접적인 점검을 요구한다.",
+                "why": [
+                    "Thomson Reuters AI 감원 변화는 핵심 후보자 발굴과 선확보 파이프라인의 우선순위를 바꿀 수 있다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "채용 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "신규 채용은 단순 개발 역량보다 AI 활용·검증·업무 재설계 역량을 더 보게 된다.",
+                "stars": {
+                    "인력 재배치": 4,
+                    "운영비 영향": 3,
+                    "규제 리스크": 2,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "핵심 후보자 풀을 직무·경력·AI 활용 역량 기준으로 재분류한다.",
+                    "오퍼 거절 사유를 보상, 성장기회, 근무지, 직무매력으로 나눠 기록한다.",
+                    "선확보가 필요한 직무의 산학·경력 채널을 별도 관리한다."
+                ],
+                "scope": [
+                    "외부 인력 발굴 및 채용",
+                    "우수 인력 선확보",
+                    "산학교류 및 참여연구원 관리"
+                ],
+                "directImpact": "AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다.",
+                "finalRisk": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다.",
+                "indicators": [
+                    "채용 관련 문의 건수",
+                    "채용 실행 지표 변동",
+                    "채용 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "채용 관점에서 AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "신규 채용은 단순 개발 역량보다 AI 활용·검증·업무 재설계 역량을 더 보게 된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "핵심 후보자 발굴과 선확보 파이프라인 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "조직/임원",
+                "owner": "조직/임원 담당",
+                "score": 82,
+                "confidence": "High",
+                "summary": "Thomson Reuters AI 감원 이슈는 전사 People 우선순위와 임원 보고 기준에 직접적인 점검을 요구한다.",
+                "why": [
+                    "Thomson Reuters AI 감원 변화는 전사 People 우선순위와 임원 보고 기준의 우선순위를 바꿀 수 있다.",
+                    "외부 뉴스 신호가 내부 운영 기준, 설명자료, 실행 지표로 빠르게 연결될 가능성이 높다."
+                ],
+                "insight": "조직/임원 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 3,
+                    "규제 리스크": 2,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "Thomson Reuters AI 감원 이슈를 임원 보고 안건으로 올릴지 판단 기준을 정한다.",
+                    "핵심 조직과 리더 후보군에 미치는 영향을 분기 리뷰 항목에 추가한다.",
+                    "현업별 대응 기준이 다르게 운영되지 않도록 공통 메시지를 정리한다."
+                ],
+                "scope": [
+                    "조직개편",
+                    "임원 지원 및 관리",
+                    "임원 인사",
+                    "차세대 리더 양성 및 관리"
+                ],
+                "directImpact": "AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다.",
+                "finalRisk": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다.",
+                "indicators": [
+                    "조직/임원 관련 문의 건수",
+                    "조직/임원 실행 지표 변동",
+                    "조직/임원 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "조직/임원 관점에서 AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "전사 People 우선순위와 임원 보고 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": false
+            },
+            {
+                "name": "조직문화",
+                "owner": "조직문화 담당",
+                "score": 78,
+                "confidence": "Medium",
+                "summary": "Thomson Reuters AI 감원 이슈는 일하는 방식, 공정성 체감, 변화 수용성에 보조적인 확인을 요구한다.",
+                "why": [
+                    "Thomson Reuters AI 감원 변화는 일하는 방식, 공정성 체감, 변화 수용성의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "조직문화 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 3,
+                    "규제 리스크": 4,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "변화 수용성이 낮은 조직의 공정성 체감과 성장기회 체감을 점검한다.",
+                    "관리자 1:1에서 구성원이 묻는 우려를 공통 질문 목록으로 수집한다.",
+                    "캠페인성 메시지보다 일하는 방식 변화와 지원 기준을 구체화한다."
+                ],
+                "scope": [
+                    "캠퍼스 행사 운영",
+                    "일하는 문화 조성"
+                ],
+                "directImpact": "AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다.",
+                "finalRisk": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다.",
+                "indicators": [
+                    "조직문화 관련 문의 건수",
+                    "조직문화 실행 지표 변동",
+                    "조직문화 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "조직문화 관점에서 AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "일하는 방식, 공정성 체감, 변화 수용성 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "보안",
+                "owner": "보안 담당",
+                "score": 76,
+                "confidence": "Medium",
+                "summary": "Thomson Reuters AI 감원 이슈는 접근권한, 기술자료, AI 사용 보안 기준에 보조적인 확인을 요구한다.",
+                "why": [
+                    "Thomson Reuters AI 감원 변화는 접근권한, 기술자료, AI 사용 보안 기준의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "보안 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "AI 도구 사용량이 늘수록 기술자료와 개인정보 입력 금지 기준이 중요해진다.",
+                "stars": {
+                    "인력 재배치": 3,
+                    "운영비 영향": 3,
+                    "규제 리스크": 4,
+                    "실행 시급성": 4
+                },
+                "actions": [
+                    "직무 전환 또는 외부 협업 확대 시 접근권한 변경이 필요한 계정을 점검한다.",
+                    "AI 도구 입력 금지 데이터와 기술자료 반출 기준을 최신화한다.",
+                    "핵심 직무 인력 이동과 보안 교육 이수 상태를 함께 확인한다."
+                ],
+                "scope": [
+                    "보안 시스템 개선 및 관리",
+                    "보안 점검"
+                ],
+                "directImpact": "AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다.",
+                "finalRisk": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다.",
+                "indicators": [
+                    "AI 도구 사용 로그",
+                    "입력 금지 데이터 위반 건수",
+                    "접근권한 변경 건수"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "보안 관점에서 AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "AI 도구 사용량이 늘수록 기술자료와 개인정보 입력 금지 기준이 중요해진다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "접근권한, 기술자료, AI 사용 보안 기준 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "노사",
+                "owner": "노사 담당",
+                "score": 70,
+                "confidence": "Medium",
+                "summary": "Thomson Reuters AI 감원 이슈는 대내외 동향, 현장 VOC, 특이 인력 신호에 보조적인 확인을 요구한다.",
+                "why": [
+                    "Thomson Reuters AI 감원 변화는 대내외 동향, 현장 VOC, 특이 인력 신호의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "노사 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다.",
+                "stars": {
+                    "인력 재배치": 2,
+                    "운영비 영향": 2,
+                    "규제 리스크": 1,
+                    "실행 시급성": 3
+                },
+                "actions": [
+                    "예상 문의와 불만 쟁점을 FAQ로 정리해 현장 관리자에게 공유한다.",
+                    "노조·구성원 커뮤니케이션에서 단정 표현보다 확인 가능한 지표를 사용한다.",
+                    "현장 VOC를 보상, 고용안정, 업무강도, 공정성 항목으로 분류한다."
+                ],
+                "scope": [
+                    "대내외 동향 관리",
+                    "특이 인력 파악"
+                ],
+                "directImpact": "AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다.",
+                "finalRisk": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다.",
+                "indicators": [
+                    "노사 관련 문의 건수",
+                    "노사 실행 지표 변동",
+                    "노사 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "노사 관점에서 AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "대내외 동향, 현장 VOC, 특이 인력 신호 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            },
+            {
+                "name": "총무",
+                "owner": "총무 담당",
+                "score": 58,
+                "confidence": "Watch",
+                "summary": "Thomson Reuters AI 감원 이슈는 좌석, 통근, 식당, 사무환경 운영 부하에 낮은 강도의 모니터링을 요구한다.",
+                "why": [
+                    "Thomson Reuters AI 감원 변화는 좌석, 통근, 식당, 사무환경 운영 부하의 우선순위를 바꿀 수 있다.",
+                    "직접 영향은 제한적이지만 상위 기능의 대응 과정에서 후속 문의와 운영 부하가 생길 수 있다."
+                ],
+                "insight": "총무 영역은 낮은 영향이라도 빈칸으로 두지 말고 관련 내부 신호를 확인해야 한다.",
+                "secondaryImpact": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다.",
+                "stars": {
+                    "인력 재배치": 1,
+                    "운영비 영향": 1,
+                    "규제 리스크": 1,
+                    "실행 시급성": 2
+                },
+                "actions": [
+                    "공간, 좌석, 통근, 식당 등 운영 부하가 바뀌는 사업장을 먼저 확인한다.",
+                    "채용·교육 일정이 몰리는 기간의 의전과 입사 운영 리소스를 산정한다.",
+                    "근무환경 관련 VOC를 People 의사결정 지표와 연결해 본다."
+                ],
+                "scope": [
+                    "의전",
+                    "레이아웃 관리",
+                    "사무환경/비품",
+                    "식당",
+                    "인허가",
+                    "차량 관리"
+                ],
+                "directImpact": "AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다.",
+                "finalRisk": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다.",
+                "indicators": [
+                    "총무 관련 문의 건수",
+                    "총무 실행 지표 변동",
+                    "총무 예외 승인 또는 지원 요청"
+                ],
+                "impactPath": [
+                    {
+                        "stage": "기준 기사",
+                        "text": "Thomson Reuters cuts 500 jobs as AI adoption deepens"
+                    },
+                    {
+                        "stage": "직접 영향",
+                        "text": "총무 관점에서 AI 도입에 따른 직무 역할과 필요 역량을 다시 정의해야 한다."
+                    },
+                    {
+                        "stage": "2차 영향",
+                        "text": "직무 재설계가 교육, 평가, 채용, 보안, 조직문화 이슈로 확산된다."
+                    },
+                    {
+                        "stage": "검토 필요 리스크",
+                        "text": "AI 도입 목적과 직무 변화 기준을 설명하지 못하면 구성원 불안과 실행 저항이 커질 수 있다."
+                    },
+                    {
+                        "stage": "우선 검토",
+                        "text": "좌석, 통근, 식당, 사무환경 운영 부하 관련 내부 지표를 2026-07-15 기준으로 대조한다."
+                    }
+                ],
+                "supporting": true
+            }
+        ],
+        "evidence": [
+            {
+                "type": "보완 근거",
+                "title": "Insurance giant says it's turning to AI to replace as many as 1,800 jobs",
+                "source": "MarketWatch",
+                "date": "2026-07-09",
+                "url": "https://www.marketwatch.com/story/insurance-giant-says-its-turning-to-ai-to-replace-as-many-as-1-800-jobs-13e60de2",
+                "summary": "Allianz가 AI 활용 확대와 일부 직무 감축 계획을 밝힌 사례를 다뤘다.",
+                "impactLink": "AI 도입이 서비스·지원 직무 구조 변화로 이어질 수 있음을 보여준다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "As Microsoft lays off 4,800 employees, HR head Amy Coleman's memo has a direct line",
+                "source": "Times of India",
+                "date": "2026-07-12",
+                "url": "https://timesofindia.indiatimes.com/technology/tech-news/as-microsoft-lays-off-4800-employees-hr-head-amy-colemans-memo-has-a-direct-line-for-all-the-employees-the-jobs-are-not-being-replaced-by-ai-but-/articleshow/132326446.cms",
+                "summary": "Microsoft HR 리더가 감원과 AI 업무 변화의 관계를 구성원에게 설명한 사례다.",
+                "impactLink": "관리자·HR 커뮤니케이션 문구가 AI 불안 관리의 핵심임을 시사한다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "120,000 tech jobs cut in 2026 as AI drives Big Tech's reset",
+                "source": "Economic Times",
+                "date": "2026-07-10",
+                "url": "https://m.economictimes.com/news/company/corporate-trends/techs-brutal-layoffs-continue-and-india-alone-losing-up-to-35000-jobs/articleshow/132282955.cms",
+                "summary": "AI 도입과 기술기업 구조 재편 속 글로벌 기술직 감원 흐름을 정리했다.",
+                "impactLink": "채용 기준과 전환 교육을 글로벌 노동시장 변화와 함께 봐야 한다."
+            },
+            {
+                "type": "보완 근거",
+                "title": "AI is reshaping hiring before it reshapes jobs",
+                "source": "The Australian",
+                "date": "2026-07-15",
+                "url": "https://www.theaustralian.com.au/business/tech-journal/ai-is-reshaping-hiring-before-it-reshapes-jobs/news-story/1c281b17d12f30d5c5d52e323684d47f",
+                "summary": "AI가 대규모 감원보다 먼저 채용 수요와 직무별 공고를 바꾸고 있다는 분석을 소개했다.",
+                "impactLink": "채용팀은 감원 여부보다 직무별 신규 수요 변화에 먼저 대응해야 한다."
+            }
+        ],
+        "cases": [
+            {
+                "title": "Microsoft 감원과 HR 메모",
+                "type": "해외 커뮤니케이션 사례",
+                "org": "Times of India",
+                "why": "AI 전환과 감원 사이의 관계를 HR이 직접 설명한 사례다.",
+                "peopleInsight": "관리자와 HR의 설명 문구가 구성원 불안을 낮추는 첫 장치다.",
+                "peopleFunction": "조직문화/노사",
+                "actionLink": "관리자 교육에 변화 이유와 구성원 질문 대응 스크립트를 포함한다.",
+                "url": "https://timesofindia.indiatimes.com/technology/tech-news/as-microsoft-lays-off-4800-employees-hr-head-amy-colemans-memo-has-a-direct-line-for-all-the-employees-the-jobs-are-not-being-replaced-by-ai-but-/articleshow/132326446.cms",
+                "priority": true
+            },
+            {
+                "title": "Allianz AI 콜센터 직무 대체",
+                "type": "AI 자동화 사례",
+                "org": "MarketWatch",
+                "why": "AI가 고객응대 직무 규모와 재배치 필요성을 직접 바꾸는 사례다.",
+                "peopleInsight": "지원 직무도 AI 영향도와 전환 가능성을 정량화해야 한다.",
+                "peopleFunction": "인력운영/교육",
+                "actionLink": "AI로 축소·확대될 직무를 구분하고 전환 가능 인력을 표시한다.",
+                "url": "https://www.marketwatch.com/story/insurance-giant-says-its-turning-to-ai-to-replace-as-many-as-1-800-jobs-13e60de2"
+            },
+            {
+                "title": "Morgan Stanley 감원 보도",
+                "type": "화이트칼라 자동화 참고 사례",
+                "org": "매일경제",
+                "why": "금융권 고성과 조직에서도 효율화와 감원이 함께 논의될 수 있음을 보여준다.",
+                "peopleInsight": "성과가 좋은 조직도 AI 효율화에 따라 역할 재정의가 필요할 수 있다.",
+                "peopleFunction": "조직/임원/제도",
+                "actionLink": "AI 영향 직무 목록과 평가 기준 변경 가능성을 임원 보고 안건으로 정리한다.",
+                "url": "https://www.mk.co.kr/news/world/11979250"
+            },
+            {
+                "title": "AI 고용 대전환과 채용문 축소",
+                "type": "글로벌 노동시장 참고 사례",
+                "org": "한국경제TV·Daum",
+                "why": "AI 전환이 채용 축소와 직무 전환 압력으로 이어진다는 흐름을 보여준다.",
+                "peopleInsight": "채용 축소 신호가 나올 때 재교육과 재배치 기준을 함께 준비해야 한다.",
+                "peopleFunction": "채용/교육",
+                "actionLink": "신규 채용 기준에 AI 활용·검증·업무 재설계 역량을 반영한다.",
+                "url": "https://v.daum.net/v/20260203070240296"
+            }
+        ]
+    }
+];
+
+    const areaRefinements = {};
+    const evidenceSummaries = {};
+    const evidenceImpactLinks = {};
+    // End generated daily report content.
+    scenarios.forEach((scenario) => {
+      completePeopleAreas(scenario);
+      scenario.areas.forEach((item) => Object.assign(item, areaRefinements[scenario.id]?.[item.name] || {}));
+      scenario.evidence.forEach((item) => {
+        item.summary = evidenceSummaries[item.title] || item.summary || "요약: 이 자료는 해당 이슈가 인사 기능에 미치는 영향을 판단하기 위한 참고 근거로 활용된다.";
+        item.impactLink = item.impactLink || evidenceImpactLinks[item.title];
+      });
+    });
+
+    const confidenceLabel = {
+      High: "신뢰도 높음",
+      Medium: "신뢰도 보통",
+      Watch: "관찰 필요",
+    };
+
+    const confidenceClass = {
+      High: "confidence-high",
+      Medium: "confidence-medium",
+      Watch: "confidence-watch",
+    };
+
+    let scenarioIndex = Math.max(0, scenarios.findIndex((scenario) => scenario.category === DEFAULT_TAB));
+    let selectedAreaName = "";
+
+    const nodes = {
+      tabs: document.getElementById("scenarioTabs"),
+      advanceScenario: document.getElementById("advanceScenario"),
+      headline: document.getElementById("headline"),
+      articleTitleLink: document.getElementById("articleTitleLink"),
+      articleSource: document.getElementById("articleSource"),
+      articleDate: document.getElementById("articleDate"),
+      articleOriginalLink: document.getElementById("articleOriginalLink"),
+      scenarioContext: document.getElementById("scenarioContext"),
+      newsInput: document.getElementById("newsInput"),
+      sourceMix: document.getElementById("sourceMix"),
+      reportFlow: document.getElementById("reportFlow"),
+      overallConfidence: document.getElementById("overallConfidence"),
+      decisionQuestion: document.getElementById("decisionQuestion"),
+      peopleSignal: document.getElementById("peopleSignal"),
+      directFinding: document.getElementById("directFinding"),
+      researchJudgement: document.getElementById("researchJudgement"),
+      metricGrid: document.getElementById("metricGrid"),
+      riskGrid: document.getElementById("riskGrid"),
+      rankingList: document.getElementById("rankingList"),
+      detailTitle: document.getElementById("detailTitle"),
+      detailOwner: document.getElementById("detailOwner"),
+      detailImpactLevel: document.getElementById("detailImpactLevel"),
+      detailConfidence: document.getElementById("detailConfidence"),
+      detailScope: document.getElementById("detailScope"),
+      detailDirectImpact: document.getElementById("detailDirectImpact"),
+      detailPathway: document.getElementById("detailPathway"),
+      detailFinalRisk: document.getElementById("detailFinalRisk"),
+      detailWhy: document.getElementById("detailWhy"),
+      detailInsight: document.getElementById("detailInsight"),
+      detailIndicators: document.getElementById("detailIndicators"),
+      evidenceGrid: document.getElementById("evidenceGrid"),
+      actionStack: document.getElementById("actionStack"),
+      caseGrid: document.getElementById("caseGrid"),
+    };
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function hasUrl(value) {
+      return typeof value === "string" && /^https?:\/\//.test(value);
+    }
+
+    function sourceLink(url, label) {
+      if (!hasUrl(url)) return `<span class="link-missing">링크 확인 필요</span>`;
+      return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+    }
+
+    function selectedScenario() {
+      return scenarios[scenarioIndex];
+    }
+
+    function sortedAreas(scenario) {
+      return [...scenario.areas].sort((a, b) => b.score - a.score);
+    }
+
+    function selectedArea(scenario) {
+      const sorted = sortedAreas(scenario);
+      return sorted.find((area) => area.name === selectedAreaName) || sorted[0];
+    }
+
+    function stars(value) {
+      return "★★★★★".slice(0, value) + "☆☆☆☆☆".slice(0, 5 - value);
+    }
+
+    function impactLevel(area) {
+      if (area.score >= 92) return { text: "매우 높음", className: "level-critical" };
+      if (area.score >= 82) return { text: "높음", className: "level-high" };
+      if (area.score >= 68) return { text: "보통", className: "level-medium" };
+      return { text: "낮음", className: "level-low" };
+    }
+
+    function renderTabs() {
+      if (!nodes.tabs) return;
+      nodes.tabs.innerHTML = scenarios
+        .map(
+          (scenario, index) => `
+              <button
+                class="scenario-tab"
+                type="button"
+                role="tab"
+                aria-selected="${index === scenarioIndex}"
+                data-scenario-index="${index}"
+              >${escapeHtml(scenario.label)}</button>
+            `,
+        )
+        .join("");
+
+      nodes.tabs.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          scenarioIndex = Number(button.dataset.scenarioIndex);
+          selectedAreaName = "";
+          render();
+        });
+      });
+    }
+
+    function renderInput(scenario) {
+      const article = scenario.article || scenario.evidence[0] || {};
+      nodes.headline.textContent = article.title || scenario.headline;
+      nodes.articleTitleLink.href = hasUrl(article.url) ? article.url : "#";
+      nodes.articleSource.textContent = `출처: ${article.source || "확인 필요"}`;
+      nodes.articleDate.textContent = `날짜: ${article.date || "확인 필요"}`;
+      nodes.articleOriginalLink.style.display = hasUrl(article.url) ? "inline-flex" : "none";
+      nodes.articleOriginalLink.href = hasUrl(article.url) ? article.url : "#";
+      nodes.scenarioContext.textContent = scenario.context;
+      nodes.newsInput.textContent = scenario.input;
+      if (nodes.sourceMix) {
+        nodes.sourceMix.innerHTML = "";
+      }
+      nodes.reportFlow.innerHTML = (scenario.reportFlow || [])
+        .map(
+          ([label, text]) => `
+              <div class="flow-card">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(text)}</strong>
+              </div>
+            `,
+        )
+        .join("");
+      nodes.overallConfidence.className = `confidence-badge ${confidenceClass[scenario.confidence]}`;
+      nodes.overallConfidence.textContent = confidenceLabel[scenario.confidence];
+      nodes.decisionQuestion.textContent = scenario.decisionQuestion;
+      nodes.peopleSignal.textContent = scenario.peopleSignal;
+      nodes.directFinding.textContent = scenario.directFinding || scenario.context;
+      nodes.researchJudgement.textContent = scenario.researchJudgement || scenario.peopleSignal;
+      nodes.metricGrid.innerHTML = scenario.metrics
+        .map(
+          ([label, value, note]) => `
+              <div class="metric-tile">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(value)}</strong>
+                <p>${escapeHtml(note)}</p>
+              </div>
+            `,
+        )
+        .join("");
+    }
+
+    function renderTopRisks(scenario) {
+      nodes.riskGrid.innerHTML = (scenario.topRisks || [])
+        .map(
+          ([index, title, note]) => `
+              <article class="risk-card">
+                <span>${escapeHtml(index)}. 우선 검토</span>
+                <h3>${escapeHtml(title)}</h3>
+                <p>${escapeHtml(note)}</p>
+              </article>
+            `,
+        )
+        .join("");
+    }
+
+    function renderRanking(scenario, activeArea) {
+      nodes.rankingList.innerHTML = sortedAreas(scenario)
+        .map((area, index) => {
+          const level = impactLevel(area);
+          return `
+              <button class="ranking-row ${area.name === activeArea.name ? "active" : ""} ${area.supporting ? "supporting" : ""}" type="button" data-area="${escapeHtml(area.name)}">
+                <span class="rank-no">${index + 1}</span>
+                <span class="rank-main">
+                  <span class="rank-title">
+                    <strong>${escapeHtml(area.name)}</strong>
+                    <span class="confidence-badge ${confidenceClass[area.confidence]}">${confidenceLabel[area.confidence]}</span>
+                  </span>
+                  <p>${escapeHtml(area.summary)}</p>
+                </span>
+                <span class="rank-score">
+                  <span class="impact-level ${level.className}">영향 수준 ${level.text}</span>
+                </span>
+              </button>
+            `;
+        })
+        .join("");
+
+      nodes.rankingList.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedAreaName = button.dataset.area;
+          render();
+        });
+      });
+    }
+
+    function renderDetail(area) {
+      const level = impactLevel(area);
+      const impactPath = area.impactPath || [
+        { stage: "기사 내용", text: area.summary },
+        { stage: "직접 영향", text: area.directImpact || area.summary },
+        { stage: "2차 영향", text: area.secondaryImpact || area.insight },
+        { stage: "검토 필요 리스크", text: area.finalRisk || area.insight },
+        { stage: "우선 검토", text: `${area.name} 관점의 실행 과제 확인` },
+      ];
+      nodes.detailTitle.textContent = area.name;
+      nodes.detailOwner.textContent = `${area.owner} 관점`;
+      nodes.detailImpactLevel.className = `impact-level ${level.className}`;
+      nodes.detailImpactLevel.textContent = level.text;
+      nodes.detailConfidence.textContent = confidenceLabel[area.confidence];
+      nodes.detailScope.innerHTML = area.scope.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      nodes.detailDirectImpact.textContent = area.directImpact || area.summary;
+      nodes.detailPathway.innerHTML = impactPath
+        .map(
+          (step) => `
+              <div class="path-step">
+                <span>${escapeHtml(step.stage)}</span>
+                <strong>${escapeHtml(step.text)}</strong>
+              </div>
+            `,
+        )
+        .join("");
+      nodes.detailFinalRisk.textContent = area.finalRisk || area.insight;
+      nodes.detailWhy.innerHTML = area.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      nodes.detailInsight.textContent = area.insight;
+      nodes.detailIndicators.innerHTML = (area.indicators || ["관련 내부 지표 확인 필요"])
+        .map((item) => `<li>${escapeHtml(item)}</li>`)
+        .join("");
+    }
+
+    function renderEvidence(scenario) {
+      nodes.evidenceGrid.innerHTML = scenario.evidence
+        .map(
+          (item) => `
+              <article class="evidence-card">
+                <span class="type-badge">${escapeHtml(item.type)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <p class="evidence-key">핵심 근거: ${escapeHtml(item.keyEvidence || item.summary.replace(/^요약:\s*/, "").split(".")[0])}</p>
+                <p class="evidence-summary">${escapeHtml(item.summary)}</p>
+                <p class="evidence-link-note">${escapeHtml(item.impactLink || "판단 연결: 해당 이슈의 인사 영향 판단 근거")}</p>
+                <div class="source-meta">
+                  <span>출처: ${escapeHtml(item.source)}</span>
+                  <span>날짜: ${escapeHtml(item.date)}</span>
+                </div>
+                ${sourceLink(item.url, "자료 열기")}
+              </article>
+            `,
+        )
+        .join("");
+    }
+
+    function renderActions(area) {
+      nodes.actionStack.innerHTML = `
+          <article class="action-card">
+            <span class="confidence-badge ${confidenceClass[area.confidence]}">${escapeHtml(area.name)}</span>
+            <h3>권고 액션</h3>
+            <ol>
+              ${area.actions.map((action) => `<li>${escapeHtml(action)}</li>`).join("")}
+            </ol>
+          </article>
+        `;
+    }
+
+    function renderCases(scenario) {
+      nodes.caseGrid.innerHTML = scenario.cases
+        .map(
+          (item) => `
+              <article class="case-card ${item.priority ? "case-card-strong" : ""}">
+                <span>${escapeHtml(item.type || item.tag)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <dl class="case-meta">
+                  <div><dt>출처/범위</dt><dd>${escapeHtml(item.org || item.sourceScope || "확인 필요")}</dd></div>
+                  <div><dt>참고 이유</dt><dd>${escapeHtml(item.why || item.note)}</dd></div>
+                  <div><dt>인사 시사점</dt><dd>${escapeHtml(item.peopleInsight || item.note)}</dd></div>
+                  <div><dt>연결 기능</dt><dd>${escapeHtml(item.peopleFunction || item.tag)}</dd></div>
+                  <div><dt>연결 액션</dt><dd>${escapeHtml(item.actionLink || "권고 액션 점검")}</dd></div>
+                </dl>
+                ${sourceLink(item.url, "사례 열기")}
+              </article>
+            `,
+        )
+        .join("");
+    }
+
+    function render() {
+      const scenario = selectedScenario();
+      const area = selectedArea(scenario);
+      renderTabs();
+      renderInput(scenario);
+      renderTopRisks(scenario);
+      renderRanking(scenario, area);
+      renderDetail(area);
+      renderEvidence(scenario);
+      renderActions(area);
+      renderCases(scenario);
+    }
+
+    if (nodes.advanceScenario) {
+      nodes.advanceScenario.addEventListener("click", () => {
+        scenarioIndex = (scenarioIndex + 1) % scenarios.length;
+        selectedAreaName = "";
+        render();
+      });
+    }
+
+    render();
+  </script>
+</body>
+
+</html>
