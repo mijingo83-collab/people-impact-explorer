@@ -355,6 +355,44 @@
         "status": "complete"
       }
     ],
-    "latest": true
+    "latest": false
+  },
+  {
+    "date": "2026-07-16",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260716.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LG디스플레이 OLED 집중과 수율·원가 역량 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 동해안 AX 벨트 구상과 제조 AI 직무 전환",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 19조 구미 투자와 지역 AI 인재 파이프라인",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 최저임금 후속 쟁점과 도급·업종별 적용 논의",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 호황의 세 비용 청구서와 보상·운영 압력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 엔비디아 일본 피지컬 AI 협력과 핵심 직무 재편",
+        "status": "complete"
+      }
+    ]
   }
 ]
