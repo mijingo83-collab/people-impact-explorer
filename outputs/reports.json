@@ -399,7 +399,7 @@
     "date": "2026-07-17",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260717.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -429,6 +429,82 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI발 고용 불안과 미국 청년 기술직 이동",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-18",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260718.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] Micro-LED CPO 광통신과 디스플레이 기술직 확장",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI 팩토리 확산과 제조 운영 직무 재설계",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 세종 국가산단 추가 투자 요청과 지역 인재 운영",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 고용 감소 경고와 청년성장 투자 논의",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 레버리지 ETF 변동성과 반도체 보상 기대 흔들림",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 인도네시아 AI 저작권 규제와 생성형 AI 사용 기준",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-19",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260719.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 갤럭시 Z OLED 공급과 플렉스 티타늄 역량 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 한국 AI 도입률 최고 전망과 제조 신입 직무 재설계",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 언팩과 AI 글래스 확장에 따른 AI 경험 역량",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI기본법 시행과 인사 AI 사용 통제 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 대졸 실업 5년 최대와 신입 채용 포트폴리오 압력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 삼성 미국 법인 인력 조정과 AI 인프라 투자 전환",
         "status": "complete"
       }
     ]
