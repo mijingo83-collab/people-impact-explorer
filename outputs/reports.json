@@ -475,7 +475,7 @@
     "date": "2026-07-19",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260719.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -505,6 +505,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 삼성 미국 법인 인력 조정과 AI 인프라 투자 전환",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-20",
+    "title": "2026-07-20 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260720.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성D 노트북용 탠덤 OLED 공급과 IT OLED 역량 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 신입 채용 47% 증가와 기술 인재 파이프라인 경쟁",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 당일 기사 기준 미충족",
+        "status": "missing"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 현대차 부분파업 확대와 자동화 고용안정 쟁점",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 당일 기사 기준 미충족",
+        "status": "missing"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 직무 확산과 전 직군 AI 활용 역량 재편",
         "status": "complete"
       }
     ]
