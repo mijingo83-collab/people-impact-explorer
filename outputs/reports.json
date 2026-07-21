@@ -513,7 +513,7 @@
     "date": "2026-07-20",
     "title": "2026-07-20 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260720.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -543,6 +543,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 직무 확산과 전 직군 AI 활용 역량 재편",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-21",
+    "title": "2026-07-21 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260721.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] K-OLED 중대형 시장 독주와 핵심 기술직무 수요",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SK하이닉스 자사주 성과급 논의와 보상 기준 압력",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 성과급 합의 논란과 보상 거버넌스 점검",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI기본법 후속 개정안 시행과 인사 AI 관리 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 대기업 이익 증가와 고용 정체가 만든 인력운영 압력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] ASML AI 반도체 장비 호황과 글로벌 핵심인재 경쟁",
         "status": "complete"
       }
     ]
