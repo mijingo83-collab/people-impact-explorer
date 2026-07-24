@@ -663,38 +663,38 @@
   },
   {
     "date": "2026-07-24",
-    "title": "2026-07-24 데일리 인사 시사점 리포트",
+    "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260724.html",
     "latest": true,
     "issues": [
       {
         "category": "업계",
-        "title": "[업계] AR 글라스 LCoS 양산 로드맵과 디스플레이 직무 전환",
+        "title": "[업계] 삼성 OLED 확대와 대형 OLED 공급망 재편",
         "status": "complete"
       },
       {
         "category": "산업",
-        "title": "[산업] AMD HBM4 로드맵과 AI 반도체 스킬 수요 확대",
+        "title": "[산업] AI 배전망 ESS 경쟁과 배터리 운영 역량 수요",
         "status": "complete"
       },
       {
         "category": "관계사",
-        "title": "[관계사] 삼성바이오 완전가동 실적과 관계사 인력운영 참고 신호",
+        "title": "[관계사] 삼성전자 폴더블 8세대와 모바일 AI 경험 경쟁",
         "status": "complete"
       },
       {
         "category": "정책",
-        "title": "[정책] 청년 장기 미취업 확대와 채용·교육 미스매치 대응",
+        "title": "[정책] 미국 강제노동 관세와 공급망 노동 리스크",
         "status": "complete"
       },
       {
         "category": "경제",
-        "title": "[경제] 반도체 투심 반등과 보상 기대·인력시장 변동성",
+        "title": "[경제] 반도체 수출 호조와 보상·채용 기대 상승",
         "status": "complete"
       },
       {
         "category": "글로벌",
-        "title": "[글로벌] Uber AI 고객지원 재편과 직무 자동화 압력",
+        "title": "[글로벌] AI 관련 감원 확산과 직무 재설계 압력",
         "status": "complete"
       }
     ]
