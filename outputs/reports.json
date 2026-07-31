@@ -814,6 +814,120 @@
     ]
   },
   {
+    "date": "2026-07-28",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260728.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 애플 OLED 공급가 인하 요구와 수익성·인력운영 압박",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 중국 DUV 장비 양산 신호와 첨단 제조 인재 경쟁",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 녹색상품 선정과 ESG 역량·근무환경 기준",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 공무직 차별 해소 요구와 내부 형평성 커뮤니케이션",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체주 급락과 보상·리텐션 기대 변동성",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 올트먼 초지능 발언과 AI 직무 재편 압력",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-29",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260729.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] OLED 모니터 가격 하락과 게이밍 패널 수익성 압박",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI 혁신인재 1000명 산학협력과 첨단산업 교육 파이프라인",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 2분기 실적 발표 대기와 HBM 보상 기대",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 고용상황판 논의와 직무 전환 모니터링",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 폭락장 이후 투자심리와 보상 기대 관리",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 애플 개발자 지원과 글로벌 SW 인재 생태계",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-30",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260730.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 8.6세대 IT OLED 양산 개시와 램프업 인력 과부하",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SK하이닉스 AI 역량 채용과 반도체 인재 선발 기준 변화",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 역대 최대 실적과 사업부별 성과 설명 부담",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 실질임금 하락과 보상 체감 리스크",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 사업체 종사자 증가와 제조 인력운영 온도차",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 도입 기업의 채용 증가 신호와 직무 재설계",
+        "status": "complete"
+      }
+    ]
+  },
+  {
     "date": "2026-07-31",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260731.html",
