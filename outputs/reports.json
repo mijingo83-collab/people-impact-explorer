@@ -779,7 +779,7 @@
     "date": "2026-07-27",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260727.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -809,6 +809,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 지원 채용 과부하와 선별 기준 재설계",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-31",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260731.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 첨단 클러스터 투자와 아산 OLED 인력 전환",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] HBM4 주도권 경쟁과 반도체 핵심직무 수요",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 AX 평가 강화와 임원·조직 역량 압박",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 메가특구 주52시간 예외와 기간제 활용 확대 논의",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 메모리 가격 급등과 모바일·DX 수익성 압박",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 월가·AI 기업 수학 인재 보상 경쟁 심화",
         "status": "complete"
       }
     ]
