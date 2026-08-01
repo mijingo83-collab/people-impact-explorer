@@ -931,7 +931,7 @@
     "date": "2026-07-31",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260731.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -961,6 +961,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 월가·AI 기업 수학 인재 보상 경쟁 심화",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-01",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260801.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 프라이버시 OLED 기능 논쟁과 패널 요구 변화",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 피지컬 AI 인재 영입과 제조 직무 재설계",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성SDS 기업용 AI 확산과 AX 역량 압박",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 메가특구 주52시간·기간제 특례 논의와 노사 리스크",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 수출 호조와 보상·채용 기대 상승",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 에이전트 보안 사고와 사용 통제 기준",
         "status": "complete"
       }
     ]
