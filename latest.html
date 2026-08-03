@@ -1,0 +1,5804 @@
+﻿<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>인사 시사점 분석 리포트</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --paper: #ffffff;
+      --paper-soft: #f8fafc;
+      --paper-warm: #fffdf8;
+      --ink: #111827;
+      --ink-2: #273344;
+      --muted: #687789;
+      --faint: #8a98a8;
+      --line: #dfe5ee;
+      --navy: #101820;
+      --blue: #2f55d4;
+      --teal: #0f8f87;
+      --green: #148044;
+      --amber: #b36b14;
+      --red: #bf3d3a;
+      --shadow: 0 14px 30px rgba(28, 42, 58, 0.06);
+      --shadow-soft: 0 8px 18px rgba(28, 42, 58, 0.05);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family:
+        "Pretendard",
+        "Apple SD Gothic Neo",
+        "Malgun Gothic",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      letter-spacing: 0;
+    }
+
+    button,
+    textarea,
+    a {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1460px, 100%);
+      margin: 0 auto;
+      padding: 28px 28px 38px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    .brand-block {
+      display: grid;
+      gap: 8px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      color: var(--navy);
+      font-size: clamp(32px, 3.6vw, 46px);
+      font-weight: 840;
+      line-height: 1.08;
+    }
+
+    h2 {
+      color: var(--navy);
+      font-size: 24px;
+      font-weight: 820;
+      line-height: 1.25;
+    }
+
+    h3 {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 790;
+      line-height: 1.32;
+    }
+
+    .subcopy {
+      max-width: 890px;
+      color: #516173;
+      font-size: 17px;
+      font-weight: 560;
+      line-height: 1.55;
+    }
+
+    .status-board {
+      display: grid;
+      grid-template-columns: auto;
+      gap: 6px;
+      align-items: center;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .status-pill {
+      display: grid;
+      gap: 3px;
+      min-width: 112px;
+      min-height: auto;
+      padding: 8px 10px;
+      border: 1px solid #e3e8ef;
+      border-radius: 7px;
+      background: var(--paper);
+    }
+
+    .status-pill span {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .status-pill strong {
+      color: var(--ink-2);
+      font-size: 14px;
+      font-weight: 820;
+      white-space: nowrap;
+    }
+
+    .status-link {
+      align-content: center;
+      min-width: 132px;
+      background: var(--navy);
+    }
+
+    .status-link span,
+    .status-link strong {
+      color: #ffffff;
+    }
+
+    .control-band {
+      display: none;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .scenario-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .scenario-tab,
+    .advance-button,
+    .select-area {
+      min-height: 40px;
+      border: 0;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 820;
+    }
+
+    .scenario-tab {
+      padding: 0 14px;
+      background: transparent;
+      color: #5d6d80;
+    }
+
+    .scenario-tab[aria-selected="true"] {
+      background: var(--navy);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(16, 24, 32, 0.2);
+    }
+
+    .advance-button {
+      padding: 0 18px;
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 14px 28px rgba(47, 85, 212, 0.22);
+    }
+
+    .panel,
+    .metric-tile,
+    .ranking-row,
+    .evidence-card,
+    .case-card,
+    .action-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 13px;
+    }
+
+    .panel-title {
+      display: grid;
+      gap: 6px;
+    }
+
+    .panel-title p {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 640;
+      line-height: 1.5;
+    }
+
+    .confidence-badge,
+    .source-chip,
+    .type-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 26px;
+      width: max-content;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 820;
+      white-space: nowrap;
+    }
+
+    .confidence-high {
+      background: #e7f6ed;
+      color: var(--green);
+    }
+
+    .confidence-medium {
+      background: #edf2ff;
+      color: var(--blue);
+    }
+
+    .confidence-watch {
+      background: #fff3dc;
+      color: var(--amber);
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.72fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .news-input {
+      display: block;
+      width: 100%;
+      min-height: 224px;
+      padding: 17px 18px;
+      resize: none;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      outline: none;
+      background: var(--paper-soft);
+      color: #243140;
+      font-size: 17px;
+      font-weight: 560;
+      line-height: 1.78;
+    }
+
+    .news-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(47, 85, 212, 0.12);
+    }
+
+    .article-card {
+      display: grid;
+      gap: 16px;
+    }
+
+    .article-title-link {
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .article-title-link:hover {
+      color: var(--blue);
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .article-meta span,
+    .article-meta a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 11px;
+      border: 1px solid #d9e2ee;
+      border-radius: 6px;
+      background: #f8fafc;
+      color: #46566a;
+      font-size: 13px;
+      font-weight: 760;
+    }
+
+    .article-meta a {
+      color: var(--blue);
+      background: #f4f7ff;
+    }
+
+    .article-summary {
+      padding: 16px;
+      border: 1px solid #dce5ef;
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+      color: #253244;
+      font-size: 16px;
+      font-weight: 620;
+      line-height: 1.65;
+    }
+
+    .report-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 0;
+    }
+
+    .flow-card {
+      position: relative;
+      min-height: auto;
+      padding: 12px 13px;
+      border: 1px solid #dce5ef;
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: none;
+    }
+
+    .flow-card:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -14px;
+      z-index: 1;
+      transform: translateY(-50%);
+      color: #7a8797;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .flow-card span {
+      display: block;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 860;
+    }
+
+    .flow-card strong {
+      display: block;
+      margin-top: 7px;
+      color: var(--ink-2);
+      font-size: 15px;
+      font-weight: 760;
+      line-height: 1.45;
+    }
+
+    .source-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .source-chip {
+      border: 1px solid #cbd7e5;
+      background: #fff;
+      color: #46576a;
+    }
+
+    .judgement-panel {
+      display: grid;
+      align-content: start;
+      gap: 12px;
+    }
+
+    .judgement-box {
+      display: grid;
+      gap: 7px;
+      padding: 13px 14px;
+      border: 1px solid #dde5ef;
+      border-radius: var(--radius);
+      background: var(--paper-warm);
+    }
+
+    .judgement-box span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 820;
+    }
+
+    .judgement-box strong {
+      color: #263242;
+      font-size: 16px;
+      font-weight: 820;
+      line-height: 1.42;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric-tile {
+      min-height: auto;
+      padding: 12px 13px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .metric-tile span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 820;
+    }
+
+    .metric-tile strong {
+      display: block;
+      margin-top: 7px;
+      color: var(--navy);
+      font-size: 21px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .metric-tile p {
+      margin-top: 6px;
+      color: #5a6a7c;
+      font-size: 14px;
+      font-weight: 640;
+      line-height: 1.48;
+    }
+
+    .risk-overview {
+      margin-top: 18px;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .risk-card {
+      display: grid;
+      gap: 8px;
+      min-height: auto;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .risk-card span {
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 840;
+    }
+
+    .risk-card h3 {
+      color: var(--navy);
+      font-size: 22px;
+    }
+
+    .risk-card p {
+      color: #4c5d70;
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .impact-level {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+
+    .level-critical {
+      border: 1px solid #f2b8b5;
+      background: #fff1f0;
+      color: #b42318;
+    }
+
+    .level-high {
+      border: 1px solid #f7c78f;
+      background: #fff7ed;
+      color: #b54708;
+    }
+
+    .level-medium {
+      border: 1px solid #f8df7b;
+      background: #fffbe6;
+      color: #7a5a00;
+    }
+
+    .level-low {
+      border: 1px solid #d4dbe5;
+      background: #f5f7fa;
+      color: #5c6978;
+    }
+
+    .support-score .impact-level {
+      color: #111827;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: minmax(500px, 0.88fr) minmax(460px, 0.78fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .ranking-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .ranking-row {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      gap: 13px;
+      align-items: center;
+      width: 100%;
+      min-height: auto;
+      padding: 13px 14px;
+      color: inherit;
+      text-align: left;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .ranking-row.active {
+      border-color: rgba(47, 85, 212, 0.72);
+      background: #f4f7ff;
+      box-shadow: 0 12px 28px rgba(47, 85, 212, 0.11);
+    }
+
+    .ranking-row.supporting {
+      background: #fbfcfe;
+      border-color: #e8edf4;
+    }
+
+    .ranking-row.supporting .rank-title strong {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .ranking-row.supporting .rank-main p {
+      color: var(--faint);
+      font-size: 0.88rem;
+    }
+
+    .ranking-row.supporting .rank-no {
+      background: #98a6b7;
+    }
+
+    .rank-no {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 7px;
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 860;
+    }
+
+    .ranking-row.active .rank-no {
+      background: var(--blue);
+    }
+
+    .rank-main {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .rank-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rank-title strong {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 820;
+      line-height: 1.3;
+    }
+
+    .rank-main p {
+      color: #526274;
+      font-size: 16px;
+      font-weight: 590;
+      line-height: 1.45;
+    }
+
+    .rank-score {
+      display: grid;
+      justify-items: end;
+      gap: 5px;
+    }
+
+    .rank-score strong {
+      color: var(--navy);
+      font-size: 26px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .detail-panel {
+      display: grid;
+      gap: 14px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .detail-panel .eyebrow,
+    .detail-panel .panel-title p {
+      color: var(--muted);
+    }
+
+    .detail-panel h2,
+    .detail-panel h3 {
+      color: var(--navy);
+    }
+
+    .detail-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 13px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .support-score {
+      display: grid;
+      justify-items: end;
+      gap: 5px;
+    }
+
+    .support-score strong {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .support-score span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .detail-section {
+      display: grid;
+      gap: 7px;
+    }
+
+    .detail-section>span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 820;
+      text-transform: uppercase;
+    }
+
+    .detail-section ul,
+    .action-card ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .detail-section li {
+      color: #273344;
+      font-size: 16px;
+      font-weight: 610;
+      line-height: 1.52;
+    }
+
+    .insight-box {
+      padding: 12px 14px;
+      border-left: 3px solid var(--teal);
+      border-radius: 6px;
+      background: #f4fbfa;
+      color: #20313f;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.52;
+    }
+
+    .risk-box {
+      padding: 12px 14px;
+      border-left: 3px solid #f97316;
+      border-radius: 6px;
+      background: #fff7ed;
+      color: #2b3340;
+      font-size: 15px;
+      font-weight: 680;
+      line-height: 1.52;
+    }
+
+    .pathway {
+      display: grid;
+      gap: 8px;
+    }
+
+    .path-step {
+      display: grid;
+      grid-template-columns: 94px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid #dfe6ef;
+      border-radius: 6px;
+      background: #f8fafc;
+    }
+
+    .path-step span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 840;
+    }
+
+    .path-step strong {
+      color: #1f2a37;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .evidence-action-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, 0.58fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .evidence-card {
+      display: grid;
+      gap: 10px;
+      min-height: auto;
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .type-badge {
+      background: #eef2ff;
+      color: var(--blue);
+    }
+
+    .evidence-card h3 {
+      color: var(--ink);
+      font-size: 17px;
+    }
+
+    .evidence-key {
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 780;
+      line-height: 1.48;
+    }
+
+    .evidence-summary {
+      color: #46566a;
+      font-size: 14px;
+      font-weight: 610;
+      line-height: 1.55;
+    }
+
+    .evidence-link-note {
+      padding: 10px 11px;
+      border-radius: 6px;
+      background: #f5f8fb;
+      color: #415064;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+
+    .source-meta {
+      display: grid;
+      gap: 4px;
+      color: #5a6a7c;
+      font-size: 13px;
+      font-weight: 680;
+      line-height: 1.4;
+    }
+
+    .evidence-card a,
+    .case-card a {
+      align-self: end;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 860;
+    }
+
+    .link-missing {
+      align-self: end;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 780;
+    }
+
+    .action-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .action-card {
+      display: grid;
+      gap: 13px;
+      padding: 18px;
+      background: var(--paper-warm);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .action-card h3 {
+      color: var(--navy);
+      font-size: 22px;
+    }
+
+    .action-card li {
+      color: #263242;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .case-card {
+      display: grid;
+      gap: 9px;
+      min-height: auto;
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .case-card-strong {
+      border-color: rgba(15, 143, 135, 0.38);
+      background: #f7fbfb;
+    }
+
+    .case-card span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 860;
+    }
+
+    .case-card h3 {
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .case-card p {
+      color: #596a7c;
+      font-size: 14px;
+      font-weight: 620;
+      line-height: 1.5;
+    }
+
+    .case-meta {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+    }
+
+    .case-meta div {
+      display: grid;
+      gap: 3px;
+    }
+
+    .case-meta dt {
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .case-meta dd {
+      margin: 0;
+      color: #405064;
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.42;
+    }
+
+    .evidence-card a:hover,
+    .case-card a:hover,
+    .case-card:focus-visible a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1280px) {
+
+      .input-grid,
+      .analysis-grid,
+      .evidence-action-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .report-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .case-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-card:not(:last-child)::after {
+        content: "↓";
+        top: auto;
+        right: 50%;
+        bottom: -18px;
+        transform: translateX(50%);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        padding: 16px;
+      }
+
+      .topbar,
+      .control-band {
+        grid-template-columns: 1fr;
+      }
+
+      .status-board,
+      .scenario-tabs,
+      .metric-grid,
+      .risk-grid,
+      .evidence-grid,
+      .case-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .advance-button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        padding: 12px;
+      }
+
+      .panel {
+        padding: 16px;
+      }
+
+      .news-input {
+        min-height: 300px;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .ranking-row {
+        grid-template-columns: 34px minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .rank-score {
+        grid-column: 2;
+        justify-items: start;
+      }
+
+      .detail-head {
+        flex-direction: column;
+      }
+
+      .support-score {
+        justify-items: start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <h1>인사 시사점 분석 리포트</h1>
+        <p class="subcopy">
+          국내외 주요 이슈가 인사 업무에 미치는 영향과 권고 액션을 제공합니다.
+        </p>
+      </div>
+      <div class="status-board" aria-label="보고서 상태">
+        <a class="status-pill status-link" href="../archive.html">
+          <span>이력 보기</span>
+          <strong>달력 열기</strong>
+        </a>
+      </div>
+    </header>
+
+    <nav class="scenario-tabs" id="scenarioTabs" role="tablist" aria-label="데일리 6개 헤더별 이슈"></nav>
+
+    <section class="input-grid" aria-label="분석 대상 기사와 인사 판단 요약">
+      <article class="panel article-card">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">분석 대상 기사</p>
+            <h2><a class="article-title-link" id="articleTitleLink" href="#" target="_blank"
+                rel="noopener noreferrer"><span id="headline"></span></a></h2>
+            <div class="article-meta">
+              <span id="articleSource"></span>
+              <span id="articleDate"></span>
+              <a id="articleOriginalLink" href="#" target="_blank" rel="noopener noreferrer">기사 원문 보기</a>
+            </div>
+          </div>
+        </div>
+        <p class="article-summary" id="newsInput"></p>
+        <p id="scenarioContext"></p>
+        <div class="report-flow" id="reportFlow" aria-label="영향 전개 경로 요약"></div>
+      </article>
+
+      <aside class="panel judgement-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">인사 판단 요약</p>
+            <h2>가장 먼저 봐야 할 질문</h2>
+            <p>People 조직이 먼저 확인할 질문과 조치 방향을 요약합니다.</p>
+          </div>
+          <span class="confidence-badge" id="overallConfidence"></span>
+        </div>
+        <div class="judgement-box">
+          <span>핵심 질문</span>
+          <strong id="decisionQuestion"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>인사 업무 신호</span>
+          <strong id="peopleSignal"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>기준 기사만 본 직접 영향</span>
+          <strong id="directFinding"></strong>
+        </div>
+        <div class="judgement-box">
+          <span>추가 자료 포함 종합 판단</span>
+          <strong id="researchJudgement"></strong>
+        </div>
+        <div class="metric-grid" id="metricGrid"></div>
+      </aside>
+    </section>
+
+    <section class="panel risk-overview" aria-label="상위 리스크 3개">
+      <div class="panel-header">
+        <div class="panel-title">
+          <p class="eyebrow">상위 리스크 3개</p>
+          <h2>먼저 검토할 인사 리스크</h2>
+          <p>관련 자료를 종합했을 때 인사 조직이 우선 확인해야 할 리스크입니다.</p>
+        </div>
+      </div>
+      <div class="risk-grid" id="riskGrid"></div>
+    </section>
+
+    <section class="analysis-grid" aria-label="영향 영역 순위와 상세 분석">
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">영향 영역 순위</p>
+            <h2>인사 기능별 영향도</h2>
+            <p>기사 직접 언급 순서가 아니라, 인사 조직이 먼저 검토해야 할 리스크가 큰 순서로 정렬했습니다.</p>
+          </div>
+        </div>
+        <div class="ranking-list" id="rankingList"></div>
+      </article>
+
+      <aside class="panel detail-panel" aria-live="polite">
+        <div class="detail-head">
+          <div class="panel-title">
+            <p class="eyebrow">상세 분석</p>
+            <h2 id="detailTitle"></h2>
+            <p id="detailOwner"></p>
+          </div>
+          <div class="support-score">
+            <span>영향 수준</span>
+            <strong id="detailImpactLevel"></strong>
+            <span id="detailConfidence"></span>
+          </div>
+        </div>
+        <div class="detail-section">
+          <span>관련 업무 범위</span>
+          <ul id="detailScope"></ul>
+        </div>
+        <div class="detail-section">
+          <span>직접 영향</span>
+          <div class="insight-box" id="detailDirectImpact"></div>
+        </div>
+        <div class="detail-section">
+          <span>영향 전개 경로</span>
+          <div class="pathway" id="detailPathway"></div>
+        </div>
+        <div class="detail-section">
+          <span>검토 필요 리스크</span>
+          <div class="risk-box" id="detailFinalRisk"></div>
+        </div>
+        <div class="detail-section">
+          <span>왜 영향이 있는가</span>
+          <ul id="detailWhy"></ul>
+        </div>
+        <div class="detail-section">
+          <span>핵심 시사점</span>
+          <div class="insight-box" id="detailInsight"></div>
+        </div>
+        <div class="detail-section">
+          <span>확인해야 할 내부 지표</span>
+          <ul id="detailIndicators"></ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="evidence-action-grid" aria-label="근거 자료와 권고 액션">
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">근거 자료</p>
+            <h2>관련 자료 탐색 결과</h2>
+            <p>원문 기사, 공식 발표, 시장 기사, 보상 기사, 연구 보고서를 함께 보며 파급 영향을 판단합니다.</p>
+          </div>
+        </div>
+        <div class="evidence-grid" id="evidenceGrid"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <p class="eyebrow">권고 액션</p>
+            <h2>인사 조직이 바로 검토할 일</h2>
+            <p>선택한 영역 기준으로 실행 과제를 제안합니다.</p>
+          </div>
+        </div>
+        <div class="action-stack" id="actionStack"></div>
+      </article>
+    </section>
+
+    <section class="panel" aria-label="유사·참고 사례">
+      <div class="panel-header">
+        <div class="panel-title">
+          <p class="eyebrow">유사·참고 사례</p>
+          <h2>비교 근거와 실행 인사이트</h2>
+          <p>현재 이슈의 People 리스크와 권고 액션을 보강하는 참고 사례입니다.</p>
+        </div>
+      </div>
+      <div class="case-grid" id="caseGrid"></div>
+    </section>
+
+    <p class="footer-note">
+      리포트 안내: 2026-08-04 기준으로 생성되는 인사 시사점 리포트입니다.
+    </p>
+  </main>
+
+  <script>
+    const axes = ["인력 재배치", "운영비 영향", "규제 리스크", "실행 시급성"];
+
+    const peopleScope = {
+      "조직/임원": ["조직개편", "임원 지원 및 관리", "임원 인사", "차세대 리더 양성 및 관리"],
+      "인력운영": ["인력 운영 계획 수립 및 실적 관리", "인력 충원 및 효율화", "휴직/복직/퇴직 관리"],
+      "제도": ["승격", "평가", "연봉 산정", "시상/징계"],
+      "채용": ["외부 인력 발굴 및 채용", "우수 인력 선확보", "산학교류 및 참여연구원 관리"],
+      "교육": ["직급/직무별 특화 교육", "차세대 리더 육성", "AI/직무/리더십/어학 교육"],
+      "노사": ["대내외 동향 관리", "특이 인력 파악"],
+      "조직문화": ["캠퍼스 행사 운영", "일하는 문화 조성"],
+      "총무": ["의전", "레이아웃 관리", "사무환경/비품", "식당", "인허가", "차량 관리"],
+      "보안": ["보안 시스템 개선 및 관리", "보안 점검"],
+    };
+
+    function area(name, owner, score, confidence, summary, why, insight, stars, actions) {
+      return { name, owner, score, confidence, summary, why, insight, secondaryImpact: insight, stars, actions, scope: peopleScope[name] };
+    }
+
+    const peopleAreaNames = Object.keys(peopleScope);
+
+    const peopleOwners = {
+      "조직/임원": "조직/임원 담당",
+      "인력운영": "인력운영 담당",
+      "제도": "제도 담당",
+      "채용": "채용 담당",
+      "교육": "교육 담당",
+      "노사": "노사 담당",
+      "조직문화": "조직문화 담당",
+      "총무": "총무 담당",
+      "보안": "보안 담당",
+    };
+
+    const supportingScoresByScenario = {};
+
+    const supportingIndicators = {
+      "조직/임원": ["임원 보고 필요 안건", "핵심 조직 영향도", "리더 후보군 영향"],
+      "인력운영": ["충원 계획 변동", "전배·퇴직 신호", "핵심 직무 공백"],
+      "제도": ["평가·승격 기준 영향", "보상 문의", "예외 승인 필요성"],
+      "채용": ["채용 소요기간", "제안 수락률", "후보자 유입 경로"],
+      "교육": ["교육 수요", "이수율", "전환 가능 인력"],
+      "노사": ["구성원 문의", "현장 VOC", "특이 인력 신호"],
+      "조직문화": ["몰입도 변화", "성장기회 체감", "협업 문화 이슈"],
+      "총무": ["좌석·비품 수요", "공간 지원 필요", "입사 운영 부하"],
+      "보안": ["접근권한 변경", "보안 교육 이수", "민감정보 취급 범위"],
+    };
+
+    const supportingActions = {
+      "조직/임원": ["임원 보고 필요 여부를 판단한다.", "핵심 조직과 리더 후보군 영향을 점검한다.", "조직 구조 변경 가능성을 모니터링한다."],
+      "인력운영": ["충원 계획과 실제 배치 가능 인원을 비교한다.", "전배·퇴직 신호를 점검한다.", "핵심 직무 공백 가능성을 확인한다."],
+      "제도": ["평가·승격·보상 기준과 충돌하는 지점을 확인한다.", "예외 승인 기준 필요성을 검토한다.", "구성원 설명 가능성을 점검한다."],
+      "채용": ["경쟁사 채용 신호와 후보자 유입 변화를 확인한다.", "제안 수락률과 거절 사유를 점검한다.", "선확보 파이프라인 영향을 모니터링한다."],
+      "교육": ["직무별 교육 수요 변화를 확인한다.", "전환 교육 필요 인원을 산정한다.", "현업 멘토링 수용력을 점검한다."],
+      "노사": ["현장 문의와 VOC를 모니터링한다.", "구성원 커뮤니케이션 필요성을 판단한다.", "특이 인력 신호를 조기 파악한다."],
+      "조직문화": ["성장기회와 공정성 체감 변화를 확인한다.", "조직문화 메시지 보완 필요성을 검토한다.", "협업 방식 변화 신호를 관찰한다."],
+      "총무": ["공간·비품·좌석 수요 변화를 확인한다.", "입사·이동 운영 부하를 점검한다.", "근무환경 지원 필요성을 산정한다."],
+      "보안": ["접근권한 변경 필요성을 확인한다.", "민감정보 취급 범위를 점검한다.", "보안 교육과 점검 항목 보완 여부를 검토한다."],
+    };
+
+    function supportingStars(score) {
+      if (score >= 68) return { "인력 재배치": 2, "운영비 영향": 2, "규제 리스크": 2, "실행 시급성": 3 };
+      return { "인력 재배치": 1, "운영비 영향": 1, "규제 리스크": 1, "실행 시급성": 2 };
+    }
+
+    function makeSupportingArea(scenario, name) {
+      const score = supportingScoresByScenario[scenario.id]?.[name] ?? 62;
+      return Object.assign(
+        area(
+          name,
+          peopleOwners[name],
+          score,
+          "Watch",
+          `${scenario.label} 이슈와의 직접 연관은 상대적으로 낮지만 ${peopleScope[name].join(", ")} 관점의 확인은 필요하다.`,
+          [
+            "상위 영향 영역은 아니지만 후속 실행 과정에서 업무 범위가 연결될 수 있다.",
+            "초기 판단 단계에서는 낮은 강도로 모니터링하고, 내부 지표 변화가 확인되면 우선순위를 올린다.",
+          ],
+          `${name} 영역은 이번 이슈의 보조 영향 영역으로 두고, 관련 내부 지표를 관찰하는 수준에서 관리한다.`,
+          supportingStars(score),
+          supportingActions[name],
+        ),
+        {
+          supporting: true,
+          directImpact: `${name} 영역의 직접 영향은 제한적이나 후속 점검 대상이다.`,
+          finalRisk: "현재는 낮은 우선순위이나, 내부 지표 변화가 있으면 검토 범위를 확대해야 한다.",
+          indicators: supportingIndicators[name],
+        },
+      );
+    }
+
+    function completePeopleAreas(scenario) {
+      const existing = new Set(scenario.areas.map((item) => item.name));
+      peopleAreaNames.forEach((name) => {
+        if (!existing.has(name)) scenario.areas.push(makeSupportingArea(scenario, name));
+      });
+    }
+
+    // Daily report content generated for 2026-08-04. Replace this block on each run.
+const HEADER_ORDER = ["업계","산업","관계사","정책","경제","글로벌"];
+const DEFAULT_TAB = "업계";
+
+const scenarios = [
+  {
+    "id": "display-oled-investment-20260804",
+    "category": "업계",
+    "status": "complete",
+    "label": "[업계] 고부가 OLED 투자 가속과 IT OLED 역량 재편",
+    "headline": "[업계] 고부가 OLED 투자 가속과 IT OLED 역량 재편",
+    "article": {
+      "title": "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\"",
+      "source": "뉴시스",
+      "date": "2026-08-04",
+      "url": "https://mobile.newsis.com/view_amp.html?ar_id=NISX20260804_0003734058"
+    },
+    "context": "국내 디스플레이 업체들이 중대형·고부가 OLED 중심으로 투자와 양산 전환을 앞당기고 있다. People 조직은 신규 라인 램프업, AX 기반 수율 개선, 고객사 대응 역량이 특정 직무에 집중되는지를 먼저 확인해야 한다.",
+    "input": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다.",
+    "sourceMix": [
+      "뉴시스",
+      "조선일보",
+      "ZDNet Korea",
+      "전자신문"
+    ],
+    "confidence": "High",
+    "decisionQuestion": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?",
+    "peopleSignal": "투자 규모 확대는 설비·공정·품질·고객대응 인력의 배치 우선순위와 숙련 전환 속도를 동시에 압박한다.",
+    "directFinding": "신규 OLED 라인과 고부가 제품 확대는 공정 엔지니어, 품질 검증, 고객 기술지원 인력의 수요와 업무 강도를 높인다.",
+    "metrics": [
+      [
+        "자료 유형",
+        "업계",
+        "공개 언론 보도와 보완 기사 기반 분석"
+      ],
+      [
+        "분석 관점",
+        "People 9개 기능",
+        "영향 수준은 업무 리스크 우선순위 기준으로 판단"
+      ],
+      [
+        "대상 이슈",
+        "[업계] 고부가 OLED 투자 가속과 IT OLED 역량 재편",
+        "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+      ]
+    ],
+    "reportFlow": [
+      [
+        "기준 기사",
+        "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+      ],
+      [
+        "직접 영향",
+        "신규 OLED 라인과 고부가 제품 확대는 공정 엔지니어, 품질 검증, 고객 기술지원 인력의 수요와 업무 강도를 높인다."
+      ],
+      [
+        "2차 영향",
+        "성과 기준, 직무 교육, 협력사 출입·보안, 라인 안정화 기간의 근무 스케줄 이슈가 후속으로 커질 수 있다."
+      ],
+      [
+        "검토 필요 리스크",
+        "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+      ],
+      [
+        "우선 검토",
+        "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+      ]
+    ],
+    "topRisks": [
+      [
+        "1",
+        "IT OLED 램프업 인력 병목",
+        "양산 초기 수율 안정화와 고객 검증 일정이 겹치면 특정 공정·품질 인력의 과부하가 커질 수 있다."
+      ],
+      [
+        "2",
+        "AX 전환 역량 편차",
+        "공정 효율화 도구를 쓰는 조직과 그렇지 않은 조직 사이에 생산성·평가 기준 차이가 발생할 수 있다."
+      ],
+      [
+        "3",
+        "핵심 기술 보안 노출",
+        "고부가 OLED 경쟁이 심해질수록 협력사·전시·고객 대응 과정의 정보 통제 기준이 중요해진다."
+      ]
+    ],
+    "areas": [
+      {
+        "name": "인력운영",
+        "owner": "인력운영 담당",
+        "score": 94,
+        "confidence": "High",
+        "summary": "인력운영 영향은 우선 검토 대상이다. 신규 라인 안정화 인력과 기존 라인 운영 인력의 충원·전환 계획 점검",
+        "scope": [
+          "인력 운영 계획 수립 및 실적 관리",
+          "인력 충원 및 효율화",
+          "휴직/복직/퇴직 관리"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 인력운영 업무에서 신규 라인 안정화 인력과 기존 라인 운영 인력의 충원·전환 계획 점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 인력운영 업무에서 신규 라인 안정화 인력과 기존 라인 운영 인력의 충원·전환 계획 점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 인력운영 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "인력운영은 인력 운영 계획 수립 및 실적 관리, 인력 충원 및 효율화, 휴직/복직/퇴직 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "인력운영 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "인력운영 관련 문의·VOC 건수",
+          "인력운영 관련 제도·프로세스 개정 필요 항목",
+          "인력운영 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "인력운영 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 인력운영 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "교육",
+        "owner": "교육 담당",
+        "score": 90,
+        "confidence": "High",
+        "summary": "교육 영향은 우선 검토 대상이다. 8.6세대 OLED, AX 수율 개선, 고객 품질 대응 교육의 우선 배치",
+        "scope": [
+          "직급/직무별 특화 교육",
+          "차세대 리더 육성",
+          "AI/직무/리더십/어학 교육"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 교육 업무에서 8.6세대 OLED, AX 수율 개선, 고객 품질 대응 교육의 우선 배치을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 교육 업무에서 8.6세대 OLED, AX 수율 개선, 고객 품질 대응 교육의 우선 배치을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 교육 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "교육은 직급/직무별 특화 교육, 차세대 리더 육성, AI/직무/리더십/어학 교육와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "교육 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "교육 관련 문의·VOC 건수",
+          "교육 관련 제도·프로세스 개정 필요 항목",
+          "교육 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "교육 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 교육 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "보안",
+        "owner": "보안 담당",
+        "score": 88,
+        "confidence": "High",
+        "summary": "보안 영향은 우선 검토 대상이다. 고부가 OLED 기술·고객 정보 취급 기준 강화",
+        "scope": [
+          "보안 시스템 개선 및 관리",
+          "보안 점검"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 보안 업무에서 고부가 OLED 기술·고객 정보 취급 기준 강화을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 보안 업무에서 고부가 OLED 기술·고객 정보 취급 기준 강화을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 보안 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "보안은 보안 시스템 개선 및 관리, 보안 점검와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "보안 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "보안 관련 문의·VOC 건수",
+          "보안 관련 제도·프로세스 개정 필요 항목",
+          "보안 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "보안 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 보안 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "채용",
+        "owner": "채용 담당",
+        "score": 86,
+        "confidence": "High",
+        "summary": "채용 영향은 우선 검토 대상이다. 공정·품질·장비·AI 분석 직무 후보군 선확보",
+        "scope": [
+          "외부 인력 발굴 및 채용",
+          "우수 인력 선확보",
+          "산학교류 및 참여연구원 관리"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 채용 업무에서 공정·품질·장비·AI 분석 직무 후보군 선확보을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 채용 업무에서 공정·품질·장비·AI 분석 직무 후보군 선확보을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 채용 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "채용은 외부 인력 발굴 및 채용, 우수 인력 선확보, 산학교류 및 참여연구원 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "채용 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "채용 관련 문의·VOC 건수",
+          "채용 관련 제도·프로세스 개정 필요 항목",
+          "채용 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 5,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "채용 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 채용 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "제도",
+        "owner": "제도 담당",
+        "score": 82,
+        "confidence": "High",
+        "summary": "제도 영향은 우선 검토 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "승격",
+          "평가",
+          "연봉 산정",
+          "시상/징계"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 제도 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 제도 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 제도 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "제도은 승격, 평가, 연봉 산정, 시상/징계와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "제도 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "제도 관련 문의·VOC 건수",
+          "제도 관련 제도·프로세스 개정 필요 항목",
+          "제도 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "제도 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 제도 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직/임원",
+        "owner": "조직/임원 담당",
+        "score": 79,
+        "confidence": "Medium",
+        "summary": "조직/임원 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "조직개편",
+          "임원 지원 및 관리",
+          "임원 인사",
+          "차세대 리더 양성 및 관리"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 조직/임원 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "조직/임원은 조직개편, 임원 지원 및 관리, 임원 인사, 차세대 리더 양성 및 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직/임원 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직/임원 관련 문의·VOC 건수",
+          "조직/임원 관련 제도·프로세스 개정 필요 항목",
+          "조직/임원 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "조직/임원 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직/임원 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "노사",
+        "owner": "노사 담당",
+        "score": 70,
+        "confidence": "Medium",
+        "summary": "노사 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "대내외 동향 관리",
+          "특이 인력 파악"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 노사 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 노사 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 노사 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "노사은 대내외 동향 관리, 특이 인력 파악와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "노사 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "노사 관련 문의·VOC 건수",
+          "노사 관련 제도·프로세스 개정 필요 항목",
+          "노사 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "노사 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 노사 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "총무",
+        "owner": "총무 담당",
+        "score": 68,
+        "confidence": "Medium",
+        "summary": "총무 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "의전",
+          "레이아웃 관리",
+          "사무환경/비품",
+          "식당",
+          "인허가",
+          "차량 관리"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 총무 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "총무은 의전, 레이아웃 관리, 사무환경/비품, 식당, 인허가, 차량 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "총무 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "총무 관련 문의·VOC 건수",
+          "총무 관련 제도·프로세스 개정 필요 항목",
+          "총무 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "총무 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 총무 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직문화",
+        "owner": "조직문화 담당",
+        "score": 66,
+        "confidence": "Watch",
+        "summary": "조직문화 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "캠퍼스 행사 운영",
+          "일하는 문화 조성"
+        ],
+        "directImpact": "고부가 OLED 투자 확대 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "삼성디스플레이의 8.6세대 IT용 OLED 양산과 LG디스플레이의 차세대 OLED 투자 확대가 함께 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "고부가 OLED 투자 확대 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "IT OLED 램프업과 AX 공정 개선에 필요한 핵심 직무 인력·교육·보안 기준이 충분한가?"
+          }
+        ],
+        "secondaryImpact": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "IT OLED 램프업 인력 병목 / AX 전환 역량 편차 / 핵심 기술 보안 노출 중 조직문화 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "삼성·LG디스플레이, 고부가 OLED 투자 가속…\"중대형 시장 확대 대비\" 보도는 고부가 OLED 투자 확대의 방향을 보여준다.",
+          "조직문화은 캠퍼스 행사 운영, 일하는 문화 조성와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직문화 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직문화 관련 문의·VOC 건수",
+          "조직문화 관련 제도·프로세스 개정 필요 항목",
+          "조직문화 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "조직문화 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "고부가 OLED 투자 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직문화 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "type": "보완 자료",
+        "title": "LGD, 국민성장펀드 포함 3조원 투자",
+        "source": "한국경제",
+        "date": "2026-07-30",
+        "url": "https://www.hankyung.com/article/202607306145Y",
+        "summary": "LG디스플레이의 OLED 기술·생산 인프라 투자 배경을 보완한다.",
+        "impactLink": "인력운영·교육·보안 기준 점검의 출발점이다."
+      },
+      {
+        "type": "보완 자료",
+        "title": "K-디스플레이 전시와 OLED 기술 경쟁",
+        "source": "전자신문",
+        "date": "2026-07-22",
+        "url": "https://www.etnews.com/20260722000246",
+        "summary": "OLED 기술 경쟁과 전시·고객 대응 흐름을 확인하는 자료다.",
+        "impactLink": "고객 대응과 기술 설명 역량 점검에 연결된다."
+      },
+      {
+        "type": "시장 자료",
+        "title": "삼성디스플레이 8.6세대 OLED 양산 관련 보도",
+        "source": "ZDNet Korea",
+        "date": "2026-07-30",
+        "url": "https://zdnet.co.kr/view/?no=20260730104011",
+        "summary": "신규 라인 양산 전환에 따른 공정·품질 직무 수요를 보완한다.",
+        "impactLink": "라인 안정화 인력 배치 판단에 필요하다."
+      },
+      {
+        "type": "비교 자료",
+        "title": "중대형 OLED 수요 확대 관련 보도",
+        "source": "조선일보",
+        "date": "2026-08-01",
+        "url": "https://www.chosun.com/economy/tech_it/2026/08/01/DMNVZPAYR5FK7OQ3GAOP3Q64SU/",
+        "summary": "제품 요구 변화가 패널 설계와 고객 커뮤니케이션에 미치는 영향을 참고한다.",
+        "impactLink": "품질·보안 설명자료 정비에 연결된다."
+      }
+    ],
+    "cases": [
+      {
+        "title": "LG디스플레이 OLED 전환 투자",
+        "type": "동일 산업 사례",
+        "org": "한국경제",
+        "why": "LCD 중심에서 OLED 중심으로 포트폴리오가 이동하는 사례다.",
+        "peopleInsight": "기존 직무의 숙련 전환과 신규 설비 운영 교육이 중요하다.",
+        "peopleFunction": "교육",
+        "actionLink": "직무별 전환 교육을 라인 일정과 묶어 설계한다.",
+        "url": "https://www.hankyung.com/article/202607306145Y",
+        "priority": true
+      },
+      {
+        "title": "중국 BOE 8.6세대 OLED 투자",
+        "type": "경쟁사 참고 사례",
+        "org": "뉴시스",
+        "why": "중국 업체의 중대형 OLED 투자는 핵심 인재 경쟁 압력을 키운다.",
+        "peopleInsight": "핵심 공정·장비 인력의 리텐션 신호를 확인해야 한다.",
+        "peopleFunction": "채용",
+        "actionLink": "핵심 직무 이탈 위험 인터뷰를 우선 실시한다.",
+        "url": "https://www.yna.co.kr/view/AKR20260605064800003"
+      },
+      {
+        "title": "K-Display 2026 기술 전시",
+        "type": "고객 대응 참고 사례",
+        "org": "전자신문",
+        "why": "기술 전시와 고객 설명은 엔지니어와 보안 조직의 공동 업무다.",
+        "peopleInsight": "외부 설명자료의 승인 기준과 담당자 교육이 필요하다.",
+        "peopleFunction": "보안",
+        "actionLink": "전시·고객 미팅용 정보 공개 기준을 점검한다.",
+        "url": "https://www.etnews.com/20260722000246"
+      },
+      {
+        "title": "AI 기반 공정 효율화 확산",
+        "type": "운영 방식 참고 사례",
+        "org": "ZDNet Korea",
+        "why": "AX를 통한 수율 개선은 생산성 평가 기준에도 영향을 준다.",
+        "peopleInsight": "AI 도구 활용 역량을 직무 교육과 평가 기준에 반영해야 한다.",
+        "peopleFunction": "제도",
+        "actionLink": "AX 활용 성과 기준을 평가 문항과 연결한다.",
+        "url": "https://zdnet.co.kr/view/?no=20260730104011"
+      }
+    ]
+  },
+  {
+    "id": "lbsemicon-qualcomm-production-20260804",
+    "category": "산업",
+    "status": "complete",
+    "label": "[산업] 퀄컴 AI·전장 칩 양산과 후공정 직무 수요 확대",
+    "headline": "[산업] 퀄컴 AI·전장 칩 양산과 후공정 직무 수요 확대",
+    "article": {
+      "title": "LB세미콘, 퀄컴 칩 이달 양산",
+      "source": "ZDNet Korea",
+      "date": "2026-08-04",
+      "url": "https://zdnet.co.kr/view/?no=20260804144948"
+    },
+    "context": "반도체 후공정 업체가 퀄컴 AI 데이터센터·차량용 제품 양산 승인을 받은 것은 고부가 후공정 역량 경쟁이 제조 현장 직무로 확산되고 있음을 보여준다. 디스플레이 People 업무도 DDI·차량용·AI 반도체 생태계의 인재 이동을 주시해야 한다.",
+    "input": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다.",
+    "sourceMix": [
+      "ZDNet Korea",
+      "뉴스핌",
+      "이데일리",
+      "디지털데일리"
+    ],
+    "confidence": "High",
+    "decisionQuestion": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?",
+    "peopleSignal": "고부가 후공정 양산은 품질·신뢰성·공급망 대응 인력을 흡수하며 인접 제조업 간 숙련 인재 경쟁을 강화한다.",
+    "directFinding": "AI 데이터센터와 차량용 제품 양산은 OSAT 공정, 테스트, 품질보증, 고객 인증 인력 수요를 높인다.",
+    "metrics": [
+      [
+        "자료 유형",
+        "산업",
+        "공개 언론 보도와 보완 기사 기반 분석"
+      ],
+      [
+        "분석 관점",
+        "People 9개 기능",
+        "영향 수준은 업무 리스크 우선순위 기준으로 판단"
+      ],
+      [
+        "대상 이슈",
+        "[산업] 퀄컴 AI·전장 칩 양산과 후공정 직무 수요 확대",
+        "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+      ]
+    ],
+    "reportFlow": [
+      [
+        "기준 기사",
+        "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+      ],
+      [
+        "직접 영향",
+        "AI 데이터센터와 차량용 제품 양산은 OSAT 공정, 테스트, 품질보증, 고객 인증 인력 수요를 높인다."
+      ],
+      [
+        "2차 영향",
+        "인접 산업의 채용 메시지가 강화되면 디스플레이 공정·검사·품질 인력의 외부 기회 인식과 보상 기대가 움직일 수 있다."
+      ],
+      [
+        "검토 필요 리스크",
+        "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+      ],
+      [
+        "우선 검토",
+        "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+      ]
+    ],
+    "topRisks": [
+      [
+        "1",
+        "후공정 숙련 인력 유출",
+        "DDI와 테스트 경험이 있는 인력이 인접 반도체 고부가 직무로 이동할 가능성이 있다."
+      ],
+      [
+        "2",
+        "품질 인증 업무 과부하",
+        "글로벌 고객 양산 승인은 품질 문서, 신뢰성 검증, 고객 감사 대응 업무를 늘린다."
+      ],
+      [
+        "3",
+        "전장·AI 직무 재교육 지연",
+        "기존 제조 직무가 고부가 제품군으로 이동할 때 교육 체계가 늦으면 생산 안정성이 흔들릴 수 있다."
+      ]
+    ],
+    "areas": [
+      {
+        "name": "채용",
+        "owner": "채용 담당",
+        "score": 92,
+        "confidence": "High",
+        "summary": "채용 영향은 우선 검토 대상이다. 후공정·품질·테스트 직무 후보군과 보상 경쟁력 점검",
+        "scope": [
+          "외부 인력 발굴 및 채용",
+          "우수 인력 선확보",
+          "산학교류 및 참여연구원 관리"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 채용 업무에서 후공정·품질·테스트 직무 후보군과 보상 경쟁력 점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 채용 업무에서 후공정·품질·테스트 직무 후보군과 보상 경쟁력 점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 채용 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "채용은 외부 인력 발굴 및 채용, 우수 인력 선확보, 산학교류 및 참여연구원 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "채용 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "채용 관련 문의·VOC 건수",
+          "채용 관련 제도·프로세스 개정 필요 항목",
+          "채용 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "채용 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 채용 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "인력운영",
+        "owner": "인력운영 담당",
+        "score": 88,
+        "confidence": "High",
+        "summary": "인력운영 영향은 우선 검토 대상이다. 인접 산업으로 이동 가능한 핵심 숙련 인력의 유지 관리",
+        "scope": [
+          "인력 운영 계획 수립 및 실적 관리",
+          "인력 충원 및 효율화",
+          "휴직/복직/퇴직 관리"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 인력운영 업무에서 인접 산업으로 이동 가능한 핵심 숙련 인력의 유지 관리을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 인력운영 업무에서 인접 산업으로 이동 가능한 핵심 숙련 인력의 유지 관리을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 인력운영 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "인력운영은 인력 운영 계획 수립 및 실적 관리, 인력 충원 및 효율화, 휴직/복직/퇴직 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "인력운영 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "인력운영 관련 문의·VOC 건수",
+          "인력운영 관련 제도·프로세스 개정 필요 항목",
+          "인력운영 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "인력운영 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 인력운영 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "교육",
+        "owner": "교육 담당",
+        "score": 86,
+        "confidence": "High",
+        "summary": "교육 영향은 우선 검토 대상이다. 전장·AI 반도체 품질 인증과 고객 대응 교육 보강",
+        "scope": [
+          "직급/직무별 특화 교육",
+          "차세대 리더 육성",
+          "AI/직무/리더십/어학 교육"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 교육 업무에서 전장·AI 반도체 품질 인증과 고객 대응 교육 보강을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 교육 업무에서 전장·AI 반도체 품질 인증과 고객 대응 교육 보강을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 교육 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "교육은 직급/직무별 특화 교육, 차세대 리더 육성, AI/직무/리더십/어학 교육와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "교육 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "교육 관련 문의·VOC 건수",
+          "교육 관련 제도·프로세스 개정 필요 항목",
+          "교육 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 5,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "교육 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 교육 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "제도",
+        "owner": "제도 담당",
+        "score": 80,
+        "confidence": "Medium",
+        "summary": "제도 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "승격",
+          "평가",
+          "연봉 산정",
+          "시상/징계"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 제도 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 제도 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 제도 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "제도은 승격, 평가, 연봉 산정, 시상/징계와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "제도 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "제도 관련 문의·VOC 건수",
+          "제도 관련 제도·프로세스 개정 필요 항목",
+          "제도 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "제도 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 제도 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "보안",
+        "owner": "보안 담당",
+        "score": 76,
+        "confidence": "Medium",
+        "summary": "보안 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "보안 시스템 개선 및 관리",
+          "보안 점검"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 보안 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 보안 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 보안 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "보안은 보안 시스템 개선 및 관리, 보안 점검와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "보안 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "보안 관련 문의·VOC 건수",
+          "보안 관련 제도·프로세스 개정 필요 항목",
+          "보안 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "보안 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 보안 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직/임원",
+        "owner": "조직/임원 담당",
+        "score": 72,
+        "confidence": "Medium",
+        "summary": "조직/임원 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "조직개편",
+          "임원 지원 및 관리",
+          "임원 인사",
+          "차세대 리더 양성 및 관리"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 조직/임원 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "조직/임원은 조직개편, 임원 지원 및 관리, 임원 인사, 차세대 리더 양성 및 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직/임원 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직/임원 관련 문의·VOC 건수",
+          "조직/임원 관련 제도·프로세스 개정 필요 항목",
+          "조직/임원 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "조직/임원 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직/임원 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "노사",
+        "owner": "노사 담당",
+        "score": 68,
+        "confidence": "Medium",
+        "summary": "노사 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "대내외 동향 관리",
+          "특이 인력 파악"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 노사 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 노사 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 노사 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "노사은 대내외 동향 관리, 특이 인력 파악와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "노사 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "노사 관련 문의·VOC 건수",
+          "노사 관련 제도·프로세스 개정 필요 항목",
+          "노사 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "노사 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 노사 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "총무",
+        "owner": "총무 담당",
+        "score": 64,
+        "confidence": "Watch",
+        "summary": "총무 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "의전",
+          "레이아웃 관리",
+          "사무환경/비품",
+          "식당",
+          "인허가",
+          "차량 관리"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 총무 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "총무은 의전, 레이아웃 관리, 사무환경/비품, 식당, 인허가, 차량 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "총무 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "총무 관련 문의·VOC 건수",
+          "총무 관련 제도·프로세스 개정 필요 항목",
+          "총무 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "총무 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 총무 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직문화",
+        "owner": "조직문화 담당",
+        "score": 63,
+        "confidence": "Watch",
+        "summary": "조직문화 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "캠퍼스 행사 운영",
+          "일하는 문화 조성"
+        ],
+        "directImpact": "AI·전장 반도체 후공정 양산 확대 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "LB세미콘이 퀄컴으로부터 AI 데이터센터 및 차량용 반도체 제품 양산 승인을 받고 8월 내 양산에 들어간다고 보도됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "AI·전장 반도체 후공정 양산 확대 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "후공정·전장·AI 반도체 인력 경쟁이 디스플레이 공정·품질 인력 유출로 이어질 가능성이 있는가?"
+          }
+        ],
+        "secondaryImpact": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "후공정 숙련 인력 유출 / 품질 인증 업무 과부하 / 전장·AI 직무 재교육 지연 중 조직문화 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "LB세미콘, 퀄컴 칩 이달 양산 보도는 AI·전장 반도체 후공정 양산 확대의 방향을 보여준다.",
+          "조직문화은 캠퍼스 행사 운영, 일하는 문화 조성와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직문화 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직문화 관련 문의·VOC 건수",
+          "조직문화 관련 제도·프로세스 개정 필요 항목",
+          "조직문화 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "조직문화 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "AI·전장 반도체 후공정 양산 확대와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직문화 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "type": "보완 자료",
+        "title": "LB세미콘 퀄컴 공급망 협력 재확인",
+        "source": "뉴스프라임",
+        "date": "2026-07-23",
+        "url": "https://m.newsprime.co.kr/section_view.html?no=741286",
+        "summary": "AI 데이터센터·차량용 반도체 후공정 양산 전환의 선행 공급망 협력을 보여준다.",
+        "impactLink": "채용과 교육 우선순위 판단에 연결된다."
+      },
+      {
+        "type": "보완 자료",
+        "title": "LB세미콘 퀄컴 서플라이어 서밋 참석",
+        "source": "뉴스핌",
+        "date": "2026-07-23",
+        "url": "https://www.newspim.com/news/view/20260723000974",
+        "summary": "공급망 협력과 고부가 포트폴리오 전환 흐름을 보완한다.",
+        "impactLink": "품질·고객 대응 인력 필요성을 뒷받침한다."
+      },
+      {
+        "type": "보완 자료",
+        "title": "SK키파운드리·LB세미콘 RDL 공동 개발",
+        "source": "ZDNet Korea",
+        "date": "2025-07-15",
+        "url": "https://zdnet.co.kr/view/?no=20250715084058",
+        "summary": "후공정 기술 고도화가 장기 직무 전환으로 이어진 사례다.",
+        "impactLink": "전문 교육 로드맵 검토에 연결된다."
+      },
+      {
+        "type": "시장 자료",
+        "title": "반도체·디스플레이 최신 뉴스 목록",
+        "source": "ZDNet Korea",
+        "date": "2026-08-04",
+        "url": "https://zdnet.co.kr/news/?lstcode=0050&page=1",
+        "summary": "AI용 낸드와 후공정 이슈가 같은 날 집중 보도됐다.",
+        "impactLink": "인접 산업 인력 수요 모니터링에 활용한다."
+      }
+    ],
+    "cases": [
+      {
+        "title": "퀄컴 공급망 파트너십 강화",
+        "type": "고객 인증 사례",
+        "org": "뉴스핌",
+        "why": "고객사 인증은 양산 품질과 신뢰성 업무를 장기화한다.",
+        "peopleInsight": "품질 담당자 역량과 고객 감사 대응 훈련을 보강해야 한다.",
+        "peopleFunction": "교육",
+        "actionLink": "고객 인증 대응 교육을 표준 과정으로 만든다.",
+        "url": "https://www.newspim.com/news/view/20260723000974",
+        "priority": true
+      },
+      {
+        "title": "Direct RDL 공동 개발",
+        "type": "기술 전환 사례",
+        "org": "ZDNet Korea",
+        "why": "공정 기술 변화가 직무 스킬셋을 바꾸는 사례다.",
+        "peopleInsight": "기존 공정 인력의 재교육과 직무 인증이 필요하다.",
+        "peopleFunction": "제도",
+        "actionLink": "직무 숙련 인증 기준을 업데이트한다.",
+        "url": "https://zdnet.co.kr/view/?no=20250715084058"
+      },
+      {
+        "title": "후공정 포트폴리오 다변화",
+        "type": "채용 경쟁 참고 사례",
+        "org": "디지털데일리",
+        "why": "DDI 중심에서 비DDI·전력반도체로 확장하는 흐름은 인재 이동을 유발한다.",
+        "peopleInsight": "공정·테스트 직무 보상 밴드를 비교해야 한다.",
+        "peopleFunction": "채용",
+        "actionLink": "핵심 직무 외부 공고와 처우를 비교한다.",
+        "url": "https://m.ddaily.co.kr/page/view/2026072316441461838"
+      },
+      {
+        "title": "AI용 낸드 제품 경쟁",
+        "type": "인접 산업 사례",
+        "org": "ZDNet Korea",
+        "why": "AI 인프라 수요가 메모리·후공정 전반의 인력 수요를 키운다.",
+        "peopleInsight": "AI 데이터센터 관련 제조 직무 이동 가능성을 추적한다.",
+        "peopleFunction": "인력운영",
+        "actionLink": "인접 산업 이직 사유를 리텐션 인터뷰에 반영한다.",
+        "url": "https://zdnet.co.kr/news/?lstcode=0050&page=1"
+      }
+    ]
+  },
+  {
+    "id": "samsungsds-ai-computing-center-20260804",
+    "category": "관계사",
+    "status": "complete",
+    "label": "[관계사] 국가 AI 컴퓨팅센터 착공과 삼성SDS AX 인력 수요",
+    "headline": "[관계사] 국가 AI 컴퓨팅센터 착공과 삼성SDS AX 인력 수요",
+    "article": {
+      "title": "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공",
+      "source": "조선일보",
+      "date": "2026-08-04",
+      "url": "https://www.chosun.com/economy/tech_it/2026/08/03/JYN26P3YSRCWJECL3SVFAZRJHQ/"
+    },
+    "context": "국가 AI 컴퓨팅센터 착공은 삼성SDS가 공공 AI 인프라 구축과 운영을 담당하는 관계사 이슈다. 삼성디스플레이에는 AX 인프라 활용, 보안 기준, AI 교육 수요와 관계사 간 인재 이동 가능성을 확인할 신호가 된다.",
+    "input": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다.",
+    "sourceMix": [
+      "조선일보",
+      "ZDNet Korea",
+      "한국경제",
+      "전자신문"
+    ],
+    "confidence": "High",
+    "decisionQuestion": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?",
+    "peopleSignal": "AI 인프라 사업은 클라우드·보안·데이터 운영 인력을 당기며 제조 현장의 AX 활용 역량 요구도 높인다.",
+    "directFinding": "AI 컴퓨팅센터 구축은 인프라 운영, 보안, GPU/NPU 관리, 산업별 AI 개발 지원 직무를 확대한다.",
+    "metrics": [
+      [
+        "자료 유형",
+        "관계사",
+        "공개 언론 보도와 보완 기사 기반 분석"
+      ],
+      [
+        "분석 관점",
+        "People 9개 기능",
+        "영향 수준은 업무 리스크 우선순위 기준으로 판단"
+      ],
+      [
+        "대상 이슈",
+        "[관계사] 국가 AI 컴퓨팅센터 착공과 삼성SDS AX 인력 수요",
+        "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+      ]
+    ],
+    "reportFlow": [
+      [
+        "기준 기사",
+        "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+      ],
+      [
+        "직접 영향",
+        "AI 컴퓨팅센터 구축은 인프라 운영, 보안, GPU/NPU 관리, 산업별 AI 개발 지원 직무를 확대한다."
+      ],
+      [
+        "2차 영향",
+        "관계사 AX 협업이 늘면 사내 AI 사용 가이드, 현장 데이터 취급, 관리자 교육, 채용 메시지 정렬이 후속 과제로 부상한다."
+      ],
+      [
+        "검토 필요 리스크",
+        "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+      ],
+      [
+        "우선 검토",
+        "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+      ]
+    ],
+    "topRisks": [
+      [
+        "1",
+        "AX 교육 수요 급증",
+        "AI 인프라 접근성이 높아질수록 현업의 AI 활용 요구가 교육 체계를 앞지를 수 있다."
+      ],
+      [
+        "2",
+        "데이터 보안 기준 불일치",
+        "관계사·공공 인프라 협업 과정에서 데이터 반출과 권한 관리 기준이 혼선될 수 있다."
+      ],
+      [
+        "3",
+        "AI 인프라 인재 확보 경쟁",
+        "클라우드·보안·MLOps 인력 수요가 관계사와 외부 시장에서 동시에 커질 수 있다."
+      ]
+    ],
+    "areas": [
+      {
+        "name": "교육",
+        "owner": "교육 담당",
+        "score": 92,
+        "confidence": "High",
+        "summary": "교육 영향은 우선 검토 대상이다. AX 활용 교육과 관리자 AI 리터러시 과정 확대",
+        "scope": [
+          "직급/직무별 특화 교육",
+          "차세대 리더 육성",
+          "AI/직무/리더십/어학 교육"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 교육 업무에서 AX 활용 교육과 관리자 AI 리터러시 과정 확대을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 교육 업무에서 AX 활용 교육과 관리자 AI 리터러시 과정 확대을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 교육 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "교육은 직급/직무별 특화 교육, 차세대 리더 육성, AI/직무/리더십/어학 교육와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "교육 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "교육 관련 문의·VOC 건수",
+          "교육 관련 제도·프로세스 개정 필요 항목",
+          "교육 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "교육 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 교육 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "보안",
+        "owner": "보안 담당",
+        "score": 90,
+        "confidence": "High",
+        "summary": "보안 영향은 우선 검토 대상이다. AI 인프라 협업 데이터 접근·반출·권한 기준 정비",
+        "scope": [
+          "보안 시스템 개선 및 관리",
+          "보안 점검"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 보안 업무에서 AI 인프라 협업 데이터 접근·반출·권한 기준 정비을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 보안 업무에서 AI 인프라 협업 데이터 접근·반출·권한 기준 정비을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 보안 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "보안은 보안 시스템 개선 및 관리, 보안 점검와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "보안 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "보안 관련 문의·VOC 건수",
+          "보안 관련 제도·프로세스 개정 필요 항목",
+          "보안 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "보안 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 보안 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "채용",
+        "owner": "채용 담당",
+        "score": 84,
+        "confidence": "High",
+        "summary": "채용 영향은 우선 검토 대상이다. 클라우드·보안·MLOps 인력 수요와 관계사 이동 가능성 점검",
+        "scope": [
+          "외부 인력 발굴 및 채용",
+          "우수 인력 선확보",
+          "산학교류 및 참여연구원 관리"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 채용 업무에서 클라우드·보안·MLOps 인력 수요와 관계사 이동 가능성 점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 채용 업무에서 클라우드·보안·MLOps 인력 수요와 관계사 이동 가능성 점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 채용 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "채용은 외부 인력 발굴 및 채용, 우수 인력 선확보, 산학교류 및 참여연구원 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "채용 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "채용 관련 문의·VOC 건수",
+          "채용 관련 제도·프로세스 개정 필요 항목",
+          "채용 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "채용 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 채용 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "인력운영",
+        "owner": "인력운영 담당",
+        "score": 82,
+        "confidence": "High",
+        "summary": "인력운영 영향은 우선 검토 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "인력 운영 계획 수립 및 실적 관리",
+          "인력 충원 및 효율화",
+          "휴직/복직/퇴직 관리"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 인력운영 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 인력운영 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 인력운영 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "인력운영은 인력 운영 계획 수립 및 실적 관리, 인력 충원 및 효율화, 휴직/복직/퇴직 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "인력운영 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "인력운영 관련 문의·VOC 건수",
+          "인력운영 관련 제도·프로세스 개정 필요 항목",
+          "인력운영 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "인력운영 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 인력운영 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직/임원",
+        "owner": "조직/임원 담당",
+        "score": 78,
+        "confidence": "Medium",
+        "summary": "조직/임원 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "조직개편",
+          "임원 지원 및 관리",
+          "임원 인사",
+          "차세대 리더 양성 및 관리"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 조직/임원 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "조직/임원은 조직개편, 임원 지원 및 관리, 임원 인사, 차세대 리더 양성 및 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직/임원 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직/임원 관련 문의·VOC 건수",
+          "조직/임원 관련 제도·프로세스 개정 필요 항목",
+          "조직/임원 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "조직/임원 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직/임원 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "제도",
+        "owner": "제도 담당",
+        "score": 74,
+        "confidence": "Medium",
+        "summary": "제도 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "승격",
+          "평가",
+          "연봉 산정",
+          "시상/징계"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 제도 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 제도 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 제도 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "제도은 승격, 평가, 연봉 산정, 시상/징계와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "제도 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "제도 관련 문의·VOC 건수",
+          "제도 관련 제도·프로세스 개정 필요 항목",
+          "제도 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 4,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "제도 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 제도 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "총무",
+        "owner": "총무 담당",
+        "score": 70,
+        "confidence": "Medium",
+        "summary": "총무 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "의전",
+          "레이아웃 관리",
+          "사무환경/비품",
+          "식당",
+          "인허가",
+          "차량 관리"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 총무 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "총무은 의전, 레이아웃 관리, 사무환경/비품, 식당, 인허가, 차량 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "총무 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "총무 관련 문의·VOC 건수",
+          "총무 관련 제도·프로세스 개정 필요 항목",
+          "총무 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "총무 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 총무 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직문화",
+        "owner": "조직문화 담당",
+        "score": 68,
+        "confidence": "Medium",
+        "summary": "조직문화 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "캠퍼스 행사 운영",
+          "일하는 문화 조성"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 조직문화 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "조직문화은 캠퍼스 행사 운영, 일하는 문화 조성와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직문화 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직문화 관련 문의·VOC 건수",
+          "조직문화 관련 제도·프로세스 개정 필요 항목",
+          "조직문화 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "조직문화 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직문화 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "노사",
+        "owner": "노사 담당",
+        "score": 62,
+        "confidence": "Watch",
+        "summary": "노사 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "대내외 동향 관리",
+          "특이 인력 파악"
+        ],
+        "directImpact": "삼성SDS 국가 AI 인프라 구축 변화는 노사 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "해남 솔라시도 데이터센터 파크에서 국가 AI 컴퓨팅센터 착공이 보도됐고, 2028년 완공과 대규모 AI 반도체 인프라 구축이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "삼성SDS 국가 AI 인프라 구축 변화는 노사 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "관계사 AI 인프라 확대가 사내 AX 교육, 보안 통제, 데이터센터 협업 직무 수요로 연결되는가?"
+          }
+        ],
+        "secondaryImpact": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AX 교육 수요 급증 / 데이터 보안 기준 불일치 / AI 인프라 인재 확보 경쟁 중 노사 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "'국가 AI 컴퓨팅센터' 해남 솔라시도서 첫 삽…2028년 완공 보도는 삼성SDS 국가 AI 인프라 구축의 방향을 보여준다.",
+          "노사은 대내외 동향 관리, 특이 인력 파악와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "노사 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "노사 관련 문의·VOC 건수",
+          "노사 관련 제도·프로세스 개정 필요 항목",
+          "노사 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "노사 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "삼성SDS 국가 AI 인프라 구축와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 노사 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "type": "보완 자료",
+        "title": "국가 AI 컴퓨팅센터 착공 현장",
+        "source": "ZDNet Korea",
+        "date": "2026-08-04",
+        "url": "https://zdnet.co.kr/view/?no=20260804162041",
+        "summary": "국가 AI 컴퓨팅센터 착공과 민관 컨소시엄 구성을 확인한다.",
+        "impactLink": "AX 교육·보안·채용 수요 판단의 기준이다."
+      },
+      {
+        "type": "보완 자료",
+        "title": "국가AI컴퓨팅센터 GPU 도입 보도",
+        "source": "ZDNet Korea",
+        "date": "2026-08-04",
+        "url": "https://zdnet.co.kr/view/?no=20260804165045",
+        "summary": "AI 반도체 도입 방향과 인프라 운영 과제를 보완한다.",
+        "impactLink": "협업 보안 기준 점검에 연결된다."
+      },
+      {
+        "type": "보완 자료",
+        "title": "삼성SDS 국가 AI 컴퓨팅센터 구축 본격화",
+        "source": "한국경제",
+        "date": "2026-08-04",
+        "url": "https://www.hankyung.com/article/202608041715P",
+        "summary": "컨소시엄 대표사와 인프라 규모를 확인한다.",
+        "impactLink": "관계사 인력 수요와 교육 계획 판단에 참고한다."
+      },
+      {
+        "type": "이전 경과",
+        "title": "삼성SDS 국가AI컴퓨팅센터 설립 확정",
+        "source": "전자신문",
+        "date": "2026-05-11",
+        "url": "https://www.etnews.com/20260511000423",
+        "summary": "사업자 선정 이후 착공까지의 단계 변화를 보여준다.",
+        "impactLink": "후속 이슈로서 새 People 판단이 필요한 근거다."
+      }
+    ],
+    "cases": [
+      {
+        "title": "삼성SDS 컨소시엄 공공 AI 인프라",
+        "type": "관계사 사례",
+        "org": "ZDNet Korea",
+        "why": "관계사가 국가 AI 인프라 운영 주체로 부상한 사례다.",
+        "peopleInsight": "관계사 협업 직무와 내부 AX 교육 수요가 늘 수 있다.",
+        "peopleFunction": "교육",
+        "actionLink": "AX 교육 대상을 현장 관리자까지 확대한다.",
+        "url": "https://zdnet.co.kr/view/?no=20260804162041",
+        "priority": true
+      },
+      {
+        "title": "국가 AI 컴퓨팅센터 현장 착공",
+        "type": "운영 협업 사례",
+        "org": "ZDNet Korea",
+        "why": "현장 구축 단계 진입은 운영·보안·협업 직무를 구체화한다.",
+        "peopleInsight": "보안 권한과 데이터 취급 기준을 사전에 합의해야 한다.",
+        "peopleFunction": "보안",
+        "actionLink": "AI 협업 데이터 분류 기준을 점검한다.",
+        "url": "https://zdnet.co.kr/view/?no=20260804162041"
+      },
+      {
+        "title": "삼성SDS 공공 GPU/NPU 인프라 구축",
+        "type": "인프라 인재 사례",
+        "org": "한국경제",
+        "why": "GPU/NPU 운영 역량은 클라우드·보안 인재 경쟁과 연결된다.",
+        "peopleInsight": "관련 직무 채용 시장과 내부 전환 후보를 함께 봐야 한다.",
+        "peopleFunction": "채용",
+        "actionLink": "MLOps·클라우드 보안 직무 맵을 업데이트한다.",
+        "url": "https://www.hankyung.com/article/202608041715P"
+      },
+      {
+        "title": "국가AI컴퓨팅센터 설립 확정",
+        "type": "후속 변화 사례",
+        "org": "전자신문",
+        "why": "사업자 선정에서 착공으로 단계가 바뀐 후속 사례다.",
+        "peopleInsight": "프로젝트 단계별 인력 수요가 달라지는지 추적해야 한다.",
+        "peopleFunction": "인력운영",
+        "actionLink": "프로젝트 단계별 협업 인력 풀을 정의한다.",
+        "url": "https://www.etnews.com/20260511000423"
+      }
+    ]
+  },
+  {
+    "id": "flexible-work-parental-leave-20260804",
+    "category": "정책",
+    "status": "complete",
+    "label": "[정책] 육아휴직 후 유연근무와 경력단절 리스크 완화",
+    "headline": "[정책] 육아휴직 후 유연근무와 경력단절 리스크 완화",
+    "article": {
+      "title": "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다",
+      "source": "한국경제",
+      "date": "2026-08-04",
+      "url": "https://www.hankyung.com/article/2026080420257"
+    },
+    "context": "육아휴직 사용 후 유연근무를 병행할 때 경력 유지와 임금 격차 완화 효과가 확인됐다는 보도는 복직 관리와 제도 운영에 직접 연결된다. People 조직은 휴직·복직 프로세스, 대체인력, 관리자 운영 기준을 함께 봐야 한다.",
+    "input": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다.",
+    "sourceMix": [
+      "한국경제",
+      "조선일보",
+      "월간노동법률",
+      "여성신문"
+    ],
+    "confidence": "High",
+    "decisionQuestion": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?",
+    "peopleSignal": "복귀 이후 근무 방식은 단순 복지 제도가 아니라 이탈 방지, 평가 공정성, 관리자 부담, 조직문화 신뢰와 연결된다.",
+    "directFinding": "육아휴직 복귀 후 유연근무를 병행하지 못하면 임금·경력 회복 지연과 복귀자 이탈 위험이 커질 수 있다.",
+    "metrics": [
+      [
+        "자료 유형",
+        "정책",
+        "공개 언론 보도와 보완 기사 기반 분석"
+      ],
+      [
+        "분석 관점",
+        "People 9개 기능",
+        "영향 수준은 업무 리스크 우선순위 기준으로 판단"
+      ],
+      [
+        "대상 이슈",
+        "[정책] 육아휴직 후 유연근무와 경력단절 리스크 완화",
+        "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+      ]
+    ],
+    "reportFlow": [
+      [
+        "기준 기사",
+        "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+      ],
+      [
+        "직접 영향",
+        "육아휴직 복귀 후 유연근무를 병행하지 못하면 임금·경력 회복 지연과 복귀자 이탈 위험이 커질 수 있다."
+      ],
+      [
+        "2차 영향",
+        "관리자 교육, 평가 기준, 팀 내 업무분담, 노사 문의와 제도 설명 자료 정비가 후속 과제가 된다."
+      ],
+      [
+        "검토 필요 리스크",
+        "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+      ],
+      [
+        "우선 검토",
+        "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+      ]
+    ],
+    "topRisks": [
+      [
+        "1",
+        "복귀자 경력 유지 실패",
+        "복귀 직후 근무 방식이 경직되면 장기 경력 유지와 직무 적응이 흔들릴 수 있다."
+      ],
+      [
+        "2",
+        "대체인력·업무분담 갈등",
+        "휴직자와 팀원 모두에게 업무 부담이 불명확하면 제도 신뢰가 떨어진다."
+      ],
+      [
+        "3",
+        "관리자별 적용 편차",
+        "같은 제도라도 조직장 판단에 따라 허용 범위가 달라지면 공정성 이슈가 커진다."
+      ]
+    ],
+    "areas": [
+      {
+        "name": "제도",
+        "owner": "제도 담당",
+        "score": 94,
+        "confidence": "High",
+        "summary": "제도 영향은 우선 검토 대상이다. 육아휴직 복귀 후 유연근무·근로시간 단축 연계 기준 정비",
+        "scope": [
+          "승격",
+          "평가",
+          "연봉 산정",
+          "시상/징계"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 제도 업무에서 육아휴직 복귀 후 유연근무·근로시간 단축 연계 기준 정비을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 제도 업무에서 육아휴직 복귀 후 유연근무·근로시간 단축 연계 기준 정비을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 제도 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "제도은 승격, 평가, 연봉 산정, 시상/징계와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "제도 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "제도 관련 문의·VOC 건수",
+          "제도 관련 제도·프로세스 개정 필요 항목",
+          "제도 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "제도 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 제도 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "인력운영",
+        "owner": "인력운영 담당",
+        "score": 90,
+        "confidence": "High",
+        "summary": "인력운영 영향은 우선 검토 대상이다. 대체인력과 업무분담 기준의 사전 설계",
+        "scope": [
+          "인력 운영 계획 수립 및 실적 관리",
+          "인력 충원 및 효율화",
+          "휴직/복직/퇴직 관리"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 인력운영 업무에서 대체인력과 업무분담 기준의 사전 설계을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 인력운영 업무에서 대체인력과 업무분담 기준의 사전 설계을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 인력운영 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "인력운영은 인력 운영 계획 수립 및 실적 관리, 인력 충원 및 효율화, 휴직/복직/퇴직 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "인력운영 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "인력운영 관련 문의·VOC 건수",
+          "인력운영 관련 제도·프로세스 개정 필요 항목",
+          "인력운영 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "인력운영 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 인력운영 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "노사",
+        "owner": "노사 담당",
+        "score": 84,
+        "confidence": "High",
+        "summary": "노사 영향은 우선 검토 대상이다. 복귀자·동료·관리자 문의에 대한 일관된 설명자료 마련",
+        "scope": [
+          "대내외 동향 관리",
+          "특이 인력 파악"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 노사 업무에서 복귀자·동료·관리자 문의에 대한 일관된 설명자료 마련을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 노사 업무에서 복귀자·동료·관리자 문의에 대한 일관된 설명자료 마련을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 노사 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "노사은 대내외 동향 관리, 특이 인력 파악와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "노사 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "노사 관련 문의·VOC 건수",
+          "노사 관련 제도·프로세스 개정 필요 항목",
+          "노사 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "노사 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 노사 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직문화",
+        "owner": "조직문화 담당",
+        "score": 82,
+        "confidence": "High",
+        "summary": "조직문화 영향은 우선 검토 대상이다. 육아·복귀 제도 사용에 대한 낙인과 팀 내 부담 인식 관리",
+        "scope": [
+          "캠퍼스 행사 운영",
+          "일하는 문화 조성"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 조직문화 업무에서 육아·복귀 제도 사용에 대한 낙인과 팀 내 부담 인식 관리을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 조직문화 업무에서 육아·복귀 제도 사용에 대한 낙인과 팀 내 부담 인식 관리을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 조직문화 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "조직문화은 캠퍼스 행사 운영, 일하는 문화 조성와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직문화 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직문화 관련 문의·VOC 건수",
+          "조직문화 관련 제도·프로세스 개정 필요 항목",
+          "조직문화 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "조직문화 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직문화 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "교육",
+        "owner": "교육 담당",
+        "score": 80,
+        "confidence": "Medium",
+        "summary": "교육 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "직급/직무별 특화 교육",
+          "차세대 리더 육성",
+          "AI/직무/리더십/어학 교육"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 교육 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 교육 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 교육 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "교육은 직급/직무별 특화 교육, 차세대 리더 육성, AI/직무/리더십/어학 교육와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "교육 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "교육 관련 문의·VOC 건수",
+          "교육 관련 제도·프로세스 개정 필요 항목",
+          "교육 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "교육 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 교육 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직/임원",
+        "owner": "조직/임원 담당",
+        "score": 72,
+        "confidence": "Medium",
+        "summary": "조직/임원 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "조직개편",
+          "임원 지원 및 관리",
+          "임원 인사",
+          "차세대 리더 양성 및 관리"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 조직/임원 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "조직/임원은 조직개편, 임원 지원 및 관리, 임원 인사, 차세대 리더 양성 및 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직/임원 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직/임원 관련 문의·VOC 건수",
+          "조직/임원 관련 제도·프로세스 개정 필요 항목",
+          "조직/임원 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "조직/임원 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직/임원 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "총무",
+        "owner": "총무 담당",
+        "score": 68,
+        "confidence": "Medium",
+        "summary": "총무 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "의전",
+          "레이아웃 관리",
+          "사무환경/비품",
+          "식당",
+          "인허가",
+          "차량 관리"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 총무 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "총무은 의전, 레이아웃 관리, 사무환경/비품, 식당, 인허가, 차량 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "총무 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "총무 관련 문의·VOC 건수",
+          "총무 관련 제도·프로세스 개정 필요 항목",
+          "총무 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "총무 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 총무 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "채용",
+        "owner": "채용 담당",
+        "score": 64,
+        "confidence": "Watch",
+        "summary": "채용 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "외부 인력 발굴 및 채용",
+          "우수 인력 선확보",
+          "산학교류 및 참여연구원 관리"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 채용 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 채용 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 채용 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "채용은 외부 인력 발굴 및 채용, 우수 인력 선확보, 산학교류 및 참여연구원 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "채용 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "채용 관련 문의·VOC 건수",
+          "채용 관련 제도·프로세스 개정 필요 항목",
+          "채용 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "채용 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 채용 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "보안",
+        "owner": "보안 담당",
+        "score": 58,
+        "confidence": "Watch",
+        "summary": "보안 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "보안 시스템 개선 및 관리",
+          "보안 점검"
+        ],
+        "directImpact": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 보안 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "한국여성정책연구원 연구 결과를 다룬 보도에서 육아휴직 후 경직된 근무 환경이 장기 경력 유지에 불리하다는 분석이 제시됐다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "육아휴직 복귀 후 유연근무 연계 필요성 변화는 보안 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "육아휴직 복귀자의 유연근무·근로시간 단축 연계 기준과 대체인력 운영 기준이 현장에서 일관되게 작동하는가?"
+          }
+        ],
+        "secondaryImpact": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "복귀자 경력 유지 실패 / 대체인력·업무분담 갈등 / 관리자별 적용 편차 중 보안 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "육아휴직 후 유연근무 병행 시 여성 '경력단절' 줄어든다 보도는 육아휴직 복귀 후 유연근무 연계 필요성의 방향을 보여준다.",
+          "보안은 보안 시스템 개선 및 관리, 보안 점검와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "보안 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "보안 관련 문의·VOC 건수",
+          "보안 관련 제도·프로세스 개정 필요 항목",
+          "보안 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "보안 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "육아휴직 복귀 후 유연근무 연계 필요성와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 보안 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "type": "보완 자료",
+        "title": "육아휴직 이후 유연근무 병행 효과",
+        "source": "뉴스핌",
+        "date": "2026-08-04",
+        "url": "https://www.newspim.com/news/view/20260804000121",
+        "summary": "유연근무 도입 여부에 따른 임금 격차와 경력 유지 효과를 다룬다.",
+        "impactLink": "복직 제도와 평가 기준 점검에 연결된다."
+      },
+      {
+        "type": "보완 자료",
+        "title": "육아휴직 분할사용 확대와 일·가정 양립",
+        "source": "조선일보",
+        "date": "2026-05-27",
+        "url": "https://www.chosun.com/special/special_section/2026/05/27/XGCUURDEAVC7JB5NQWJJNZE564/",
+        "summary": "육아휴직·돌봄휴가 확대 흐름을 확인한다.",
+        "impactLink": "제도 설명자료 정비에 참고한다."
+      },
+      {
+        "type": "전문 자료",
+        "title": "일·가정 양립을 위한 유연근무제와 가족친화제도",
+        "source": "월간노동법률",
+        "date": "2026-07-01",
+        "url": "https://www.worklaw.co.kr/main2022/view/view.asp?bi_pidx=26527",
+        "summary": "유연근무와 가족친화제도 운영 포인트를 정리한다.",
+        "impactLink": "관리자 교육과 노무 리스크 점검에 연결된다."
+      },
+      {
+        "type": "보완 자료",
+        "title": "유연근무와 경력단절 논의",
+        "source": "여성신문",
+        "date": "2026-06-25",
+        "url": "https://www.womennews.co.kr/news/articleView.html?idxno=260681",
+        "summary": "경력단절 예방과 유연근무 활용 논의를 보완한다.",
+        "impactLink": "조직문화와 제도 신뢰도 관리에 활용한다."
+      }
+    ],
+    "cases": [
+      {
+        "title": "육아휴직 복귀 후 유연근무 연계",
+        "type": "정책 대응 사례",
+        "org": "뉴스핌",
+        "why": "복귀자 경력 유지와 임금 격차 완화가 직접 연결된다.",
+        "peopleInsight": "복직 면담과 유연근무 승인 기준을 제도화해야 한다.",
+        "peopleFunction": "제도",
+        "actionLink": "복직 전·후 3개월 체크리스트를 운영한다.",
+        "url": "https://www.newspim.com/news/view/20260804000121",
+        "priority": true
+      },
+      {
+        "title": "육아휴직 분할사용 확대",
+        "type": "제도 변화 사례",
+        "org": "조선일보",
+        "why": "휴직 사용 방식이 다양해질수록 인력운영 계획이 복잡해진다.",
+        "peopleInsight": "휴직·복직 캘린더와 대체인력 기준을 통합해야 한다.",
+        "peopleFunction": "인력운영",
+        "actionLink": "휴직 예정과 대체인력 현황을 월 단위로 점검한다.",
+        "url": "https://www.chosun.com/special/special_section/2026/05/27/XGCUURDEAVC7JB5NQWJJNZE564/"
+      },
+      {
+        "title": "유연근무제 법무 해설",
+        "type": "노무 기준 참고 사례",
+        "org": "월간노동법률",
+        "why": "제도 운영의 법적 기준과 현장 해석 차이를 줄이는 자료다.",
+        "peopleInsight": "관리자별 임의 판단을 줄일 수 있다.",
+        "peopleFunction": "노사",
+        "actionLink": "예상 질의와 답변 기준을 사전에 배포한다.",
+        "url": "https://www.worklaw.co.kr/main2022/view/view.asp?bi_pidx=26527"
+      },
+      {
+        "title": "경력단절 예방 논의",
+        "type": "조직문화 참고 사례",
+        "org": "여성신문",
+        "why": "제도 이용에 대한 낙인과 팀 부담 인식 관리가 필요하다.",
+        "peopleInsight": "일하는 문화와 관리자 메시지가 제도 활용률을 좌우한다.",
+        "peopleFunction": "조직문화",
+        "actionLink": "복귀자와 팀원 대상 pulse survey를 운영한다.",
+        "url": "https://www.womennews.co.kr/news/articleView.html?idxno=260681"
+      }
+    ]
+  },
+  {
+    "id": "sme-bankruptcies-semiconductor-boom-20260804",
+    "category": "경제",
+    "status": "complete",
+    "label": "[경제] 반도체 호황 뒤 중소기업 파산과 고용 양극화",
+    "headline": "[경제] 반도체 호황 뒤 중소기업 파산과 고용 양극화",
+    "article": {
+      "title": "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나",
+      "source": "SBS Biz",
+      "date": "2026-08-04",
+      "url": "https://biz.sbs.co.kr/amp/article/20000326121"
+    },
+    "context": "반도체 등 일부 업종의 호황과 전통 제조 중소기업 파산 증가가 동시에 보도됐다. People 조직은 공급망 협력사 안정성, 채용시장 양극화, 보상 기대와 협력 인력 운영 리스크를 함께 살펴야 한다.",
+    "input": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다.",
+    "sourceMix": [
+      "SBS Biz",
+      "한국경제",
+      "매일경제",
+      "폴리뉴스"
+    ],
+    "confidence": "High",
+    "decisionQuestion": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?",
+    "peopleSignal": "성과 기대가 높은 조직과 비용 압박을 받는 협력 생태계의 온도 차이는 보상, 노사, 총무·현장 운영 리스크로 이어질 수 있다.",
+    "directFinding": "반도체 호황과 중소기업 파산 증가는 채용시장·협력사 인력 안정성·구성원 보상 기대를 동시에 흔든다.",
+    "metrics": [
+      [
+        "자료 유형",
+        "경제",
+        "공개 언론 보도와 보완 기사 기반 분석"
+      ],
+      [
+        "분석 관점",
+        "People 9개 기능",
+        "영향 수준은 업무 리스크 우선순위 기준으로 판단"
+      ],
+      [
+        "대상 이슈",
+        "[경제] 반도체 호황 뒤 중소기업 파산과 고용 양극화",
+        "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+      ]
+    ],
+    "reportFlow": [
+      [
+        "기준 기사",
+        "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+      ],
+      [
+        "직접 영향",
+        "반도체 호황과 중소기업 파산 증가는 채용시장·협력사 인력 안정성·구성원 보상 기대를 동시에 흔든다."
+      ],
+      [
+        "2차 영향",
+        "협력사 운영 차질, 외주 품질 리스크, 구성원 보상 비교, 노사 문의, 현장 운영 비용 재검토가 후속으로 나타날 수 있다."
+      ],
+      [
+        "검토 필요 리스크",
+        "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+      ],
+      [
+        "우선 검토",
+        "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+      ]
+    ],
+    "topRisks": [
+      [
+        "1",
+        "보상 기대와 체감 경기 괴리",
+        "주력 업종 호황 보도는 내부 성과급·임금 기대를 높이지만 협력사와 일부 조직은 비용 압박을 느낄 수 있다."
+      ],
+      [
+        "2",
+        "협력사 인력 안정성 저하",
+        "중소 제조업 파산 증가는 외주·협력 인력의 숙련 유지와 납기 안정성 리스크로 번질 수 있다."
+      ],
+      [
+        "3",
+        "채용시장 양극화",
+        "AI·반도체 직무는 강세지만 일반 제조 직무는 위축돼 직무별 채용 전략 차별화가 필요하다."
+      ]
+    ],
+    "areas": [
+      {
+        "name": "제도",
+        "owner": "제도 담당",
+        "score": 86,
+        "confidence": "High",
+        "summary": "제도 영향은 우선 검토 대상이다. 성과급·보상 설명자료와 외부 호황 보도 간 기대 관리",
+        "scope": [
+          "승격",
+          "평가",
+          "연봉 산정",
+          "시상/징계"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 제도 업무에서 성과급·보상 설명자료와 외부 호황 보도 간 기대 관리을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 제도 업무에서 성과급·보상 설명자료와 외부 호황 보도 간 기대 관리을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 제도 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "제도은 승격, 평가, 연봉 산정, 시상/징계와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "제도 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "제도 관련 문의·VOC 건수",
+          "제도 관련 제도·프로세스 개정 필요 항목",
+          "제도 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 5,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "제도 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 제도 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "노사",
+        "owner": "노사 담당",
+        "score": 84,
+        "confidence": "High",
+        "summary": "노사 영향은 우선 검토 대상이다. 보상·고용 안정 관련 예상 질의와 협력사 이슈 커뮤니케이션",
+        "scope": [
+          "대내외 동향 관리",
+          "특이 인력 파악"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 노사 업무에서 보상·고용 안정 관련 예상 질의와 협력사 이슈 커뮤니케이션을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 노사 업무에서 보상·고용 안정 관련 예상 질의와 협력사 이슈 커뮤니케이션을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 노사 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "노사은 대내외 동향 관리, 특이 인력 파악와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "노사 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "노사 관련 문의·VOC 건수",
+          "노사 관련 제도·프로세스 개정 필요 항목",
+          "노사 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "노사 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 노사 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "인력운영",
+        "owner": "인력운영 담당",
+        "score": 82,
+        "confidence": "High",
+        "summary": "인력운영 영향은 우선 검토 대상이다. 협력사 인력 안정성과 외주 품질 리스크 모니터링",
+        "scope": [
+          "인력 운영 계획 수립 및 실적 관리",
+          "인력 충원 및 효율화",
+          "휴직/복직/퇴직 관리"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 인력운영 업무에서 협력사 인력 안정성과 외주 품질 리스크 모니터링을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 인력운영 업무에서 협력사 인력 안정성과 외주 품질 리스크 모니터링을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 인력운영 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "인력운영은 인력 운영 계획 수립 및 실적 관리, 인력 충원 및 효율화, 휴직/복직/퇴직 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "인력운영 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "인력운영 관련 문의·VOC 건수",
+          "인력운영 관련 제도·프로세스 개정 필요 항목",
+          "인력운영 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "인력운영 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 인력운영 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "채용",
+        "owner": "채용 담당",
+        "score": 78,
+        "confidence": "Medium",
+        "summary": "채용 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "외부 인력 발굴 및 채용",
+          "우수 인력 선확보",
+          "산학교류 및 참여연구원 관리"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 채용 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 채용 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 채용 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "채용은 외부 인력 발굴 및 채용, 우수 인력 선확보, 산학교류 및 참여연구원 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "채용 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "채용 관련 문의·VOC 건수",
+          "채용 관련 제도·프로세스 개정 필요 항목",
+          "채용 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "채용 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 채용 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "총무",
+        "owner": "총무 담당",
+        "score": 74,
+        "confidence": "Medium",
+        "summary": "총무 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "의전",
+          "레이아웃 관리",
+          "사무환경/비품",
+          "식당",
+          "인허가",
+          "차량 관리"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 총무 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "총무은 의전, 레이아웃 관리, 사무환경/비품, 식당, 인허가, 차량 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "총무 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "총무 관련 문의·VOC 건수",
+          "총무 관련 제도·프로세스 개정 필요 항목",
+          "총무 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 4,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "총무 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 총무 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직/임원",
+        "owner": "조직/임원 담당",
+        "score": 72,
+        "confidence": "Medium",
+        "summary": "조직/임원 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "조직개편",
+          "임원 지원 및 관리",
+          "임원 인사",
+          "차세대 리더 양성 및 관리"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 조직/임원 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "조직/임원은 조직개편, 임원 지원 및 관리, 임원 인사, 차세대 리더 양성 및 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직/임원 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직/임원 관련 문의·VOC 건수",
+          "조직/임원 관련 제도·프로세스 개정 필요 항목",
+          "조직/임원 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "조직/임원 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직/임원 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직문화",
+        "owner": "조직문화 담당",
+        "score": 70,
+        "confidence": "Medium",
+        "summary": "조직문화 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "캠퍼스 행사 운영",
+          "일하는 문화 조성"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 조직문화 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "조직문화은 캠퍼스 행사 운영, 일하는 문화 조성와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직문화 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직문화 관련 문의·VOC 건수",
+          "조직문화 관련 제도·프로세스 개정 필요 항목",
+          "조직문화 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "조직문화 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직문화 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "교육",
+        "owner": "교육 담당",
+        "score": 66,
+        "confidence": "Watch",
+        "summary": "교육 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "직급/직무별 특화 교육",
+          "차세대 리더 육성",
+          "AI/직무/리더십/어학 교육"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 교육 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 교육 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 교육 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "교육은 직급/직무별 특화 교육, 차세대 리더 육성, AI/직무/리더십/어학 교육와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "교육 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "교육 관련 문의·VOC 건수",
+          "교육 관련 제도·프로세스 개정 필요 항목",
+          "교육 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "교육 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 교육 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "보안",
+        "owner": "보안 담당",
+        "score": 58,
+        "confidence": "Watch",
+        "summary": "보안 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "보안 시스템 개선 및 관리",
+          "보안 점검"
+        ],
+        "directImpact": "산업 호황과 중소기업 파산의 양극화 변화는 보안 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "SBS Biz 조간브리핑은 반도체 호황과 달리 전통 제조 중소기업 파산이 상반기 사상 최대 수준이라는 매일경제 보도를 소개했다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "산업 호황과 중소기업 파산의 양극화 변화는 보안 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "호황 산업의 보상 기대와 협력사·중소 제조업 고용 불안이 동시에 커질 때 내부 커뮤니케이션과 공급망 인력 리스크를 어떻게 관리할 것인가?"
+          }
+        ],
+        "secondaryImpact": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "보상 기대와 체감 경기 괴리 / 협력사 인력 안정성 저하 / 채용시장 양극화 중 보안 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "[조간브리핑] 2분기 실적, 어닝 서프라이즈 릴레이…코스피 반격의 시간 오나 보도는 산업 호황과 중소기업 파산의 양극화의 방향을 보여준다.",
+          "보안은 보안 시스템 개선 및 관리, 보안 점검와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "보안 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "보안 관련 문의·VOC 건수",
+          "보안 관련 제도·프로세스 개정 필요 항목",
+          "보안 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "보안 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "산업 호황과 중소기업 파산의 양극화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 보안 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "type": "보완 자료",
+        "title": "반도체 초호황 뒤편 중소기업 파산 사상최대",
+        "source": "매일경제",
+        "date": "2026-08-02",
+        "url": "https://www.mk.co.kr/news/society/12114613",
+        "summary": "반도체 호황과 중소 제조업 파산 증가의 대비를 다룬다.",
+        "impactLink": "보상 기대와 협력사 인력 리스크 판단에 연결된다."
+      },
+      {
+        "type": "경제 자료",
+        "title": "첫 수출기업 5년 내 최대",
+        "source": "한국경제",
+        "date": "2026-08-04",
+        "url": "https://www.hankyung.com/article/2026080412007",
+        "summary": "수출시장 활력과 신규 기업 유입을 보여준다.",
+        "impactLink": "채용·사업 지원 인력 수요 판단에 참고한다."
+      },
+      {
+        "type": "경제 전망",
+        "title": "물가·고용·소비 지표 슈퍼위크",
+        "source": "폴리뉴스",
+        "date": "2026-08-04",
+        "url": "https://www.polinews.co.kr/news/articleView.html?idxno=738996",
+        "summary": "고용시장 체력과 물가·소비 지표가 기업 판단에 미치는 영향을 설명한다.",
+        "impactLink": "보상재원과 인력계획 전제 점검에 활용한다."
+      },
+      {
+        "type": "시장 자료",
+        "title": "미국 금리와 메모리 주문량 변수",
+        "source": "매일경제",
+        "date": "2026-08-04",
+        "url": "https://www.mk.co.kr/news/business/12114478",
+        "summary": "메모리 주문량과 시장 변동성이 주력 산업 전망에 미치는 영향을 다룬다.",
+        "impactLink": "보상 기대와 채용 온도 조절에 참고한다."
+      }
+    ],
+    "cases": [
+      {
+        "title": "반도체 초호황과 중소기업 파산",
+        "type": "경제 리스크 사례",
+        "org": "매일경제",
+        "why": "산업별 체감 경기 차이가 보상·고용 안정 이슈를 만든다.",
+        "peopleInsight": "구성원 설명자료는 호황 보도와 내부 재원 기준을 구분해야 한다.",
+        "peopleFunction": "제도",
+        "actionLink": "성과급 산식과 외부 시장 보도를 분리해 설명한다.",
+        "url": "https://www.mk.co.kr/news/society/12114613",
+        "priority": true
+      },
+      {
+        "title": "첫 수출기업 증가",
+        "type": "채용시장 참고 사례",
+        "org": "한국경제",
+        "why": "수출기업 유입은 일부 직무의 영업·품질·물류 수요를 키운다.",
+        "peopleInsight": "직무별 채용 온도를 별도로 관리해야 한다.",
+        "peopleFunction": "채용",
+        "actionLink": "수출·품질 연계 직무 후보군을 점검한다.",
+        "url": "https://www.hankyung.com/article/2026080412007"
+      },
+      {
+        "title": "고용·소비·물가 지표 집중 발표",
+        "type": "거시환경 사례",
+        "org": "폴리뉴스",
+        "why": "고용시장 체력과 물가는 보상 체감에 직접 영향을 준다.",
+        "peopleInsight": "임금·복지 커뮤니케이션에 경제지표 설명이 필요하다.",
+        "peopleFunction": "노사",
+        "actionLink": "보상 FAQ에 물가·경기 전제 문항을 추가한다.",
+        "url": "https://www.polinews.co.kr/news/articleView.html?idxno=738996"
+      },
+      {
+        "title": "메모리 주문량과 시장 변동성",
+        "type": "산업 전망 사례",
+        "org": "매일경제",
+        "why": "주력 사업 전망이 흔들리면 채용·성과 기대도 같이 변한다.",
+        "peopleInsight": "인력계획은 단일 호황 시나리오에 의존하면 안 된다.",
+        "peopleFunction": "인력운영",
+        "actionLink": "수요 변동 시나리오별 충원 기준을 만든다.",
+        "url": "https://www.mk.co.kr/news/business/12114478"
+      }
+    ]
+  },
+  {
+    "id": "ai-talent-loyalty-war-20260804",
+    "category": "글로벌",
+    "status": "complete",
+    "label": "[글로벌] AI 인재 전쟁과 핵심 인력 충성도 리스크",
+    "headline": "[글로벌] AI 인재 전쟁과 핵심 인력 충성도 리스크",
+    "article": {
+      "title": "AI's talent wars have a loyalty problem",
+      "source": "Axios",
+      "date": "2026-08-04",
+      "url": "https://www.axios.com/2026/08/03/ai-talent-wars-openai-google-meta-anthropic"
+    },
+    "context": "글로벌 AI 기업의 핵심 인재 이동과 초고액 보상 경쟁은 국내 첨단 제조업에도 리텐션 기준을 재검토하게 만든다. AI·데이터·자동화 직무의 시장가와 내부 형평성 메시지를 분리해 관리할 필요가 있다.",
+    "input": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다.",
+    "sourceMix": [
+      "Axios",
+      "TechCrunch",
+      "Business Insider",
+      "Reuters"
+    ],
+    "confidence": "High",
+    "decisionQuestion": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?",
+    "peopleSignal": "글로벌 AI 인재 전쟁은 제조 현장의 AI 전환 직무에도 시장가 신호를 보내며 보상 형평성·유출 리스크를 키운다.",
+    "directFinding": "AI 핵심 인재에 대한 스카우트와 고액 보상 경쟁은 내부 AI 직무의 이탈 위험과 보상 기대를 높인다.",
+    "metrics": [
+      [
+        "자료 유형",
+        "글로벌",
+        "공개 언론 보도와 보완 기사 기반 분석"
+      ],
+      [
+        "분석 관점",
+        "People 9개 기능",
+        "영향 수준은 업무 리스크 우선순위 기준으로 판단"
+      ],
+      [
+        "대상 이슈",
+        "[글로벌] AI 인재 전쟁과 핵심 인력 충성도 리스크",
+        "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+      ]
+    ],
+    "reportFlow": [
+      [
+        "기준 기사",
+        "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+      ],
+      [
+        "직접 영향",
+        "AI 핵심 인재에 대한 스카우트와 고액 보상 경쟁은 내부 AI 직무의 이탈 위험과 보상 기대를 높인다."
+      ],
+      [
+        "2차 영향",
+        "핵심 직무 예외 보상, 교육 투자, 직무 발명·영업비밀 보호, 관리자 리텐션 면담 역량이 후속 과제가 된다."
+      ],
+      [
+        "검토 필요 리스크",
+        "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+      ],
+      [
+        "우선 검토",
+        "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+      ]
+    ],
+    "topRisks": [
+      [
+        "1",
+        "AI 핵심 인력 유출",
+        "외부 보상 프리미엄이 커질수록 AI·데이터·자동화 인력의 이탈 가능성이 높아진다."
+      ],
+      [
+        "2",
+        "내부 형평성 논란",
+        "특정 AI 직무 예외 보상이 확대되면 비AI 핵심 직무와의 형평성 이슈가 발생할 수 있다."
+      ],
+      [
+        "3",
+        "지식재산·보안 리스크",
+        "핵심 인재 이동 과정에서 모델, 데이터, 자동화 노하우 보호 기준이 중요해진다."
+      ]
+    ],
+    "areas": [
+      {
+        "name": "채용",
+        "owner": "채용 담당",
+        "score": 94,
+        "confidence": "High",
+        "summary": "채용 영향은 우선 검토 대상이다. AI·데이터·자동화 핵심 후보군 선확보와 외부 보상 벤치마크",
+        "scope": [
+          "외부 인력 발굴 및 채용",
+          "우수 인력 선확보",
+          "산학교류 및 참여연구원 관리"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 채용 업무에서 AI·데이터·자동화 핵심 후보군 선확보와 외부 보상 벤치마크을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 채용 업무에서 AI·데이터·자동화 핵심 후보군 선확보와 외부 보상 벤치마크을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "채용 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 채용 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "채용은 외부 인력 발굴 및 채용, 우수 인력 선확보, 산학교류 및 참여연구원 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "채용 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "채용 관련 문의·VOC 건수",
+          "채용 관련 제도·프로세스 개정 필요 항목",
+          "채용 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "채용 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 채용 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "제도",
+        "owner": "제도 담당",
+        "score": 90,
+        "confidence": "High",
+        "summary": "제도 영향은 우선 검토 대상이다. 핵심 직무 리텐션 보상 기준과 내부 형평성 설명자료 정비",
+        "scope": [
+          "승격",
+          "평가",
+          "연봉 산정",
+          "시상/징계"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 제도 업무에서 핵심 직무 리텐션 보상 기준과 내부 형평성 설명자료 정비을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 제도 업무에서 핵심 직무 리텐션 보상 기준과 내부 형평성 설명자료 정비을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "제도 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 제도 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "제도은 승격, 평가, 연봉 산정, 시상/징계와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "제도 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "제도 관련 문의·VOC 건수",
+          "제도 관련 제도·프로세스 개정 필요 항목",
+          "제도 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 5,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "제도 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 제도 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "보안",
+        "owner": "보안 담당",
+        "score": 88,
+        "confidence": "High",
+        "summary": "보안 영향은 우선 검토 대상이다. 핵심 인재 이동 시 영업비밀·모델·데이터 접근 권한 회수 기준 강화",
+        "scope": [
+          "보안 시스템 개선 및 관리",
+          "보안 점검"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 보안 업무에서 핵심 인재 이동 시 영업비밀·모델·데이터 접근 권한 회수 기준 강화을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 보안 업무에서 핵심 인재 이동 시 영업비밀·모델·데이터 접근 권한 회수 기준 강화을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "보안 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 보안 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "보안은 보안 시스템 개선 및 관리, 보안 점검와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "보안 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "보안 관련 문의·VOC 건수",
+          "보안 관련 제도·프로세스 개정 필요 항목",
+          "보안 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 5,
+          "규제 리스크": 5,
+          "실행 시급성": 5
+        },
+        "actions": [
+          "보안 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 보안 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "교육",
+        "owner": "교육 담당",
+        "score": 84,
+        "confidence": "High",
+        "summary": "교육 영향은 우선 검토 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "직급/직무별 특화 교육",
+          "차세대 리더 육성",
+          "AI/직무/리더십/어학 교육"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 교육 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 교육 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "교육 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 교육 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "교육은 직급/직무별 특화 교육, 차세대 리더 육성, AI/직무/리더십/어학 교육와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "교육 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "교육 관련 문의·VOC 건수",
+          "교육 관련 제도·프로세스 개정 필요 항목",
+          "교육 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "교육 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 교육 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "인력운영",
+        "owner": "인력운영 담당",
+        "score": 82,
+        "confidence": "High",
+        "summary": "인력운영 영향은 우선 검토 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "인력 운영 계획 수립 및 실적 관리",
+          "인력 충원 및 효율화",
+          "휴직/복직/퇴직 관리"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 인력운영 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 인력운영 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "인력운영 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 인력운영 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "인력운영은 인력 운영 계획 수립 및 실적 관리, 인력 충원 및 효율화, 휴직/복직/퇴직 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "인력운영 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "인력운영 관련 문의·VOC 건수",
+          "인력운영 관련 제도·프로세스 개정 필요 항목",
+          "인력운영 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 4,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "인력운영 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 인력운영 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직/임원",
+        "owner": "조직/임원 담당",
+        "score": 78,
+        "confidence": "Medium",
+        "summary": "조직/임원 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "조직개편",
+          "임원 지원 및 관리",
+          "임원 인사",
+          "차세대 리더 양성 및 관리"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 조직/임원 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "조직/임원 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 조직/임원 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "조직/임원은 조직개편, 임원 지원 및 관리, 임원 인사, 차세대 리더 양성 및 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직/임원 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직/임원 관련 문의·VOC 건수",
+          "조직/임원 관련 제도·프로세스 개정 필요 항목",
+          "조직/임원 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 4,
+          "규제 리스크": 4,
+          "실행 시급성": 4
+        },
+        "actions": [
+          "조직/임원 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직/임원 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "조직문화",
+        "owner": "조직문화 담당",
+        "score": 72,
+        "confidence": "Medium",
+        "summary": "조직문화 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "캠퍼스 행사 운영",
+          "일하는 문화 조성"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 조직문화 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "조직문화 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 조직문화 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "조직문화은 캠퍼스 행사 운영, 일하는 문화 조성와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "조직문화 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "조직문화 관련 문의·VOC 건수",
+          "조직문화 관련 제도·프로세스 개정 필요 항목",
+          "조직문화 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "조직문화 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 조직문화 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "노사",
+        "owner": "노사 담당",
+        "score": 68,
+        "confidence": "Medium",
+        "summary": "노사 영향은 모니터링 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "대내외 동향 관리",
+          "특이 인력 파악"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 노사 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 노사 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "노사 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 노사 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "노사은 대내외 동향 관리, 특이 인력 파악와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "노사 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "노사 관련 문의·VOC 건수",
+          "노사 관련 제도·프로세스 개정 필요 항목",
+          "노사 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 3,
+          "운영비 영향": 3,
+          "규제 리스크": 3,
+          "실행 시급성": 3
+        },
+        "actions": [
+          "노사 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 노사 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      },
+      {
+        "name": "총무",
+        "owner": "총무 담당",
+        "score": 56,
+        "confidence": "Watch",
+        "summary": "총무 영향은 낮은 강도의 확인 대상이다. 관련 기준과 현장 문의 흐름을 확인한다.",
+        "scope": [
+          "의전",
+          "레이아웃 관리",
+          "사무환경/비품",
+          "식당",
+          "인허가",
+          "차량 관리"
+        ],
+        "directImpact": "글로벌 AI 인재 전쟁 심화 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다.",
+        "impactPath": [
+          {
+            "stage": "기준 기사",
+            "text": "Axios는 Meta, OpenAI 등 AI 기업 사이의 인재 확보 경쟁과 충성도 문제를 다뤘다."
+          },
+          {
+            "stage": "직접 영향",
+            "text": "글로벌 AI 인재 전쟁 심화 변화는 총무 업무에서 정책·운영 기준의 재점검을 요구한다. 현재 공개 신호만으로 단정하기보다 관련 조직의 업무량, 문의, 비용, 보안 요구를 함께 확인해야 한다."
+          },
+          {
+            "stage": "2차 영향",
+            "text": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다."
+          },
+          {
+            "stage": "검토 필요 리스크",
+            "text": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크"
+          },
+          {
+            "stage": "우선 검토",
+            "text": "AI·데이터·자동화 핵심 직무의 리텐션 인터뷰, 보상 밴드, 경력 성장 경로가 외부 시장 변화에 맞게 업데이트됐는가?"
+          }
+        ],
+        "secondaryImpact": "총무 조정은 다른 People 기능으로 이어질 수 있다. 특히 인력운영, 제도, 교육, 노사 커뮤니케이션, 보안 기준이 같은 메시지로 연결되는지 점검해야 한다.",
+        "finalRisk": "AI 핵심 인력 유출 / 내부 형평성 논란 / 지식재산·보안 리스크 중 총무 관점의 기준이 늦게 정리되면 현장별 해석 차이와 실행 지연이 커질 수 있다.",
+        "why": [
+          "AI's talent wars have a loyalty problem 보도는 글로벌 AI 인재 전쟁 심화의 방향을 보여준다.",
+          "총무은 의전, 레이아웃 관리, 사무환경/비품, 식당, 인허가, 차량 관리와 연결되므로 업무량과 기준 변경 가능성을 수치로 확인해야 한다."
+        ],
+        "insight": "총무 담당은 이슈를 단순 외부 뉴스가 아니라 내부 기준, 담당자 용량, 구성원 커뮤니케이션이 동시에 움직이는 신호로 다뤄야 한다.",
+        "indicators": [
+          "총무 관련 문의·VOC 건수",
+          "총무 관련 제도·프로세스 개정 필요 항목",
+          "총무 담당 조직의 월별 처리 리드타임"
+        ],
+        "stars": {
+          "인력 재배치": 2,
+          "운영비 영향": 2,
+          "규제 리스크": 2,
+          "실행 시급성": 2
+        },
+        "actions": [
+          "총무 관련 현행 기준과 예외 적용 사례를 2026-08-04 기준으로 점검한다.",
+          "글로벌 AI 인재 전쟁 심화와 연결된 내부 지표를 주간 모니터링 항목에 추가한다.",
+          "현장 리더에게 설명할 총무 관점의 FAQ와 판단 기준을 정리한다."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "type": "보완 자료",
+        "title": "AI talent wars hit startups",
+        "source": "Business Insider",
+        "date": "2025-07-01",
+        "url": "https://www.businessinsider.com/ai-talent-wars-startups-compete-2025-7",
+        "summary": "글로벌 AI 기업 간 인재 확보 경쟁과 스타트업 리텐션 리스크를 다룬다.",
+        "impactLink": "핵심 AI 직무 리텐션 기준 점검에 연결된다."
+      },
+      {
+        "type": "보완 자료",
+        "title": "OpenAI agents security concerns",
+        "source": "TechCrunch",
+        "date": "2026-08-01",
+        "url": "https://techcrunch.com/2026/08/01/openai-reportedly-finds-evidence-that-more-of-its-agents-ran-amok/",
+        "summary": "AI 에이전트 운영과 보안 리스크를 보완한다.",
+        "impactLink": "AI 활용 가이드와 보안 교육에 연결된다."
+      },
+      {
+        "type": "인재 자료",
+        "title": "AI job anxiety and career response",
+        "source": "Business Insider",
+        "date": "2026-07-05",
+        "url": "https://www.businessinsider.com/ai-jobs-career-advice-executive-coach-2026-7",
+        "summary": "AI 직무 전환에 대한 개인의 대응과 불안을 다룬다.",
+        "impactLink": "교육과 조직문화 커뮤니케이션에 참고한다."
+      },
+      {
+        "type": "시장 자료",
+        "title": "AI workplace adaptation initiative",
+        "source": "Axios",
+        "date": "2026-06-28",
+        "url": "https://www.axios.com/2026/06/28/anthropic-openai-ai-jobs-workforce-adaptation",
+        "summary": "AI 확산에 따른 재교육·적응 지원 흐름을 보여준다.",
+        "impactLink": "직무 전환 교육 설계에 연결된다."
+      }
+    ],
+    "cases": [
+      {
+        "title": "AI 인재 전쟁과 스타트업 리텐션",
+        "type": "해외 인재 경쟁 사례",
+        "org": "Business Insider",
+        "why": "AI 핵심 인력 이동과 보상 프리미엄을 보여준다.",
+        "peopleInsight": "핵심 직무 리텐션 면담과 외부 보상 밴드 점검이 필요하다.",
+        "peopleFunction": "채용",
+        "actionLink": "AI 핵심 직무별 시장 보상 벤치마크를 갱신한다.",
+        "url": "https://www.businessinsider.com/ai-talent-wars-startups-compete-2025-7",
+        "priority": true
+      },
+      {
+        "title": "AI 에이전트 보안 이슈",
+        "type": "보안 참고 사례",
+        "org": "TechCrunch",
+        "why": "AI 활용 확대가 곧 보안·권한 관리 이슈로 번진다.",
+        "peopleInsight": "AI 사용 가이드와 접근권한 회수 절차를 재점검해야 한다.",
+        "peopleFunction": "보안",
+        "actionLink": "AI 도구 사용·로그·반출 기준을 업데이트한다.",
+        "url": "https://techcrunch.com/2026/08/01/openai-reportedly-finds-evidence-that-more-of-its-agents-ran-amok/"
+      },
+      {
+        "title": "AI 직무 불안 대응 조언",
+        "type": "교육 참고 사례",
+        "org": "Business Insider",
+        "why": "개인 차원의 AI 역량 전환 요구가 커지고 있다.",
+        "peopleInsight": "직무별 AI 교육을 성장 경로와 연결해야 한다.",
+        "peopleFunction": "교육",
+        "actionLink": "AI 재교육 과정을 직무군별로 분리한다.",
+        "url": "https://www.businessinsider.com/ai-jobs-career-advice-executive-coach-2026-7"
+      },
+      {
+        "title": "AI 일자리 적응 지원",
+        "type": "직무 전환 사례",
+        "org": "Axios",
+        "why": "AI 확산에 따른 노동시장 적응 지원이 확대되고 있다.",
+        "peopleInsight": "자동화 영향 직무를 조기에 식별해야 한다.",
+        "peopleFunction": "인력운영",
+        "actionLink": "자동화 영향 직무별 전환 계획을 수립한다.",
+        "url": "https://www.axios.com/2026/06/28/anthropic-openai-ai-jobs-workforce-adaptation"
+      }
+    ]
+  }
+];
+
+const areaRefinements = {};
+const evidenceSummaries = {};
+const evidenceImpactLinks = {};
+// End daily report content placeholders.
+    scenarios.forEach((scenario) => {
+      completePeopleAreas(scenario);
+      scenario.areas.forEach((item) => Object.assign(item, areaRefinements[scenario.id]?.[item.name] || {}));
+      scenario.evidence.forEach((item) => {
+        item.summary = evidenceSummaries[item.title] || item.summary || "요약: 이 자료는 해당 이슈가 인사 기능에 미치는 영향을 판단하기 위한 참고 근거로 활용된다.";
+        item.impactLink = item.impactLink || evidenceImpactLinks[item.title];
+      });
+    });
+
+    const confidenceLabel = {
+      High: "신뢰도 높음",
+      Medium: "신뢰도 보통",
+      Watch: "관찰 필요",
+    };
+
+    const confidenceClass = {
+      High: "confidence-high",
+      Medium: "confidence-medium",
+      Watch: "confidence-watch",
+    };
+
+    let scenarioIndex = Math.max(0, scenarios.findIndex((scenario) => scenario.category === DEFAULT_TAB));
+    let selectedAreaName = "";
+
+    const nodes = {
+      tabs: document.getElementById("scenarioTabs"),
+      advanceScenario: document.getElementById("advanceScenario"),
+      headline: document.getElementById("headline"),
+      articleTitleLink: document.getElementById("articleTitleLink"),
+      articleSource: document.getElementById("articleSource"),
+      articleDate: document.getElementById("articleDate"),
+      articleOriginalLink: document.getElementById("articleOriginalLink"),
+      scenarioContext: document.getElementById("scenarioContext"),
+      newsInput: document.getElementById("newsInput"),
+      sourceMix: document.getElementById("sourceMix"),
+      reportFlow: document.getElementById("reportFlow"),
+      overallConfidence: document.getElementById("overallConfidence"),
+      decisionQuestion: document.getElementById("decisionQuestion"),
+      peopleSignal: document.getElementById("peopleSignal"),
+      directFinding: document.getElementById("directFinding"),
+      researchJudgement: document.getElementById("researchJudgement"),
+      metricGrid: document.getElementById("metricGrid"),
+      riskGrid: document.getElementById("riskGrid"),
+      rankingList: document.getElementById("rankingList"),
+      detailTitle: document.getElementById("detailTitle"),
+      detailOwner: document.getElementById("detailOwner"),
+      detailImpactLevel: document.getElementById("detailImpactLevel"),
+      detailConfidence: document.getElementById("detailConfidence"),
+      detailScope: document.getElementById("detailScope"),
+      detailDirectImpact: document.getElementById("detailDirectImpact"),
+      detailPathway: document.getElementById("detailPathway"),
+      detailFinalRisk: document.getElementById("detailFinalRisk"),
+      detailWhy: document.getElementById("detailWhy"),
+      detailInsight: document.getElementById("detailInsight"),
+      detailIndicators: document.getElementById("detailIndicators"),
+      evidenceGrid: document.getElementById("evidenceGrid"),
+      actionStack: document.getElementById("actionStack"),
+      caseGrid: document.getElementById("caseGrid"),
+    };
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function hasUrl(value) {
+      return typeof value === "string" && /^https?:\/\//.test(value);
+    }
+
+    function sourceLink(url, label) {
+      if (!hasUrl(url)) return `<span class="link-missing">링크 확인 필요</span>`;
+      return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+    }
+
+    function selectedScenario() {
+      return scenarios[scenarioIndex];
+    }
+
+    function sortedAreas(scenario) {
+      return [...scenario.areas].sort((a, b) => b.score - a.score);
+    }
+
+    function selectedArea(scenario) {
+      const sorted = sortedAreas(scenario);
+      return sorted.find((area) => area.name === selectedAreaName) || sorted[0];
+    }
+
+    function stars(value) {
+      return "★★★★★".slice(0, value) + "☆☆☆☆☆".slice(0, 5 - value);
+    }
+
+    function impactLevel(area) {
+      if (area.score >= 92) return { text: "매우 높음", className: "level-critical" };
+      if (area.score >= 82) return { text: "높음", className: "level-high" };
+      if (area.score >= 68) return { text: "보통", className: "level-medium" };
+      return { text: "낮음", className: "level-low" };
+    }
+
+    function renderTabs() {
+      if (!nodes.tabs) return;
+      nodes.tabs.innerHTML = scenarios
+        .map(
+          (scenario, index) => `
+              <button
+                class="scenario-tab"
+                type="button"
+                role="tab"
+                aria-selected="${index === scenarioIndex}"
+                data-scenario-index="${index}"
+              >${escapeHtml(scenario.label)}</button>
+            `,
+        )
+        .join("");
+
+      nodes.tabs.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          scenarioIndex = Number(button.dataset.scenarioIndex);
+          selectedAreaName = "";
+          render();
+        });
+      });
+    }
+
+    function renderInput(scenario) {
+      const article = scenario.article || scenario.evidence[0] || {};
+      nodes.headline.textContent = article.title || scenario.headline;
+      nodes.articleTitleLink.href = hasUrl(article.url) ? article.url : "#";
+      nodes.articleSource.textContent = `출처: ${article.source || "확인 필요"}`;
+      nodes.articleDate.textContent = `날짜: ${article.date || "확인 필요"}`;
+      nodes.articleOriginalLink.style.display = hasUrl(article.url) ? "inline-flex" : "none";
+      nodes.articleOriginalLink.href = hasUrl(article.url) ? article.url : "#";
+      nodes.scenarioContext.textContent = scenario.context;
+      nodes.newsInput.textContent = scenario.input;
+      if (nodes.sourceMix) {
+        nodes.sourceMix.innerHTML = "";
+      }
+      nodes.reportFlow.innerHTML = (scenario.reportFlow || [])
+        .map(
+          ([label, text]) => `
+              <div class="flow-card">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(text)}</strong>
+              </div>
+            `,
+        )
+        .join("");
+      nodes.overallConfidence.className = `confidence-badge ${confidenceClass[scenario.confidence]}`;
+      nodes.overallConfidence.textContent = confidenceLabel[scenario.confidence];
+      nodes.decisionQuestion.textContent = scenario.decisionQuestion;
+      nodes.peopleSignal.textContent = scenario.peopleSignal;
+      nodes.directFinding.textContent = scenario.directFinding || scenario.context;
+      nodes.researchJudgement.textContent = scenario.researchJudgement || scenario.peopleSignal;
+      nodes.metricGrid.innerHTML = scenario.metrics
+        .map(
+          ([label, value, note]) => `
+              <div class="metric-tile">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(value)}</strong>
+                <p>${escapeHtml(note)}</p>
+              </div>
+            `,
+        )
+        .join("");
+    }
+
+    function renderTopRisks(scenario) {
+      nodes.riskGrid.innerHTML = (scenario.topRisks || [])
+        .map(
+          ([index, title, note]) => `
+              <article class="risk-card">
+                <span>${escapeHtml(index)}. 우선 검토</span>
+                <h3>${escapeHtml(title)}</h3>
+                <p>${escapeHtml(note)}</p>
+              </article>
+            `,
+        )
+        .join("");
+    }
+
+    function renderRanking(scenario, activeArea) {
+      nodes.rankingList.innerHTML = sortedAreas(scenario)
+        .map((area, index) => {
+          const level = impactLevel(area);
+          return `
+              <button class="ranking-row ${area.name === activeArea.name ? "active" : ""} ${area.supporting ? "supporting" : ""}" type="button" data-area="${escapeHtml(area.name)}">
+                <span class="rank-no">${index + 1}</span>
+                <span class="rank-main">
+                  <span class="rank-title">
+                    <strong>${escapeHtml(area.name)}</strong>
+                    <span class="confidence-badge ${confidenceClass[area.confidence]}">${confidenceLabel[area.confidence]}</span>
+                  </span>
+                  <p>${escapeHtml(area.summary)}</p>
+                </span>
+                <span class="rank-score">
+                  <span class="impact-level ${level.className}">영향 수준 ${level.text}</span>
+                </span>
+              </button>
+            `;
+        })
+        .join("");
+
+      nodes.rankingList.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedAreaName = button.dataset.area;
+          render();
+        });
+      });
+    }
+
+    function renderDetail(area) {
+      const level = impactLevel(area);
+      const impactPath = area.impactPath || [
+        { stage: "기사 내용", text: area.summary },
+        { stage: "직접 영향", text: area.directImpact || area.summary },
+        { stage: "2차 영향", text: area.secondaryImpact || area.insight },
+        { stage: "검토 필요 리스크", text: area.finalRisk || area.insight },
+        { stage: "우선 검토", text: `${area.name} 관점의 실행 과제 확인` },
+      ];
+      nodes.detailTitle.textContent = area.name;
+      nodes.detailOwner.textContent = `${area.owner} 관점`;
+      nodes.detailImpactLevel.className = `impact-level ${level.className}`;
+      nodes.detailImpactLevel.textContent = level.text;
+      nodes.detailConfidence.textContent = confidenceLabel[area.confidence];
+      nodes.detailScope.innerHTML = area.scope.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      nodes.detailDirectImpact.textContent = area.directImpact || area.summary;
+      nodes.detailPathway.innerHTML = impactPath
+        .map(
+          (step) => `
+              <div class="path-step">
+                <span>${escapeHtml(step.stage)}</span>
+                <strong>${escapeHtml(step.text)}</strong>
+              </div>
+            `,
+        )
+        .join("");
+      nodes.detailFinalRisk.textContent = area.finalRisk || area.insight;
+      nodes.detailWhy.innerHTML = area.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      nodes.detailInsight.textContent = area.insight;
+      nodes.detailIndicators.innerHTML = (area.indicators || ["관련 내부 지표 확인 필요"])
+        .map((item) => `<li>${escapeHtml(item)}</li>`)
+        .join("");
+    }
+
+    function renderEvidence(scenario) {
+      nodes.evidenceGrid.innerHTML = scenario.evidence
+        .map(
+          (item) => `
+              <article class="evidence-card">
+                <span class="type-badge">${escapeHtml(item.type)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <p class="evidence-key">핵심 근거: ${escapeHtml(item.keyEvidence || item.summary.replace(/^요약:\s*/, "").split(".")[0])}</p>
+                <p class="evidence-summary">${escapeHtml(item.summary)}</p>
+                <p class="evidence-link-note">${escapeHtml(item.impactLink || "판단 연결: 해당 이슈의 인사 영향 판단 근거")}</p>
+                <div class="source-meta">
+                  <span>출처: ${escapeHtml(item.source)}</span>
+                  <span>날짜: ${escapeHtml(item.date)}</span>
+                </div>
+                ${sourceLink(item.url, "자료 열기")}
+              </article>
+            `,
+        )
+        .join("");
+    }
+
+    function renderActions(area) {
+      nodes.actionStack.innerHTML = `
+          <article class="action-card">
+            <span class="confidence-badge ${confidenceClass[area.confidence]}">${escapeHtml(area.name)}</span>
+            <h3>권고 액션</h3>
+            <ol>
+              ${area.actions.map((action) => `<li>${escapeHtml(action)}</li>`).join("")}
+            </ol>
+          </article>
+        `;
+    }
+
+    function renderCases(scenario) {
+      nodes.caseGrid.innerHTML = scenario.cases
+        .map(
+          (item) => `
+              <article class="case-card ${item.priority ? "case-card-strong" : ""}">
+                <span>${escapeHtml(item.type || item.tag)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+                <dl class="case-meta">
+                  <div><dt>출처/범위</dt><dd>${escapeHtml(item.org || item.sourceScope || "확인 필요")}</dd></div>
+                  <div><dt>참고 이유</dt><dd>${escapeHtml(item.why || item.note)}</dd></div>
+                  <div><dt>인사 시사점</dt><dd>${escapeHtml(item.peopleInsight || item.note)}</dd></div>
+                  <div><dt>연결 기능</dt><dd>${escapeHtml(item.peopleFunction || item.tag)}</dd></div>
+                  <div><dt>연결 액션</dt><dd>${escapeHtml(item.actionLink || "권고 액션 점검")}</dd></div>
+                </dl>
+                ${sourceLink(item.url, "사례 열기")}
+              </article>
+            `,
+        )
+        .join("");
+    }
+
+    function render() {
+      const scenario = selectedScenario();
+      const area = selectedArea(scenario);
+      renderTabs();
+      renderInput(scenario);
+      renderTopRisks(scenario);
+      renderRanking(scenario, area);
+      renderDetail(area);
+      renderEvidence(scenario);
+      renderActions(area);
+      renderCases(scenario);
+    }
+
+    if (nodes.advanceScenario) {
+      nodes.advanceScenario.addEventListener("click", () => {
+        scenarioIndex = (scenarioIndex + 1) % scenarios.length;
+        selectedAreaName = "";
+        render();
+      });
+    }
+
+    render();
+  </script>
+</body>
+
+</html>
