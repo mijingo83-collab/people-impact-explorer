@@ -969,7 +969,7 @@
     "date": "2026-08-01",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260801.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -999,6 +999,82 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 에이전트 보안 사고와 사용 통제 기준",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-02",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260802.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] OLED 전환 지연과 프리미엄 패널 인력 압박",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 국방 피지컬 AI 반도체와 제조 AI 직무 확대",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 메모리 현금창출 확대와 보상 기대",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 폭염 작업중지 지시와 현장 근무환경 점검",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 쏠림 수출과 보상·채용 온도차",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 코딩 도구 확산과 주니어 인재 파이프라인 약화",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-03",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260803.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 고부가 OLED 투자 가속과 IT OLED 역량 재편",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 퀄컴 AI·전장 칩 양산과 후공정 직무 수요 확대",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 국가 AI 컴퓨팅센터 착공과 삼성SDS AX 인력 수요",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 육아휴직 후 유연근무와 경력단절 리스크 완화",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 호황 뒤 중소기업 파산과 고용 양극화",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 인재 전쟁과 핵심 인력 충성도 리스크",
         "status": "complete"
       }
     ]

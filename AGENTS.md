@@ -111,6 +111,9 @@
 
 현재 최신 템플릿은 `outputs/template.html`, `index.html`, `archive.html`, `outputs/reports.json`이 함께 동작하는 구조다.
 
+* 현재 저장소의 최신 운영 기준은 6개 고정 분류(`업계`, `산업`, `관계사`, `정책`, `경제`, `글로벌`) 리포트 구조다.
+* 과거 자동화 지시나 외부 실행 문구에 `기준 기사 3건`, `탭 3개`, `scenarios 3개` 같은 표현이 남아 있더라도, `outputs/template.html`, `outputs/latest.html`, `archive.html`, `outputs/reports.json`이 6개 분류 구조로 동작하는 한 6개 분류 기준을 우선 적용한다.
+* 3건 구조로 되돌리려면 먼저 템플릿, 최신 리포트, 이력 JSON, 아카이브 화면의 구조 변경을 명시적으로 승인받고 함께 수정한다.
 * `outputs/template.html`은 개별 데일리 리포트 화면의 기준 템플릿이다.
 * `outputs/latest.html`은 최신 리포트 고정 URL용 파일이며, 매일 생성되는 날짜별 HTML과 같은 내용으로 갱신한다.
 * `outputs/데일리_인사시사점리포트_YYYYMMDD.html`은 날짜별 보관용 HTML이다.
