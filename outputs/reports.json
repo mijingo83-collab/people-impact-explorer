@@ -1083,7 +1083,7 @@
     "date": "2026-08-04",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260804.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1113,6 +1113,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 인재 순유출과 핵심 직무 리텐션 압력",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-05",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260805.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] OLED 장비 공급선 이원화와 공정 대응 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 인재 빼가기 수사와 핵심직무 보안",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 파운드리 풀캐파와 생산·지원 인력 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 2027년 최저임금 확정과 임금 기준 점검",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 정서적 연봉 지표와 리텐션 경쟁력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] OpenAI 채용 합의와 글로벌 채용 컴플라이언스",
         "status": "complete"
       }
     ]
