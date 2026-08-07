@@ -1045,7 +1045,7 @@
     "date": "2026-08-03",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260803.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1075,6 +1075,158 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 인재 전쟁과 핵심 인력 충성도 리스크",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-04",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260804.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 폴더블 화면비 경쟁과 모바일 OLED 검증 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] HBF 표준 공개와 AI 메모리 직무 확장",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 폴더블 사전판매 기록과 공급 대응 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 메가프로젝트·제조 AX와 지역 인력운영 압력",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] D램 점유율 반등과 보상 기대 변동성",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 인재 순유출과 핵심 직무 리텐션 압력",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-05",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260805.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] OLED 장비 공급선 이원화와 공정 대응 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 인재 빼가기 수사와 핵심직무 보안",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 파운드리 풀캐파와 생산·지원 인력 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 2027년 최저임금 확정과 임금 기준 점검",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 정서적 연봉 지표와 리텐션 경쟁력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] OpenAI 채용 합의와 글로벌 채용 컴플라이언스",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-06",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260806.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 디스플레이 부품사의 휴머노이드 공급 확대와 직무 전환",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 성장과 고용 한파의 동시 진행",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 노조 교섭구조 변화와 노사 대응",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 고용 전망 하향과 인력계획 보수화 압력",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] AI 반도체 호황이 만든 지역·직업 수요 재편",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 시대 전공 선택 변화와 기술인재 파이프라인",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-07",
+    "title": "데일리 인사시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20260807.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] AI 폼팩터 확산과 차세대 디스플레이 역량 수요",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SK하이닉스 반나절 면접과 채용 속도 경쟁",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 핵심인력 특별인센티브와 리텐션 경쟁",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 활용 기업의 고용 증가와 직무정책 전환",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 최저임금과 임금분포 변화에 대한 보상 점검",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 1인 기업 확산과 핵심인재 이탈 위험",
         "status": "complete"
       }
     ]
