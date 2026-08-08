@@ -1197,7 +1197,7 @@
     "date": "2026-08-07",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260807.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1227,6 +1227,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 해고 명분화와 직무 재설계 리스크",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-08",
+    "title": "2026-08-08 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260808.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LGD OLED 공급망 다변화와 장비 인력·보안 점검",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 용인 반도체·AI 생태계 확장과 지역 인재 파이프라인 점검",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성SDI 전고체 협력과 계열사 기술직 전환 기준",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 배민 라이더 본인인증 강화와 외부 인력 통제 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 단기자금 조달 급증과 인건비·교육 예산 우선순위 점검",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 개발 수요 확장과 직무 전환 교육·거버넌스 재설계",
         "status": "complete"
       }
     ]
