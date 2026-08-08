@@ -997,9 +997,31 @@ const scenarios = [
   },
 ];
 
+const blockedSources = ["데일리인베스트", "Daily Invest"];
+const blockedDomains = ["dailyinvest.kr"];
+const investmentPromotionPattern = /(목표가|목표주가|투자의견|매수\s*(의견|추천)|매도\s*(의견|추천)|종목\s*추천|추천주|유망주|수혜주|리포트\s*브리핑)/i;
+
+function validatePrimaryArticles(items) {
+  for (const item of items) {
+    const article = item.article || {};
+    const source = String(article.source || "");
+    const title = String(article.title || "");
+    const url = String(article.url || "");
+    const blockedSource = blockedSources.some((value) => source.toLowerCase().includes(value.toLowerCase()));
+    const blockedDomain = blockedDomains.some((value) => url.toLowerCase().includes(value));
+    if (blockedSource || blockedDomain) {
+      throw new Error(`Blocked source for primary article: ${source || url}`);
+    }
+    if (investmentPromotionPattern.test(title)) {
+      throw new Error(`Investment-promotion article is not allowed: ${title}`);
+    }
+  }
+}
+
 async function main() {
+  validatePrimaryArticles(scenarios);
   const template = await fs.readFile(templatePath, "utf8");
-  const generatedBlock = `// Daily report content generated for ${reportDate}. Replace this block on each run.\n      const scenarios = ${JSON.stringify(scenarios, null, 8)};\n\n      const areaRefinements = {};\n      const evidenceSummaries = {};\n      const evidenceImpactLinks = {};\n      // End generated daily report content.`;
+  const generatedBlock = `// Daily report content generated for ${reportDate}. Replace this block on each run.\n      const HEADER_ORDER = ["업계", "산업", "관계사", "정책", "경제", "글로벌"];\n      const DEFAULT_TAB = "업계";\n      const scenarios = ${JSON.stringify(scenarios, null, 8)};\n\n      const areaRefinements = {};\n      const evidenceSummaries = {};\n      const evidenceImpactLinks = {};\n      // End generated daily report content.`;
 
   let html = template.replace(
     /\/\/ Daily report content placeholders\.[\s\S]*?\/\/ End daily report content placeholders\./,
