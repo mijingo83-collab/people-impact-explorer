@@ -1235,7 +1235,7 @@
     "date": "2026-08-08",
     "title": "2026-08-08 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260808.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1265,6 +1265,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 개발 수요 확장과 직무 전환 교육·거버넌스 재설계",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-09",
+    "title": "2026-08-09 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260809.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LG전자 다저스 구장 LED 리본보드 공급과 상업용 디스플레이 운영 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SK하이닉스 충칭공장 지분 매각 검토와 생산거점 재배치 신호",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 테일러 파운드리 첫 인턴십과 현지 제조 인재 확보",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 융합인재 양성 전환과 직무 재교육 기준 정비",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 환율 급변동 확대와 보상·채용 비용 가정 재점검",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 미국의 중국 AI 클라우드 우회 조사와 AI 인프라 보안 기준",
         "status": "complete"
       }
     ]
