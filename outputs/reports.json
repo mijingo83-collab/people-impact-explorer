@@ -1308,6 +1308,120 @@
     ]
   },
   {
+    "date": "2026-08-10",
+    "title": "2026-08-10 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260810.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] K디스플레이 초격차 투자에 장비 수주 확대",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AP시스템, 반도체 수주 사상 최대",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성디스플레이·삼성전기 베트남 유휴설비 매각",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI·로봇 자율실험실 생태계 구축 본격화",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 원·달러 환율 1300원대 접근 후 하락 반전",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 애플 가격 인하 압박에 OLED 원가 경쟁 심화",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-11",
+    "title": "2026-08-11 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260811.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성·삼성D, 마이크로LED 사업 방향 조율",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI·로봇이 24시간 실험하는 자율실험실 출범",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 반도체 성과급 공정성 쟁점",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 시대에도 컴활이 청년 취업자 자격증 1위",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 영향으로 2분기 수출 역대 최대 증가",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 메타, 개방형 AI 복귀와 AI 권력 분산 강조",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-12",
+    "title": "2026-08-12 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260812.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성전자 광주 HVAC 신공장 착공 추진",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 현대차그룹, 제조·정비 현장 AI 전환 확대",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] LG CNS, AI 신약개발 AX 사업 확대",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 이후 7대 첨단기술을 차세대 성장엔진으로 추진",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 10년 호황 착시와 청년고용 경고",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 엔비디아, 자체 개방형 AI 모델 공개",
+        "status": "complete"
+      }
+    ]
+  },
+  {
     "date": "2026-08-13",
     "title": "2026-08-13 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260813.html",
