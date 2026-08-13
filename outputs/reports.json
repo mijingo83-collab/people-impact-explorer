@@ -1273,7 +1273,7 @@
     "date": "2026-08-09",
     "title": "2026-08-09 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260809.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1303,6 +1303,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 미국의 중국 AI 클라우드 우회 조사와 AI 인프라 보안 기준",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-13",
+    "title": "2026-08-13 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260813.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] OLED 증착장비 발주 재개와 공정 인력 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 노조 파업 장기화와 핵심라인 운영 리스크",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 HBM4 수율 개선과 AI 핵심직무 확보",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 부트캠프 매칭 확대와 산학 인재 기준 정비",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 제조업 지역 온도차와 인력운영 비용 점검",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 일본 AI 전담부서 실험과 직무 재설계 압력",
         "status": "complete"
       }
     ]
