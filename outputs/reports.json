@@ -1425,7 +1425,7 @@
     "date": "2026-08-13",
     "title": "2026-08-13 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260813.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1455,6 +1455,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 일본 AI 전담부서 실험과 직무 재설계 압력",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-14",
+    "title": "2026-08-14 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260814.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LGD 기술 아카데미와 디스플레이 기술인재 육성",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 첨단소재 인도 생산기지와 공급망 직무 확장",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 R&D·시설투자 확대와 핵심직무 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 윤리원칙 초안과 인사 AI 운영 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 수출 호조와 청년·제조 고용 온도차",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 인재 확보를 위한 캠퍼스 파트너십 확산",
         "status": "complete"
       }
     ]
