@@ -1163,7 +1163,7 @@
     "issues": [
       {
         "category": "업계",
-        "title": "[업계] 디스플레이 부품사의 휴머노이드 공급 확대와 직무 전환",
+        "title": "[업계] 중국 8.6세대 OLED 후속 투자와 공정·장비 역량 경쟁",
         "status": "complete"
       },
       {
@@ -1197,36 +1197,454 @@
     "date": "2026-08-07",
     "title": "데일리 인사시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20260807.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
-        "title": "[업계] AI 폼팩터 확산과 차세대 디스플레이 역량 수요",
+        "title": "[업계] OLED 증착장비 AI화와 공정 역량 재편",
         "status": "complete"
       },
       {
         "category": "산업",
-        "title": "[산업] SK하이닉스 반나절 면접과 채용 속도 경쟁",
+        "title": "[산업] 제조 AX와 AI 안경이 바꾸는 현장 직무",
         "status": "complete"
       },
       {
         "category": "관계사",
-        "title": "[관계사] 삼성 핵심인력 특별인센티브와 리텐션 경쟁",
+        "title": "[관계사] 삼성전자 AI 메모리 호평과 핵심직무 압력",
         "status": "complete"
       },
       {
         "category": "정책",
-        "title": "[정책] AI 활용 기업의 고용 증가와 직무정책 전환",
+        "title": "[정책] 반도체 특구 주52시간 예외와 노무 기준 압력",
         "status": "complete"
       },
       {
         "category": "경제",
-        "title": "[경제] 최저임금과 임금분포 변화에 대한 보상 점검",
+        "title": "[경제] 폴리실리콘 관세와 공급망 비용 압박",
         "status": "complete"
       },
       {
         "category": "글로벌",
-        "title": "[글로벌] AI 1인 기업 확산과 핵심인재 이탈 위험",
+        "title": "[글로벌] AI 해고 명분화와 직무 재설계 리스크",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-08",
+    "title": "2026-08-08 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260808.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LGD OLED 공급망 다변화와 장비 인력·보안 점검",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 용인 반도체·AI 생태계 확장과 지역 인재 파이프라인 점검",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성SDI 전고체 협력과 계열사 기술직 전환 기준",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 배민 라이더 본인인증 강화와 외부 인력 통제 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 단기자금 조달 급증과 인건비·교육 예산 우선순위 점검",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 개발 수요 확장과 직무 전환 교육·거버넌스 재설계",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-09",
+    "title": "2026-08-09 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260809.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LG전자 다저스 구장 LED 리본보드 공급과 상업용 디스플레이 운영 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SK하이닉스 충칭공장 지분 매각 검토와 생산거점 재배치 신호",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 테일러 파운드리 첫 인턴십과 현지 제조 인재 확보",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 융합인재 양성 전환과 직무 재교육 기준 정비",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 환율 급변동 확대와 보상·채용 비용 가정 재점검",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 미국의 중국 AI 클라우드 우회 조사와 AI 인프라 보안 기준",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-10",
+    "title": "2026-08-10 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260810.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] K디스플레이 초격차 투자에 장비 수주 확대",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AP시스템, 반도체 수주 사상 최대",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성디스플레이·삼성전기 베트남 유휴설비 매각",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI·로봇 자율실험실 생태계 구축 본격화",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 원·달러 환율 1300원대 접근 후 하락 반전",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 애플 가격 인하 압박에 OLED 원가 경쟁 심화",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-11",
+    "title": "2026-08-11 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260811.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성·삼성D, 마이크로LED 사업 방향 조율",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI·로봇이 24시간 실험하는 자율실험실 출범",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 반도체 성과급 공정성 쟁점",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 시대에도 컴활이 청년 취업자 자격증 1위",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 영향으로 2분기 수출 역대 최대 증가",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 메타, 개방형 AI 복귀와 AI 권력 분산 강조",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-12",
+    "title": "2026-08-12 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260812.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성전자 광주 HVAC 신공장 착공 추진",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 현대차그룹, 제조·정비 현장 AI 전환 확대",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] LG CNS, AI 신약개발 AX 사업 확대",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 이후 7대 첨단기술을 차세대 성장엔진으로 추진",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 10년 호황 착시와 청년고용 경고",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 엔비디아, 자체 개방형 AI 모델 공개",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-13",
+    "title": "2026-08-13 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260813.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] OLED 증착장비 발주 재개와 공정 인력 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 노조 파업 장기화와 핵심라인 운영 리스크",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 HBM4 수율 개선과 AI 핵심직무 확보",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 부트캠프 매칭 확대와 산학 인재 기준 정비",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 제조업 지역 온도차와 인력운영 비용 점검",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 일본 AI 전담부서 실험과 직무 재설계 압력",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-14",
+    "title": "2026-08-14 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260814.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LGD 기술 아카데미와 디스플레이 기술인재 육성",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 첨단소재 인도 생산기지와 공급망 직무 확장",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 R&D·시설투자 확대와 핵심직무 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 윤리원칙 초안과 인사 AI 운영 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 수출 호조와 청년·제조 고용 온도차",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 인재 확보를 위한 캠퍼스 파트너십 확산",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-15",
+    "title": "2026-08-15 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260815.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LG 부품 계열사의 OLED R&D 확대와 기술인재 경쟁",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 삼성 반도체 AI 특수와 미국·중국 수출 급증",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 혼수 특화 매장 확대와 현장 서비스 역량",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 지방노동청 현장 간담회와 노동행정 점검 강화",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 중국 AI 주가 과열 경고와 인재·투자 변동성",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 확산에 따른 업무 재편과 재교육 우선순위",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-16",
+    "title": "2026-08-16 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260816.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 차량용 하이브리드 OLED 개발과 전장 패널 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 저전력 두뇌모사 반도체와 연구인력 전환",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 주주환원 논의와 보상 기대 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 미래대응기금 논의와 인재·교육 재원 재편",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 임금근로자 감소와 인력운영 보수화 압력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 빅테크 AI 인프라 투자와 핵심직무 경쟁",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-17",
+    "title": "2026-08-17 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260817.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] IMID 2026과 OLED 혁신 제품 공개",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 여성 이공계 인재 취업역량 강화",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성의 미래 이공계 인재 지원 확대",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI·숙련기술 협업 중심 고용전환",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 지역 청년 고용의 질 격차 확대",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 빅테크 감원과 AI 기술 수요 급증",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-18",
+    "title": "2026-08-18 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260818.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성디스플레이 A7 공사 재개와 장기 인력수요",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 섬유산업 AI·로봇 실증과 현장 직무전환",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 차입금 상환과 투자재원 변화",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 플랫폼 노동자 보호를 위한 일터기본법 논의",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 대기업 고용의 세대 역전과 신규채용 감소",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 호황의 고용·보상 양극화",
         "status": "complete"
       }
     ]

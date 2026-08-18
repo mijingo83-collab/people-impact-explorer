@@ -1539,7 +1539,7 @@
     "date": "2026-08-16",
     "title": "2026-08-16 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260816.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1569,6 +1569,82 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 빅테크 AI 인프라 투자와 핵심직무 경쟁",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-17",
+    "title": "2026-08-17 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260817.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] IMID 2026과 OLED 혁신 제품 공개",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 여성 이공계 인재 취업역량 강화",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성의 미래 이공계 인재 지원 확대",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI·숙련기술 협업 중심 고용전환",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 지역 청년 고용의 질 격차 확대",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 빅테크 감원과 AI 기술 수요 급증",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-18",
+    "title": "2026-08-18 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260818.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성디스플레이 A7 공사 재개와 장기 인력수요",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 섬유산업 AI·로봇 실증과 현장 직무전환",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 차입금 상환과 투자재원 변화",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 플랫폼 노동자 보호를 위한 일터기본법 논의",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 대기업 고용의 세대 역전과 신규채용 감소",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 호황의 고용·보상 양극화",
         "status": "complete"
       }
     ]
