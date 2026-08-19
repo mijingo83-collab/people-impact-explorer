@@ -1615,7 +1615,7 @@
     "date": "2026-08-18",
     "title": "2026-08-18 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260818.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1645,6 +1645,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] EY AI형 커리어 레지던시와 신입 육성 모델 변화",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-19",
+    "title": "2026-08-19 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260819.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 와이드 폴더블 수요와 OLED 증설 인력 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체·데이터센터 건설 붐과 현장 인력 인프라",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 임원 보수 공개와 성과보상 설명 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 반도체 R&D 근로시간 특례 논쟁과 노무 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 임시근로 OECD 1위와 채용·리텐션 구조 점검",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 인도 전자부품 프로젝트와 제조 인재 확보 경쟁",
         "status": "complete"
       }
     ]
