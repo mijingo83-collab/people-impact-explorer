@@ -1653,7 +1653,7 @@
     "date": "2026-08-19",
     "title": "2026-08-19 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260819.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1683,6 +1683,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 인도 전자부품 프로젝트와 제조 인재 확보 경쟁",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-23",
+    "title": "2026-08-23 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260823.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성D FOLED 전환 가속과 중국 추격",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] PLP 표준 부재와 첨단 패키징 생태계 압력",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성SDI 지분 매각과 투자재원 재배치",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 난임치료휴가 유급 확대와 인사 운영 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] AI 서버 가격 상승과 메모리 인력 수요 압력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 혜택의 지역·소득 격차와 직무 재교육",
         "status": "complete"
       }
     ]
