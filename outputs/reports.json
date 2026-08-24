@@ -1691,7 +1691,7 @@
     "date": "2026-08-23",
     "title": "2026-08-23 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260823.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1721,6 +1721,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 혜택의 지역·소득 격차와 직무 재교육",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-24",
+    "title": "2026-08-24 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260824.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 페라리 전기차 OLED 콕핏과 전장 패널 대응 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] HBM 병목 해법 공개와 첨단 패키징 직무 확장",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 히트펌프 국내 생산과 제조 인력 운영",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 임직원 기업인수 특별법과 고용승계 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 임금근로 일자리 회복과 청년·반도체 고용 온도차",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 중국 AI 직무 대체와 재교육·리텐션 압력",
         "status": "complete"
       }
     ]
