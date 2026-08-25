@@ -1729,7 +1729,7 @@
     "date": "2026-08-24",
     "title": "2026-08-24 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260824.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1759,6 +1759,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 중국 AI 직무 대체와 재교육·리텐션 압력",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-25",
+    "title": "2026-08-25 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260825.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] EU PFAS 규제와 디스플레이 소재 전환 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] CPO 생태계 경쟁과 광통신·패키징 직무 확장",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 게임스컴 풀스택 공개와 AI 경험 역량",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 800조원대 예산과 AI·청년 인재 투자 확대",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 소비심리 하락과 취업기회 전망 둔화",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] Harvard AI 교수 클론과 직무교육 확장 모델",
         "status": "complete"
       }
     ]
