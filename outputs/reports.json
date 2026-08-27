@@ -1688,6 +1688,120 @@
     ]
   },
   {
+    "date": "2026-08-20",
+    "title": "2026-08-20 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260820.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 플렉시블 OLED 출하 증가와 공정 인력 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI 소재 플랫폼 확장과 연구 직무 자동화",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 DX노조 집회 예고와 보상 형평성",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 학습 개인정보 활용과 인사 데이터 거버넌스",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 대기업 하반기 채용 축소 전망과 선확보 압력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 감원 커뮤니케이션 변화와 구성원 불안",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-21",
+    "title": "2026-08-21 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260821.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성디스플레이 67조 투자와 폴더블 OLED 인력 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 전기차 라인의 ESS 전환과 제조 직무 재배치",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성SDI 지분 매각과 투자재원 재배치",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] K-노동복지회의소와 비정형 노동자 보호",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 수출 급증과 보상 기대 변동",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 일본 초과근무 논쟁과 근로시간 특례 기준",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-22",
+    "title": "2026-08-22 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260822.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 디스플레이 계측 표준 개발과 평가 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체·AI 인력난과 채용 연계 확대",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성SDI 지분 매각과 북미 배터리 투자",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 야간노동 건강보호 입법과 교대근무 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 원화 강세와 달러예금 증가가 만든 비용 가정 변화",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 데이터 학습 논쟁과 지식재산 보호",
+        "status": "complete"
+      }
+    ]
+  },
+  {
     "date": "2026-08-23",
     "title": "2026-08-23 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260823.html",
@@ -1767,7 +1881,7 @@
     "date": "2026-08-25",
     "title": "2026-08-25 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260825.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1797,6 +1911,82 @@
       {
         "category": "글로벌",
         "title": "[글로벌] Harvard AI 교수 클론과 직무교육 확장 모델",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-26",
+    "title": "2026-08-26 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260826.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 제네시스 GV90 OLED 공급과 전장 패널 운영 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 첨단 패키징 산업전과 후공정 인재 경쟁",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 이재용·정의선 회동과 AI 투자 조율",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 카카오 인적분할 반대와 공동교섭 요구",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 금통위 앞 환율 횡보와 보상 비용 가정",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 미국 AI 데이터센터 반대와 지역 수용성",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-27",
+    "title": "2026-08-27 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260827.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성D 게이밍 QD-OLED 양산과 e스포츠 패널 경쟁",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 차량 AI 플랫폼 확장과 전장 SW 직무 재편",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 노조 분리교섭 현실화와 보상 거버넌스 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 중후장대 임단협 확산과 성과급·정년 쟁점",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 금리 3%와 확장 재정이 만든 임금·예산 압력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 앤트로픽 AI 인프라 장기 선점과 기술직 경쟁",
         "status": "complete"
       }
     ]
