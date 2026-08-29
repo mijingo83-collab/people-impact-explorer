@@ -1957,7 +1957,7 @@
     "date": "2026-08-27",
     "title": "2026-08-27 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260827.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -1987,6 +1987,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 앤트로픽 AI 인프라 장기 선점과 기술직 경쟁",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-29",
+    "title": "2026-08-29 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260829.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성D 저전력 노트북 OLED와 IT 패널 역량",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI·반도체 스타트업 고용 증가와 직무 재편",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 9개 관계사 수해 지원과 현장 운영",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 노란봉투법 시행지침과 쟁의범위 기준",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 원화 강세와 반도체 보상·운영비 가정",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 한미 AI-반도체 동맹과 두뇌 순환",
         "status": "complete"
       }
     ]
