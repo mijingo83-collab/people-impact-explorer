@@ -1992,6 +1992,44 @@
     ]
   },
   {
+    "date": "2026-08-28",
+    "title": "2026-08-28 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260828.html",
+    "latest": false,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] QLEDoS 소재 원천기술과 차세대 QD 인력 수요",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SK하이닉스 인디애나 HBM 거점과 후공정 인재 경쟁",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 디지털고객경험 1위와 AI 서비스 역량",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 노란봉투법 시행지침과 성과급·배치전환 쟁점",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 성장률 상향과 체감경기 냉기가 만든 보상 압력",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] Meta 데이터센터 로봇 실험과 현장 직무 재설계",
+        "status": "complete"
+      }
+    ]
+  },
+  {
     "date": "2026-08-29",
     "title": "2026-08-29 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260829.html",
