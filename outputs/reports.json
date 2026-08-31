@@ -2071,7 +2071,7 @@
     "date": "2026-08-30",
     "title": "2026-08-30 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260830.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2101,6 +2101,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] AI 감원 신호와 조직 리스크 조기 감지",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-31",
+    "title": "2026-08-31 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260831.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 애플 참전과 폴더블 OLED 3색 셈법",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 호황과 소부장 낙수효과 약화",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성SDI ESS용 LFP 공급 확대",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 국가과학기술자 100명 예우 제도",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 산업생산 보합과 OLED 생산 증가",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 기업용 AI 경쟁축과 업무 거버넌스",
         "status": "complete"
       }
     ]
