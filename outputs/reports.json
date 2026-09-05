@@ -2109,7 +2109,7 @@
     "date": "2026-08-31",
     "title": "2026-08-31 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260831.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2139,6 +2139,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 기업용 AI 경쟁축과 업무 거버넌스",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-05",
+    "title": "2026-09-05 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260905.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] IFA 폴더블 AMOLED 신제품과 패널 검증 압력",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 멀티 실리콘 AI 추론과 인프라 직무 확장",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 DX노조 대외 행동과 보상 형평성",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 공공 AI·드론 전문인력 확대와 직무 전환",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 수출 신기록과 반도체 중심 보상 기대",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 중국 AI 고용충격 관리와 재교육 압력",
         "status": "complete"
       }
     ]
