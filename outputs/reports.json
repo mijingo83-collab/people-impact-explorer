@@ -2147,7 +2147,7 @@
     "date": "2026-09-05",
     "title": "2026-09-05 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260905.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2177,6 +2177,44 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 중국 AI 고용충격 관리와 재교육 압력",
+        "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-06",
+    "title": "2026-09-06 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260906.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LGD 비FMM 플립 투자 검토와 OLED 공정 전환",
+        "status": "complete"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] LG전자 로봇 액추에이터와 피지컬 AI 직무 확장",
+        "status": "complete"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 DX노조 대외 집회와 보상 형평성 압력",
+        "status": "complete"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 반도체 클러스터 예타면제와 지역 인재 운영 과제",
+        "status": "complete"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 수출 신기록과 원화 강세가 만든 보상재원 변동성",
+        "status": "complete"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 혼다 AI 인재 수당과 직무 보상 재설계",
         "status": "complete"
       }
     ]
