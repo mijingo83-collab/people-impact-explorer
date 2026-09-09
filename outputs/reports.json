@@ -2185,7 +2185,7 @@
     "date": "2026-09-06",
     "title": "2026-09-06 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260906.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2216,6 +2216,50 @@
         "category": "글로벌",
         "title": "[글로벌] 혼다 AI 인재 수당과 직무 보상 재설계",
         "status": "complete"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-09",
+    "title": "인사 시사점 분석 레포트 (2026-09-09)",
+    "file": "outputs/데일리_인사시사점리포트_20260909.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] OLED 포토마스크 감축과 공정 통합 압력",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62038"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 기아 스마트팩토리와 현장 직무 전환",
+        "source": "IT조선",
+        "url": "https://it.chosun.com/news/articleView.html?idxno=2023092169726"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 반도체 특화 AI와 DS 직무 재편",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=61984"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 통상임금 176시간 쟁점과 노사 대응 기준",
+        "source": "뉴스핌",
+        "url": "https://www.newspim.com/news/view/20260909001219"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 청년 고용 하락과 제조업 채용 사다리 약화",
+        "source": "서울신문",
+        "url": "https://www.seoul.co.kr/news/economy/2026/09/09/20260909500017"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 메타 AI 에이전트와 업무 자동화 거버넌스",
+        "source": "뉴스핌",
+        "url": "https://www.newspim.com/news/view/20260909000041"
       }
     ]
   }
