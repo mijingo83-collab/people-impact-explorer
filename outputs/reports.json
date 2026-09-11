@@ -2223,7 +2223,7 @@
     "date": "2026-09-09",
     "title": "인사 시사점 분석 레포트 (2026-09-09)",
     "file": "outputs/데일리_인사시사점리포트_20260909.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2260,6 +2260,56 @@
         "title": "[글로벌] 메타 AI 에이전트와 업무 자동화 거버넌스",
         "source": "뉴스핌",
         "url": "https://www.newspim.com/news/view/20260909000041"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-11",
+    "title": "2026-09-11 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260911.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 폴더블 OLED 소재량 급증과 공급망 역량 압력",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62171"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SK하이닉스 성과급 수정안과 보상 선택권 압력",
+        "status": "complete",
+        "source": "머니투데이",
+        "url": "https://www.mt.co.kr/industry/2026/09/11/2026091020043694906"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 SW 네트워크와 AI 인프라 직무 재편",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260911000253"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 이용자보호법 추진과 인사 AI 통제 기준",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260911000217"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 9월 초 수출 급증과 반도체 보상 기대 변동",
+        "status": "complete",
+        "source": "서울신문",
+        "url": "https://www.seoul.co.kr/news/economy/2026/09/11/20260911500079"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 미국 패스트푸드 대면 서비스 회귀와 자동화 직무 재설계",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260911000313"
       }
     ]
   }
