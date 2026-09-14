@@ -2267,7 +2267,7 @@
     "date": "2026-09-11",
     "title": "2026-09-11 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260911.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2310,6 +2310,56 @@
         "status": "complete",
         "source": "전자신문",
         "url": "https://www.etnews.com/20260911000313"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "title": "2026-09-14 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260914.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성D 고주사율 OLED와 구동·AI 화질 역량 압력",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62209"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 오가닉 브릿지 패키징 개발과 후공정 직무 확장",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62253"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 협력사 대금 조기 지급과 상생 운영 부담",
+        "status": "complete",
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/article/202609142164g"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 삼성 노조 운영 논란과 노동 커뮤니케이션 리스크",
+        "status": "complete",
+        "source": "데일리안",
+        "url": "https://m.dailian.co.kr/news/view/1690031"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 전기료 선납 거절과 운영비 가정 변동",
+        "status": "complete",
+        "source": "데일리안",
+        "url": "https://m.dailian.co.kr/news/view/1690228/"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 속도조절 논쟁과 업무 AI 거버넌스 압력",
+        "status": "complete",
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/article/2026091440201"
       }
     ]
   }
