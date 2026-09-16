@@ -2317,7 +2317,7 @@
     "date": "2026-09-14",
     "title": "2026-09-14 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260914.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2360,6 +2360,56 @@
         "status": "complete",
         "source": "한국경제",
         "url": "https://www.hankyung.com/article/2026091440201"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-16",
+    "title": "2026-09-16 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260916.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 삼성D RGB OLEDoS 투자와 마이크로디스플레이 역량 압력",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62280"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 장비 부품 납기 지연과 투자 실행 인력 압박",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260916000148"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 노조 탄원 서명과 노사 신뢰 리스크",
+        "status": "complete",
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/article/2026091684237"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 노동감독권 지방 위임과 사업장 컴플라이언스 점검",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/economy/12154583"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 청년 자발퇴사 급증과 초기 근속 설계 압력",
+        "status": "complete",
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/article/2026091675727"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] OpenAI 반복업무 대체와 주니어 직무 재설계",
+        "status": "complete",
+        "source": "Business Insider",
+        "url": "https://www.businessinsider.com/sarah-friar-openai-cfo-ai-replacing-mundane-jobs-2026-9"
       }
     ]
   }
