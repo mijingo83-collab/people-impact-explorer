@@ -2367,7 +2367,7 @@
     "date": "2026-09-16",
     "title": "2026-09-16 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260916.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2410,6 +2410,56 @@
         "status": "complete",
         "source": "Business Insider",
         "url": "https://www.businessinsider.com/sarah-friar-openai-cfo-ai-replacing-mundane-jobs-2026-9"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-19",
+    "title": "2026-09-19 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260919.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 중국 LCD 가격 인상과 패널 공급망 역량 압력",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62485"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 양극재 CATL 협상과 배터리 공급망 인력 경쟁",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62506"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 반도체 노조 재편과 성과보상 갈등",
+        "status": "complete",
+        "source": "경향신문",
+        "url": "https://www.khan.co.kr/article/202609191344001/amp"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AI 기본법 보완 논의와 청년고용 재설계",
+        "status": "complete",
+        "source": "뉴스핌",
+        "url": "https://www.newspim.com/news/view/20260918000959"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체주 반등과 성과보상 기대 변동성",
+        "status": "complete",
+        "source": "뉴스핌",
+        "url": "https://www.newspim.com/news/view/20260918000748"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 저노출 고성장 직무와 인력 포트폴리오 재설계",
+        "status": "complete",
+        "source": "Business Insider Japan",
+        "url": "https://www.businessinsider.jp/"
       }
     ]
   }
