@@ -2417,7 +2417,7 @@
     "date": "2026-09-19",
     "title": "2026-09-19 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260919.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2460,6 +2460,56 @@
         "status": "complete",
         "source": "Business Insider Japan",
         "url": "https://www.businessinsider.jp/"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-20",
+    "title": "2026-09-20 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260920.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 폴더블폰 수요 변동과 OLED 공급 역량 압력",
+        "status": "complete",
+        "source": "중앙일보",
+        "url": "https://news.nate.com/"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI 부품 제안 시스템과 구매·개발 직무 재설계",
+        "status": "complete",
+        "source": "매일일보",
+        "url": "https://www.m-i.kr/news/articleView.html?idxno=1416369"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 테크포럼과 AI·로봇 인재 네트워크",
+        "status": "complete",
+        "source": "매일일보",
+        "url": "https://www.m-i.kr/news/articleView.html?idxno=1416327"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 배달종사자 보험 의무화와 안전·복지 제도 점검",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260920000050"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 특별급여가 끌어올린 임금 흐름과 보상 기대",
+        "status": "complete",
+        "source": "Seoul Economic Daily",
+        "url": "https://en.sedaily.com/finance/2026/09/20/korean-wages-rise-31-percent-in-first-half-on-chip-bonuses"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI Force 구상과 업무 AI 거버넌스 압력",
+        "status": "complete",
+        "source": "Seoul Economic Daily",
+        "url": "https://en.sedaily.com/international/2026/09/20/trump-vows-ai-force-and-calls-safety-fears-a-left-wing-hoax"
       }
     ]
   }
