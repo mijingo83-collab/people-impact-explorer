@@ -2467,7 +2467,7 @@
     "date": "2026-09-20",
     "title": "2026-09-20 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260920.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2510,6 +2510,56 @@
         "status": "complete",
         "source": "Seoul Economic Daily",
         "url": "https://en.sedaily.com/international/2026/09/20/trump-vows-ai-force-and-calls-safety-fears-a-left-wing-hoax"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "title": "2026-09-21 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260921.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 아이폰 OLED 수리 난도와 신뢰성 검증 압력",
+        "status": "complete",
+        "source": "IT조선",
+        "url": "https://it.chosun.com/news/articleView.html?idxno=2023092170557"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 휴머노이드 로봇 PoC와 제조 직무 재설계",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62336"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 광주 AI 냉각라인과 지역 제조 인재",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62565"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 청년지원 예산 확대와 초기 커리어 설계 압력",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/economy/12158032"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 중장년 워라밸 인식 변화와 근무제도 체감",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/economy/12158045"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 양자·AI 칩 전환과 차세대 직무 포트폴리오",
+        "status": "complete",
+        "source": "Seoul Economic Daily",
+        "url": "https://en.sedaily.com/international/2026/09/21/after-gpus-and-cpus-quantum-chips-intel-ceo-sees-quantum"
       }
     ]
   }
