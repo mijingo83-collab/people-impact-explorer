@@ -2517,7 +2517,7 @@
     "date": "2026-09-21",
     "title": "2026-09-21 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260921.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2560,6 +2560,56 @@
         "status": "complete",
         "source": "Seoul Economic Daily",
         "url": "https://en.sedaily.com/international/2026/09/21/after-gpus-and-cpus-quantum-chips-intel-ceo-sees-quantum"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-23",
+    "title": "2026-09-23 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260923.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] LGD 난징 모듈 매각 철회와 공급단가 협상 리스크",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62735"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 제조 피지컬 AI 실증과 현장 직무 전환 압력",
+        "status": "complete",
+        "source": "ZDNet Korea",
+        "url": "https://zdnet.co.kr/view/?no=20260923101736"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 LPDDR6 검증과 온디바이스 AI 역량 경쟁",
+        "status": "complete",
+        "source": "ZDNet Korea",
+        "url": "https://zdnet.co.kr/view/?no=20260923093534"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 중대재해 양형기준 강화와 안전 책임 체계",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/society/12159626"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 서울 전월세 상승 전망과 주거 복지 체감 압력",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/realestate/12159632"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 알리바바 AI 데이터센터 확장과 글로벌 직무 경쟁",
+        "status": "complete",
+        "source": "The Economic Times",
+        "url": "https://m.economictimes.com/tech/artificial-intelligence/chinas-alibaba-launches-international-data-centre-push/amp_articleshow/134426278.cms"
       }
     ]
   }
