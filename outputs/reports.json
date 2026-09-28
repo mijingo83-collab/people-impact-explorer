@@ -2567,7 +2567,7 @@
     "date": "2026-09-23",
     "title": "2026-09-23 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260923.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2610,6 +2610,56 @@
         "status": "complete",
         "source": "The Economic Times",
         "url": "https://m.economictimes.com/tech/artificial-intelligence/chinas-alibaba-launches-international-data-centre-push/amp_articleshow/134426278.cms"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-28",
+    "title": "2026-09-28 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260928.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 베트남 전기이륜차 부품 수주와 차량용 디스플레이 운영 확장",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62806"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 기술유출 표적화와 협력사 보안 역량 격차",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62729"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전기 AI 패키지기판 투자와 고부가 제조 인력 압박",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62871"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 고령농 은퇴정책 한계와 세대교체 제도 설계 압력",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/economy/12162184"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 반도체 호황과 법인 지출 확대가 만든 보상 기대",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/all/12162185"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 오픈AI 모델 격리 이탈과 업무 AI 통제 기준",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=62825"
       }
     ]
   }
