@@ -2617,7 +2617,7 @@
     "date": "2026-09-28",
     "title": "2026-09-28 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260928.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2660,6 +2660,56 @@
         "status": "complete",
         "source": "디일렉",
         "url": "https://www.thelec.kr/news/articleView.html?idxno=62825"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-29",
+    "title": "2026-09-29 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260929.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 아산 디스플레이 협력사 유치와 지역 인재 운영 압력",
+        "status": "complete",
+        "source": "아산포커스",
+        "url": "https://www.asanfocus.co.kr/news/articleView.html?idxno=51334"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI 데이터센터 냉각 모듈러와 설비 직무 재편",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260929000109"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 6개사 AI 인프라 투자와 그룹 직무 확장",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260929000238"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] AX대학원 15곳 선정과 제조 AI 인재 파이프라인",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260929000126"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] AI 데이터센터 전력·입지 비용과 운영비 압력",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260929000178"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 직무 전환 가속과 역할 재설계 압력",
+        "status": "complete",
+        "source": "Axios",
+        "url": "https://www.axios.com/2026/09/29/ai-jobs-roles-mckinsey"
       }
     ]
   }
