@@ -2667,7 +2667,7 @@
     "date": "2026-09-29",
     "title": "2026-09-29 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260929.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2710,6 +2710,56 @@
         "status": "complete",
         "source": "Axios",
         "url": "https://www.axios.com/2026/09/29/ai-jobs-roles-mckinsey"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-30",
+    "title": "2026-09-30 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20260930.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] TCL 프린팅 OLED 전시와 중국 패널 기술 추격",
+        "status": "complete",
+        "source": "전자신문",
+        "url": "https://www.etnews.com/20260930000222"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] LG이노텍 자율차 센싱 투자와 AI 제조 직무 확장",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/business/12163981"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성SDI 데이터센터 배터리와 그룹 AI 인프라 직무 확장",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/business/12163985"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 자소서 무용론 확산과 채용 평가 기준 재점검",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/society/12164778"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 생산·소비·투자 동반 감소와 인력운영 비용 압력",
+        "status": "complete",
+        "source": "서울신문",
+        "url": "https://m.eye.seoul.co.kr/news/economy/2026/09/30/20260930500014?wlog_tag4=mo_article_inner_0"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 오픈AI 아스트라 출시 취소와 업무 AI 통제 기준",
+        "status": "complete",
+        "source": "중앙일보",
+        "url": "https://www.joongang.co.kr/article/25465793"
       }
     ]
   }
