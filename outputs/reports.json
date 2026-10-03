@@ -2717,7 +2717,7 @@
     "date": "2026-09-30",
     "title": "2026-09-30 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20260930.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2760,6 +2760,56 @@
         "status": "complete",
         "source": "중앙일보",
         "url": "https://www.joongang.co.kr/article/25465793"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-03",
+    "title": "2026-10-03 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20261003.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 중국 OLED 추격과 차세대 기술 인력 압력",
+        "status": "complete",
+        "source": "파이낸셜뉴스",
+        "url": "https://www.fnnews.com/news/202610031401173999"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 반도체 취업 선호와 신입 인재 기준 변화",
+        "status": "complete",
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/article/202610029276g"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 노조 개인정보 논란과 징계·보안 기준",
+        "status": "complete",
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/article/202610018831g"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 보육교사 육아휴직 공공지원과 대체인력 기준",
+        "status": "complete",
+        "source": "전국매일신문",
+        "url": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1298574"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 물가 상승 압력과 보상·복지 체감 리스크",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://m.mk.co.kr/news/economy/12167722"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 회피형 진로 이동과 직무 전환 교육",
+        "status": "complete",
+        "source": "인사이트",
+        "url": "https://www.insight.co.kr/news/576384"
       }
     ]
   }
