@@ -2767,7 +2767,7 @@
     "date": "2026-10-03",
     "title": "2026-10-03 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20261003.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2810,6 +2810,56 @@
         "status": "complete",
         "source": "인사이트",
         "url": "https://www.insight.co.kr/news/576384"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-05",
+    "title": "2026-10-05 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20261005.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 국가핵심기술 유출과 디스플레이 보안·핵심인재 리스크",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/economy/12168241"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI 서버 냉각 스타트업과 데이터센터 기술직 수요",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/business/12167055"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 실적 관측과 보상 기대 변동",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/world/12168043"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 노동감독관 피소 증가와 현장 노무 대응 기준",
+        "status": "complete",
+        "source": "연합뉴스",
+        "url": "https://www.fnnews.com/news/202610050606164710"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] ETF 리밸런싱과 반도체 수급 변동성",
+        "status": "complete",
+        "source": "한국경제",
+        "url": "https://www.hankyung.com/article/202610020399i"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 오픈 모델 경쟁과 사내 AI 역량·보안 기준",
+        "status": "complete",
+        "source": "Axios",
+        "url": "https://www.axios.com/2026/10/04/reflection-open-weight-ai"
       }
     ]
   }
