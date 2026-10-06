@@ -2817,7 +2817,7 @@
     "date": "2026-10-05",
     "title": "2026-10-05 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20261005.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2860,6 +2860,56 @@
         "status": "complete",
         "source": "Axios",
         "url": "https://www.axios.com/2026/10/04/reflection-open-weight-ai"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-06",
+    "title": "2026-10-06 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20261006.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] 디스플레이 규제개선과 AI 활용 기준 압력",
+        "status": "complete",
+        "source": "조선비즈",
+        "url": "https://biz.chosun.com/policy/policy_sub/2026/10/06/56DYCS4BVNFUFAQ6O6JAGCRWMM/"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SDV 콕핏 공급과 전장 소프트웨어 직무 확장",
+        "status": "complete",
+        "source": "연합뉴스",
+        "url": "https://www.yna.co.kr/amp/view/AKR20261006022800003"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전기 AI 서버 MLCC 수주와 고부가 직무 압박",
+        "status": "complete",
+        "source": "더팩트",
+        "url": "https://news.tf.co.kr/read/economy/2373237.htm"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 일자리 공론화와 직무·보상 재설계 압력",
+        "status": "complete",
+        "source": "뉴스핌",
+        "url": "https://www.newspim.com/news/view/20261006000380"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 파운드리 가격 인상과 원가·인력운영 압력",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/business/12169296"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 해킹 확산과 업무 AI 보안 기준",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/society/12169095"
       }
     ]
   }
