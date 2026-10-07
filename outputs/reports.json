@@ -2867,7 +2867,7 @@
     "date": "2026-10-06",
     "title": "2026-10-06 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20261006.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2910,6 +2910,38 @@
         "status": "complete",
         "source": "매일경제",
         "url": "https://www.mk.co.kr/news/society/12169095"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-07",
+    "title": "2026-10-07 데일리 인사 시사점 리포트",
+    "file": "outputs/데일리_인사시사점리포트_20261007.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] RGB 백라이트 모듈 개발과 디스플레이 검증 직무 압력"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AMD 방한과 국내 AI 반도체 협력 인재 압력"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 DX 노사 면담과 보상 기준 설명 압력"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 청년 '밀려났음' 논쟁과 초기 커리어 설계 압력"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 환율 급락과 수출 제조업 보상재원 변동 리스크"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 글로벌 AI 투자와 사내 AI 인재 육성 경쟁"
       }
     ]
   }
