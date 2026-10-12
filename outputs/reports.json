@@ -2917,7 +2917,7 @@
     "date": "2026-10-07",
     "title": "2026-10-07 데일리 인사 시사점 리포트",
     "file": "outputs/데일리_인사시사점리포트_20261007.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2942,6 +2942,56 @@
       {
         "category": "글로벌",
         "title": "[글로벌] 글로벌 AI 투자와 사내 AI 인재 육성 경쟁"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-12",
+    "title": "2026-10-12 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20261012.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] OLED 노트북 확산과 검증·품질 인력 압력",
+        "status": "complete",
+        "source": "이데일리",
+        "url": "https://www4.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=04191846645612264"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] SEDEX 채용박람회와 AI 반도체 인재 확보 경쟁",
+        "status": "complete",
+        "source": "이투데이",
+        "url": "https://www.etoday.co.kr/news/view/2512514"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성 SSAFY 모집과 그룹 AI 인재 파이프라인 경쟁",
+        "status": "complete",
+        "source": "컨슈머타임스",
+        "url": "https://www.cstimes.com/news/articleView.html?idxno=723582"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 정년 후 재고용 논의와 고령 인력운영 기준 압력",
+        "status": "complete",
+        "source": "파이낸셜뉴스",
+        "url": "https://www.fnnews.com/news/202610120811253067"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 청년 일자리 예산 감소와 초기 커리어 파이프라인 압력",
+        "status": "complete",
+        "source": "뉴데일리경제",
+        "url": "https://biz.newdaily.co.kr/site/data/html/2026/10/12/2026101200038.html"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] AI 활용 확대와 일자리 안정감 격차 관리",
+        "status": "complete",
+        "source": "The Business Times",
+        "url": "https://www.businesstimes.com.sg/singapore/singapore-workers-embrace-ai-faster-global-peers-fewer-feel-secure-their-jobs-pwc-survey"
       }
     ]
   }
