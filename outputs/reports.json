@@ -2949,7 +2949,7 @@
     "date": "2026-10-12",
     "title": "2026-10-12 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20261012.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -2992,6 +2992,56 @@
         "status": "complete",
         "source": "The Business Times",
         "url": "https://www.businesstimes.com.sg/singapore/singapore-workers-embrace-ai-faster-global-peers-fewer-feel-secure-their-jobs-pwc-survey"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-13",
+    "title": "2026-10-13 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20261013.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] FLiPP 증착 투자와 차세대 OLED 핵심 인력 압력",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=63537"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] AI 데이터보호 솔루션과 업무 보안 역량 압력",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=63603"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 KES AI 전시와 그룹 직무 확장",
+        "status": "complete",
+        "source": "뉴스1",
+        "url": "https://www.news1.kr/industry/electronics/5940169"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 일하는 사람 권리 기본법과 AI 전환 보호 기준",
+        "status": "complete",
+        "source": "전기신문",
+        "url": "https://www.electimes.com/news/articleView.html?idxno=373334"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 청년 고용지표와 신입 채용 파이프라인 압력",
+        "status": "complete",
+        "source": "창업일보",
+        "url": "https://www.news33.net/news/articleView.html?idxno=118562"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] 메타 AI 에이전트와 업무 자동화 통제 기준",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=63604"
       }
     ]
   }
