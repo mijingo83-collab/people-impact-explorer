@@ -2999,7 +2999,7 @@
     "date": "2026-10-13",
     "title": "2026-10-13 인사 시사점 분석 레포트",
     "file": "outputs/데일리_인사시사점리포트_20261013.html",
-    "latest": true,
+    "latest": false,
     "issues": [
       {
         "category": "업계",
@@ -3042,6 +3042,56 @@
         "status": "complete",
         "source": "디일렉",
         "url": "https://www.thelec.kr/news/articleView.html?idxno=63604"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-14",
+    "title": "2026-10-14 인사 시사점 분석 레포트",
+    "file": "outputs/데일리_인사시사점리포트_20261014.html",
+    "latest": true,
+    "issues": [
+      {
+        "category": "업계",
+        "title": "[업계] BOE 회동과 OLED 공급 재개 가능성이 만든 검증 압력",
+        "status": "complete",
+        "source": "디일렉",
+        "url": "https://www.thelec.kr/news/articleView.html?idxno=63663"
+      },
+      {
+        "category": "산업",
+        "title": "[산업] 카카오 AI 서비스 출시와 업무 AI 활용 기준 압력",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/stock/12175568"
+      },
+      {
+        "category": "관계사",
+        "title": "[관계사] 삼성전자 HBM5 공개와 AI 반도체 직무 확장",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/business/12175072"
+      },
+      {
+        "category": "정책",
+        "title": "[정책] 중앙행정기관 세종 이전과 근무지 전환 리스크",
+        "status": "complete",
+        "source": "중앙신문",
+        "url": "https://www.jasm.co.kr/news/view/321365/%EC%88%A0%EB%A0%81-%EA%B5%AD%EB%B0%A9-%EC%99%B8%EA%B5%90-%ED%86%B5%EC%9D%BC%EB%B6%80-%EB%93%B1-44%EA%B0%9C-%EC%A4%91%EC%95%99%ED%96%89%EC%A0%95%EA%B8%B0%EA%B4%80-%EC%84%B8%EC%A2%85-%EB%8C%80%EC%9D%B4%EB%8F%99-2026"
+      },
+      {
+        "category": "경제",
+        "title": "[경제] 부산 제조업 경기 반등과 인력 확보 애로",
+        "status": "complete",
+        "source": "매일경제",
+        "url": "https://www.mk.co.kr/news/business/12175363"
+      },
+      {
+        "category": "글로벌",
+        "title": "[글로벌] Workday AI 인력 리포트와 직무 재설계 압력",
+        "status": "complete",
+        "source": "Outsource Accelerator",
+        "url": "https://news.outsourceaccelerator.com/workday-global-workforce-report/"
       }
     ]
   }
